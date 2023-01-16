@@ -11,7 +11,7 @@ class MyPage extends Component{
                 <div className="outer_date">
 
                 </div>
-                <div className="outer_">
+                <div className="outer_pro">
 
                 </div>
             </div>
