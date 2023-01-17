@@ -5,12 +5,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { MyPage } from './mypage/MyPage';
 import MainPage from './mainPage/MainPage'
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <MainPage/>
-  </React.StrictMode>
+    <App></App>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
