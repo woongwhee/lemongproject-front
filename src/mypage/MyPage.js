@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Component } from "react";
 
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import googleCalendarPlugin from '@fullcalendar/google-calendar';
+// import FullCalendar from '@fullcalendar/react';
+// import dayGridPlugin from '@fullcalendar/daygrid';
+// import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
 import btnLogo from './image/menu1.png';
 
@@ -39,7 +39,7 @@ function MyPage() {
                 <br/><br/><br/><br/><br/><br/>
 
                 {/* 구글 API로 구글 캘린더 사용 */}
-                <FullCalendar
+                {/* <FullCalendar
                     plugins={[dayGridPlugin, googleCalendarPlugin]}
                     initialView="dayGridMonth"
                     googleCalendarApiKey={apiKey}
@@ -51,7 +51,7 @@ function MyPage() {
                     eventColor={'#F2921D'}
                     height={'660px'}
                     Toolbar
-                 />
+                 /> */}
             </div>
             <div className="outer_pro">
                 <div className="outer_MyPro">
