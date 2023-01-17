@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState  } from "react";
 import { Component } from "react";
 
 // import FullCalendar from '@fullcalendar/react';
@@ -24,13 +24,15 @@ function MyPage() {
     const apiKey = process.env.REACT_APP_CAL_API_KEY;
 
     // 버튼 클릭 시 Feed , Challenge , Template 보이게 하기.
-    const [btnClick1 , setbtnClick1] = useState(false); // Feed
-    const [btnClick2 , setbtnClick2] = useState(false); // Challenge
-    const [btnClick3 , setbtnClick3] = useState(false); // Template
+    const [tab , setbtnClick] = useState("Feed"); // Feed
 
     // 버튼 클릭 시 Menu 보이게 하기.
     const [menuClick , setMenuClick] = useState(false);
 
+    const changeTab = (tabName) =>{
+        setbtnClick(tabName);
+    }
+ 
     return(
 
         <div className="outer">
@@ -72,14 +74,14 @@ function MyPage() {
                     </div>
                 </div>
                 <div className="outer_btn">
-                    <button className="myBtn" onClick={() => setbtnClick1((!btnClick1))}>Feed</button>
-                    <button className="myBtn" onClick={() => setbtnClick2((!btnClick2))}>Challenge</button>
-                    <button className="myBtn" onClick={() => setbtnClick3((!btnClick3))}>Template</button>
+                    <button className="myBtn" onClick={() => changeTab("Feed")}>Feed</button>
+                    <button className="myBtn" onClick={() => changeTab("Challenge")}>Challenge</button>
+                    <button className="myBtn" onClick={() => changeTab("Template")}>Template</button>
                 </div>
-                {btnClick1 === true ? <MyFeed/> : null}
-                {btnClick2 === true ? <MyChallenge/> : null}
-                {btnClick3 === true ? <MyTemplates/> : null}
-            </div>
+                    {tab === "Feed" ? <MyFeed/> : null}
+                    {tab === "Challenge" ? <MyChallenge/> : null}
+                    {tab === "Template" ? <MyTemplates/> : null}
+                </div>
             <div className="outer_menu">
                 <div className="menuBtn">
                     <button className="mybtn1" style={{backgroundImage: `url(${btnLogo})`}}
