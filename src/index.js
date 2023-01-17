@@ -6,12 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { MyPage } from './mypage/MyPage';
 import MainPage from './mainPage/MainPage'
 import App from "./App";
+import FeedMain from "./feedPage/FeedBody";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App></App>
-
+    // <Feed></Feed>
+    // <App></App>
+    <FeedMain/>
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

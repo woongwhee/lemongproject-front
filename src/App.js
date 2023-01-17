@@ -1,28 +1,36 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import './App.css';
-import { useEffect, useState } from 'react';
 
 function App() {
-    // message 초기값 설정 (""로 설정)
-    const [message, setMessage] = useState("");
+    // 요청받은 정보를 담아줄 변수 선언
+    const [ testStr, setTestStr ] = useState('');
+    //         ''        data
+    //         data
+    // const testStr = String data(hello world)
+    //                 JSON, 객체 상관이없다!
 
-    // useEffect(함수, 배열) : 컴포넌트가 화면에 나타났을 때 자동 실행
-    useEffect(() => {
-        // fetch(url, options) : Http 요청 함수
-        fetch("/nowij")
-            .then(response => response.text())
-            .then(message => {
-                setMessage(message);
-            });
-    }, [])
+    // 변수 초기화
+    function callback(str) {
+        setTestStr(str);
+    }
+
+    // 첫 번째 렌더링을 마친 후 실행
+    useEffect(
+        () => {
+            axios({
+                url: '/api/home',
+                method: 'GET'
+            }).then((res) => {
+                callback(res.data);
+            })
+        }, []
+    );
 
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    nowij : {message}
-                </p>
+                {testStr}
             </header>
         </div>
     );

@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {Component, useEffect, useState} from "react";
+import axios from "axios";
 
-import axios from 'axios'
-// import './App.css';
-
-function Feed() {
+function FeedMain(){
     // 요청받은 정보를 담아줄 변수 선언
     const [ testStr, setTestStr ] = useState('');
     //         ''        data
@@ -36,5 +34,4 @@ function Feed() {
         </div>
     );
 }
-
-export default Feed;
+export default FeedMain
