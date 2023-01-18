@@ -1,0 +1,156 @@
+.outer{
+    border: 1px solid black;
+    width: 1900px;
+    height: 1000px;
+    margin: auto;
+    margin-top: 100px;
+}
+.outer_date{
+    border: 1px solid red;
+    width: 33%;
+    height: 100%;
+    float: left;
+    background-color: gainsboro;
+}
+.outer_pro{
+    border: 1px solid blue;
+    width: 45%;
+    height: 100%;
+    float: left;
+}
+.outer_menu{
+    border: 1px solid green;
+    width: 21.4%;
+    height: 100%;
+    float: right;
+}
+.outer_MyPro{
+    border: 1px solid sienna;
+    width: 85%;
+    height: 27%;
+    margin: auto;
+    margin-top: 10px;
+}
+.outer_Feed{
+    border: 1px solid springgreen;
+    width: 85%;
+    height: 65%;
+    margin: auto;
+    margin-top: 0px;
+}
+.outer_Chall{
+    border: 1px solid violet;
+    width: 85%;
+    height: 65%;
+    margin: auto;
+    margin-top: 0px;
+}
+.outer_Temp{
+    border: 1px solid tomato;
+    width: 85%;
+    height: 65%;
+    margin: auto;
+    margin-top: 0px;
+}
+.outer_btn{
+    border: 1px solid salmon;
+    margin: auto;
+    width: 85%;
+}
+.myBtn{
+    width: 33.3%;
+    height: 40px;
+    font-size: 17px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0.1px solid black;
+    background-color: Transparent;
+}
+.outer_myMenu{
+    border: 1px solid palevioletred;
+    width: 100%;
+    height: 94%;
+    background-color: darkgrey;
+}
+.menuBtn{
+    border: 1px solid sienna;
+    width: 100%;
+    height: 5%; 
+}
+.mybtn1{
+    width: 17%;
+    height: 100%;
+    float: right;
+    border: 0;
+    background: none;
+    background-color: Transparent;
+}
+.outer_menuPro{
+    border: 1px solid royalblue;
+    width: 100%;
+    height: 8%;
+    margin-top: 50px;
+    background-color: aqua;
+}
+.outer_3menu{
+     border: 1px solid tomato;
+     width: 100%;
+     height: 10%;
+     background-color: burlywood;
+}
+.outer_search{
+    border: 1px solid slateblue;
+    width: 100%;
+    height: 8%;
+    background-color: brown;
+}
+.outer_req{
+    border: 1px solid teal;
+    width: 100%;
+    height: 60%;
+    margin-top: 30px;
+    background-color: teal;
+}
+.outer_proimg{
+    border: 1px solid cornflowerblue;
+    width: 30%;
+    height: 100%;
+    background-color: chartreuse;
+}
+.outer_id{
+    border: 1px solid thistle;
+    width: 69%;
+    height: 20%;
+    float: right;
+    box-sizing: border-box;
+    margin-top: -272px;
+    background-color: cadetblue;
+}
+.outer_fall{
+    border: 1px solid skyblue;
+    width: 69%;
+    height: 20%;
+    float: right;
+    margin-top: -216px;
+    box-sizing: border-box;
+    background-color: coral;
+}
+.outer_content{
+    border: 1px solid thistle;
+    width: 69%;
+    height: 43%;
+    float: right;
+    margin-top: -120px;
+    box-sizing: border-box;
+    background-color: darkcyan;
+}
+.outer_nick{
+    border: 1px solid steelblue;
+    width: 69%;
+    height: 13%;
+    float: right;
+    margin-top: -160px;
+    box-sizing: border-box;
+    background-color: cornsilk;
+}
