@@ -1,0 +1,22 @@
+.te{
+    border: 1px solid black;
+    width: 500px;
+    height: 600px;
+    text-align: center;
+
+}
+.a{
+    border: 1px solid black;
+    width: 500px;
+    height: 100px;
+}
+.b{
+    border: 1px solid black;
+    width: 500px;
+    height: 300px;
+}
+.c{
+    border: 1px solid black;
+    width: 500px;
+    height: 100px;
+}

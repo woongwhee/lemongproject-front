@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Component } from "react";
 // 메인페이지 css
-import './Main.css';
+import './main.css';
 //프로필 컴포넌트
 import Profile from "./Profile";
 //캘린더 Api 컴포넌트
