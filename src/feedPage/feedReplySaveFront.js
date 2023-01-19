@@ -6,7 +6,7 @@ function FeedReplySaveFront(props) {
     // const [feedNo, setfeedNo] = useState();
     // const [replyNo, setreplyNo] = useState();
     // const [replyAt, setreplyAt] = useState();
-    let{}
+    let{userNo, feedNo, replyNo, replyAt} = props;
     return (
         <div></div>
     );
