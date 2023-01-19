@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 import { Component } from "react";
 // 메인페이지 css
-import './Main.css';
+import './MainPage.css';
 //프로필 컴포넌트
 import Profile from "./Profile";
 //캘린더 Api 컴포넌트
 import Calendar from "./Calendar";
-import MenuBar from "./MenuBar";
-
-
+import Menubar from "./Menubar";
+import Menubar2 from "./Menubar2";
 
 import btnLogo from '../mypage/image/menu1.png';
-
-
-
-// Tab -> 각 카테고리(피드 , 챌린지 , 템플릿)별 페이지 보여주기.
-// import {TabContent , TabPane , Nav , NavItem , NavLink} from "reactstrap";
-
 
 
 function MainPage() {
@@ -37,8 +30,9 @@ function MainPage() {
             </div>
 
             {/*메인menubar */}
-            <MenuBar/>
-            
+            <div>
+              <Menubar2/>
+            </div>
 
             {/*사이드바 영역 */}
             <div className="outer_menu">

@@ -4,4 +4,8 @@
     width: 45%;
     height: 100%;
     float: left;
+    margin: auto;
+}
+NavLink{
+    text-align: center;
 }
