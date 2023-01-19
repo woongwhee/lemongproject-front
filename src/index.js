@@ -9,14 +9,17 @@ import App from "./App";
 import FeedBody from "./feedPage/FeedBody";
 import FeedInsert from "./feedPage/FeedInsert";
 import FeedMenu from "./feedPage/FeedMenu";
+import Uploader from "./feedPage/Uploader";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // <Feed></Feed>
     // <App></App>
     // <FeedInsert/>
-    <FeedMenu></FeedMenu>
+    // <FeedMenu></FeedMenu>
+    <Uploader/>
 );
+
 
 
 
