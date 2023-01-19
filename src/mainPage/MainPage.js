@@ -1,28 +1,5 @@
-<<<<<<< HEAD
 import React from 'react';
 // import './Main.css';
-=======
-import React, { useState } from "react";
-import { Component } from "react";
-// 메인페이지 css
-import './Main.css';
-//프로필 컴포넌트
-import Profile from "./Profile";
-//캘린더 Api 컴포넌트
-import Calendar from "./Calendar";
-import MenuBar from "./MenuBar";
-
-
-
-import btnLogo from '../mypage/image/menu1.png';
-
-
-
-// Tab -> 각 카테고리(피드 , 챌린지 , 템플릿)별 페이지 보여주기.
-// import {TabContent , TabPane , Nav , NavItem , NavLink} from "reactstrap";
-
-
->>>>>>> 68070044ecab981d1b157de8a28646eb8bc05240
 
 function MainPage() {
     // Apikey를 환경변수를 이용해 숨기기.
