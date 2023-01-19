@@ -10,6 +10,8 @@ import FeedBody from "./feedPage/FeedBody";
 import FeedInsert from "./feedPage/FeedInsert";
 import FeedMenu from "./feedPage/FeedMenu";
 import Uploader from "./feedPage/Uploader";
+import FeedReply from "./feedPage/FeedReply";
+import FeedReplySave from "./feedPage/FeedReplySave";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,7 +19,9 @@ root.render(
     // <App></App>
     // <FeedInsert/>
     // <FeedMenu></FeedMenu>
-    <Uploader/>
+    // <Uploader/>
+    // <FeedReply/>
+    <FeedReplySave></FeedReplySave>
 );
 
 

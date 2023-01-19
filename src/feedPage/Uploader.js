@@ -45,7 +45,9 @@ const Uploader = () => {
             formData.append('file', image.image_file);
 
             await axios.post('/api/feed/upload', formData);
+
             alert("서버에 등록이 완료되었습니다!");
+
             setImage({
                 image_file: "",
                 preview_URL: "img/default_image.png",
