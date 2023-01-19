@@ -1,6 +1,6 @@
 import React from 'react';
 import './Feed.css'
-import feedImg from './resources/test.jpg';
+// import feedImg from './resources/test.jpg';
 function Feed(props) {
 
     let{userNo,feedNo,feedContent,feedAt}=props;
@@ -13,7 +13,7 @@ function Feed(props) {
 
             <div className="b">
                 <p>피드번호 : {feedNo}</p>
-                <img src={feedImg} alt="feedImg"/>
+                {/*<img src={feedImg} alt="feedImg"/>*/}
 
             </div>
             <div className="f">
@@ -22,7 +22,7 @@ function Feed(props) {
                 </span>
 
                 <span className="d">
-                    <span style={{textAlign:"right"}}>📢</span>
+                    <button style={{textAlign:"right"}}>📢</button>
                     <span>♡</span>
                 </span>
             </div>

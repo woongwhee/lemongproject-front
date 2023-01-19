@@ -1,27 +1,22 @@
 import FeedReply from "./FeedReply";
 import axios from "axios";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import FeedReplySaveFront from "./feedReplySaveFront";
 import Feed from "./Feed";
 
 function FeedReplySave(){
-    // const [userNo, setuUserNo] = useState();
-    // const [feedNo, setfeedNo] = useState();
-    // const [replyNo, setreplyNo] = useState();
-    // const [replyAt, setreplyAt] = useState();
-
     const [ testStr, setTestStr ] = useState();
+    const [feedNo, setFeedNo] = useState();
 
     function callback(str) {
         setTestStr(str);
+        setFeedNo(str);
     }
-
 
     useEffect(
         () => {
-            axios({
-                url: '/api/feed/main',
-                method: 'GET'
+            axios.get({ url: '/api/feed/replySelect',
+                data:feedNo
             }).then((res) => {
                 callback(res.data.result);
             })

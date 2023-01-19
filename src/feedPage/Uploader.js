@@ -2,7 +2,7 @@ import { useState } from 'react';
 import "./uploader.css";
 import axios from 'axios';
 import {Button} from "react-bootstrap";
-import preview_URL from './resources/test.jpg';
+// import preview_URL from './resources/test.jpg';
 
 const Uploader = () => {
 

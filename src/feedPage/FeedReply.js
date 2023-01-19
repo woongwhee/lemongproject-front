@@ -10,10 +10,7 @@ function FeedReply(props) {
     return (
         <>
         <div>
-            1. 댓글<br/>
-            2. 댓글<br/>
-            3. 댓글<br/>
-            4. 댓글<br/>
+            <FeedReply></FeedReply>
             <hr/>
         </div>
         아이디 : <input type="text" onChange={(e)=> {SetId(e.target.value);}}/>
@@ -24,7 +21,7 @@ function FeedReply(props) {
             <br/>
 
             <button onClick={
-                () => axios.post('api/feed/reply',{
+                () => axios.post('api/feed/insertReply',{
                     userNo:id,
                     feedNo:feedNo,
                     replyContent:replyContent
