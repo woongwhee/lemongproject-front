@@ -28,8 +28,7 @@ function FeedInsert() {
 
             }).then(function (res){
                 console.log(res.data);
-        })
-            .catch(function () {
+            }).catch(function () {
                 console.log('실패함' + id, content)
             })
         }}

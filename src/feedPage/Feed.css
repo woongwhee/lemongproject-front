@@ -1,8 +1,9 @@
 .te{
     border: 1px solid black;
     width: 500px;
-    height: 600px;
+    height: 650px;
     text-align: center;
+    margin-top: 40px;
 
 }
 .a{
@@ -17,6 +18,24 @@
 }
 .c{
     border: 1px solid black;
-    width: 500px;
+    width: 250px;
     height: 100px;
+    display: inline-block;
+    float: left;
+}
+.d{
+    display: inline-block;
+    border: 1px solid red;
+    width: 200px;
+    height: 100px;
+    float: right;
+}
+.e{
+
+    border: 3px solid orange;
+    text-align: left;
+}
+.f{
+    border: 2px solid green;
+    height: 150px;
 }
