@@ -58,41 +58,28 @@ const Text = styled.div`
         `}
 `;
 
-// const[todo,setTodo]=useState();
-
-// const fetchTodo=async()=>{
-//     const response = await axios.get("/api/todo/getone");
-//     setTodo(response.data);
-// }
-
-// useEffect(
-//     ()=>{
-//         fetchTodo();
-//         return 
-//     },[]
-// )
  
 function TodoItem({ id, done, text }) {
 
-    const[todo, setTodo] = useState();
+    // const[todo, setTodo] = useState();
 
-    const fetchTodo = async() => {
-        const res = await axios.get("/api/todo/getTodo");
-        console.log(res);
-        setTodo(res.data[0]);
-    }
+    // const fetchTodo = async() => {
+    //     const res = await axios.get("/api/todo/getTodo");
+    //     console.log(res);
+    //     setTodo(res.data[0]);
+    // }
 
-    useEffect(
-        () => {
-            fetchTodo();
-            return
-        },[]
-    )
+    // useEffect(
+    //     () => {
+    //         fetchTodo();
+    //         return
+    //     },[]
+    // )
 
     return (
         <TodoItemBlock>
             <CheckCircle done={done}>{done && <MdDone />}</CheckCircle>
-            <Text done={done}>{todo.todoContent}</Text>
+            <Text done={done}>{text}</Text>
             <Remove>
                 <MdDelete />
             </Remove>

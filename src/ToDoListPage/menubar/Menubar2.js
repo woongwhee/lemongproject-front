@@ -4,10 +4,10 @@ import './Menubar2.css';
 import FeedList from "./FeedList";
 import ChallengeList from "./ChallengeList";
 import TemplateList from "./TemplateList";
-import ToDoTemplate from "./ToDoTemplate";
-import ToDoInsert from "./ToDoCreate";
-import ToDoList from './ToDoList';
-import ToDoListView from "./ToDoListView";
+import ToDoTemplate from "../todolist/ToDoTemplate";
+import ToDoInsert from "../todolist/ToDoCreate";
+import ToDoList from '../todolist/ToDoList';
+import ToDoListView from "../todolist/ToDoListView";
 
 
 const menuList = {

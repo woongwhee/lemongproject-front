@@ -3,11 +3,11 @@ import { Component } from "react";
 // 메인페이지 css
 import './MainPage.css';
 //프로필 컴포넌트
-import Profile from "./Profile";
+import Profile from "./profile/Profile";
 //캘린더 Api 컴포넌트
-import Calendar from "./Calendar";
-import Menubar from "./Menubar";
-import Menubar2 from "./Menubar2";
+import Calendar from './calendar/Calendar';
+//메뉴바 컴포넌트
+import Menubar2 from "./menubar/Menubar2";
 
 import btnLogo from '../mypage/image/menu1.png';
 
