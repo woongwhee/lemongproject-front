@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './Member/Login';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+
 
 
 // import Expenses from './testingPage/Expenses';
@@ -15,8 +15,6 @@ function App() {
     
     <div>
       <Login />
-      <Link to="/join">회원가입</Link> |{" "}
-      <Link to="/findPwd">비밀번호 찾기</Link>
     </div>
 
 
