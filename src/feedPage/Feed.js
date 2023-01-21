@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Feed.css'
-// import feedImg from './resources/test.jpg';
+import Modal from 'react-modal'
+import FeedReplyInsert from './FeedReplyInsert';
 function Feed(props) {
 
     let{userNo,feedNo,feedContent,feedAt}=props;
+
+    const [isOpen, setOpen] = useState(false);
+
+    const openClick = () => {
+        setOpen(true);
+    };
+    const closeClick = () => {
+        setOpen(false);
+    }
 
     return (
         <div className="te">
@@ -22,8 +32,12 @@ function Feed(props) {
                 </span>
 
                 <span className="d">
-                    <button style={{textAlign:"right"}}>📢</button>
-                    <span>♡</span>
+                    <button style={{textAlign:"right"}}
+                    onClick={openClick}>📢</button>
+                    <Modal isOpen={isOpen}>
+                        <button onClick={closeClick}>모달 닫기</button>
+                            <FeedReplyInsert/>
+                    </Modal>
                 </span>
             </div>
             <div className="e">

@@ -1,10 +1,10 @@
-import FeedReply from "./FeedReply";
+import FeedReplyInsert from "./FeedReplyInsert";
 import axios from "axios";
 import {useEffect, useState} from "react";
-import FeedReplySaveFront from "./feedReplySaveFront";
+import FeedReplyResultList from "./FeedReplyResultList";
 import Feed from "./Feed";
 
-function FeedReplySave(){
+function FeedReplyList(){
     const [ testStr, setTestStr ] = useState();
     const [feedNo, setFeedNo] = useState();
 
@@ -24,20 +24,21 @@ function FeedReplySave(){
     );
 
     let i=0;
+    const {스타일} = {
+        border: '1px solid green'
+    }
     return(
-        <div>
+        <div style={스타일}>
             <table>
                 <th>피드번호</th>
                 <th>아이디</th>
                 <th>댓글내용</th>
                 <th>댓글시간</th>
-                <tr>
-                    {testStr?.map(e=><FeedReplySaveFront key={i++} {...e}/>)}
-                </tr>
-            </table>
+                {testStr?.map(e=><FeedReplyResultList key={i++} {...e}/>)}
 
+            </table>
         </div>
         )
 
 }
-export default FeedReplySave;
+export default FeedReplyList;

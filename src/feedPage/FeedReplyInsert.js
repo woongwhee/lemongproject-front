@@ -1,18 +1,23 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import FeedReplyList from "./FeedReplyList";
 
-
-function FeedReply(props) {
+function FeedReplyInsert() {
     const [id, SetId] = useState();
     const [feedNo, SetFeedNo] = useState();
     const [replyContent, SetReplyContent] = useState();
 
+    const 스타일 ={
+        border: '1px solid green'
+    }
+
     return (
         <>
         <div>
-            <FeedReply></FeedReply>
-            <hr/>
+            <FeedReplyList/>
         </div>
+    <div style={스타일}>
+
         아이디 : <input type="text" onChange={(e)=> {SetId(e.target.value);}}/>
             <br/>
         피드번호 : <input type="text" onChange={(e)=> {SetFeedNo(e.target.value);}}/>
@@ -32,11 +37,11 @@ function FeedReply(props) {
                 })
             }
         >댓글쓰기</button>
-
+    </div>
         </>
 
 
     );
 }
 
-export default FeedReply;
+export default FeedReplyInsert;
