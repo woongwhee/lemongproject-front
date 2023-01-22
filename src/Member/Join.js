@@ -11,6 +11,23 @@ function Join() {
     const [email, setEmail] = useState();
     const [emailNum, setEmailNum] = useState();
     
+
+    // 닉네임 중복체크
+    const checkNick = async(nickName) => {
+        let response = await axios.post('api/join/chNick',
+            ({'nickName':nickName})
+        )
+        if(response.data.code === '2000') {
+            alert("사용가능")
+        } else {
+            alert("사용불가능")
+        } 
+    }
+
+
+
+
+
     // 회원가입 클릭시 데이터 전송
     const joinClick = async(name, nick, pwd, email) => {
         let response = await axios.post('api/join',
@@ -33,9 +50,9 @@ function Join() {
             이라는 에러가 뜬다.
             Bad Server 500 error가 뜨는데 조회는 되는데 한 개만 select가 안되다보니
             server 에러라고 뜬다.
-        */
-        
+        */ 
     }
+
 
     return(
             <div className="JoinArea">
@@ -54,7 +71,7 @@ function Join() {
                     <div className="nickInput">
                         <input type="text" id="nickName" name="nickName" placeholder="닉네임" required 
                             onChange={(e) => {setNickName(e.target.value);}} />
-                        <button className="chBtn nickBtn">중복확인</button>
+                        <button className="chBtn nickBtn" onClick={() => {checkNick(nickName);}}>중복확인</button>
                         <p className="chAlarm noAlarm">중복된 닉네임입니다.</p>
                         <p className="chAlarm okAlarm">사용가능한 닉네임입니다.</p>
                     </div>
