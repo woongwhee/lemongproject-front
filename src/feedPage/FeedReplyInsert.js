@@ -35,6 +35,8 @@ function FeedReplyInsert(props) {
                     replyContent:replyContent
                 }).then(function (res){
                     console.log(res.data)
+                    SetId('');
+                    SetReplyContent('');
                 }).catch(function (){
                     console.log('실패함'+id,feedNo,replyContent);
                 })
