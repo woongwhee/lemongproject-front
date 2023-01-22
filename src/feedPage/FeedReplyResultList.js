@@ -2,15 +2,17 @@ import React from 'react';
 
 function FeedReplyResultList(props) {
 
-    let{userNo, feedNo, replyNo, replyAt} = props;
+    let{userNo, feedNo, replyContent, replyAt} = props;
 
     return (
+
         <tr>
-            <td>{userNo}</td>
             <td>{feedNo}</td>
-            <td>{replyNo}</td>
+            <td>{userNo}</td>
+            <td>{replyContent}</td>
             <td>{replyAt}</td>
         </tr>
+
     );
 }
 

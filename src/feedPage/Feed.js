@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './Feed.css'
 import Modal from 'react-modal'
 import FeedReplyInsert from './FeedReplyInsert';
+import FeedReplyList from "./FeedReplyList";
 function Feed(props) {
 
     let{userNo,feedNo,feedContent,feedAt}=props;
@@ -34,9 +35,11 @@ function Feed(props) {
                 <span className="d">
                     <button style={{textAlign:"right"}}
                     onClick={openClick}>📢</button>
-                    <Modal isOpen={isOpen}>
+                    <Modal isOpen={isOpen} feedNo={feedNo}
+                           ariaHideApp={false} >
                         <button onClick={closeClick}>모달 닫기</button>
-                            <FeedReplyInsert/>
+                            {/*<FeedReplyList feedNo={feedNo}/>*/}
+                            <FeedReplyInsert feedNo={feedNo}/>
                     </Modal>
                 </span>
             </div>

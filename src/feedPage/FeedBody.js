@@ -6,7 +6,7 @@ import {Spinner, Toast, ToastHeader} from "react-bootstrap";
 function FeedBody(){
     // 요청받은 정보를 담아줄 변수 선언
     const [ testStr, setTestStr ] = useState();
-    const [loading,setLoading]=useState(true);
+
     //         ''        data
     //         data
     // const testStr = String data(hello world)
@@ -15,7 +15,7 @@ function FeedBody(){
     // 변수 초기화
     function callback(str) {
         setTestStr(str);
-        setLoading(false);
+        // setLoading(false);
     }
 
     // 첫 번째 렌더링을 마친 후 실행
@@ -31,7 +31,6 @@ function FeedBody(){
         }, []
     );
     let i=0;
-    if(loading)return <Toast><ToastHeader icon={<Spinner size="sm">로딩중</Spinner> }/></Toast>
     return(
         <div className="App">
             <header className="App-header">

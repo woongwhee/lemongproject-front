@@ -1,23 +1,31 @@
-import FeedReplyInsert from "./FeedReplyInsert";
+
 import axios from "axios";
 import {useEffect, useState} from "react";
 import FeedReplyResultList from "./FeedReplyResultList";
-import Feed from "./Feed";
 
-function FeedReplyList(){
+
+function FeedReplyList(props){
     const [ testStr, setTestStr ] = useState();
-    const [feedNo, setFeedNo] = useState();
+
+    const feedNo = props.feedNo;
+
+    console.log(feedNo);
 
     function callback(str) {
         setTestStr(str);
-        setFeedNo(str);
+
     }
 
     useEffect(
         () => {
-            axios.get({ url: '/api/feed/replySelect',
-                data:feedNo
+            axios({
+                url: '/api/feed/listReply',
+                method: 'GET',
+                params:{
+                    feedNo:feedNo
+                }
             }).then((res) => {
+                console.log(res.data.result)
                 callback(res.data.result);
             })
         }, []
@@ -29,13 +37,18 @@ function FeedReplyList(){
     }
     return(
         <div style={스타일}>
-            <table>
-                <th>피드번호</th>
-                <th>아이디</th>
-                <th>댓글내용</th>
-                <th>댓글시간</th>
-                {testStr?.map(e=><FeedReplyResultList key={i++} {...e}/>)}
-
+            <table >
+                <thead>
+                    <tr>
+                    <th>피드번호 : {feedNo}</th>
+                    <th>아이디</th>
+                    <th>댓글내용</th>
+                    <th>댓글시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {testStr?.map(e=><FeedReplyResultList key={i++} {...e}/>)}
+                </tbody>
             </table>
         </div>
         )

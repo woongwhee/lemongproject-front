@@ -1,0 +1,3 @@
+
+feedMenu -> FeedBody(전체보여주기) ------> Feed -> FeedReplyInsert
+         -> FeedInsert(data)            -> FeedReplyList
