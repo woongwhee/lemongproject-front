@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // 액시오스
 import { Link } from 'react-router-dom';
-
 import '../styles/Login.css';
 
 function Login() {
@@ -30,19 +29,7 @@ function Login() {
 
     // 화면 설계
     return (
-        // <div>
-        //     <p>아이디</p>
-        //     <input onChange={(e) => {setEmail(e.target.value);}}/>
-        //     <p>이메일</p>
-        //     <input type="password" onChange={(e) => {setUserPwd(e.target.value);}}/>
-        //     <br/>
-        //     <button onClick={()=>{loginClick(email,userPwd);}}>
-        //         전송
-        //     </button>
-        //     <br />
-        //     <img src="LemongImg/LemongLogo.png" alt="lemongLogo" />
-        // </div>
-
+        
         <div className='loginArea'>
             <div className='logo'>
                 <img className='logo' src='LemongImg/CommonImg/LemongLogo.png' alt='lemongLogo' />
