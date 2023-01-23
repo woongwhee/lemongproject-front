@@ -3,6 +3,7 @@ import './Feed.css'
 import Modal from 'react-modal'
 import FeedReplyInsert from './FeedReplyInsert';
 import FeedReplyList from "./FeedReplyList";
+import {Button} from "react-bootstrap";
 function Feed(props) {
 
     let{userNo,feedNo,feedContent,feedAt}=props;
@@ -15,6 +16,8 @@ function Feed(props) {
     const closeClick = () => {
         setOpen(false);
     }
+
+    const [like, setLike] = useState(0)
 
     return (
         <div className="te">
@@ -33,8 +36,10 @@ function Feed(props) {
                 </span>
 
                 <span className="d">
-                    <button style={{textAlign:"right"}}
-                    onClick={openClick}>📢</button>
+                    <button onClick={ () => {setLike(like + 1); }}> ♡ </button>
+                    <span>좋아요수 : {like}</span> <br/>
+
+                    <button style={{textAlign:"right"}} onClick={openClick}>📢</button>
                     <Modal isOpen={isOpen} feedNo={feedNo}
                            ariaHideApp={false} >
                         <button onClick={closeClick}>모달 닫기</button>
