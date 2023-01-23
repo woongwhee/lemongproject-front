@@ -2,20 +2,19 @@ import React, {useState} from 'react';
 import './Feed.css'
 import Modal from 'react-modal'
 import FeedReplyInsert from './FeedReplyInsert';
-import FeedReplyList from "./FeedReplyList";
-import {Button} from "react-bootstrap";
+import FeedUpdate from "./FeedUpdate";
 function Feed(props) {
 
     let{userNo,feedNo,feedContent,feedAt}=props;
 
     const [isOpen, setOpen] = useState(false);
-
     const openClick = () => {
         setOpen(true);
     };
     const closeClick = () => {
         setOpen(false);
-    }
+    };
+
 
     const [like, setLike] = useState(0)
 
@@ -23,6 +22,8 @@ function Feed(props) {
         <div className="te">
             <div className="a">
                 <p>피드시간 : {feedAt}</p>
+                <FeedUpdate feedNo={feedNo}feedContent={feedContent}/>
+                <button>삭제하기</button>
             </div>
 
             <div className="b">
@@ -36,14 +37,14 @@ function Feed(props) {
                 </span>
 
                 <span className="d">
+
                     <button onClick={ () => {setLike(like + 1); }}> ♡ </button>
                     <span>좋아요수 : {like}</span> <br/>
 
-                    <button style={{textAlign:"right"}} onClick={openClick}>📢</button>
+                    <button onClick={openClick}>📢</button>
                     <Modal isOpen={isOpen} feedNo={feedNo}
                            ariaHideApp={false} >
                         <button onClick={closeClick}>모달 닫기</button>
-                            {/*<FeedReplyList feedNo={feedNo}/>*/}
                             <FeedReplyInsert feedNo={feedNo}/>
                     </Modal>
                 </span>

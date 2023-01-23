@@ -20,17 +20,11 @@ function FeedInsert() {
             <input onChange={(e) => {SetContent(e.target.value);}}/>
             <br/>
 
-    <button onClick={ () => {
+    <button onClick={
+        () => {
         axios.post('api/feed/insert', {
-
             userNo:id,
             feedContent:content
-                // params: {
-                //     id: id,
-                //     picture: picture,
-                //     content: content
-                // }
-
             }).then(function (res){
                 console.log(res.data);
             }).catch(function () {

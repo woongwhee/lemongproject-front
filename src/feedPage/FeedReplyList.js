@@ -9,11 +9,8 @@ function FeedReplyList(props){
 
     const feedNo = props.feedNo;
 
-    console.log(feedNo);
-
     function callback(str) {
         setTestStr(str);
-
     }
 
     useEffect(
@@ -25,7 +22,7 @@ function FeedReplyList(props){
                     feedNo:feedNo
                 }
             }).then((res) => {
-                console.log(res.data.result)
+
                 callback(res.data.result);
             })
         }, []
