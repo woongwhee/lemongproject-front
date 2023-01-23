@@ -40,7 +40,7 @@
     text-align: left;
     margin-left: 1rem;
     box-sizing: border-box;
-    margin-top: 0px;
+    margin-top: 2px;
     font-size: 11px;
 }
 
@@ -99,6 +99,10 @@ div {
     height: 2.5rem;
     border: 1px solid #BA99C3;
     border-radius: 5px;
+}
+
+.joinBtn>button:hover {
+    cursor: pointer;
 }
 
 
