@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 import axios from "axios";
 
 import '../styles/Join.css';
@@ -8,8 +8,24 @@ function Join() {
     const [userName, setUserName] = useState();
     const [nickName, setNickName] = useState();
     const [userPwd, setUserPwd] = useState();
+    const [reUserPwd, setReUserPwd] = useState();
     const [email, setEmail] = useState();
     const [emailNum, setEmailNum] = useState();
+
+    // 알림 색깔
+    const [errorColor, setErrorColor] = useState();
+    const [pwdColor, setPwdColor] = useState();
+    const [rePwdColor, setRePwdColor] = useState();
+
+
+    // 에러 메세지 변수
+    const [nickError, setNickError] = useState();
+    const [pwdError, setPwdError] = useState();
+    const [rePwdError, setRePwdError] = useState();
+
+    // 유효성 검사
+    const [isPwd, setIsPwd] = useState(false);
+    const [isRePwd, setIsRePwd] = useState(false);
     
 
     // 닉네임 중복체크
@@ -18,14 +34,50 @@ function Join() {
             ({'nickName':nickName})
         )
         if(response.data.code === '2000') {
-            alert("사용가능")
+            // alert("사용가능")
+            setNickError("사용 가능한 닉네임입니다.")
+            setErrorColor("chAlarm okAlarm")
         } else {
-            alert("사용불가능")
+            // alert("사용불가능")
+            setNickError("중복된 닉네임입니다.")
+            setErrorColor("chAlarm noAlarm")
         } 
     }
 
 
+    // 비밀번호 체크
+    const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[@#$%^&*()_])(?=.*[0-9]).{8,15}$/
+        const passwordCurrent = e.target.value
+        setUserPwd(passwordCurrent)
 
+        if(!passwordRegex.test(passwordCurrent)) {
+            setPwdError("8~15자 영문자, 숫자, 특수문자(@#$%^&*()_)를 사용하세요.")
+            setPwdColor("chAlarm noAlarm")
+            setIsPwd(false);
+        } else {
+            setPwdError("형식에 맞는 비밀번호입니다.")
+            setPwdColor("chAlarm okAlarm")
+            setIsPwd(true)
+        }
+    }, [])
+
+    
+    // 비밀번호 일치 체크
+    const onChangeRePwd = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const passwordReCurrent = e.target.value
+        setReUserPwd(passwordReCurrent)
+
+        if(userPwd === passwordReCurrent) {
+            setRePwdError("비밀번호가 일치합니다.")
+            setRePwdColor("chAlarm okAlarm")
+            setIsRePwd(true)
+        } else {
+            setRePwdError("비밀번호가 일치하지않습니다.")
+            setRePwdColor("chAlarm noAlarm")
+            setIsRePwd(false)
+        }
+    })
 
 
     // 회원가입 클릭시 데이터 전송
@@ -72,22 +124,22 @@ function Join() {
                         <input type="text" id="nickName" name="nickName" placeholder="닉네임" required 
                             onChange={(e) => {setNickName(e.target.value);}} />
                         <button className="chBtn nickBtn" onClick={() => {checkNick(nickName);}}>중복확인</button>
-                        <p className="chAlarm noAlarm">중복된 닉네임입니다.</p>
-                        <p className="chAlarm okAlarm">사용가능한 닉네임입니다.</p>
+                        <p className={errorColor}>{nickError}</p>
                     </div>
-
                     {/* 비밀번호 */}
                     <div className="pwdInput">
                         <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호" required 
-                            onChange={(e) => {setUserPwd(e.target.value);}} />
-                        <p className="chAlarm">8~15자 영문자, 숫자, 특수문자(@#$%^&*_)를 사용하세요.</p>
+                            onChange={(e) => {
+                                onChangePassword(e);
+                                setUserPwd(e.target.value);
+                            }} />
+                        <p className={pwdColor}>{pwdError}</p>
                     </div>
                     {/* 비밀번호 확인 */}
                     <div className="rePwdInpt">
-                        <input type="password" placeholder="비밀번호 확인" />
-                        <p className="chAlarm noAlarm">조건에 맞는 비밀번호를 입력하세요.</p>
-                        <p className="chAlarm noAlarm">비밀번호가 일치하지 않습니다.</p>
-                        <p className="chAlarm okAlarm">비밀번호가 일치합니다.</p>
+                        <input type="password" placeholder="비밀번호 확인" 
+                            onChange={(e) => {onChangeRePwd(e);}} />
+                        <p className={rePwdColor}>{rePwdError}</p>
                     </div>
                     {/* 이메일 */}
                     <div className="emailInput">
