@@ -1,17 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { MyPage } from './mypage/MyPage';
-import MainPage from './mainPage/MainPage'
-import App from "./App";
-import FeedBody from "./feedPage/FeedBody";
-import FeedInsert from "./feedPage/FeedInsert";
 import FeedMenu from "./feedPage/FeedMenu";
-import Uploader from "./feedPage/Uploader";
-import FeedReplyInsert from "./feedPage/FeedReplyInsert";
-import FeedReplyList from "./feedPage/FeedReplyList";
+import  'bootstrap/dist/css/bootstrap.min.css' ;
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

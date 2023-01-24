@@ -1,8 +1,7 @@
-
 import axios from "axios";
 import {useEffect, useState} from "react";
 import FeedReplyResultList from "./FeedReplyResultList";
-
+import Table from 'react-bootstrap/Table';
 
 function FeedReplyList(props){
     const [ testStr, setTestStr ] = useState();
@@ -29,12 +28,10 @@ function FeedReplyList(props){
     );
 
     let i=0;
-    const {스타일} = {
-        border: '1px solid green'
-    }
+
     return(
-        <div style={스타일}>
-            <table >
+        <div>
+            <Table striped>
                 <thead>
                     <tr>
                     <th>피드번호 : {feedNo}</th>
@@ -46,7 +43,7 @@ function FeedReplyList(props){
                 <tbody>
                     {testStr?.map(e=><FeedReplyResultList key={i++} {...e}/>)}
                 </tbody>
-            </table>
+            </Table>
         </div>
         )
 

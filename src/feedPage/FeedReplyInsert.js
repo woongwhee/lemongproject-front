@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import FeedReplyList from "./FeedReplyList";
-
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 function FeedReplyInsert(props) {
     const [id, SetId] = useState();
 
@@ -10,25 +12,45 @@ function FeedReplyInsert(props) {
     let feedNo = props.feedNo;
 
 
-    const 스타일 ={
-        border: '1px solid green'
-    }
-
     return (
         <>
         <div>
             <FeedReplyList feedNo={feedNo}/>
         </div>
-    <div style={스타일}>
 
-        아이디 : <input type="text" onChange={(e)=> {SetId(e.target.value);}} placeholder="숫자만입력"/>
-            <br/>
-        피드번호 : {feedNo}
-            <br/>
-        댓글내용 : <input type="text" onChange={(e)=> {SetReplyContent(e.target.value);}}/>
-            <br/>
+            <InputGroup className="mb-2" style={{marginTop:"30px"}}>
+                <InputGroup.Text id="inputGroup-sizing-default" onChange={(e)=> {SetId(e.target.value);}} placeholder="숫자만입력">
+                    아이디
+                </InputGroup.Text>
+                <Form.Control
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup>
 
-            <button onClick={
+
+            <div style={{marginTop:"30px"}}>피드번호 : {feedNo}</div>
+
+
+            <InputGroup className="mb-2" style={{marginTop:"30px"}}>
+                <InputGroup.Text id="inputGroup-sizing-default" onChange={(e)=> {SetReplyContent(e.target.value);}}>
+                    댓글내용
+                </InputGroup.Text>
+                <Form.Control
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup>
+
+
+        {/*아이디 : <input type="text" onChange={(e)=> {SetId(e.target.value);}} placeholder="숫자만입력"/>*/}
+        {/*    <br/>*/}
+        {/*피드번호 : {feedNo}*/}
+        {/*    <br/>*/}
+        {/*댓글내용 : <input type="text" onChange={(e)=> {SetReplyContent(e.target.value);}}/>*/}
+        {/*    <br/>*/}
+
+            <Button style={{marginTop:"40px", float:"right"}} onClick={
                 () => axios.post('api/feed/insertReply',{
                     userNo:id,
                     feedNo:feedNo,
@@ -41,8 +63,7 @@ function FeedReplyInsert(props) {
                     console.log('실패함'+id,feedNo,replyContent);
                 })
             }
-        >댓글쓰기</button>
-    </div>
+        >댓글쓰기</Button>
         </>
 
 
