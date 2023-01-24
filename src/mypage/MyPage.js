@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React , {useState , useEffect} from "react";
 import { Component } from "react";
+import axios from "axios";
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -19,6 +20,30 @@ import Mymenu from "./Mymenu";
 import './MyPage.css';
 
 function MyPage() {
+
+    // 스프링에서 유저프로필 정보 가져오기.
+    const [member , setMember] = useState();
+    
+    const randMember=async()=>{
+        const response = await axios.get("/api/member/selectPro");
+        console.log(response);
+        setMember(response.data[0]);
+    }
+    useEffect(()=>{
+        randMember()
+    },[])
+
+     // photo테이블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
+     const [myprofile , setMyProfile] = useState();
+
+     const selectMyProfile = async() => {
+         const response = await axios.get("/api/member/selectMyProfileImg");
+         setMyProfile(response.data[0])
+         console.log(response.data)
+     }
+     useEffect(() => {selectMyProfile()},[])
+ 
+     let saveFilePath = "http://localhost:8081/api/images/";
 
     // Apikey를 환경변수를 이용해 숨기기.
     const apiKey = process.env.REACT_APP_CAL_API_KEY;
@@ -59,9 +84,10 @@ function MyPage() {
                 <div className="outer_MyPro">
                     <div className="outer_proimg">
                         <p>프로필 이미지</p>
+                        <img src={saveFilePath+myprofile?.changeName} className="profileImg"></img>
                     </div>
                     <div className="outer_id">
-                        <p>닉네임(아이디)</p>
+                        <p>닉네임(아이디) : {member?.nickName}</p>
                     </div>
                     <div className="outer_fall">
                         <p>게시물(개수) / 팔로잉 / 팔로워 </p>
@@ -70,7 +96,7 @@ function MyPage() {
                         <p style={{fontSize: '10px'}}>별명</p>
                     </div>
                     <div className="outer_content">
-                        <p>자기소개</p>
+                        <p>자기소개 : {member?.profileComment}</p>
                     </div>
                 </div>
                 <div className="outer_btn">

@@ -153,3 +153,17 @@
     box-sizing: border-box;
     background-color: cornsilk;
 }
+.outer_feedThum{
+    border: 1px solid tomato;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    width: 32.4%;
+    height: 33%;
+    float: left;
+}
+.profileImg{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: gainsboro;
+}
