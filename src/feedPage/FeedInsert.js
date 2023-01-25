@@ -31,7 +31,7 @@ function FeedInsert() {
                         <br/>
                     </Tab>
                 </Tabs>
-                    <Button variant="primary" style={{float:'right', marginTop:'20%'}} onClick={
+                    <Button className="feed-insert-button" variant="success" onClick={
                         () => {
                         axios.post('api/feed/insert', {
                             userNo:id,

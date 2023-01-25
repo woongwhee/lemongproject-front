@@ -17,6 +17,8 @@ function FeedPicture(props) {
         setFileImage("");
     };
 
+
+
     return (
         <>
             <table>
@@ -26,36 +28,35 @@ function FeedPicture(props) {
                 <tbody>
                 <tr>
                     <td>
-                        <div>
+                        <input
+                            name="imgUpload"
+                            type="file"
+                            accept="image/*"
+                            onChange={saveFileImage}
+                            multiple
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div className="imagePreview" >
                             {fileImage && (<img
                                     alt="sample"
                                     src={fileImage}
                                     style={{margin: "auto", width: "500px", height: "500px"}}
                                 />)}
-                            <div
+                        </div>
+                        <div>
+                            <button
                                 style={{
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    border:"1px solid black"
-                                }}
-                            >
-                                <input
-                                    name="imgUpload"
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={saveFileImage}
-                                />
-                                <button
-                                    style={{
-                                        backgroundColor: "gray",
-                                        color: "white",
-                                        width: "55px",
-                                        height: "40px",
-                                        cursor: "pointer",
-                                    }} onClick={() => deleteFileImage()}>
-                                    삭제
-                                </button>
-                            </div>
+                                    backgroundColor: "gray",
+                                    color: "white",
+                                    width: "55px",
+                                    height: "40px",
+                                    cursor: "pointer",
+                                }} onClick={() => deleteFileImage()}>
+                                삭제
+                            </button>
                         </div>
                     </td>
                 </tr>
