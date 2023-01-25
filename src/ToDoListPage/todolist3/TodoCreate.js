@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
-import { useTodoDispatch, useTodoNextId } from './TodoContext';
+import axios from 'axios';
+import moment from 'moment';
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -76,40 +77,61 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
-function TodoCreate() {
+function TodoCreate({onAdd, todoDate }) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('');
-  const dispatch = useTodoDispatch();
-  const nextId = useTodoNextId();
-
+ 
   const onToggle = () => setOpen(!open);
-  const onChange = e => setValue(e.target.value);
-  const onSubmit = e => {
-    e.preventDefault();
-    dispatch({
-      type: 'CREATE',
-      todo: {
-        id: nextId.current,
-        text: value,
-        done: false
+
+  //입력창 값 저장
+  const [inputValue, setInputValue] = useState('')
+
+  //투두넘버
+  const todoNo = useRef(0)
+
+  //임시 투두 날짜
+  const today = moment(todoDate).format("yyyy년 MM월 DD일");
+
+  //const textRef = useRef()
+
+  const onCreate = (event) => {
+    setInputValue(event.target.value)
+    console.log(inputValue)
+  } 
+
+  const onSubmit = (e) => {
+    e.preventDefault() //새로고침 방지
+
+    if(!inputValue) return //공백 입력 방지
+
+    onAdd(inputValue) //입력 내용 추가
+
+    setInputValue('')
+
+    //textRef.current.focus();
+  }
+
+  const insertTodo = () => {
+    axios({
+      method: 'post',
+      url: '/api/todo/insert',
+      data: {
+        id : todoNo.current++, 
+        userNo : 1,
+        date : today,
+        content : inputValue,
+        done : false,
+        sort : 1
       }
-    });
-    nextId.current += 1;
-    setOpen(false);
-    setValue('');
-  };
+    })
+  }
 
   return (
     <>
       {open && (
         <InsertFormPositioner>
           <InsertForm onSubmit={onSubmit}>
-            <Input
-              autoFocus
-              onChange={onChange}
-              value={value}
-              placeholder="할 일을 입력 후, Enter 를 누르세요"
-            />
+            <Input type="text" value={inputValue} onChange={onCreate}/>
+            <button onClick={insertTodo}>add</button>
           </InsertForm>
         </InsertFormPositioner>
       )}

@@ -11,11 +11,18 @@ import Menubar2 from "./menubar/Menubar2";
 
 import btnLogo from '../mypage/image/menu1.png';
 
+//캘린더 라이브러리 추가 해주기
+//npm install react-calendar
+
+//리액트 두투라이브러리 추가
+// npx create-react-app react-todolist
+// npm i react-icons styled-components
+
 
 function MainPage() {
     // Apikey를 환경변수를 이용해 숨기기.
     const apiKey = process.env.REACT_APP_CAL_API_KEY;
-
+    
     // 버튼 클릭 시 Menu 보이게 하기.
     const [menuClick , setMenuClick] = useState(false);
 
