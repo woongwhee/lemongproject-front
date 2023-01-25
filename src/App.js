@@ -1,27 +1,31 @@
-// import logo from './logo.svg';
-// import './App.css';
-// import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
-// function App() {
-//   const [message, setMessage]=useState([]);
-//   useEffect(()=>{
-//     fetch("/api/hello")
-//         .then((res)=>{
-//           return res.json();
-//         })
-//         .then((data)=>{
-//             setMessage(data);
-//         });
-//   },[]);
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <ul>
-//           {message.map((v,idx)=><li key={`${idx}-${v}`}>{v}</li>)}
-//         </ul>
-//       </header>
-//     </div>
-//   );
-// }
+function App() {
 
-// export default App;
+    export default function useIntersectionObserver(callback) {
+        const observer = useRef(
+            new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            callback();
+                        }
+                    });
+                },
+                { threshold: 1 }
+            )
+        );
+
+        const observe = (element) => {
+            observer.current.observe(element);
+        };
+
+        const unobserve = (element) => {
+            observer.current.unobserve(element);
+        };
+
+        return [observe, unobserve];
+    }
+}
+
+export default App;
