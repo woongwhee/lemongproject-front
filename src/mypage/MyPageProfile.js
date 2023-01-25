@@ -34,7 +34,7 @@ function MyPageProfile(){
         <div className="outer_proUpdate">
                 <div className="outer_myProUpdate">
                     <p>마이페이지 프로필 업데이트</p>
-                    <img src={saveFilePath+myprofile?.changeName} className="profileImg"></img>
+                    <img src={saveFilePath+myprofile?.changeName} style={{marginLeft:'150px'}} className="profileImg"></img>
                     
                 </div>
                     <ProFileData/>

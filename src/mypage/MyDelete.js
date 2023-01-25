@@ -1,4 +1,4 @@
-import React , {useState , useEffect , useValid} from "react";
+import React , {useState , useEffect} from "react";
 import { Component } from "react";
 import axios from "axios";
 
@@ -77,7 +77,6 @@ function MyDelete(){
              </div>
              </div>
              </div>
-          
         </div>
       );
 

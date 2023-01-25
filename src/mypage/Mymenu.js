@@ -1,9 +1,17 @@
 import React , {useState , useEffect} from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import MyAlert from "./MyAlert";
+import MySearch from "./MySearch";
 
 function Mymenu(){
- 
+
+    const [tab , setTab] = useState("Search");
+
+    const changeTab = (tabName) => {
+        setTab(tabName);
+    }
+
     return(
         <div className="outer_myMenu">
             <Link to="/MyPageUpdate">
@@ -14,14 +22,11 @@ function Mymenu(){
                 <p>프로필</p>
             </div>
             <div className="outer_3menu">
-                <p>검색 , 알림 , 로그아웃</p>
+                <button className="myBtn" style={{marginLeft:'60px'}} onClick={() => changeTab("Search")}>검색</button>
+                <button className="myBtn" onClick={() => changeTab("Alert")}>알림</button>
             </div>
-            <div className="outer_search">
-                <p>검색창</p>
-            </div>
-            <div className="outer_req">
-                <p>결과들</p>
-            </div>
+            {tab === "Search" ? <MySearch/> : null}
+            {tab === "Alert" ? <MyAlert/> : null}
         </div>
     )
 };

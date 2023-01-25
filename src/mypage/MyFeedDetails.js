@@ -3,6 +3,9 @@ import { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+
 // 부트스트랩
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';

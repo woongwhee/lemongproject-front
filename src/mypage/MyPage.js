@@ -18,6 +18,7 @@ import Mymenu from "./Mymenu";
 
 // 마이페이지 css
 import './MyPage.css';
+import MyFollowApplication from "./MyFollowApplication";
 
 function MyPage() {
 
@@ -84,19 +85,18 @@ function MyPage() {
                 <div className="outer_MyPro">
                     <div className="outer_proimg">
                         <p>프로필 이미지</p>
-                        <img src={saveFilePath+myprofile?.changeName} className="profileImg"></img>
+                        <img src={saveFilePath+myprofile?.changeName} style={{marginLeft:'7px'}} className="profileImg"></img>
                     </div>
                     <div className="outer_id">
                         <p>닉네임(아이디) : {member?.nickName}</p>
                     </div>
                     <div className="outer_fall">
                         <p>게시물(개수) / 팔로잉 / 팔로워 </p>
-                    </div>
-                    <div className="outer_nick">
-                        <p style={{fontSize: '10px'}}>별명</p>
+                        
                     </div>
                     <div className="outer_content">
                         <p>자기소개 : {member?.profileComment}</p>
+                        <MyFollowApplication/>
                     </div>
                 </div>
                 <div className="outer_btn">
@@ -112,7 +112,6 @@ function MyPage() {
                 <div className="menuBtn">
                     <button className="mybtn1" style={{backgroundImage: `url(${btnLogo})`}}
                         onClick={() => setMenuClick((!menuClick))}></button>
-                    {/* <button className="mybtn1" style={{backgroundImage: `url(${plusLogo})` , height}}></button> */}
                 </div>
                 {menuClick === true ? <Mymenu/> : null}
             </div>
