@@ -3,53 +3,51 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { MyPage } from './mypage/MyPage';
-import MyPageUpdate from './mypage/MyPageUpdate';
-import TemplateCard from './component/Template/TemplateCard';
-// import MainPage from './mainPage/MainPage'
-import MyPageProfile from './mypage/MyPageProfile';
-import MyPagePwdCheck from './mypage/MypagePwdUpdate';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import MyFeedDetails from './mypage/MyFeedDetails';
-import FeedMenu from "./feedPage/FeedMenu";
-import  'bootstrap/dist/css/bootstrap.min.css' ;
-
-
+import axios from 'axios';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    // <App />
+  //   <App />
   // </React.StrictMode>
-  // <MainPage/>
 
- <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MyPage />} />
-          <Route path='MyFeedDetails' element={<MyFeedDetails/>}>
 
-          </Route>
-          <Route path='MyPageUpdate' element={<MyPageUpdate/>}>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="join" element={<Join/>} />
+      <Route path="findPwd" element={<FindPwd/>} />
+    </Routes>
+  </BrowserRouter>
 
-          </Route>
-      </Routes>
- </BrowserRouter>
 
-  // <>
-  // {/* // // <TemplateCard></TemplateCard> */}
-  // // {/* <MyPageUpdate/> */}
-  // {/* // <MyPageProfile/> */}
-  // // {/* <MyPagePwdCheck/> */}
-  // {/* </> */}
+  // 페이지 자체가 이동하는 코드
+  // <BrowserRouter>
+  //   <Routes>
+  //     <Route path="/" element={<App />} />
+  //     <Route path="expenses" element={<Expenses />} />
+  //     <Route path="invoices" element={<Invoices />} />
+  //     <Route path="expenses/home" element={<Home />} />
+  //     {/* 페이지 내에 Link 이동을 할 때도 여기다 작성해줘야 한다. */}
+  //   </Routes>
+  // </BrowserRouter>
+
+  // 페이지 내에서 컴포넌트만 변경
+  // <BrowserRouter>
+  //   <Routes>
+  //     <Route path="/" element={<App />} >
+  //       <Route path="expenses" element={<Expenses />} />
+  //       <Route path="invoices" element={<Invoices />} >
+  //         <Route path=":invoiceId" element={<Invoice />} />
+  //       </Route>
+  //     </Route>
+  //   </Routes>
+  // </BrowserRouter>
+
+
 );
-
-
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
