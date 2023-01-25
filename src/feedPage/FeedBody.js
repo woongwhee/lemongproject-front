@@ -5,7 +5,7 @@ import Feed from "./Feed";
 
 function FeedBody(){
     // 요청받은 정보를 담아줄 변수 선언
-    const [ testStr, setTestStr ] = useState();
+    const [ testStr, setTestStr] = useState();
 
     //         ''        data
     //         data

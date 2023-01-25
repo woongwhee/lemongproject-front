@@ -1,8 +1,8 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import companyLogo1 from '../img/KakaoTalk_20230124_190630482.jpg';
-import companyLogo2 from '../img/KakaoTalk_20230124_190630482_02.jpg';
-import companyLogo3 from '../img/KakaoTalk_20230124_190630482_01.jpg';
+import companyLogo1 from '../feedPage/img/KakaoTalk_20230124_190630482.jpg'
+import companyLogo2 from '../feedPage/img/KakaoTalk_20230124_190630482_02.jpg'
+import companyLogo3 from '../feedPage/img/KakaoTalk_20230124_190630482_01.jpg';
 function FeedPhoto(props) {
     return (
         <Carousel>

@@ -4,6 +4,8 @@ import './FeedInsert.css'
 import Button from "react-bootstrap/Button";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import FeedPhoto from "./FeedPhoto";
+import FeedPicture from "./FeedPicture";
 
 
 function FeedInsert() {
@@ -19,10 +21,7 @@ function FeedInsert() {
                     onSelect={(k) => setKey(k)}
                     className="mb-3">
                     <Tab eventKey="home" title="사진">
-                        <p>사진</p>
-                        <input type="file" accept="image/*"/>
-                        <img src="" height="200" alt="이미지 미리보기..." />
-                        {/*<Uploader></Uploader>*/}
+                        <FeedPicture></FeedPicture>
                     </Tab>
                     <Tab eventKey="profile" title="피드내용">
                         <p>아이디</p>

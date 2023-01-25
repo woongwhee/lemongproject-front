@@ -19,12 +19,13 @@ function FeedReplyInsert(props) {
         </div>
 
             <InputGroup className="mb-2" style={{marginTop:"30px"}}>
-                <InputGroup.Text id="inputGroup-sizing-default" onChange={(e)=> {SetId(e.target.value);}} placeholder="숫자만입력">
+                <InputGroup.Text id="inputGroup-sizing-default" placeholder="숫자만입력">
                     아이디
                 </InputGroup.Text>
                 <Form.Control
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default"
+                    onChange={(e)=> {SetId(e.target.value);}}
                 />
             </InputGroup>
 
@@ -33,12 +34,13 @@ function FeedReplyInsert(props) {
 
 
             <InputGroup className="mb-2" style={{marginTop:"30px"}}>
-                <InputGroup.Text id="inputGroup-sizing-default" onChange={(e)=> {SetReplyContent(e.target.value);}}>
+                <InputGroup.Text id="inputGroup-sizing-default">
                     댓글내용
                 </InputGroup.Text>
                 <Form.Control
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default"
+                    onChange={(e)=> {SetReplyContent(e.target.value);}}
                 />
             </InputGroup>
 
@@ -59,8 +61,9 @@ function FeedReplyInsert(props) {
                     console.log(res.data)
                     SetId('');
                     SetReplyContent('');
+                    window.location.reload("/main");
                 }).catch(function (){
-                    console.log('실패함'+id,feedNo,replyContent);
+                    console.log('실패함 '+id,feedNo,replyContent);
                 })
             }
         >댓글쓰기</Button>
