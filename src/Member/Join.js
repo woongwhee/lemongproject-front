@@ -80,6 +80,15 @@ function Join() {
     })
 
 
+    // // 이메일 인증 버튼
+    // const chEmail = async(email) => {
+    //     let response = await axios.post('api/chEmail',
+    //         ({'email':email})
+    //     )
+
+    // }
+
+
     // 회원가입 클릭시 데이터 전송
     const joinClick = async(name, nick, pwd, email) => {
         let response = await axios.post('api/join',
@@ -145,7 +154,8 @@ function Join() {
                     <div className="emailInput">
                         <input type="email" id="email" name="email" placeholder="이메일 주소" required 
                             onChange={(e) => {setEmail(e.target.value);}}/>
-                        <button className="chBtn eBtn">인증</button>
+                        <button className="chBtn eBtn" onClick={() => {chEmail(email);}}
+                        >인증</button>
                         <p className="chAlarm">인증번호가 발송되었습니다.</p>
                     </div>
                     {/* 이메일 인증번호 */}
