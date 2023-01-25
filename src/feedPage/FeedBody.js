@@ -26,6 +26,7 @@ function FeedBody(){
             }).then((res) => {
                 // console.log(res.data.result)
                 callback(res.data.result);
+                console.log(res.data.code);
             })
         }, []
     );

@@ -8,7 +8,10 @@ function FeedPicture(props) {
 
     // 파일 저장
     const saveFileImage = (e) => {
-        setFileImage(URL.createObjectURL(e.target.files[0]));
+        for(let i = 0; i<e.target.files.length; i++){
+
+            setFileImage(URL.createObjectURL(e.target.files[i]));
+        }
     };
 
     // 파일 삭제
@@ -23,7 +26,9 @@ function FeedPicture(props) {
         <>
             <table>
                 <thead>
+                <tr>
                 <th>이미지 미리 보기</th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr>
@@ -62,6 +67,7 @@ function FeedPicture(props) {
                 </tr>
                 </tbody>
             </table>
+            <button> 사진 저장 하기 </button>
         </>
     );
 }

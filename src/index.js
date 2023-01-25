@@ -4,19 +4,17 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import FeedMenu from "./feedPage/FeedMenu";
 import  'bootstrap/dist/css/bootstrap.min.css' ;
+import Test from './feedPage/test';
 
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    // <Feed></Feed>
-    // <App></App>
-    // <FeedInsert/>
+
+    // <Test></Test>
     <FeedMenu></FeedMenu>
-    // <Uploader/>
-    // <FeedReplyInsert/>
-    // <FeedReplyList></FeedReplyList>
+
 );
 
 
