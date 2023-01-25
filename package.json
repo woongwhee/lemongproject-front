@@ -16,18 +16,23 @@
     "form-data": "^4.0.0",
     "jquery": "^3.6.3",
     "modal": "^1.2.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
+    "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.7.0",
     "react-intersection-observer": "^9.4.1",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.7.0",
+    "react-icons": "^4.7.1",
     "react-scripts": "5.0.1",
     "rodal": "^2.0.1",
     "sass": "^1.57.1",
     "styled-components": "^5.3.6",
     "swiper": "^8.4.6",
+    "reactstrap": "^9.1.5",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -42,6 +47,7 @@
       "react-app/jest"
     ]
   },
+
   "browserslist": {
     "production": [
       ">0.2%",
@@ -53,5 +59,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+
+
 }
