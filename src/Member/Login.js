@@ -17,13 +17,15 @@ function Login() {
         )
         if(response.data.code === '2000') {
             console.log('성공!')
+            const userNo = response.data.result.userNo;
             alert("로그인에 성공하였습니다.")
-            sessionStorage.setItem("email", email);
+            sessionStorage.setItem("userNo", userNo);
+            document.location.href = "/findPwd"; // 페이지 이동(임시)
         } else {
             console.log('실패!')
             alert("잘못된 정보입니다. 다시 입력해주세요.")
         }
-        document.location.href = "/findPwd"; // 페이지 이동(임시)
+        
     }
     
 
