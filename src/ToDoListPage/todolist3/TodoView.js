@@ -31,18 +31,18 @@ function TodoView3({todoDate}){
   //입력 내용 리스트 배열로 저장
   const [todoList, setTodoList] = useState([])
 
-  // const fetchTodo = async() => {
-  //   const res = await axios.get("/api/todo/getTodo" );
-  //   console.log("response",res);
-  //   setTodoList(res.data[0]);
-  // }
+  const fetchTodo = async() => {
+    const res = await axios.get("/api/todo/getTodo" );
+    console.log("response",res);
+    setTodoList(res.data[0]);
+  }
 
-  // useEffect(
-  //   () => {
-  //       fetchTodo();
-  //       return
-  //   },[]
-  // )
+  useEffect(
+    () => {
+        fetchTodo();
+        return
+    },[]
+  )
 
   // const insertTodo = () => {
   //   axios({

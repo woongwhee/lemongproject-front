@@ -8,7 +8,7 @@ import moment from 'moment/moment';
 //npm install react-calendar
 //npm install moment --save
 
-function Calendar2(props) {
+function Calendar2() {
   const [todoDate, setValue] = useState(new Date());
   console.log(todoDate)
 

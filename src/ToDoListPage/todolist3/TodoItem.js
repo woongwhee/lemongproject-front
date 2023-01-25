@@ -79,25 +79,25 @@ function TodoItem({todo, onDel, onToggle, onUpdate}) {
 
     const[todos, setTodos] = useState();
 
-    const fetchTodo = async() => {
-        const res = await axios.get("/api/todo/getTodo" );
-        console.log(res);
-        setTodos(res.data[0]);
-    }
+    // const fetchTodo = async() => {
+    //     const res = await axios.get("/api/todo/getTodo" );
+    //     console.log(res);
+    //     setTodos(res.data[0]);
+    // }
 
-    useEffect(
-        () => {
-            fetchTodo();
-            return
-        },[]
-    )
+    // useEffect(
+    //     () => {
+    //         fetchTodo();
+    //         return
+    //     },[]
+    // )
 
 
   return (
     <TodoItemBlock>
       {/* 완료상태 */}
       <CheckCircle done={todo.done} onClick={()=>onToggle(todo.id)}>
-        {todo.done && <MdDone /> }
+        {todos.done && <MdDone /> }
       </CheckCircle>
 
       {/* 내용 */}

@@ -11,14 +11,12 @@ import TodoView2 from "../todolist2/TodoView";
 import TodoView3 from "../todolist3/TodoView";
 import Calendar2 from "../calendar/Calendar";
 import moment from "moment";
+import { useState } from "react";
 
-const todoListDate = ({todoDate}) => {
-  {moment(todoDate).format("YYYY년 MM월 DD일")} 
-  console.log("MenubarDate",todoDate)
-}
+
 
 const menuList = {
-  0: <TodoView3 todoDate={todoDate}/>,
+  0: <TodoView3 />,
   1: <FeedList />,
   2: <ChallengeList />,
   3: <TemplateList />,
