@@ -10,15 +10,12 @@ const TodoListBlock = styled.div`
 `;
 
 function TodoList({todoList, onDel, onToggle, onUpdate}) {
-  
+  console.log("todoList", todoList)
   return (
     <TodoListBlock>
       {todoList.map(todo => (
         <TodoItem
-          // id={todo.id}
-          // content={todo.text}
-          //done={todo.done}
-          key={todo.id}
+          key={todo.todoNo}
           todo={todo}
           onDel={onDel}
           onToggle={onToggle}

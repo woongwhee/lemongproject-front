@@ -18,73 +18,63 @@ const GlobalStyle = createGlobalStyle`
     background: #e9ecef;
   }
 `;
- 
-function TodoView3({todoDate}){
-  //console.log("todoView",todoDate)
 
-  //투두 날짜(임시)
-  const today = new Date();
+function TodoView3(props){
 
-  //투두넘버 설정
-  const todoNo = useRef(0)
+  const today = new Date()
+
+  //투두넘버 설정->가져온 투두list+1
+  const todoNo = useRef('')
 
   //입력 내용 리스트 배열로 저장
   const [todoList, setTodoList] = useState([])
 
+  //투두리스트 가져오기(백)
+  // axios를 통해서 get 요청을 하는 함수를 생성합니다.
+  // 비동기처리를 해야하므로 async/await 구문을 통해서 처리합니다.
   const fetchTodo = async() => {
     const res = await axios.get("/api/todo/getTodo" );
     console.log("response",res);
-    setTodoList(res.data[0]);
+    setTodoList(res.data);
   }
 
+   // 생성한 함수를 컴포넌트가 mount 됐을 떄 실행하기 위해 useEffect를 사용합니다.
   useEffect(
     () => {
+      // effect 구문에 생성한 함수를 넣어 실행합니다.
         fetchTodo();
         return
     },[]
   )
 
-  // const insertTodo = () => {
-  //   axios({
-  //     method: 'post',
-  //     url: '/api/todo/insert',
-  //     data: {
-  //       id : todoNo.current++, 
-  //       userNo : 1,
-  //       date : today,
-  //       content : inputValue,
-  //       done : false,
-  //       sort : 1
-  //     }
-  //   })
-  // }
 
-  //투두 추가 함수
+  //투두 추가 함수(프론트)
   const onAdd = (inputValue) => {
+
     setTodoList([
       ...todoList,
       {
-        id : todoNo.current++, 
+        todoNo: todoNo.current++, 
         userNo : 1,
-        date : today,
-        content : inputValue,
-        done : false,
+        todoDate : today,
+        todoContent : inputValue,
+        clear : false,
         sort : 1
       }
     ])
     console.log(todoList)
   }
 
-  //투두 삭제
-  const onDel = (id) => {
-    setTodoList(todoList.filter(todo => todo.id !== id))
+  //투두 삭제(프론트)
+  const onDel = (todoNo) => {
+    setTodoList(todoList.filter(todo => todo.todoNo !== todoNo))
     console.log(todoList)
   }
 
-  //투두 일정완료 
-  const onToggle = (id) => {
+  //투두 일정완료(프론트)
+  const onToggle = (todoNo) => {
    setTodoList(todoList.map(todo =>
-     todo.id === id ? { ...todo, done: !todo.done } : todo
+     todo.todoNo === todoNo ? { ...todo, clear: !todo.clear } : todo
    ));
    console.log(todoList)
   }
@@ -98,9 +88,9 @@ function TodoView3({todoDate}){
     <>
       <TodoTemplate>
         <GlobalStyle />
-        <TodoDate todoDate={todoDate}/> {/*todo날짜 컴포넌트*/}
+        <TodoDate /> {/*todo날짜 컴포넌트*/}
         <TodoList todoList={todoList} onDel={onDel} onToggle={onToggle} /> {/*todo목록 컴포넌트*/}
-        <TodoCreate onAdd={onAdd}  /> {/*todo생성 컴포넌트*/}
+        <TodoCreate onAdd={onAdd}/> {/*todo생성 컴포넌트*/}
       </TodoTemplate>
     </>
   );

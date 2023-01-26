@@ -16,8 +16,7 @@ function todoReducer(state, action) {
       return state.filter(todo => todo.id !== action.id);
     default:
       return state;
-    // case 'UPDATE':
-    //   return state.
+  
   }
 }
 

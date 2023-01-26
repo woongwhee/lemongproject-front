@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import axios from 'axios';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -77,53 +78,53 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
-function TodoCreate({onAdd, todoDate }) {
+function TodoCreate({onAdd}) {
+  //투두 추가 토글
   const [open, setOpen] = useState(false);
- 
   const onToggle = () => setOpen(!open);
 
-  //입력창 값 저장
+  //투두 날짜
+  const selectDay = useSelector((state)=> state.selectDay)
+
+  //입력값 저장할 state
   const [inputValue, setInputValue] = useState('')
 
-  //투두넘버
-  const todoNo = useRef(0)
-
-  //임시 투두 날짜
-  const today = moment(todoDate).format("yyyy년 MM월 DD일");
-
-  //const textRef = useRef()
-
+  //입력값 저장
   const onCreate = (event) => {
     setInputValue(event.target.value)
     console.log(inputValue)
   } 
 
+  //작성한 todo내용 화면에 표시
   const onSubmit = (e) => {
     e.preventDefault() //새로고침 방지
-
     if(!inputValue) return //공백 입력 방지
-
     onAdd(inputValue) //입력 내용 추가
+    setInputValue('') //입력 후 input 비워주기
 
-    setInputValue('')
-
-    //textRef.current.focus();
   }
 
-  const insertTodo = () => {
-    axios({
-      method: 'post',
-      url: '/api/todo/insert',
-      data: {
-        id : todoNo.current++, 
-        userNo : 1,
-        date : today,
-        content : inputValue,
-        done : false,
-        sort : 1
-      }
-    })
+  //작성한 todo 서버로 전송
+  const insertTodo = async(inputValue) => {
+    let response = await axios.post('api/todo/insertTodo',
+      ({ 
+        'userNo' : 1,
+        'todoContent' : inputValue,
+        'clear' : false,
+        'sort' : 1,
+        'todoDate' : today
+      })
+    )
+    if(response.data.code === '2000') {
+      console.log('삽입 화면 오케이');
+      let newTodo=response.data.result;
+      onAdd(newTodo);
+    }
   }
+
+  //로그인 userno정보 
+  let userNo = sessionStorage.getItem("userNo");
+
 
   return (
     <>
@@ -131,7 +132,7 @@ function TodoCreate({onAdd, todoDate }) {
         <InsertFormPositioner>
           <InsertForm onSubmit={onSubmit}>
             <Input type="text" value={inputValue} onChange={onCreate}/>
-            <button onClick={insertTodo}>add</button>
+            <button onClick={()=>{insertTodo(inputValue)}}>add</button>
           </InsertForm>
         </InsertFormPositioner>
       )}

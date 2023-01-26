@@ -77,40 +77,25 @@ const Text = styled.div`
 
 function TodoItem({todo, onDel, onToggle, onUpdate}) {
 
-    const[todos, setTodos] = useState();
-
-    // const fetchTodo = async() => {
-    //     const res = await axios.get("/api/todo/getTodo" );
-    //     console.log(res);
-    //     setTodos(res.data[0]);
-    // }
-
-    // useEffect(
-    //     () => {
-    //         fetchTodo();
-    //         return
-    //     },[]
-    // )
-
 
   return (
     <TodoItemBlock>
       {/* 완료상태 */}
-      <CheckCircle done={todo.done} onClick={()=>onToggle(todo.id)}>
-        {todos.done && <MdDone /> }
+      <CheckCircle clear={todo.clear} onClick={()=>onToggle(todo.id)}>
+        {todo?.clear && <MdDone /> }
       </CheckCircle>
 
       {/* 내용 */}
-      <Text done={todo.done}>{todo.content}</Text>
+      <Text clear={todo.clear}>{todo.todoNo}{todo.todoContent}</Text>
 
       {/* 수정버튼 */}
-      <Update onClick={()=>onUpdate(todo.id)}>
+      <Update onClick={()=>onUpdate(todo.todoNo)}>
         <MdCreate/>
       </Update>
 
       {/* 삭제버튼 */}
       <Remove >
-        <MdDelete onClick={()=>onDel(todo.id)} />
+        <MdDelete onClick={()=>onDel(todo.todoNo)} />
       </Remove>
     </TodoItemBlock>
   );

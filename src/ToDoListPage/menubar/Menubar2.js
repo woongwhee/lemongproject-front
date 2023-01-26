@@ -12,7 +12,8 @@ import TodoView3 from "../todolist3/TodoView";
 import Calendar2 from "../calendar/Calendar";
 import moment from "moment";
 import { useState } from "react";
-
+import { Provider } from "react-redux";
+import {createStore} from 'react';
 
 
 const menuList = {
