@@ -3,25 +3,42 @@ import axios from "axios";
 import './FeedPicture.css'
 
 function FeedPicture(props) {
-    //파일 미리볼 url을 저장해줄 state
-    const [fileImage, setFileImage] = useState("");
+    const [photoList,setPhoto]=useState([]);
 
-    // 파일 저장
-    const saveFileImage = (e) => {
-        for(let i = 0; i<e.target.files.length; i++){
-            setFileImage(URL.createObjectURL(e.target.files[i]));
+    const [ photoNo, setPhotoNo] = useState();
+
+    function callback(photoNo) {
+        setPhotoNo(photoNo);
+    }
+
+    const onChange = async (e) => {
+        e.preventDefault();
+        if(e.target.files){
+            const uploadFile = e.target.files[0]
+            const formData = new FormData()
+            formData.append('files',uploadFile)
+
+            const response = await axios({
+                method: 'post',
+                url: '/api/feed/feedPhoto',
+                data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            if(response.data.code==='2000'){
+                putPhoto(response.data.result)
+                console.log(response.data.result.photoNo)
+                callback(response.data.result.photoNo);
+                e.target.value="";
+            }
         }
-    };
-
-    // 파일 삭제
-    const deleteFileImage = () => {
-        URL.revokeObjectURL(fileImage);
-        setFileImage("");
-    };
-
-
-
-
+    }
+    const putPhoto = (newPhoto) => {
+        setPhoto([...photoList,newPhoto]);
+    }
+    let i =0;
     return (
         <>
 
@@ -38,7 +55,7 @@ function FeedPicture(props) {
                             name="imgUpload"
                             type="file"
                             accept="image/*"
-                            onChange={saveFileImage}
+                            onChange={onChange}
                             multiple
                         />
                     </td>
@@ -46,11 +63,7 @@ function FeedPicture(props) {
                 <tr>
                     <td>
                         <div className="imagePreview" >
-                            {fileImage && (<img
-                                    alt="sample"
-                                    src={fileImage}
-                                    style={{margin: "auto", width: "500px", height: "500px"}}
-                                />)}
+                            {photoList?.map(photo => <img style={{width:"100px", height:"100px"}} src={photo?.filePath+photo.changeName} key={i++}/>)}
                         </div>
                         <div>
                             <button
@@ -60,7 +73,13 @@ function FeedPicture(props) {
                                     width: "55px",
                                     height: "40px",
                                     cursor: "pointer",
-                                }} onClick={() => deleteFileImage()}>
+                                }} onClick={ () => { axios.post('api/feed/deleteFeedPhoto',{
+                                    photoNo:photoNo
+                                }).then(function (res){
+                                    console.log('성공');
+                            })
+
+                                }}>
                                 삭제
                             </button>
                         </div>
