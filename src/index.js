@@ -6,7 +6,12 @@ import FeedMenu from "./feedPage/FeedMenu";
 import  'bootstrap/dist/css/bootstrap.min.css' ;
 import Test from './feedPage/test';
 import Test1 from './feedPage/test1.js';
-import Login from "./Member/Login";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import App from './App';
+import Join from './Member/Join';
+import FindPwd from './Member/FindPwd';
+
+
 
 
 
@@ -14,9 +19,16 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
     // <Test></Test>
-    <Login></Login>
     // <Test1></Test1>
-    // <FeedMenu></FeedMenu>
+    <FeedMenu></FeedMenu>
+    // <BrowserRouter>
+    //     <Routes>
+    //         <Route path="/" element={<App />} />
+    //         <Route path="join" element={<Join />} />
+    //         <Route path="findPwd" element={<FindPwd />} />
+    //         <Route path="feedMenu" element={<FeedMenu/>}/>
+    //     </Routes>
+    // </BrowserRouter>
 
 );
 
