@@ -1,38 +1,43 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import './FeedPicture.css'
+import FeedPictureDelete from "./FeedPictureDelete";
 
 function FeedPicture(props) {
     const [photoList,setPhoto]=useState([]);
 
-    const [ photoNo, setPhotoNo] = useState();
+    const [ photoNo, SetPhotoNo] = useState();
 
-    function callback(photoNo) {
-        setPhotoNo(photoNo);
+    function callback(str) {
+        SetPhotoNo(str);
     }
 
     const onChange = async (e) => {
-        e.preventDefault();
-        if(e.target.files){
-            const uploadFile = e.target.files[0]
-            const formData = new FormData()
-            formData.append('files',uploadFile)
+        try{
+            e.preventDefault();
+            if(e.target.files){
+                const uploadFile = e.target.files[0]
+                const formData = new FormData()
+                formData.append('files',uploadFile)
 
-            const response = await axios({
-                method: 'post',
-                url: '/api/feed/feedPhoto',
-                data: formData,
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+                const response = await axios({
+                    method: 'post',
+                    url: '/api/feed/feedPhoto',
+                    data: formData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
 
-            if(response.data.code==='2000'){
-                putPhoto(response.data.result)
-                console.log(response.data.result.photoNo)
-                callback(response.data.result.photoNo);
-                e.target.value="";
+                if(response.data.code==='2000'){
+                    putPhoto(response.data.result)
+                    console.log(response.data.result.photoNo)
+                    callback(response.data.result.photoNo);
+                    e.target.value="";
+                }
             }
+        }catch (error){
+            console.log(error);
         }
     }
     const putPhoto = (newPhoto) => {
@@ -41,7 +46,6 @@ function FeedPicture(props) {
     let i =0;
     return (
         <>
-
             <table>
                 <thead>
                 <tr>
@@ -66,22 +70,7 @@ function FeedPicture(props) {
                             {photoList?.map(photo => <img style={{width:"100px", height:"100px"}} src={photo?.filePath+photo.changeName} key={i++}/>)}
                         </div>
                         <div>
-                            <button
-                                style={{
-                                    backgroundColor: "gray",
-                                    color: "white",
-                                    width: "55px",
-                                    height: "40px",
-                                    cursor: "pointer",
-                                }} onClick={ () => { axios.post('api/feed/deleteFeedPhoto',{
-                                    photoNo:photoNo
-                                }).then(function (res){
-                                    console.log('성공');
-                            })
-
-                                }}>
-                                삭제
-                            </button>
+                            <FeedPictureDelete photoNo={photoNo}></FeedPictureDelete>
                         </div>
                     </td>
                 </tr>

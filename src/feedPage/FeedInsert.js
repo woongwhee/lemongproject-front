@@ -9,8 +9,9 @@ import FeedPicture from "./FeedPicture";
 
 
 function FeedInsert() {
-    const [id, SetId] = useState();
+    const [userNo, SetUserNo] = useState();
     const [content, SetContent] = useState("");
+
     const [key, setKey] = useState('home');
     return (
         <div className="feed-insert" >
@@ -25,7 +26,7 @@ function FeedInsert() {
                     </Tab>
                     <Tab eventKey="profile" title="피드내용">
                         <p>아이디</p>
-                        <input onChange={(e) => {SetId(e.target.value);}}/>
+                        <input onChange={(e) => {SetUserNo(e.target.value);}}/>
                         <p>피드 내용</p>
                         <input onChange={(e) => {SetContent(e.target.value);}}/>
                         <br/>
@@ -34,12 +35,12 @@ function FeedInsert() {
                     <Button className="feed-insert-button" variant="success" onClick={
                         () => {
                         axios.post('api/feed/insert', {
-                            userNo:id,
+                            userNo:userNo,
                             feedContent:content
                             }).then(function (res){
                                 console.log(res.data);
                             }).catch(function () {
-                                console.log('실패함' + id, content)
+                                console.log('실패함' + userNo, content)
                             })
                         }}
                     >전송</Button>
