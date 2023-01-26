@@ -12,7 +12,7 @@ function FeedDelete(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const kfkf = 'adsf';
+
 
     return (
         <>

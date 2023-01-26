@@ -1,38 +1,24 @@
 import React from 'react';
-
+import axios from "axios";
 
 function Test(props) {
-
-    const handleFileOnChange = (event) => {
-        event.preventDefault();
-        let reader = new FileReader();
-        let file = event.target.files[0];
-        reader.onloadend = () => {
-            this.setState({
-                file : file,
-                previewURL : reader.result
-            })
-        }
-        reader.readAsDataURL(file);
+    const onChange = (e) => {
+        const img = e.target.files[0];
+        const formData = new FormData();
+        formData.append('file', img);
+        console.log(img)
     }
-
-    function constructor(props) {
-        this.state = {
-            file : '',
-            previewURL : ''
-        }
-    }
-
-    return(
+    return (
+        <>
         <div>
             <input type='file'
                    accept='image/jpg,impge/png,image/jpeg,image/gif'
                    name='profile_img'
-                   onChange={this.handleFileOnChange}>
+                   onChange={onChange}>
             </input>
         </div>
-    )
-
+        </>
+    );
 }
 
 export default Test;

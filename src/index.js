@@ -5,7 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import FeedMenu from "./feedPage/FeedMenu";
 import  'bootstrap/dist/css/bootstrap.min.css' ;
 import Test from './feedPage/test';
-
+import Test1 from './feedPage/test1.js';
+import Login from "./Member/Login";
 
 
 
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
     // <Test></Test>
-    <FeedMenu></FeedMenu>
+    <Login></Login>
+    // <Test1></Test1>
+    // <FeedMenu></FeedMenu>
 
 );
 

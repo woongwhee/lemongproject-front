@@ -1,9 +1,6 @@
 import React from 'react';
 import Login from './Member/Login';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-
-
-
+import {BrowserRouter, Routes, Route, Outlet, Link} from 'react-router-dom';
 // import Expenses from './testingPage/Expenses';
 // import Invoices from './testingPage/Invoices';
 // import Home from './testingPage/Home';
@@ -13,20 +10,20 @@ function App() {
 
   return (
     
-    <div>
-      <Login />
-    </div>
+    // <div>
+    //   <Login />
+    // </div>
 
 
     // 페이지 자체 이동 방법
-    // <div>
-    //   <h1>Bookkeeper</h1>
-    //   <nav style={{borderBottom: "solid 1px", paddingBottom: "1rem"}}>
-    //     <Link to="/invoices">Invoices</Link>
-    //     <br />
-    //     <Link to="/expenses">Expenses</Link>
-    //   </nav>
-    // </div>
+    <div>
+      <h1>Bookkeeper</h1>
+      <nav style={{borderBottom: "solid 1px", paddingBottom: "1rem"}}>
+        <Link to="/invoices">Invoices</Link>
+        <br />
+        <Link to="/expenses">Expenses</Link>
+      </nav>
+    </div>
     // Link 태그를 사용할 경우 -> URL로 이동하는 to를 쓸 때 '/'를 붙여줘야 한다.
 
 

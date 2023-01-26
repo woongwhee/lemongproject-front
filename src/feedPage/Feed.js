@@ -14,7 +14,7 @@ function Feed(props) {
 
     const [heart, setHeart] = useState('🤍');
 
-    const [like, setLike] = useState(0)
+    const [like, setLike] = useState(0);
 
     return (
         <div className="feed-container">
