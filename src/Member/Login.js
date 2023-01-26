@@ -10,7 +10,7 @@ function Login() {
 
     // 로그인 클릭시 데이터 전송
     const loginClick = async(e,p) => {
-        let response = await axios.post('api/login',
+        let response = await axios.post('api/member/login',
             ({'email':e,
               'userPwd':p
             })
