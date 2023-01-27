@@ -1,9 +1,15 @@
-import './App.css';
+import React from 'react';
+import Login from './Member/Login';
+import {BrowserRouter, Routes, Route, Outlet, Link} from 'react-router-dom';
+// import Expenses from './testingPage/Expenses';
+// import Invoices from './testingPage/Invoices';
+// import Home from './testingPage/Home';
+
 
 function App() {
 
   return (
-
+    
     <div>
       <Login />
     </div>
@@ -30,7 +36,7 @@ function App() {
     //     <Link to="/expenses">Expenses</Link>
     //   </nav>
     //   <Outlet />
-    //   {/*
+    //   {/* 
     //     Outlet을 작성하면
     //     Invoices와 Expenses의 페이지 링크가 바뀌면서
     //     해당 페이지의 내용이 OUtlet이 위치하는 부분에 나타나게 된다.

@@ -9,4 +9,10 @@ module.exports = (app) => {
             changeOrigin: true,
         })
     );
-}
+    app.use(
+        createProxyMiddleware('/file', {
+            target: 'http://localhost:8081',
+            changeOrigin: true,
+        })
+    );
+};
