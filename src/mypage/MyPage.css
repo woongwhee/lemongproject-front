@@ -95,21 +95,22 @@
 .outer_3menu{
      border: 1px solid tomato;
      width: 100%;
-     height: 10%;
+     height: 5%;
      background-color: burlywood;
 }
-.outer_search{
-    border: 1px solid slateblue;
-    width: 100%;
-    height: 8%;
-    background-color: brown;
-}
-.outer_req{
+.outer_req1{
     border: 1px solid teal;
     width: 100%;
-    height: 60%;
-    margin-top: 30px;
+    height: 73%;
+    margin-top: 20px;
     background-color: teal;
+}
+.outer_req2{
+    border: 1px solid yellow;
+    width: 100%;
+    height: 73%;
+    margin-top: 20px;
+    background-color: yellow;
 }
 .outer_proimg{
     border: 1px solid cornflowerblue;
@@ -123,7 +124,7 @@
     height: 20%;
     float: right;
     box-sizing: border-box;
-    margin-top: -272px;
+    margin-top: -265px;
     background-color: cadetblue;
 }
 .outer_fall{
@@ -138,18 +139,60 @@
 .outer_content{
     border: 1px solid thistle;
     width: 69%;
-    height: 43%;
+    height: 67%;
     float: right;
-    margin-top: -120px;
+    margin-top: -180px;
     box-sizing: border-box;
     background-color: darkcyan;
 }
-.outer_nick{
-    border: 1px solid steelblue;
-    width: 69%;
-    height: 13%;
-    float: right;
-    margin-top: -160px;
-    box-sizing: border-box;
-    background-color: cornsilk;
+.outer_feedThum{
+    border: 1px solid tomato;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    width: 32.4%;
+    height: 33%;
+    float: left;
+}
+.profileImg{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: gainsboro;
+}
+.outer_sub{
+    border: 1px solid red;
+    height: 677px;
+}
+.outer_feedImg{
+    border: 1px solid blue;
+    width: 60%;
+    height: 90%;
+    float: left;
+}
+.outer_feedContent{
+    border: 1px solid green;
+    width: 40%;
+    height: 30%;
+    float: left;
+}
+.outer_feedReply{
+    border: 1px solid slateblue;
+    width: 40%;
+    height: 70%;
+    float: left;
+}
+.outer_feedHart{
+    border: 1px solid violet;
+    height: 10%;
+    width: 100%;
+    margin-top: 5px;
+    float: left;
+}
+.searchbar{
+    width: 70%;
+    height: 50px;
+}
+.searchbtn{
+    width: 30%;
+    height: 51.5px;
 }

@@ -2,11 +2,10 @@ import React from 'react';
 import {Card} from "react-bootstrap";
 
 function TemplateCard(props) {
-    return (
-        <Card>
-            
-        </Card>
-    );
+
+    let hi=[1,2,3,4,5];
+    return(<>   
+     {hi.map(e=> <Card>  <h1>{e}</h1></Card>)}</>)
 }
 
 export default TemplateCard;
