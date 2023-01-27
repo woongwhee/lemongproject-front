@@ -22,6 +22,7 @@ function Join() {
     const [nickError, setNickError] = useState();
     const [pwdError, setPwdError] = useState();
     const [rePwdError, setRePwdError] = useState();
+    const [emailMs, setEmailMs] = useState();
 
     // 유효성 검사
     const [isPwd, setIsPwd] = useState(false);
@@ -30,7 +31,7 @@ function Join() {
 
     // 닉네임 중복체크
     const checkNick = async(nickName) => {
-        let response = await axios.post('api/member/join/chNick',
+        let response = await axios.post('api/p/join/chNick',
             ({'nickName':nickName})
         )
         if(response.data.code === '2000') {
@@ -81,17 +82,23 @@ function Join() {
 
 
     // 이메일 인증 버튼
-    // const chEmail = async(email) => {
-    //     let response = await axios.post('api/chEmail',
-    //         ({'email':email})
-    //     )
-
-    // }
+    const chEmail = async(email) => {
+        let response = await axios.post('api/p/join/chEmail',
+            ({'email':email})
+        )
+        if(response.data.code === '2000') {
+            console.log("테스팅 중~")
+            setEmailMs("인증번호가 발송되었습니다.")
+        } else {
+            console.log("인증 코드 보내기 실패")
+            setEmailMs("인증번호 발송에 실패하였습니다.")
+        }
+    }
 
 
     // 회원가입 클릭시 데이터 전송
     const joinClick = async(name, nick, pwd, email) => {
-        let response = await axios.post('api/member/join',
+        let response = await axios.post('api/p/join',
             ({'userName':name,
               'nickName':nick,
               'userPwd':pwd,
@@ -100,9 +107,9 @@ function Join() {
         )
         if(response.data.code === '2000') {
             alert("어서오세요. 여러분의 꿈을 응원합니다. :)")
-            document.location.href = "/"; // 회원가입 성공 시 로그인 페이지로
+            // document.location.href = "/"; // 회원가입 성공 시 로그인 페이지로
         } else {
-            console.log('회원가입 실패');
+            alert.log('회원가입 실패');
         }
 
         /*
@@ -154,8 +161,8 @@ function Join() {
                     <div className="emailInput">
                         <input type="email" id="email" name="email" placeholder="이메일 주소" required 
                             onChange={(e) => {setEmail(e.target.value);}}/>
-                        <button className="chBtn eBtn">인증</button>
-                        <p className="chAlarm">인증번호가 발송되었습니다.</p>
+                        <button className="chBtn eBtn" onClick={() => {chEmail(email);}}>인증</button>
+                        <p className="chAlarm">{emailMs}</p>
                     </div>
                     {/* 이메일 인증번호 */}
                     <div className="emailNumInput">
