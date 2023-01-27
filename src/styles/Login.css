@@ -1,0 +1,96 @@
+.loginArea {
+    border: 2px solid #BA99C3;
+    box-shadow: 0px 0px 3px 3px #BA99C3;
+    box-sizing: border-box;
+    width: 25rem;
+    height: 35rem;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+}
+
+.logo {
+    width: 80%;
+    box-sizing: border-box;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    /* border: 1px solid black; */
+}
+
+.inputArea, .socialArea {
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+    margin: auto;
+    text-align: center;
+}
+
+.inputArea {
+    margin-top: 30px;
+}
+
+.inputArea input {
+    width: 16.3rem;
+    height: 2.5rem;
+    border: 1.8px solid #BA99C3;
+    margin-bottom: 10px;
+    padding-left: 15px;
+}
+
+#loginButton {
+    width: 17.5rem;
+    height: 2.5rem;
+    border: 1px solid #BA99C3;
+    border-radius: 5px;
+    background-color: #BA99C3;
+}
+
+#loginButton:hover {
+    cursor: pointer;
+}
+
+.horizon {
+    box-sizing: border-box;
+    margin: 25px auto;
+    border-top: 1px solid #BA99C3;
+    width: 20rem;
+}
+
+.socialArea p {
+    color: gray;
+    font-weight: bold;
+    /* border: 1px solid black; */
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+
+.socialArea div {
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+}
+
+.social{
+    width: 70%;
+    box-sizing: border-box;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.social:hover {
+    cursor: pointer;
+}
+
+
+
+.menu {
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+}
