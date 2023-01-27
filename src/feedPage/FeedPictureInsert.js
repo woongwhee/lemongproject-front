@@ -40,7 +40,7 @@ function FeedPictureInsert({getPhotoNo}) {
                 });
                 if(response.data.code==='2000'){
                     putPhoto(response.data.result) // photoPath 미리보기 데이터
-                    console.log(response.data.result.photoNo)
+                    console.log(response.data.result)
                     callback(response.data.result.photoNo); // photoNo만
                     putPhotoNo(response.data.result.photoNo) // photoNo List 시키기
                     e.target.value="";

@@ -6,22 +6,34 @@ import companyLogo3 from '../feedPage/img/KakaoTalk_20230124_190630482_01.jpg';
 
 function FeedPhoto({filePath}) {
     const [getFilePath,setFilePath] = useState('')
+    useEffect(()=>{
+        setFilePath(filePath);
+    })
 
-useEffect(()=>{
-    setFilePath(filePath);
+    const list = getFilePath.split(",");
 
-})
 
-    return (
-        <Carousel>
+
+    const rendering = () => {
+        const result = [];
+        for (let i = 0; i < list.length; i++) {
+            result.push(
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={getFilePath}
+                        src={list[i]}
                         alt='사진이없습니다'
                     />
                 </Carousel.Item>
+            );
+        }
 
+        return result;
+    };
+
+    return (
+        <Carousel>
+            {rendering()}
         </Carousel>
     );
 }
