@@ -10,8 +10,8 @@ import FeedPhoto from "./FeedPhoto";
 
 function Feed(props) {
 
-    let{userNo,feedNo,feedContent,feedAt}=props;
-
+    let{userNo,feedNo,feedContent,feedAt,filePath}=props;
+    const list = filePath.split(',');
     const [heart, setHeart] = useState('🤍');
 
     const [like, setLike] = useState(0);
@@ -33,7 +33,8 @@ function Feed(props) {
                     <p>피드번호 : {feedNo}</p>
                     <span>이름 : {userNo}</span>
 
-                    <FeedPhoto></FeedPhoto>
+                    {/*<FeedPhoto filePath={filePath}></FeedPhoto>*/}
+                    {/*filePath={filePath} changeName={changeName}*/}
                 </div>
                 <div className="feed-body">
                     <div className="feed-header-left">

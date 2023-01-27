@@ -1,55 +1,52 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import companyLogo1 from '../feedPage/img/KakaoTalk_20230124_190630482.jpg'
 import companyLogo2 from '../feedPage/img/KakaoTalk_20230124_190630482_02.jpg'
 import companyLogo3 from '../feedPage/img/KakaoTalk_20230124_190630482_01.jpg';
-function FeedPhoto({photoList}) {
+
+function FeedPhoto({filePath}) {
+    const [getFilePath,setFilePath] = useState('')
+
+useEffect(()=>{
+    setFilePath(filePath);
+
+})
+
     return (
         <Carousel>
-            {/*{photoList.map(photo=>{*/}
-            {/*    return(<Carousel.Item>*/}
-            {/*        <img*/}
-            {/*            className="d-block w-100"*/}
-            {/*            src={photo.filePath+photo.changeName}*/}
-            {/*            alt="First slide"*/}
-            {/*        />*/}
-            {/*        /!*<Carousel.Caption>*!/*/}
-            {/*        /!*    <h3>First slide label</h3>*!/*/}
-            {/*        /!*</Carousel.Caption>*!/*/}
-            {/*    </Carousel.Item>)*/}
-            {/*    })*/}
-            {/*}*/}
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src={companyLogo1}
-                    alt="First slide"
-                />
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src={companyLogo2}
-                    alt="Second slide"
-                />
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={getFilePath}
+                        alt='사진이없습니다'
+                    />
+                </Carousel.Item>
 
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src={companyLogo3}
-                    alt="Third slide"
-                />
-
-                <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                </Carousel.Caption>
-            </Carousel.Item>
         </Carousel>
     );
 }
 
 export default FeedPhoto;
+            {/*<Carousel.Item>*/}
+            {/*    <img*/}
+            {/*        className="d-block w-100"*/}
+            {/*        src={companyLogo1}*/}
+            {/*        alt="First slide"*/}
+            {/*    />*/}
+            {/*</Carousel.Item>*/}
+            {/*<Carousel.Item>*/}
+            {/*    <img*/}
+            {/*        className="d-block w-100"*/}
+            {/*        src={companyLogo2}*/}
+            {/*        alt="Second slide"*/}
+            {/*    />*/}
+
+            {/*</Carousel.Item>*/}
+            {/*<Carousel.Item>*/}
+            {/*    <img*/}
+            {/*        className="d-block w-100"*/}
+            {/*        src={companyLogo3}*/}
+            {/*        alt="Third slide"*/}
+            {/*    />*/}
+            {/*</Carousel.Item>*/}
+

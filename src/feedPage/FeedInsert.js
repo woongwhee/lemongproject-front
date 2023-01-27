@@ -5,14 +5,20 @@ import Button from "react-bootstrap/Button";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import FeedPhoto from "./FeedPhoto";
-import FeedPicture from "./FeedPicture";
+import FeedPictureInsert from "./FeedPictureInsert";
 
 
 function FeedInsert() {
     const [userNo, SetUserNo] = useState();
     const [content, SetContent] = useState("");
 
-    const [key, setKey] = useState('home');
+    const [insertPhotoNo, setInsertPhotoNo] = useState([]);
+
+    const getPhotoNo = (getPhotoNo) => {
+        setInsertPhotoNo(getPhotoNo);
+    }
+
+    const [key, setKey] = useState('home'); // css useState
     return (
         <div className="feed-insert" >
             <div className="feed-insert-body">
@@ -22,7 +28,8 @@ function FeedInsert() {
                     onSelect={(k) => setKey(k)}
                     className="mb-3">
                     <Tab eventKey="home" title="사진">
-                        <FeedPicture></FeedPicture>
+                        <FeedPictureInsert getPhotoNo={getPhotoNo}></FeedPictureInsert>
+                        <h1>{insertPhotoNo}</h1>
                     </Tab>
                     <Tab eventKey="profile" title="피드내용">
                         <p>아이디</p>
@@ -36,9 +43,11 @@ function FeedInsert() {
                         () => {
                         axios.post('api/feed/insert', {
                             userNo:userNo,
-                            feedContent:content
+                            feedContent:content,
+                            photoNo:insertPhotoNo
                             }).then(function (res){
                                 console.log(res.data);
+                                window.location.reload();
                             }).catch(function () {
                                 console.log('실패함' + userNo, content)
                             })
