@@ -16,6 +16,7 @@ function Join() {
     const [errorColor, setErrorColor] = useState();
     const [pwdColor, setPwdColor] = useState();
     const [rePwdColor, setRePwdColor] = useState();
+    const [emailNumColor, setEmailNumColor] = useState();
 
 
     // 에러 메세지 변수
@@ -23,6 +24,7 @@ function Join() {
     const [pwdError, setPwdError] = useState();
     const [rePwdError, setRePwdError] = useState();
     const [emailMs, setEmailMs] = useState();
+    const [emailNumMs, setEmailNumMs] = useState();
 
     // 유효성 검사
     const [isPwd, setIsPwd] = useState(false);
@@ -92,6 +94,23 @@ function Join() {
         } else {
             console.log("인증 코드 보내기 실패")
             setEmailMs("인증번호 발송에 실패하였습니다.")
+        }
+    }
+
+
+    // 인증번호 확인
+    const chEmailNum = async(email, emailNum) => {
+        let response = await axios.post('api/p/join/chEmailNum',
+            ({'email':email,
+              'emailNum':emailNum
+            })
+        )
+        if(response.data.code === '2000') {
+            setEmailNumMs("인증되었습니다.")
+            setEmailNumColor("chAlarm okAlarm")
+        } else {
+            setEmailNumMs("인증번호가 일치하지않습니다.")
+            setEmailNumColor("chAlarm noAlarm")
         }
     }
 
@@ -166,10 +185,10 @@ function Join() {
                     </div>
                     {/* 이메일 인증번호 */}
                     <div className="emailNumInput">
-                        <input type="text" placeholder="이메일 인증번호 입력" />
-                        <button className="chBtn enBtn">확인</button>
-                        <p className="chAlarm noAlarm">인증번호가 일치하지 않습니다.</p>
-                        <p className="chAlarm okAlarm">인증되었습니다.</p>
+                        <input type="text" id="emailNum" name="emailNum" placeholder="이메일 인증번호 입력" required
+                            onChange={(e) => {setEmailNum(e.target.value)}}/>
+                        <button className="chBtn enBtn" onClick={() => {chEmailNum(email, emailNum);}}>확인</button>
+                        <p className={emailNumColor}>{emailNumMs}</p>
                     </div>
 
 
