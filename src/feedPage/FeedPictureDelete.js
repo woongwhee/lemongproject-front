@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 function FeedPictureDelete({photoNo,getData}) {
@@ -11,6 +11,7 @@ function FeedPictureDelete({photoNo,getData}) {
     function callback(str){
         setPhotoDelete(str);
     }
+    useEffect(()=>{{return callback}})
 
     return (
         <button onClick={ () => { axios({

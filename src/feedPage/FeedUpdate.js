@@ -7,32 +7,29 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
 function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const [newContent, setContent] = useState('');
 
-    const [getFilePath,setFilePath] = useState('')
-    useEffect(()=>{
-        setFilePath(filePath);
-    })
+    const [getFilePath,setFilePath] = useState('');
+    useEffect(()=>{setFilePath(filePath)})
+
     const list = getFilePath.split(",");
 
-
     const [getPhotoNo,setPhotoNo] = useState('')
-    useEffect(()=>{
-        setPhotoNo(photoNo);
-    })
-    const photoNoList = getPhotoNo.split(",");
+    useEffect(()=>{setPhotoNo(photoNo)})
 
+    const photoNoList = getPhotoNo.split(",");
 
 
     const rendering = () => {
         const result = [];
         for (let i = 0; i < list.length; i++) {
                 result.push(
-                    <div>
+                    <div key={i}>
                         <img
                             className="d-block w-100"
                             src={list[i]}
@@ -40,11 +37,10 @@ function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
                             style={{width:"300px", height:"300px"}}
                         />
                         <p>{photoNoList[i]}</p>
-                        <button onClick={()=>{
-                            deleteClick(list[i],photoNoList[i])
-
+                        <button
+                            onClick={()=>{
+                            deleteClick(photoNoList[i])
                         }}
-                                key={i}
                         >삭제하기</button>
                     </div>
                 );
@@ -56,8 +52,8 @@ function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
         axios.post(
           'api/feed/modifyFeedPhoto',
             {
-                photoNo:photoNo,
-                // filePath:filePath
+                // filePath:filePath,
+                photoNo:photoNo
         }).then(function (){
             console.log("성공")
         }).catch(function (){
@@ -79,8 +75,6 @@ function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
             <ModalBody>
             원래 피드 내용 : {feedContent} <br/>
                 {rendering()}
-
-
 
                 <FloatingLabel controlId="floatingTextarea2" label="새로운 피드 내용">
                     <Form.Control

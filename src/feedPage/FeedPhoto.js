@@ -4,13 +4,10 @@ import Carousel from 'react-bootstrap/Carousel';
 function FeedPhoto({filePath}) {
 
     const [getFilePath,setFilePath] = useState('')
-    useEffect(()=>{
-        setFilePath(filePath);
-    })
+    useEffect(()=>{setFilePath(filePath)})
+
 
     const list = getFilePath.split(",");
-
-
 
     const rendering = () => {
         const result = [];
@@ -35,28 +32,4 @@ function FeedPhoto({filePath}) {
         </Carousel>
     );
 }
-
 export default FeedPhoto;
-            {/*<Carousel.Item>*/}
-            {/*    <img*/}
-            {/*        className="d-block w-100"*/}
-            {/*        src={companyLogo1}*/}
-            {/*        alt="First slide"*/}
-            {/*    />*/}
-            {/*</Carousel.Item>*/}
-            {/*<Carousel.Item>*/}
-            {/*    <img*/}
-            {/*        className="d-block w-100"*/}
-            {/*        src={companyLogo2}*/}
-            {/*        alt="Second slide"*/}
-            {/*    />*/}
-
-            {/*</Carousel.Item>*/}
-            {/*<Carousel.Item>*/}
-            {/*    <img*/}
-            {/*        className="d-block w-100"*/}
-            {/*        src={companyLogo3}*/}
-            {/*        alt="Third slide"*/}
-            {/*    />*/}
-            {/*</Carousel.Item>*/}
-

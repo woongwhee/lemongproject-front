@@ -1,9 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
 import './FeedPicture.css'
 import FeedPictureDelete from "./FeedPictureDelete";
 
-function FeedPictureInsert({getPhotoNo}) {
+function FeedPictureInsert(props) {
     const [photoList,setPhotoList]=useState([]);
 
     const [ photoNo, SetPhotoNo] = useState();
@@ -20,7 +20,6 @@ function FeedPictureInsert({getPhotoNo}) {
     const putPhotoNo = (PhotoNo) => {
         setPhotoNoList([...photoNoList,PhotoNo]);
     }
-    
 
     const onChange = async (e) => {
         try{
@@ -40,7 +39,7 @@ function FeedPictureInsert({getPhotoNo}) {
                 });
                 if(response.data.code==='2000'){
                     putPhoto(response.data.result) // photoPath 미리보기 데이터
-                    console.log(response.data.result)
+                    // console.log(response.data.result)
                     callback(response.data.result.photoNo); // photoNo만
                     putPhotoNo(response.data.result.photoNo) // photoNo List 시키기
                     e.target.value="";
@@ -57,12 +56,11 @@ function FeedPictureInsert({getPhotoNo}) {
         photoList.pop();
         photoNoList.pop();
     }
-
     const getData = (Java) => {
         setDeleteSuccess(Java); // 'success'을 가져옴
     }
 
-    getPhotoNo(photoNoList); // FeedInsert한태 PhotoNO List 보내기
+    props.setInsertPhotoNo(photoNoList); // FeedInsert한태 PhotoNO List 보내기
 
 
     let i =0;
@@ -77,8 +75,7 @@ function FeedPictureInsert({getPhotoNo}) {
                 <tbody>
                 <tr>
                     <td>
-                        <input type="file" accept="image/*" onChange={onChange} multiple/>
-
+                        <input type="file" accept="image/*" onChange={onChange}/>
                     </td>
                 </tr>
                 <tr>
@@ -86,11 +83,10 @@ function FeedPictureInsert({getPhotoNo}) {
                         <div className="imagePreview" >
                             {
                                 photoList?.map(photo =>
-                                    <img style={{width:"100px", height:"100px"}} src={photo?.filePath+photo.changeName} key={i++}/>
+                                    <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo.changeName} key={i++}/>
                                 )
                             }
                             <FeedPictureDelete photoNo={photoNo} getData={getData}></FeedPictureDelete>
-
                         </div>
                         <div>
                         </div>
@@ -98,9 +94,6 @@ function FeedPictureInsert({getPhotoNo}) {
                 </tr>
                 </tbody>
             </table>
-
-
-
         </>
     );
 }

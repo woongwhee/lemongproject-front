@@ -12,6 +12,18 @@ function FeedDelete(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const deleteFeed = () => {
+            axios.post(
+                'api/feed/deleteFeed',{
+                    feedNo:feedNo
+                }).then(function (){
+                    console.log(feedNo)
+                    alert('삭제성공');
+                    handleClose();
+                    window.location.reload("/main");
+                }
+            )
+    }
 
 
     return (
@@ -34,18 +46,7 @@ function FeedDelete(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         닫기
                     </Button>
-                    <Button variant="danger" onClick={
-                        ()=> {axios.post(
-                            'api/feed/deleteFeed',{
-                                feedNo:feedNo
-                            }).then(function (){
-                                console.log(feedNo)
-                                alert('삭제성공');
-                                handleClose();
-                                window.location.reload("/main");
-                            }
-                        )}
-                    }>삭제하기</Button>
+                    <Button variant="danger" onClick={{deleteFeed}}>삭제하기</Button>
                 </Modal.Footer>
             </Modal>
         </>
