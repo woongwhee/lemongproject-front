@@ -78,47 +78,60 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
-function TodoCreate({onAdd}) {
+function TodoCreate({todoList, setTodoList}) {
   //투두 추가 토글
   const [open, setOpen] = useState(false);
   const onToggle = () => setOpen(!open);
 
   //투두 날짜
-  const selectDay = useSelector((state)=> state.selectDay)
+  let selectDay = useSelector((state)=> state.selectDay);
+  const todoDate = new moment(selectDay).format('YYMMDD');
 
   //입력값 저장할 state
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
 
   //입력값 저장
   const onCreate = (event) => {
     setInputValue(event.target.value)
-    console.log(inputValue)
   } 
 
   //작성한 todo내용 화면에 표시
-  const onSubmit = (e) => {
-    e.preventDefault() //새로고침 방지
-    if(!inputValue) return //공백 입력 방지
-    onAdd(inputValue) //입력 내용 추가
-    setInputValue('') //입력 후 input 비워주기
+  // const onSubmit = (e) => {
+  //   e.preventDefault() //새로고침 방지
+  //   if(!inputValue) return //공백 입력 방지
+  //   onAdd(inputValue) //입력 내용 추가
+  //   setInputValue('') //입력 후 input 비워주기
+  // }
 
-  }
+  //투두 추가 함수(프론트)
+  // const onAdd = (inputValue, todoDate) => {
+  //   setTodoList([
+  //     ...todoList,
+  //     {
+  //       "userNo" : 1,
+  //       "todoDate" : todoDate,
+  //       "todoContent" : inputValue,
+  //       "clear" : false,
+  //     }
+  //   ])
+  //   console.log("투두목록 : "+todoList)
+  // }
 
   //작성한 todo 서버로 전송
-  const insertTodo = async(inputValue) => {
+  const insertTodo = async(inputValue, todoDate) => {
     let response = await axios.post('api/todo/insertTodo',
       ({ 
         'userNo' : 1,
         'todoContent' : inputValue,
         'clear' : false,
-        'sort' : 1,
-        'todoDate' : today
+        'value' : 1,
+        'todoDate' :  todoDate
       })
     )
     if(response.data.code === '2000') {
       console.log('삽입 화면 오케이');
-      let newTodo=response.data.result;
-      onAdd(newTodo);
+      setTodoList(response.data.result);
+      //onAdd(newTodo);
     }
   }
 
@@ -130,9 +143,9 @@ function TodoCreate({onAdd}) {
     <>
       {open && (
         <InsertFormPositioner>
-          <InsertForm onSubmit={onSubmit}>
+          <InsertForm>
             <Input type="text" value={inputValue} onChange={onCreate}/>
-            <button onClick={()=>{insertTodo(inputValue)}}>add</button>
+            <button onClick={()=>{insertTodo(inputValue, todoDate)}}>add</button>
           </InsertForm>
         </InsertFormPositioner>
       )}

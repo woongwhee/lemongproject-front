@@ -84,13 +84,6 @@ function TodoItem({ id, done, text }) {
     });
   };
 
-  const onUpdate = () => {
-    // dispatch({
-    //   type: 'UPDATE',
-    //   id
-    // });
-  }
-
   const onRemove = () => {
     dispatch({
       type: 'REMOVE',
@@ -107,11 +100,6 @@ function TodoItem({ id, done, text }) {
 
       {/* 내용 */}
       <Text done={done}>{text}</Text>
-
-      {/* 수정버튼 */}
-      {/* <Update onClick={onUpdate}>
-        <MdCreate/>
-      </Update> */}
 
       {/* 삭제버튼 */}
       <Remove onClick={onRemove}>

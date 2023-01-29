@@ -77,16 +77,45 @@ const Text = styled.div`
 
 function TodoItem({todo, onDel, onToggle, onUpdate}) {
 
+  //투두 삭제
+  // const onDel = (todoNo) => {
+  //   setTodoList(todoList.filter(todo => todo.todoNo !== todoNo));
+
+  //   const deleteTodo = async() => {
+  //     try{
+  //       const res = await axios.get("/api/todo/getTodo" , {
+  //         params : {todoNo : todo.todoNo},
+  //       });
+  //       console.log("삭제 성공!")
+  //       setTodoList(res.data);
+  //     } catch(res){
+  //       console.log("실패")
+  //     }
+  //   };
+  //   useEffect(
+  //     () => {
+  //       deleteTodo();
+  //     },[]
+  //   );
+  // }
+  
+  //투두 일정완료
+  // const onToggle = (todoNo) => {
+  //   setTodoList(todoList.map(todo =>
+  //     todo.todoNo === todoNo ? { ...todo, clear: !todo.clear } : todo
+  //   ));
+  // }
+
 
   return (
     <TodoItemBlock>
       {/* 완료상태 */}
-      <CheckCircle clear={todo.clear} onClick={()=>onToggle(todo.id)}>
-        {todo?.clear && <MdDone /> }
+      <CheckCircle clear={todo.clear} onClick={()=>onToggle(todo.todoNo)}>
+        {todo.clear && <MdDone /> }
       </CheckCircle>
 
       {/* 내용 */}
-      <Text clear={todo.clear}>{todo.todoNo}{todo.todoContent}</Text>
+      <Text clear={todo.clear}>{todo.todoContent}</Text>
 
       {/* 수정버튼 */}
       <Update onClick={()=>onUpdate(todo.todoNo)}>

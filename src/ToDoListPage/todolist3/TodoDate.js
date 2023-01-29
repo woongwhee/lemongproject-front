@@ -37,8 +37,8 @@ function TodoDate() {
   return (
     <TodoHeadBlock>
       <h1>{moment(selectDay.toString()).format('MM월 DD일')}</h1>
-      <div className="day">화요일</div>
-      <div className="tasks-left">할 일 2개 남음</div>
+      <div className="day">{moment(selectDay.toString()).format('ddd요일')}</div>
+      {/* <div className="tasks-left">할 일 2개 남음</div> */}
     </TodoHeadBlock>
   );
 }

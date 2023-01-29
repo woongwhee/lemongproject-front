@@ -10,10 +10,9 @@ const TodoListBlock = styled.div`
 `;
 
 function TodoList({todoList, onDel, onToggle, onUpdate}) {
-  console.log("todoList", todoList)
   return (
     <TodoListBlock>
-      {todoList.map(todo => (
+      {todoList && todoList.map(todo => (
         <TodoItem
           key={todo.todoNo}
           todo={todo}
