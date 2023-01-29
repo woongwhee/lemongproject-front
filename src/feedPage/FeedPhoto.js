@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import companyLogo1 from '../feedPage/img/KakaoTalk_20230124_190630482.jpg'
-import companyLogo2 from '../feedPage/img/KakaoTalk_20230124_190630482_02.jpg'
-import companyLogo3 from '../feedPage/img/KakaoTalk_20230124_190630482_01.jpg';
 
 function FeedPhoto({filePath}) {
+
     const [getFilePath,setFilePath] = useState('')
     useEffect(()=>{
         setFilePath(filePath);
@@ -18,7 +16,7 @@ function FeedPhoto({filePath}) {
         const result = [];
         for (let i = 0; i < list.length; i++) {
             result.push(
-                <Carousel.Item>
+                <Carousel.Item key={i}>
                     <img
                         className="d-block w-100"
                         src={list[i]}

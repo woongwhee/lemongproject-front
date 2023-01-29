@@ -10,7 +10,7 @@ import FeedPhoto from "./FeedPhoto";
 
 function Feed(props) {
 
-    let{userNo,feedNo,feedContent,feedAt,filePath}=props;
+    let{userNo,feedNo,feedContent,feedAt,filePath,photoNo}=props;
 
     const [heart, setHeart] = useState('🤍');
 
@@ -22,10 +22,9 @@ function Feed(props) {
                 <div className="feed-header">
                     <div className="feed-header-left">
                         피드시간 : {feedAt} <br/>
-
                     </div>
                     <div className="feed-header-right">
-                        <FeedUpdate feedNo={feedNo}feedContent={feedContent}/>
+                        <FeedUpdate feedNo={feedNo} feedContent={feedContent} filePath={filePath} photoNo={photoNo}/>
                         <FeedDelete feedNo={feedNo}/>
                     </div>
                 </div>
@@ -33,7 +32,7 @@ function Feed(props) {
                 <div className="feed-photo">
                     <p>피드번호 : {feedNo}</p>
                     <span>이름 : {userNo}</span>
-                    <span>{filePath}</span>
+
                     <FeedPhoto filePath={filePath}></FeedPhoto>
                 </div>
                 <div className="feed-body">
