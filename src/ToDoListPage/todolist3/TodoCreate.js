@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect} from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import axios from 'axios';
@@ -78,7 +78,7 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
-function TodoCreate({todoList, setTodoList, insertTodo}) {
+function TodoCreate({insertTodo}) {
   //투두 추가 토글
   const [open, setOpen] = useState(false);
   const onToggle = () => setOpen(!open);
@@ -95,66 +95,19 @@ function TodoCreate({todoList, setTodoList, insertTodo}) {
     setInputValue(event.target.value);
   } 
 
-  //작성한 todo내용 화면에 표시
-  // const onSubmit = (e) => {
-  //   e.preventDefault() //새로고침 방지
-  //   if(!inputValue) return //공백 입력 방지
-  //   onAdd(inputValue) //입력 내용 추가
-  //   setInputValue('') //입력 후 input 비워주기
-  // }
-
-  //투두 추가 함수(프론트)
-  // const onAdd = (inputValue, todoDate) => {
-  //   setTodoList([
-  //     ...todoList,
-  //     {
-  //       "userNo" : 1,
-  //       "todoDate" : todoDate,
-  //       "todoContent" : inputValue,
-  //       "clear" : false,
-  //     }
-  //   ])
-  //   console.log("투두목록 : "+todoList)
-  // }
-
-
-
-  //작성한 todo 서버로 전송
-  // const insertTodo = async(inputValue, todoDate) => {
-  //   let response = await axios.post('api/todo/insertTodo',
-  //     ({ 
-  //       'userNo' : 1,
-  //       'todoContent' : inputValue,
-  //       'clear' : false,
-  //       'value' : 1,
-  //       'todoDate' :  todoDate
-  //     })
-  //   )
-  //   if(response.data.code === '2000') {
-  //     console.log('삽입 화면 오케이');
-  //     setTodoList(response.data.result);
-  //     response.preventDefault();
-  //   }
-  // }
-
-
-
   //로그인 userno정보 
   let userNo = sessionStorage.getItem("userNo");
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); 
-  }
 
 
   return (
     <>
       {open && (
         <InsertFormPositioner>
-          <InsertForm onSubmit={()=>{insertTodo(inputValue, todoDate); handleSubmit();}}>
-            <Input type="text" value={inputValue} onChange={onCreate} />
-            {/* <button onClick={()=>{insertTodo(inputValue, todoDate)} } >add</button> */}
+          <InsertForm onSubmit={(e)=>{e.preventDefault(); insertTodo(inputValue, setInputValue, open, setOpen, todoDate);}}>
+            <Input type="text" value={inputValue} onChange={onCreate} autoFocus/>
+            {/* <button onClick={()=>{insertTodo(inputValue, setInputValue, todoDate)} } >add</button> */}
           </InsertForm>
         </InsertFormPositioner>
       )}

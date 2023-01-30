@@ -38,25 +38,48 @@ function TodoView3(){
         params : {todoDate : todoDate,
                   userNo : 1},
       });
-      console.log("response", res.data);
+      console.log('전송 성공');
       setTodoList(res.data);
     } catch(res){
-      console.log("실패")
+      console.log("전송 실패")
     }
   }
 
   //컴포넌트가 렌더링될 때마다 작업을 실행하게 하는 기능
   //[]을 마지막에 추가하면 컴포넌트가 처음 렌더링 될때만 작업을 실행한다.
   //[] <- 값을 추가하면 값이 변할 때마다 작업을 실행한다.(ㅜㅜ눙뭉)
-  useEffect(
-    () => {
-      fetchTodo();
-    },[todoDate]
-  )
+  useEffect(() => {
+    fetchTodo();
+  },[todoDate])
 
   //투두 작성
-  const insertTodo = async(inputValue, todoDate) => {
-    const res = axios.post('api/todo/insertTodo',
+  //button 버전
+  // const insertTodo = async(inputValue, setInputValue, todoDate) => {
+  //   await axios.post('api/todo/insertTodo',
+  //     ({ 
+  //       'userNo' : 1,
+  //       'todoContent' : inputValue,
+  //       'clear' : false,
+  //       'value' : 1,
+  //       'todoDate' :  todoDate
+  //     })
+  //   ).then(function(res){
+  //     console.log('작성 성공');
+  //     setTodoList(res.data);
+  //     setTodoList([
+  //       ...todoList,
+  //       {
+  //         todoContent : inputValue,
+  //         clear : false
+  //       }
+  //     ])
+  //     setInputValue('');
+  //   })
+  // }
+
+  //투두 작성 form태그 
+  const insertTodo = async(inputValue, setInputValue, open, setOpen, todoDate) => {
+    await axios.post('api/todo/insertTodo',
       ({ 
         'userNo' : 1,
         'todoContent' : inputValue,
@@ -64,13 +87,25 @@ function TodoView3(){
         'value' : 1,
         'todoDate' :  todoDate
       })
-    ); 
-    console.log('삽입 화면 오케이');
-    setTodoList(res.data);
+    ).then(function(res){
+      console.log('작성 성공');
+      setTodoList(res.data);
+      setTodoList([
+        ...todoList,
+        {
+          todoContent : inputValue,
+          clear : false,
+          todoNo : res.data.todoNo
+        }
+      ])
+      setInputValue('');
+      setOpen(!open);
+    })
   }
+  
 
   //투두 삭제
-  const onDel = (todoNo) => {
+  const onDel = async(todoNo) => {
     try{
       const res = axios.get("/api/todo/deleteTodo" , {
         params : {todoNo : todoNo}
@@ -81,7 +116,7 @@ function TodoView3(){
       //console.log("반환 된 todoList : "+ res.data);
       //console.log("삭제 후 todoList : "+todoList)
     }catch(res){
-      console.log("실패")
+      console.log("삭제 실패")
     }
   };
 
@@ -125,7 +160,7 @@ function TodoView3(){
         <GlobalStyle />
         <TodoDate /> {/*todo날짜 컴포넌트*/}
         <TodoList todoList={todoList} onDel={onDel} onToggle={onToggle} onUpdate={onUpdate}/> {/*todo목록 컴포넌트*/}
-        <TodoCreate todoList={todoList} setTodoList={setTodoList} insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}
+        <TodoCreate insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}
       </TodoTemplate>
     </>
   );
