@@ -13,7 +13,6 @@ function Join() {
     const [emailNum, setEmailNum] = useState();
 
     // 알림 색깔
-    const [nameColor, setNameColor] = useState();
     const [errorColor, setErrorColor] = useState();
     const [pwdColor, setPwdColor] = useState();
     const [rePwdColor, setRePwdColor] = useState();
@@ -22,7 +21,6 @@ function Join() {
 
 
     // 에러 메세지 변수
-    const [nameError, setNameError] = useState();
     const [nickError, setNickError] = useState();
     const [pwdError, setPwdError] = useState();
     const [rePwdError, setRePwdError] = useState();
@@ -40,7 +38,6 @@ function Join() {
     const [isNickBtn, setIsNickBtn] = useState(false);
     const [isEmailBtn, setIsEmailBtn] = useState(false);
     const [isEmailNumBtn, setIsEmailNumBtn] = useState(false);
-    // const [isJoinBtn, setIsJoinBtn] = useState(false);
     
 
     // 이름 공백 체크
@@ -54,8 +51,6 @@ function Join() {
             setIsName(true)
         }
     }, [])
-
-
 
 
 
@@ -107,7 +102,7 @@ function Join() {
             setRePwdColor("chAlarm okAlarm")
             setIsRePwd(true)
         } else {
-            setRePwdError("비밀번호가 일치하지않습니다.")
+            setRePwdError("비밀번호가 일치하지 않습니다.")
             setRePwdColor("chAlarm noAlarm")
             setIsRePwd(false)
         }
@@ -122,11 +117,11 @@ function Join() {
         setEmail(emailCurrent)
 
         if(!emailRegex.test(emailCurrent)) {
-            setEmailMs("유효하지 않은 이메일 주소 입니다.")
+            setEmailMs("유효하지 않은 이메일 주소입니다.")
             setEmailColor("chAlarm noAlarm")
             setIsEmail(false)
         } else {
-            setEmailMs("유효한 이메일 주소 입니다.")
+            setEmailMs("유효한 이메일 주소입니다.")
             setEmailColor("chAlarm okAlarm")
             setIsEmail(true)
         }
@@ -214,10 +209,7 @@ function Join() {
                     {/* 이름 */}
                     <div className="nameInput">    
                         <input type="text" id="userName" name="userName" placeholder="이름" required 
-                            onChange={(e) => {
-                                onChangeName(e);
-                                // setUserName(e.target.value);
-                            }} />
+                            onChange={(e) => {onChangeName(e);}} />
                     </div>
                     {/* 닉네임 */}
                     <div className="nickInput">
