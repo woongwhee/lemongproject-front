@@ -91,7 +91,7 @@ div {
 }
 
 .joinBtn>button {
-    background-color: #ba99c3a3;
+    /* background-color: #ba99c3a3; */
     color: white;
     font-weight: bold;
     font-size: large;
@@ -104,6 +104,14 @@ div {
 .joinBtn>button:hover {
     cursor: pointer;
     /* background-color: #BA99C3; */
+}
+
+.joinBtn>button:disabled {
+    background-color: #ba99c383;
+}
+
+.joinBtn>button:enabled {
+    background-color: #BA99C3;
 }
 
 

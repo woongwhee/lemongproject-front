@@ -13,6 +13,7 @@ function Join() {
     const [emailNum, setEmailNum] = useState();
 
     // 알림 색깔
+    const [nameColor, setNameColor] = useState();
     const [errorColor, setErrorColor] = useState();
     const [pwdColor, setPwdColor] = useState();
     const [rePwdColor, setRePwdColor] = useState();
@@ -21,6 +22,7 @@ function Join() {
 
 
     // 에러 메세지 변수
+    const [nameError, setNameError] = useState();
     const [nickError, setNickError] = useState();
     const [pwdError, setPwdError] = useState();
     const [rePwdError, setRePwdError] = useState();
@@ -28,10 +30,34 @@ function Join() {
     const [emailNumMs, setEmailNumMs] = useState();
 
     // 유효성 검사
+    const [isName, setIsName] = useState(false);
     const [isPwd, setIsPwd] = useState(false);
     const [isRePwd, setIsRePwd] = useState(false);
     const [isEmail, setIsEmail] = useState(false);
+
+
+    // 버튼 활성화
+    const [isNickBtn, setIsNickBtn] = useState(false);
+    const [isEmailBtn, setIsEmailBtn] = useState(false);
+    const [isEmailNumBtn, setIsEmailNumBtn] = useState(false);
+    // const [isJoinBtn, setIsJoinBtn] = useState(false);
     
+
+    // 이름 공백 체크
+    const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const nameCurrent = e.target.value
+        setUserName(nameCurrent)
+
+        if(nameCurrent == null) {
+            setIsName(false)
+        } else {
+            setIsName(true)
+        }
+    }, [])
+
+
+
+
 
     // 닉네임 중복체크
     const checkNick = async(nickName) => {
@@ -42,10 +68,12 @@ function Join() {
             // alert("사용가능")
             setNickError("사용 가능한 닉네임입니다.")
             setErrorColor("chAlarm okAlarm")
+            setIsNickBtn(true);
         } else {
             // alert("사용불가능")
             setNickError("중복된 닉네임입니다.")
             setErrorColor("chAlarm noAlarm")
+            setIsNickBtn(false);
         } 
     }
 
@@ -115,10 +143,12 @@ function Join() {
             console.log("테스팅 중~")
             setEmailMs("인증번호가 발송되었습니다.")
             setEmailColor("chAlarm")
+            setIsEmailBtn(true)
         } else {
             console.log("인증 코드 보내기 실패")
             setEmailMs("인증번호 발송에 실패하였습니다.")
             setEmailColor("chAlarm noAlarm")
+            setIsEmailBtn(false)
         }
     }
 
@@ -133,12 +163,17 @@ function Join() {
         if(response.data.code === '2000') {
             setEmailNumMs("인증되었습니다.")
             setEmailNumColor("chAlarm okAlarm")
+            setIsEmailNumBtn(true)
         } else {
             setEmailNumMs("인증번호가 일치하지않습니다.")
             setEmailNumColor("chAlarm noAlarm")
+            setIsEmailNumBtn(false)
         }
     }
 
+
+    // 이메일 인증 버튼 활성화
+    const isJoinBtn = isNickBtn && isEmailBtn && isEmailNumBtn && isPwd && isRePwd && isEmail && isName;
 
 
 
@@ -179,7 +214,10 @@ function Join() {
                     {/* 이름 */}
                     <div className="nameInput">    
                         <input type="text" id="userName" name="userName" placeholder="이름" required 
-                            onChange={(e) => {setUserName(e.target.value);}} />
+                            onChange={(e) => {
+                                onChangeName(e);
+                                // setUserName(e.target.value);
+                            }} />
                     </div>
                     {/* 닉네임 */}
                     <div className="nickInput">
@@ -225,7 +263,7 @@ function Join() {
                 </div>
                 <br />
                 <div className="joinBtn">
-                    <button onClick={() => {joinClick(userName, nickName, userPwd, email);}} disabled>
+                    <button onClick={() => {joinClick(userName, nickName, userPwd, email);}} disabled={!isJoinBtn}>
                         회 원 가 입
                     </button>
                 </div>
