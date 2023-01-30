@@ -25,11 +25,10 @@ function TodoView3(){
   const selectDay = useSelector((state)=> state.selectDay);
   const todoDate = new moment(selectDay).format('YYMMDD');
 
+  
   //입력 내용 리스트 배열로 저장
   const [todoList, setTodoList] = useState([])
 
-
-  //selectDay가 변할 때마다 fetchtodo() 실행
 
   //투두리스트 가져오기(get요청)
   //비동기처리를 해야하므로 async/await 구문을 통해서 처리합니다.
@@ -55,6 +54,21 @@ function TodoView3(){
     },[todoDate]
   )
 
+  //투두 작성
+  const insertTodo = async(inputValue, todoDate) => {
+    const res = axios.post('api/todo/insertTodo',
+      ({ 
+        'userNo' : 1,
+        'todoContent' : inputValue,
+        'clear' : false,
+        'value' : 1,
+        'todoDate' :  todoDate
+      })
+    ); 
+    console.log('삽입 화면 오케이');
+    setTodoList(res.data);
+  }
+
   //투두 삭제
   const onDel = (todoNo) => {
     try{
@@ -64,8 +78,8 @@ function TodoView3(){
       setTodoList(res.data);
       setTodoList(todoList.filter(todo => todo.todoNo !== todoNo));
       console.log("삭제 성공!");
-      console.log("반환 된 todoList : "+ res.data);
-      console.log("삭제 후 todoList : "+todoList)
+      //console.log("반환 된 todoList : "+ res.data);
+      //console.log("삭제 후 todoList : "+todoList)
     }catch(res){
       console.log("실패")
     }
@@ -86,10 +100,23 @@ function TodoView3(){
     })
   }
 
-  //투두 수정
-  // const onUpdate = (id) => {
-  //   setTodoList(todoList.content())
-  // }
+  //투두 수정   
+  const onUpdate = async(todoNo, editeTodo, setEdite) => {
+    axios.get('api/todo/updateTodo', ({
+      params: {todoNo : todoNo,
+              todoContent : editeTodo,}
+      })
+    ).then(function(){
+      setTodoList(todoList.map((todo) => ({
+        ...todo,
+        todoContent : todo.todoNo === todoNo ? editeTodo : todo.todoContent,
+      })));
+      setEdite(false);
+      console.log("수정 완료");
+    }).catch(function(){
+      console.log("수정 실패")
+    })
+  }
 
   return (
     <>
@@ -97,8 +124,8 @@ function TodoView3(){
         {/* <p onClick={click}>dd</p> */}
         <GlobalStyle />
         <TodoDate /> {/*todo날짜 컴포넌트*/}
-        <TodoList todoList={todoList} onDel={onDel} onToggle={onToggle} /> {/*todo목록 컴포넌트*/}
-        <TodoCreate todoList={todoList} setTodoList={setTodoList}/> {/*todo생성 컴포넌트*/}
+        <TodoList todoList={todoList} onDel={onDel} onToggle={onToggle} onUpdate={onUpdate}/> {/*todo목록 컴포넌트*/}
+        <TodoCreate todoList={todoList} setTodoList={setTodoList} insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}
       </TodoTemplate>
     </>
   );

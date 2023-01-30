@@ -1,6 +1,6 @@
 import React , {useState, useEffect} from 'react';
 import styled, { css } from 'styled-components';
-import { MdDone, MdDelete, MdCreate } from 'react-icons/md';
+import { MdDone, MdDelete, MdCreate, MdOutlineCreate, MdClear } from 'react-icons/md';
 import axios from 'axios';
 
 const Remove = styled.div`
@@ -67,7 +67,7 @@ const Text = styled.div`
   flex: 1;
   font-size: 21px;
   color: #495057;
-  //background-color: pink;
+  background-color: pink;
   ${todo =>
     todo.done &&
     css`
@@ -76,35 +76,24 @@ const Text = styled.div`
 `;
 
 function TodoItem({todo, onDel, onToggle, onUpdate}) {
-
-  //투두 삭제
-  // const onDel = (todoNo) => {
-  //   setTodoList(todoList.filter(todo => todo.todoNo !== todoNo));
-
-  //   const deleteTodo = async() => {
-  //     try{
-  //       const res = await axios.get("/api/todo/getTodo" , {
-  //         params : {todoNo : todo.todoNo},
-  //       });
-  //       console.log("삭제 성공!")
-  //       setTodoList(res.data);
-  //     } catch(res){
-  //       console.log("실패")
-  //     }
-  //   };
-  //   useEffect(
-  //     () => {
-  //       deleteTodo();
-  //     },[]
-  //   );
-  // }
   
-  //투두 일정완료
-  // const onToggle = (todoNo) => {
-  //   setTodoList(todoList.map(todo =>
-  //     todo.todoNo === todoNo ? { ...todo, clear: !todo.clear } : todo
-  //   ));
-  // }
+  //수정 모드 확인하기 위한 값
+  const [edite, setEdite] = useState(false);
+  
+  //수정된 투두 content
+  const [editeTodo, setEditeTodo] = useState(todo.todoContent);
+
+  //수정버튼을 눌렀을 때 수정모드 on
+  const onClickEdite = () => {
+    setEdite(true);
+  }
+
+  //새로 값이 입력되면 setEditeTodo에 내용을 저장
+  const onEditeTodo = (e) => {
+    setEditeTodo(e.target.value);
+  }
+
+
 
 
   return (
@@ -115,16 +104,30 @@ function TodoItem({todo, onDel, onToggle, onUpdate}) {
       </CheckCircle>
 
       {/* 내용 */}
-      <Text clear={todo.clear}>{todo.todoContent}</Text>
+      {edite ? (
+        //edite버튼을 눌렀을 때 input태그가 뜬다.
+          <input type="text" value={editeTodo} onChange={onEditeTodo}/>
+      ) : (
+        //edite버튼을 누르지 않은 상태에서는 일반 text창이 뜬다.
+        <Text clear={todo.clear}>{todo.todoContent}</Text>
+      )}
 
       {/* 수정버튼 */}
-      <Update onClick={()=>onUpdate(todo.todoNo)}>
-        <MdCreate/>
+      <Update>
+        {!todo.clear ? ( //완료된 투두일 경우 수정 버튼이 뜨지 않게 한다.
+          edite ? (
+            // eidte가 true면(onClickEdite버튼을 누르면) 작성버튼을 눌렀을 때 update()를 실행
+            <MdCreate onClick={()=>onUpdate(todo.todoNo, editeTodo, setEdite)}/>
+          ) : (
+            //버튼 클릭시 MdCreate버튼으로 바뀜
+            <MdOutlineCreate onClick={onClickEdite}/>
+          )
+        ) : null} 
       </Update>
 
       {/* 삭제버튼 */}
       <Remove >
-        <MdDelete onClick={()=>onDel(todo.todoNo)} />
+        <MdClear onClick={()=>onDel(todo.todoNo)} />
       </Remove>
     </TodoItemBlock>
   );
