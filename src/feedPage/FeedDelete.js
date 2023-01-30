@@ -5,19 +5,22 @@ import axios from "axios";
 
 function FeedDelete(props) {
 
-    let feedNo = props.feedNo;
+    let Feed = props.Feed;
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const feedNo = Feed.feedNo;
+    const photoNo = Feed.photoNoList[0];
+
     const deleteFeed = () => {
             axios.post(
                 'api/feed/deleteFeed',{
-                    feedNo:feedNo
+                    feedNo:feedNo,
+                    photoNo:photoNo
                 }).then(function (){
-                    console.log(feedNo)
                     alert('삭제성공');
                     handleClose();
                     window.location.reload("/main");
@@ -46,7 +49,7 @@ function FeedDelete(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         닫기
                     </Button>
-                    <Button variant="danger" onClick={{deleteFeed}}>삭제하기</Button>
+                    <Button variant="danger" onClick={deleteFeed}>삭제하기</Button>
                 </Modal.Footer>
             </Modal>
         </>

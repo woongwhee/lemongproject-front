@@ -1,28 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import './FeedPicture.css'
 import FeedPictureDelete from "./FeedPictureDelete";
 
 function FeedPictureInsert(props) {
     const [photoList,setPhotoList]=useState([]);
-
-    const [ photoNo, SetPhotoNo] = useState();
-
-    const putPhoto = (newPhoto) => {
-        setPhotoList([...photoList,newPhoto]);
-    }
-    function callback(str) { // 사진 지우기 photoNo
-        SetPhotoNo(str);
-    }
-
     const [photoNoList, setPhotoNoList] = useState([]);
 
+    const putPhoto = (newPhoto) => { //사진 미리보기
+        console.log(newPhoto)
+        setPhotoList([...photoList,newPhoto]);
+        // setPhotoNoList(newList);
+        console.log(photoList)
+    }
+
     const putPhotoNo = (PhotoNo) => {
-        setPhotoNoList([...photoNoList,PhotoNo]);
+        const newList=[...photoNoList,PhotoNo];
+        setPhotoNoList(newList);
+        console.log(newList);
+        props.setInsertPhotoNo(newList);
+
     }
 
     const onChange = async (e) => {
-        try{
+        // try{
             e.preventDefault();
             if(e.target.files){
                 const uploadFile = e.target.files[0]
@@ -41,26 +42,34 @@ function FeedPictureInsert(props) {
                     putPhoto(response.data.result) // photoPath 미리보기 데이터
                     // console.log(response.data.result)
                     callback(response.data.result.photoNo); // photoNo만
+                    console.log(response.data.result.photoNo);
                     putPhotoNo(response.data.result.photoNo) // photoNo List 시키기
                     e.target.value="";
                 }
             }
-        }catch (error){
-            console.log(error);
+        // }catch (error){
+        //     console.log(error);
+        // }
+    }
+    const [ photoNo, SetPhotoNo] = useState();
+    function callback(str) { // 사진 지우기 photoNo
+        SetPhotoNo(str);
+    }
+
+    const [deleteStatus, setDeleteStatus] = useState(0)
+    const deleteCallBack=()=>{
+        if(deleteStatus === 'success'){
+            photoList.pop();
+            const newList=[...photoNoList];
+            newList.pop();
+            setPhotoNoList(newList)
+            props.setInsertPhotoNo(newList);
         }
     }
-
-    const [deleteSuccess, setDeleteSuccess] = useState(0)
-
-    if(deleteSuccess ==='success'){
-        photoList.pop();
-        photoNoList.pop();
-    }
     const getData = (Java) => {
-        setDeleteSuccess(Java); // 'success'을 가져옴
+        setDeleteStatus(Java); // 'success'을 가져옴
+        deleteCallBack();
     }
-
-    props.setInsertPhotoNo(photoNoList); // FeedInsert한태 PhotoNO List 보내기
 
 
     let i =0;
@@ -83,7 +92,7 @@ function FeedPictureInsert(props) {
                         <div className="imagePreview" >
                             {
                                 photoList?.map(photo =>
-                                    <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo.changeName} key={i++}/>
+                                    <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo?.changeName} key={i++}/>
                                 )
                             }
                             <FeedPictureDelete photoNo={photoNo} getData={getData}></FeedPictureDelete>

@@ -6,7 +6,7 @@ import {ModalBody, ModalFooter} from "react-bootstrap";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
-function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
+function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList},updateFeed}) {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -14,25 +14,29 @@ function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
 
     const [newContent, setContent] = useState('');
 
-    const [getFilePath,setFilePath] = useState('');
-    useEffect(()=>{setFilePath(filePath)})
+    // const [getFilePath,setFilePath] = useState('');
+    // useEffect(()=>{setFilePath(filePath)})
 
-    const list = getFilePath.split(",");
+    // const list = getFilePath.split(",");
+    //
+    // const [getPhotoNo,setPhotoNo] = useState('')
+    // useEffect(()=>{setPhotoNo(photoNo)})
 
-    const [getPhotoNo,setPhotoNo] = useState('')
-    useEffect(()=>{setPhotoNo(photoNo)})
+    // const photoNoList = getPhotoNo.split(",");
 
-    const photoNoList = getPhotoNo.split(",");
+    const [showPhoto, setShowPhoto] = useState(true);
+    const photoDelete = () => setShowPhoto(false);
 
 
     const rendering = () => {
         const result = [];
-        for (let i = 0; i < list.length; i++) {
+        for (let i = 0; i < filePathList.length; i++) {
                 result.push(
-                    <div key={i}>
+
+                    <div key={i} >
                         <img
                             className="d-block w-100"
-                            src={list[i]}
+                            src={filePathList[i]}
                             alt='사진이없습니다'
                             style={{width:"300px", height:"300px"}}
                         />
@@ -43,6 +47,7 @@ function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
                         }}
                         >삭제하기</button>
                     </div>
+
                 );
 
         }
@@ -50,14 +55,18 @@ function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
     };
     const deleteClick=(photoNo)=>{
         axios.post(
-          'api/feed/modifyFeedPhoto',
-            {
-                // filePath:filePath,
-                photoNo:photoNo
-        }).then(function (){
-            console.log("성공")
-        }).catch(function (){
-            console.log("실패")
+            'api/feed/modifyFeedPhoto',{
+            photoNo:photoNo
+        }).then(function (res){
+            const newPlist=[...photoNoList];
+            console.log(newPlist);
+                let index=newPlist.findIndex(photoNo);
+            newPlist.splice(index,1)
+            if(res.data.Java === 'success'){
+                photoDelete();
+            }
+        }).catch(function (res){
+            console.log("실패"+res.data)
         })
     }
 
@@ -68,14 +77,13 @@ function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
             <Modal.Header closeButton>
                 <Modal.Title>
                     피드 업데이트
-
                 </Modal.Title>
             </Modal.Header>
 
             <ModalBody>
             원래 피드 내용 : {feedContent} <br/>
-                {rendering()}
 
+            {rendering()}
                 <FloatingLabel controlId="floatingTextarea2" label="새로운 피드 내용">
                     <Form.Control
                         as="textarea"
@@ -92,8 +100,7 @@ function FeedUpdate({feedContent,feedNo,filePath,photoNo}) {
                 {feedNo:feedNo, feedContent:newContent}
                 ).catch(function () {
                     console.log('실패함')
-                    console.log(feedNo);
-                    console.log(newContent);
+                    updateFeed("feedContent",newContent)
                 }).then(function (res){
                     console.log(feedNo)
                     alert('업테이트성공');

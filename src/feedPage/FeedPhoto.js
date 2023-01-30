@@ -1,27 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
-function FeedPhoto({filePath}) {
+function FeedPhoto({filePathList}) {
 
-    const [getFilePath,setFilePath] = useState('')
-    useEffect(()=>{setFilePath(filePath)})
-
-
-    const list = getFilePath.split(",");
 
     const rendering = () => {
+        let i = 0;
         const result = [];
-        for (let i = 0; i < list.length; i++) {
-            result.push(
-                <Carousel.Item key={i}>
+        filePathList.map(path => {
+                result.push(
+                <Carousel.Item key={i++}>
                     <img
                         className="d-block w-100"
-                        src={list[i]}
+                        src={path}
                         alt='사진이없습니다'
                     />
                 </Carousel.Item>
-            );
-        }
+            );})
+
 
         return result;
     };

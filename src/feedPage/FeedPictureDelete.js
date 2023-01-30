@@ -6,7 +6,7 @@ function FeedPictureDelete({photoNo,getData}) {
 
     const [photoDelete, setPhotoDelete] = useState();
 
-    getData(photoDelete);
+    useEffect(()=>{getData(photoDelete);})
 
     function callback(str){
         setPhotoDelete(str);
@@ -14,7 +14,8 @@ function FeedPictureDelete({photoNo,getData}) {
     useEffect(()=>{{return callback}})
 
     return (
-        <button onClick={ () => { axios({
+        <button onClick={
+            () => { axios({
             url:'api/feed/deleteFeedPhoto',
             method:'GET',
             params:{photoNo:photoNo}
