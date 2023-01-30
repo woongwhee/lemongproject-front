@@ -14,71 +14,95 @@ import MyDelete from "./MyDelete";
 
 function MyPageUpdate(){
 
-    // 스프링에서 유저프로필 정보 가져오기.
-    const [member , setMember] = useState();
-    
-    const randMember=async()=>{
-        const response = await axios.get("/api/member/selectPro");
-        console.log(response);
-        setMember(response.data[0]);
-    }
-    useEffect(()=>{
-        randMember()
-    },[])
+    const userNo = sessionStorage.getItem("userNo");
 
-    // 리액트에서 스프링으로 유저 정보 보내기(Update) => NickName
-    const updateNickName  = async() => {
-        const modifyNickname = prompt("[" + member.nickName + "]" + " 을(를) 어떤 닉네임으로 변경할까요?");
+    // 현재 주소에 떠있는 userNo를 가져와서 그 userNo에 해당하는 값을 사용하겠다.
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
 
-        console.log(modifyNickname);
+    const userNo1 = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
-        if(modifyNickname !== null){
-            const body = {
-                nickname : 'modifyNickname'
-            }
+     // photo테이블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
+     const [myprofile , setMyProfile] = useState();
+ 
+     function callback(data){
+         setMyProfile(data);
+     }
+ 
+     useEffect(
+         () => {
+             axios.get("/api/member/selectMyProfile" , {
+                 params:{
+                     userNo : userNo1 ,
+                 }
+             }).then(function(res){
+                 console.log("데이터 전송 성공");
+                 const data = res.data.result;
+                 console.log(data);
+                 callback(data);
+                 
+             }).catch(function(){
+                 console.log("데이터 전송 실패");
+             });
+         } , []
+     );
+        
+    // },[])
 
-            const userNiname = axios.get("/api/member/checkNickName" , {
-                params:{
-                    modifyNickname : modifyNickname ,
-                }
-            }).then(function(){
-                if(userNiname.data){
-                    alert("NickName이 변경되었습니다.");
-                    return window.location.reload();
-                }
-            });
-        }
-    }
+    // // 리액트에서 스프링으로 유저 정보 보내기(Update) => NickName
+    // const updateNickName  = async() => {
+    //     const modifyNickname = prompt("[" + member.nickName + "]" + " 을(를) 어떤 닉네임으로 변경할까요?");
 
-     // 리액트에서 스프링으로 유저 정보 보내기(Update) => NickName
-     const updateComment = async() => {
+    //     console.log(modifyNickname);
 
-        const modifyComment = prompt("Introdeuction을 입력해주세요.");
+    //     if(modifyNickname !== null){
+    //         const body = {
+    //             nickname : 'modifyNickname'
+    //         }
 
-        if(modifyComment !== null){
-            const body = {
-                comment : 'modifyComment'
-            }
+    //         const userNiname = axios.get("/api/member/checkNickName" , {
+    //             params:{
+    //                 modifyNickname : modifyNickname ,
+    //             }
+    //         }).then(function(){
+    //             if(userNiname.data){
+    //                 alert("NickName이 변경되었습니다.");
+    //                 return window.location.reload();
+    //             }
+    //         });
+    //     }
+    // }
 
-            const userComment = axios.get("/api/member/updateComment" , {
-                params:{
-                    modifyComment : modifyComment ,
-                }
-            }).catch(function(){
-                if(userComment.data){
-                    alert("Introdeuction이 변경되었습니다.");
-                    return window.location.reload();
-                }
-            })
-        }
+    //  // 리액트에서 스프링으로 유저 정보 보내기(Update) => NickName
+    //  const updateComment = async() => {
 
-    }
-    
+    //     const modifyComment = prompt("Introdeuction을 입력해주세요.");
+
+    //     if(modifyComment !== null){
+    //         const body = {
+    //             comment : 'modifyComment'
+    //         }
+
+    //         const userComment = axios.get("/api/member/updateComment" , {
+    //             params:{
+    //                 modifyComment : modifyComment ,
+    //             }
+    //         }).catch(function(){
+    //             if(userComment.data){
+    //                 alert("Introdeuction이 변경되었습니다.");
+    //                 return window.location.reload();
+    //             }
+    //         })
+    //     }
+
+    // }
+    // if(isLoding) {return <h1>로딩중</h1>}
+
     return(
         <div >
             <form className="outer" >
 
-                <MyPageProfile/>
+                <MyPageProfile myprofile={myprofile}/>    
                 <div className="outer_myContent">
                     <h1 style={{marginTop: "130px" , marginLeft: "70px" , fontSize: "50px"}}>My ProFile</h1>
 
@@ -90,7 +114,7 @@ function MyPageUpdate(){
 
                     <h7 style={{marginLeft: "70px"}}>NickName</h7>
                     <div className="outer_myNickUpdate">
-                       <p onClick={updateNickName}>{member?.nickName}</p>
+                       <p>{myprofile?.nickName}</p>
                     </div>
 
                     <br/>
@@ -99,7 +123,7 @@ function MyPageUpdate(){
 
                     <h7 style={{marginLeft: "70px"}}>Introdeuction</h7>
                     <div className="outer_Introdeuction">
-                        <p onClick={updateComment}>{member?.profileComment}</p>
+                        <p>{myprofile?.profileComment}</p>
                     </div>
                 </div>
             </form>

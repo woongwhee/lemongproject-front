@@ -18,7 +18,7 @@ function MyPagePwdCheck(){
     // 사용자가 입력한 비밀번호 비교.
     const [pwd , setInputPwd] = useState({
         passwordInput1 : '',
-        passwordInput2 : ''
+        passwordInput2 : '',
     });  
 
     const handleInput = (event) => {

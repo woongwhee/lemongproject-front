@@ -3,14 +3,15 @@ import axios from 'axios';
 import { jsx } from '@emotion/react';
 
 
-const ProfileUpdate = (): JSX.Element => {
+const ProfileUpdate = (props)=> {
+
+    let{userNo}=props;
 
     // 업로드 한 후  변경된 파일들 저장하는 배열
-    const fileList: File[] = []; 
+    const fileList = []; 
 
-    const onUpdateFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onUpdateFiles = (e) => {
         const uploadUpFiles = Array.prototype.slice.call(e.target.files); // 파일 선택창에서 선택한 파일들
-
         uploadUpFiles.forEach((uploadUpFile) => {
             fileList.push(uploadUpFile);
         });
@@ -22,11 +23,13 @@ const ProfileUpdate = (): JSX.Element => {
         fileList.forEach((file) => {
             // 파일 데이터 저장
             formData.append('file' , file);
+            formData.append('userNo' , userNo);
             console.log(file + "정보들");
             console.log(formData + "정보들") 
         });
 
-        axios.post('/api/member/updateUserProfile' , formData , {headers: {
+        axios.post('/api/member/updateUserProfile' ,
+            formData , {headers: {
             "Content-Type": "multipart/form-data",
         }}).catch(function(error){
             console.log("실패");

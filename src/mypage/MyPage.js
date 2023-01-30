@@ -12,6 +12,9 @@ import MyFeed from "./MyFeed";
 import MyChallenge from "./MyChallenge";
 import MyTemplates from "./MyTemplates";
 import Mymenu from "./Mymenu";
+import MyFollowCount from "./MyFollowerCount";
+import AcceptFollowCount from "./AcceptFollowCount";
+import AcceptFollowingCount from "./AcceptFollowingCount";
 
 // Tab -> 각 카테고리(피드 , 챌린지 , 템플릿)별 페이지 보여주기.
 // import {TabContent , TabPane , Nav , NavItem , NavLink} from "reactstrap";
@@ -22,28 +25,36 @@ import MyFollowApplication from "./MyFollowApplication";
 
 function MyPage() {
 
-    // 스프링에서 유저프로필 정보 가져오기.
-    const [member , setMember] = useState();
-    
-    const randMember=async()=>{
-        const response = await axios.get("/api/member/selectPro");
-        console.log(response);
-        setMember(response.data[0]);
-    }
-    useEffect(()=>{
-        randMember()
-    },[])
-
      // photo테이블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
      const [myprofile , setMyProfile] = useState();
+     
+     const queryString = window.location.search;
+     const params = new URLSearchParams(queryString);
 
-     const selectMyProfile = async() => {
-         const response = await axios.get("/api/member/selectMyProfileImg");
-         setMyProfile(response.data[0])
-         console.log(response.data)
-     }
-     useEffect(() => {selectMyProfile()},[])
+     const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
  
+     function callback(data){
+         setMyProfile(data);
+     }
+ 
+     useEffect(
+         () => {
+             axios.get("/api/member/selectMyProfile" , {
+                 params:{
+                     userNo : userNo ,
+                 }
+             }).then(function(res){
+                 console.log("데이터 전송 성공");
+                 const data = res.data.result;
+                 console.log(data);
+                 callback(data);
+                 
+             }).catch(function(){
+                 console.log("데이터 전송 실패");
+             });
+         } , []
+     );
+
      let saveFilePath = "http://localhost:8081/api/images/";
 
     // Apikey를 환경변수를 이용해 숨기기.
@@ -57,6 +68,15 @@ function MyPage() {
 
     const changeTab = (tabName) =>{
         setbtnClick(tabName);
+    }
+
+    // 세션의 user_no와 파람의 user_no를 비교하여 해당하는 팔로워 보여주기.
+    function followerComparison(){
+        if(params.get("userNo") === sessionStorage.getItem("userNo")){
+            return <MyFollowCount/>
+        }else{
+            return <AcceptFollowCount/>
+        }
     }
  
     return(
@@ -85,18 +105,20 @@ function MyPage() {
                 <div className="outer_MyPro">
                     <div className="outer_proimg">
                         <p>프로필 이미지</p>
-                        <img src={saveFilePath+myprofile?.changeName} style={{marginLeft:'7px'}} className="profileImg"></img>
+                        <img src={saveFilePath+myprofile?.photo?.changeName} style={{marginLeft:'7px'}} className="profileImg"></img>
                     </div>
                     <div className="outer_id">
-                        <p>닉네임(아이디) : {member?.nickName}</p>
+                        <p>닉네임(아이디) : {myprofile?.nickName}</p>
                     </div>
                     <div className="outer_fall">
                         <p>게시물(개수) / 팔로잉 / 팔로워 </p>
                         
                     </div>
                     <div className="outer_content">
-                        <p>자기소개 : {member?.profileComment}</p>
+                        <p>자기소개 : {myprofile?.profileComment}</p>
                         <MyFollowApplication/>
+                        {followerComparison()}
+                        <AcceptFollowingCount/>
                     </div>
                 </div>
                 <div className="outer_btn">
@@ -113,7 +135,7 @@ function MyPage() {
                     <button className="mybtn1" style={{backgroundImage: `url(${btnLogo})`}}
                         onClick={() => setMenuClick((!menuClick))}></button>
                 </div>
-                {menuClick === true ? <Mymenu/> : null}
+                {menuClick === true ? <Mymenu myprofile={myprofile}/> : null}
             </div>
         </div>
     );
