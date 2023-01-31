@@ -33,7 +33,7 @@ function Feed(props) {
                         피드시간 : {Feed.feedAt} <br/>
                     </div>
                     <div className="feed-header-right">
-                        <FeedUpdate Feed={Feed} updateFeed={updateFeed}/>
+                        <FeedUpdate Feed={Feed}/>
                         <FeedDelete Feed={Feed}/>
                     </div>
                 </div>

@@ -27,7 +27,7 @@ function FeedPictureDelete({photoNo,getData}) {
         }).catch(function (res){
             console.log(photoNo);
         })
-        }}>
+        }} >
             삭제
         </button>
     );

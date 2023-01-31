@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import Feed from "./Feed";
 
@@ -17,6 +17,7 @@ function FeedBody(){
         setTestStr(str);
     }
 
+
     // 첫 번째 렌더링을 마친 후 실행
     useEffect(
         () => {
@@ -24,7 +25,7 @@ function FeedBody(){
                 url: '/api/feed/main',
                 method: 'GET'
             }).then((res) => {
-                console.log(res.data.result)
+                // console.log(res.data.result)
                 callback(res.data.result);
                 // console.log(res.data.code);
             })

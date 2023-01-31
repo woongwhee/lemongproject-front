@@ -3,6 +3,7 @@ import axios from 'axios';
 import './FeedInsert.css'
 import Button from "react-bootstrap/Button";
 import FeedPictureInsert from "./FeedPictureInsert";
+import FeedUpdate from "./FeedUpdate";
 
 
 function FeedInsert() {

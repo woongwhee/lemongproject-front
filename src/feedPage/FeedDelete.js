@@ -13,19 +13,18 @@ function FeedDelete(props) {
     const handleShow = () => setShow(true);
 
     const feedNo = Feed.feedNo;
-    const photoNo = Feed.photoNoList[0];
+    // const photoNo = Feed.photoNoList[0];
 
     const deleteFeed = () => {
             axios.post(
                 'api/feed/deleteFeed',{
                     feedNo:feedNo,
-                    photoNo:photoNo
+                    // photoNo:photoNo
                 }).then(function (){
                     alert('삭제성공');
                     handleClose();
                     window.location.reload("/main");
-                }
-            )
+                })
     }
 
 

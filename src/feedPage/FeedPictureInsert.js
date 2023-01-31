@@ -13,13 +13,11 @@ function FeedPictureInsert(props) {
         // setPhotoNoList(newList);
         console.log(photoList)
     }
-
     const putPhotoNo = (PhotoNo) => {
         const newList=[...photoNoList,PhotoNo];
         setPhotoNoList(newList);
         console.log(newList);
         props.setInsertPhotoNo(newList);
-
     }
 
     const onChange = async (e) => {
@@ -32,7 +30,7 @@ function FeedPictureInsert(props) {
 
                 const response = await axios({
                     method: 'post',
-                    url: '/api/feed/feedPhoto',
+                    url: '/api/feed/insertPhoto',
                     data: formData,
                     headers: {
                         'Content-Type': 'multipart/form-data',
@@ -55,7 +53,6 @@ function FeedPictureInsert(props) {
     function callback(str) { // 사진 지우기 photoNo
         SetPhotoNo(str);
     }
-
     const [deleteStatus, setDeleteStatus] = useState(0)
     const deleteCallBack=()=>{
         if(deleteStatus === 'success'){
@@ -88,18 +85,17 @@ function FeedPictureInsert(props) {
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <div className="imagePreview" >
-                            {
-                                photoList?.map(photo =>
-                                    <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo?.changeName} key={i++}/>
-                                )
-                            }
-                            <FeedPictureDelete photoNo={photoNo} getData={getData}></FeedPictureDelete>
-                        </div>
-                        <div>
-                        </div>
-                    </td>
+            <td>
+                <div className="imagePreview" >
+                    {
+                        photoList?.map(photo =>
+                            <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo?.changeName} key={i++}/>
+                        )
+
+                    }
+                    <FeedPictureDelete photoNo={photoNo} getData={getData}></FeedPictureDelete>
+                </div>
+            </td>
                 </tr>
                 </tbody>
             </table>
