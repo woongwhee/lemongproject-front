@@ -68,7 +68,6 @@ function FeedPictureInsert(props) {
         deleteCallBack();
     }
 
-
     let i =0;
     return (
         <>
@@ -89,12 +88,11 @@ function FeedPictureInsert(props) {
                 <div className="imagePreview" >
                     {
                         photoList?.map(photo =>
-                            <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo?.changeName} key={i++}/>
+                            <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo.changeName} key={i++}/>
                         )
-
                     }
-                    <FeedPictureDelete photoNo={photoNo} getData={getData}></FeedPictureDelete>
                 </div>
+                <FeedPictureDelete photoNo={photoNo} getData={getData}></FeedPictureDelete>
             </td>
                 </tr>
                 </tbody>
