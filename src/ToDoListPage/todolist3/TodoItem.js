@@ -13,20 +13,21 @@ const Remove = styled.div`
   &:hover {
     color: #ff6b6b;
   }
-  display: none;
+  // display: none;
 `;
 
 const Update = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #dee2e6;
-  font-size: 24px;
-  cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #dee2e6;
+font-size: 24px;
+cursor: pointer;
+background-color: skyblue;
   &:hover {
     color: #ff6b6b;
   }
-  display: none;
+  //display: none;
 `;
 
 const TodoItemBlock = styled.div`
@@ -34,6 +35,7 @@ const TodoItemBlock = styled.div`
   align-items: center;
   padding-top: 12px;
   padding-bottom: 12px;
+  border: 3px solid orange;
   &:hover {
     ${Remove} {
       display: initial;
@@ -55,8 +57,9 @@ const CheckCircle = styled.div`
   justify-content: center;
   margin-right: 20px;
   cursor: pointer;
+  border: 3px solid purple;
   ${todo =>
-    todo.done &&
+    todo.clear &&
     css`
       border: 1px solid #38d9a9;
       color: #38d9a9;
@@ -67,9 +70,9 @@ const Text = styled.div`
   flex: 1;
   font-size: 21px;
   color: #495057;
-  background-color: pink;
+  border: 3px solid pink;
   ${todo =>
-    todo.done &&
+    todo.clear &&
     css`
       color: #ced4da;
     `}
@@ -106,7 +109,7 @@ function TodoItem({todo, onDel, onToggle, onUpdate}) {
       {/* 내용 */}
       {edite ? (
         //edite버튼을 눌렀을 때 input태그가 뜬다.
-          <input type="text" value={editeTodo} onChange={onEditeTodo}/>
+        <input type="text" value={editeTodo} onChange={onEditeTodo}/>
       ) : (
         //edite버튼을 누르지 않은 상태에서는 일반 text창이 뜬다.
         <Text clear={todo.clear}>{todo.todoContent}</Text>

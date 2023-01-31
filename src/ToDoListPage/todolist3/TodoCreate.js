@@ -98,9 +98,6 @@ function TodoCreate({insertTodo}) {
   //로그인 userno정보 
   let userNo = sessionStorage.getItem("userNo");
 
-
-
-
   return (
     <>
       {open && (
