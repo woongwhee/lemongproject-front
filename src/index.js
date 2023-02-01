@@ -9,32 +9,7 @@ import { MyPage } from './mypage/MyPage';
 import MainPage from './ToDoListPage/MainPage'
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reduxDate from './ToDoListPage/todolist3/TodoContext'
-
-// todoDate 값 넘겨줄 redux기능 추가
-// currentState: 현재 state값
-// action : 어떻게 state값을 바꿀 것인가
-function reducer(currentState, action) {
-  
-  let today = new Date();
-  
-  //기본날짜는 sysdate값(현재날짜)
-  if(currentState === undefined){
-    return {
-        selectDay : today,
-    };
-  }
-  
-  //현재 값 copy
-  // const newState = {...currentState};
-  
-  //캘린더js에서 클릭시 dispatch발생. 
-  //해당 캘린더 날짜 반환
-  if(action.type === 'SELECTDAY'){
-      return action.payload;
-  }
-
-}
+import reducer from './ToDoListPage/reducer/todoDateReduce'
 
 const store = createStore(reducer);
 

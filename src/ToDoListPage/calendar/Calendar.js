@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import './Calendar.css'
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+//import 'react-calendar/dist/Calendar.css';
+import './Calendar.css';
 import moment from 'moment/moment';
 import { useDispatch } from 'react-redux';
 
@@ -28,12 +28,14 @@ function Calendar2() {
 
 
 
+
+
   return (
     <div>
       {/* onChange: 값이 변경 될 때마다 호출되는 함수로 
       날짜가 클릭될 때 onSelectDay 함수를 호출해주었다. 
       선택한 값은 event 값에 배열로 들어가게 된다. */}
-      <Calendar onChange={onSelectDay}/>
+      <Calendar onChange={onSelectDay} />
     </div>
   );
 

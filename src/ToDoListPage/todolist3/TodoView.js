@@ -9,6 +9,8 @@ import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
 
 import axios from "axios";
+import { async } from 'q';
+import TodoItem from './TodoItem';
 
 //리액트 두투라이브러리 추가
 // npx create-react-app react-todolist
@@ -25,10 +27,8 @@ function TodoView3(){
   const selectDay = useSelector((state)=> state.selectDay);
   const todoDate = new moment(selectDay).format('YYMMDD');
 
-  
   //입력 내용 리스트 배열로 저장
   const [todoList, setTodoList] = useState([])
-
 
   //투두리스트 가져오기(get요청)
   //비동기처리를 해야하므로 async/await 구문을 통해서 처리합니다.
@@ -39,7 +39,13 @@ function TodoView3(){
                   userNo : 1},
       });
       console.log('전송 성공');
-      setTodoList(res.data);
+      setTodoList(res.data)
+      const clearTodoList = res.data.filter(todo => todo.clear === true);
+      const notClearTodoList = res.data.filter(todo => todo.clear === false);
+      setTodoList([
+        ...notClearTodoList,
+        ...clearTodoList
+      ]);
     } catch(res){
       console.log("전송 실패")
     }
@@ -52,30 +58,6 @@ function TodoView3(){
     fetchTodo();
   },[todoDate])
 
-  //투두 작성
-  //button 버전
-  // const insertTodo = async(inputValue, setInputValue, todoDate) => {
-  //   await axios.post('api/todo/insertTodo',
-  //     ({ 
-  //       'userNo' : 1,
-  //       'todoContent' : inputValue,
-  //       'clear' : false,
-  //       'value' : 1,
-  //       'todoDate' :  todoDate
-  //     })
-  //   ).then(function(res){
-  //     console.log('작성 성공');
-  //     setTodoList(res.data);
-  //     setTodoList([
-  //       ...todoList,
-  //       {
-  //         todoContent : inputValue,
-  //         clear : false
-  //       }
-  //     ])
-  //     setInputValue('');
-  //   })
-  // }
 
   //투두 작성 form태그 
   const insertTodo = async(inputValue, setInputValue, open, setOpen, todoDate) => {
@@ -95,7 +77,7 @@ function TodoView3(){
         {
           todoContent : inputValue,
           clear : false,
-          todoNo : res.data.todoNo
+          todoNo : res.data.todoNo,
         }
       ])
       setInputValue('');
@@ -103,7 +85,6 @@ function TodoView3(){
     })
   }
   
-
   //투두 삭제
   const onDel = async(todoNo) => {
     try{
@@ -153,13 +134,32 @@ function TodoView3(){
     })
   }
 
+  //내일로 미루기
+  const onDelay = async(todoNo) => {
+  axios.get('api/todo/delayTodo', ({
+    params: {todoNo : todoNo}
+    })
+  ).then(function(res){
+    //setTodoList(res.data);
+    setTodoList(todoList.map((todo) =>({
+      ...todo,
+    })));
+    console.log("미루기 완료");
+  }).catch(function(){
+    console.log("미루기 실패")
+  })
+}
+// hide : todo.todoNo === todoNo ? !hide : hide
+
+
+
   return (
     <>
       <TodoTemplate>
         {/* <p onClick={click}>dd</p> */}
         <GlobalStyle />
         <TodoDate /> {/*todo날짜 컴포넌트*/}
-        <TodoList todoList={todoList} onDel={onDel} onToggle={onToggle} onUpdate={onUpdate}/> {/*todo목록 컴포넌트*/}
+        <TodoList todoList={todoList} onDel={onDel} onToggle={onToggle} onUpdate={onUpdate} onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
         <TodoCreate insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}
       </TodoTemplate>
     </>

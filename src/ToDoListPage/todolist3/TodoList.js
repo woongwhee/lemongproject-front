@@ -9,19 +9,23 @@ const TodoListBlock = styled.div`
   overflow-y: auto;
 `;
 
-function TodoList({todoList, onDel, onToggle, onUpdate}) {
-  return (
-    <TodoListBlock>
-      {todoList && todoList.map(todo => (
+function TodoList({todoList, onDel, onToggle, onUpdate, onDelay, hide}) {
+
+ 
+
+  return ( 
+      <TodoListBlock>
+        {todoList && todoList.map(todo =>(
         <TodoItem
           key={todo.todoNo}
           todo={todo}
           onDel={onDel}
           onToggle={onToggle}
           onUpdate={onUpdate}
+          onDelay={onDelay}
         />
-      ))}
-    </TodoListBlock>
+        ))}
+      </TodoListBlock>
   );
 }
 

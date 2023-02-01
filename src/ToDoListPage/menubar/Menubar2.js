@@ -3,17 +3,10 @@ import './Menubar2.css';
 import FeedList from "./FeedList";
 import ChallengeList from "./ChallengeList";
 import TemplateList from "./TemplateList";
-import ToDoTemplate from "../todolist/TodoTemplate";
-import ToDoInsert from "../todolist/TodoCreate";
-import ToDoList from '../todolist/TodoList';
-import TodoView1 from "../todolist/TodoListView";
-import TodoView2 from "../todolist2/TodoView";
 import TodoView3 from "../todolist3/TodoView";
-import Calendar2 from "../calendar/Calendar";
-import moment from "moment";
-import { useState } from "react";
-import { Provider } from "react-redux";
-import {createStore} from 'react';
+import { useSelector } from "react-redux";
+
+//const selectTodo = useSelector(state => state.value);
 
 
 const menuList = {
@@ -22,8 +15,6 @@ const menuList = {
   2: <ChallengeList />,
   3: <TemplateList />,
 };
-
-
 
 class Menubar2 extends Component{
   constructor(props) {
