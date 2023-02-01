@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './Member/Login';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import MainPage from "./ToDoListPage/MainPage";
 
 
 
@@ -10,7 +11,10 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 
 
 function App() {
-
+    let userNo=sessionStorage.getItem("userNo");
+    if(userNo==null){
+        return <><MainPage/></>
+    }
   return (
     
     <div>
