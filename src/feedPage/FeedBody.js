@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import Feed from "./Feed";
 
@@ -16,6 +16,7 @@ function FeedBody(){
     function callback(str) {
         setTestStr(str);
     }
+
 
     // 첫 번째 렌더링을 마친 후 실행
     useEffect(

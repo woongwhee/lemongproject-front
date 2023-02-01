@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 function FeedPictureDelete({photoNo,getData}) {
@@ -6,14 +6,16 @@ function FeedPictureDelete({photoNo,getData}) {
 
     const [photoDelete, setPhotoDelete] = useState();
 
-    getData(photoDelete);
+    useEffect(()=>{getData(photoDelete);})
 
     function callback(str){
         setPhotoDelete(str);
     }
+    useEffect(()=>{{return callback}})
 
     return (
-        <button onClick={ () => { axios({
+        <button onClick={
+            () => { axios({
             url:'api/feed/deleteFeedPhoto',
             method:'GET',
             params:{photoNo:photoNo}
@@ -25,7 +27,7 @@ function FeedPictureDelete({photoNo,getData}) {
         }).catch(function (res){
             console.log(photoNo);
         })
-        }}>
+        }} >
             삭제
         </button>
     );

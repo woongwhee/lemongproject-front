@@ -13,6 +13,7 @@ import reducer from './ToDoListPage/reducer/todoDateReduce'
 
 const store = createStore(reducer);
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // Provider는 최상위 레벨에서 렌더링 된다
