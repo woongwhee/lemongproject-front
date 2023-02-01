@@ -37,9 +37,9 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                         <p>{getPhotoNoList[i]}  :::  {[i]}</p>
                         <button
                             onClick={()=>{
-                                deletePhotoNoList(getPhotoNoList[i]);
-                                deletePhotoPathList(getFilePathList[i]);
-                                deleteClick(getPhotoNoList[i]);
+                                deletePhotoNoList(getPhotoNoList[i]); // 숫자 숨겨
+                                deletePhotoPathList(getFilePathList[i]); // 위치 숨겨
+                                deleteClick(getPhotoNoList[i]); // 숫자 지운
                             }}
                         >삭제하기</button>
                     </div>
@@ -56,7 +56,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
     }
     const deletePhotoPathList=(i)=>{
         const newPlist=[...getFilePathList];
-        let index=newPlist.indexOf(i);
+        let index=newPlist.indexOf(i); // 숫자
         newPlist.splice(index,1)
         setFilePathList(newPlist);
     }
@@ -71,27 +71,66 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
         })
     }
 
-    const [getPhotoNoList, setPhotoNoList] = useState(photoNoList);
-    const [getFilePathList, setFilePathList] = useState(filePathList);
+    const [getPhotoNoList, setPhotoNoList] = useState(photoNoList);     // 원래 사진번호
+    const [getFilePathList, setFilePathList] = useState(filePathList);  // 원래 파일위치
 
-    const [getAddPhotoNoList, addPhotoNoList] = useState([]);
-    // useCallback(()=>{
-    //     const newPlist=[...getAddPhotoNoList];
-    //     setPhotoNoList(newPlist);
-    // },[])
-    const newPhotoNoList = () =>{
-            const newPlist=[...getAddPhotoNoList];
-            setPhotoNoList(newPlist);
-    }
-
-    const [getAddPhotoPathList, addPhotoPathList] = useState([]);
-    // useCallback(()=>{
+    // const [getAddPhotoNoList, addPhotoNoList] = useState([]);
+    // const newPhotoNoList = () =>{
+    //         const newPlist=[...getAddPhotoNoList];
+    //         setPhotoNoList(newPlist);
+    // }
+    //
+    // const [getAddPhotoPathList, addPhotoPathList] = useState([]);
+    // const newPhotoPathList=()=>{
     //     const newPlist=[...getAddPhotoPathList];
     //     setFilePathList(newPlist);
-    // },[])
-    const newPhotoPathList=()=>{
-        const newPlist=[...getAddPhotoPathList];
-        setFilePathList(newPlist);
+    // }
+
+
+    // const [getNewPhotoNoList, setNewPhotoNoList] = useState(photoNoList);
+    const putPhotoNo = (PhotoNo) => {
+        const newList=[...getPhotoNoList,PhotoNo];
+        setPhotoNoList(newList);
+        console.log(newList);
+    }
+
+    // const [getNewPhotoList,setNewPhotoList]=useState(filePathList);
+    const putPhoto = (newPhoto) => {
+        const newPList=[...getFilePathList,newPhoto]
+        setFilePathList(newPList);
+        console.log(newPList)
+    }
+    const onChange = async (e) => {
+        e.preventDefault();
+        if(e.target.files){
+            const uploadFile = e.target.files[0]
+            const formData = new FormData()
+            formData.append('files',uploadFile)
+
+            const response = await axios({
+                    method: 'post',
+                    url: '/api/feed/insertPhoto',
+                    data: formData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+            if(response.data.code==='2000'){
+                console.log(response.data.result.filePath);
+                console.log(response.data.result.changeName);
+
+                const newFilePath = (response.data.result.filePath);
+                const newChangeName = (response.data.result.changeName);
+
+                const newFilePathName = newFilePath+newChangeName;
+                // console.log(newFilePathName);
+                putPhoto([newFilePathName]);
+                putPhotoNo(response.data.result.photoNo) // photoNo List 시키기
+
+                e.target.value="";
+            }
+        }
     }
 
     return (
@@ -108,29 +147,41 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                     피드 업데이트
                 </Modal.Title>
             </Modal.Header>
-
             <ModalBody>
+                {/*<FeedUpdatePhotoInsert*/}
+                {/*    photoNoList = {getPhotoNoList}*/}
+                {/*   addPhotoNoList={addPhotoNoList}*/}
+                {/*   filePathList={getFilePathList}*/}
+                {/*   addPhotoPathList={addPhotoPathList}*/}
+                {/*    newPhotoNoList={newPhotoNoList}*/}
+                {/*    newPhotoPathList={newPhotoPathList}*/}
+                {/*>*/}
+                {/*</FeedUpdatePhotoInsert>*/}
+                <div>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={onChange}
+                    /><br/><br/><br/><br/>
 
-                <FeedUpdatePhotoInsert
-                    photoNoList = {getPhotoNoList}
-                   addPhotoNoList={addPhotoNoList}
-                   filePathList={getFilePathList}
-                   addPhotoPathList={addPhotoPathList}
-                    newPhotoNoList={newPhotoNoList}
-                    newPhotoPathList={newPhotoPathList}
-                >
-                </FeedUpdatePhotoInsert>
-                {/*<button onClick={()=>{newPhotoNoList(); newPhotoPathList();}}>.수정하기</button>*/}
+                    {/*<button onClick={*/}
+                    {/*    ()=>{*/}
+                    {/*        newPhotoNoList();*/}
+                    {/*        newPhotoPathList();*/}
+                    {/*        }}>*/}
+                    {/*    수정하기</button>*/}
+                </div>
+
 
                 <div>
-                피드업데이트 포토 : {getAddPhotoNoList} <br/>
-                현재피드 포토 : {getPhotoNoList} <br/>
 
-                    피드업데이트 포토 위치 : {getAddPhotoPathList}<br/>
-                    현재피드 파일위치 : {getFilePathList}<br/>
+                현재피드 포토 : {getPhotoNoList} <br/><br/>
+
+                현재피드 파일위치 : {getFilePathList}<br/>
                 </div>
 
                {Rendering()}
+
                 <div style={{clear:"both"}}></div>
 
                 <div style={{marginTop:"50px"}}>원래 피드 내용 : {feedContent}</div>

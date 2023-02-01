@@ -12,9 +12,6 @@ function FeedInsert() {
 
     const [insertPhotoNo, setInsertPhotoNo] = useState([]);
 
-    // const getPhotoNo = (getPhotoNo) => {
-    //     setInsertPhotoNo(getPhotoNo);
-    // }
     return (
         <div className="feed-insert" >
             <div className="feed-insert-body">
