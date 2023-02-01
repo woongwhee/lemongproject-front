@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Join from './Member/Join';
 import FindPwd from './Member/FindPwd';
+import KakaoLogin from './Member/KakaoLogin';
 
 // import Expenses from './testingPage/Expenses';
 // import Invoices from './testingPage/Invoices';
@@ -26,6 +27,7 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="join" element={<Join />} />
       <Route path="findPwd" element={<FindPwd />} />
+      <Route path="kakao" element={<KakaoLogin />} />
     </Routes>
   </BrowserRouter>
 

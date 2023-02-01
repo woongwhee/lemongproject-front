@@ -11,6 +11,7 @@ function Join() {
     const [reUserPwd, setReUserPwd] = useState();
     const [email, setEmail] = useState();
     const [emailNum, setEmailNum] = useState();
+    const [socialType, setSocialType] = useState("NONE");
 
     // 알림 색깔
     const [errorColor, setErrorColor] = useState();
@@ -134,7 +135,12 @@ function Join() {
         let response = await axios.post('api/p/join/chEmail',
             ({'email':email})
         )
-        if(response.data.code === '2000') {
+        if(response.data.code === '3006') {
+            console.log("중복된 이메일")
+            setEmailMs("이미 존재하는 이메일입니다.")
+            setEmailColor("chAlarm noAlarm")
+            setIsEmailBtn(false)
+        } else if(response.data.code === '2000') {
             console.log("테스팅 중~")
             setEmailMs("인증번호가 발송되었습니다.")
             setEmailColor("chAlarm")
@@ -173,17 +179,18 @@ function Join() {
 
 
     // 회원가입 클릭시 데이터 전송
-    const joinClick = async(name, nick, pwd, email) => {
+    const joinClick = async(name, nick, pwd, email, socialType) => {
         let response = await axios.post('api/p/join',
             ({'userName':name,
               'nickName':nick,
               'userPwd':pwd,
-              'email':email
+              'email':email,
+              'socialType':socialType
             })
         )
         if(response.data.code === '2000') {
             alert("어서오세요. 여러분의 꿈을 응원합니다. :)")
-            // document.location.href = "/"; // 회원가입 성공 시 로그인 페이지로
+            document.location.href = "/"; // 회원가입 성공 시 로그인 페이지로
         } else {
             alert.log('회원가입 실패');
         }
@@ -255,7 +262,7 @@ function Join() {
                 </div>
                 <br />
                 <div className="joinBtn">
-                    <button onClick={() => {joinClick(userName, nickName, userPwd, email);}} disabled={!isJoinBtn}>
+                    <button onClick={() => {joinClick(userName, nickName, userPwd, email, socialType);}} disabled={!isJoinBtn}>
                         회 원 가 입
                     </button>
                 </div>
