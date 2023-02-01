@@ -1,9 +1,10 @@
-.feed-container{
+.feed-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 120px;
 }
+
 .feed {
     width: 500px;
     margin-bottom: 50px;
@@ -12,7 +13,8 @@
     border: 2px solid black;
 
 }
-.feed-header{
+
+.feed-header {
     width: 100%;
     height: 7%;
     display: flex;
@@ -20,32 +22,35 @@
     align-items: center;
 
 }
-.feed-header-left{
+
+.feed-header-left {
     width: 100%;
     display: flex;
     justify-content: flex-start;
     padding-left: 15px;
 
 }
-.feed-header-right{
+
+.feed-header-right {
     width: 100%;
     display: flex;
     justify-content: end;
     padding-right: 15px;
 }
 
-.feed-photo{
+.feed-photo {
     width: 100%;
     height: 65%;
     /*border: 1px solid red;*/
-
 }
-.photo{
+
+.photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.feed-body{
+
+.feed-body {
     margin-top: 30px;
     display: flex;
     flex-direction: row;
@@ -53,7 +58,8 @@
     width: 100%;
     height: 6%;
 }
-.feed-content{
+
+.feed-content {
     padding-top: 10px;
     padding-left: 15px;
     font-size: 14px;

@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import './FeedPicture.css'
-import FeedPictureDelete from "./FeedPictureDelete";
 import {Button, IconButton} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+import CloseButton from "react-bootstrap/CloseButton";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import {PhotoCamera} from "@mui/icons-material";
+
 
 function FeedPictureInsert(props) {
 
@@ -16,20 +14,16 @@ function FeedPictureInsert(props) {
         for(let i = 0; i<photoFilePathList.length; i++){
             result.push(
                 <div key={i} style={{border:"3px solid black", width:"310px", float:"left", marginLeft:"10px"}}>
-                    <IconButton aria-label="delete" size="large" style={{float:"right"}}>
-                        <DeleteIcon fontSize="inherit" onClick={()=>{
-                            deletePhotoNoList(photoNoList[i]); // 숫자 숨겨
-                            deletePhotoPathList(photoFilePathList[i]); // 위치 숨겨
-                            deleteClick(photoNoList[i]);}}// 숫자 지운
+                    <CloseButton onClick={()=>{
+                        deletePhotoNoList(photoNoList[i]); // 숫자 숨겨
+                        deletePhotoPathList(photoFilePathList[i]); // 위치 숨겨
+                        deleteClick(photoNoList[i]);}}// 숫자 지운/>
                         />
-                    </IconButton>
                     <img
                         src={photoFilePathList[i]}
                         alt="사진이없습니다"
                         style={{width:"300px", height:"300px", clear:"both"}}
                     />
-                    <p style={{margin:"auto", }}>{i+1} 번째 사진</p>
-
                 </div>
             )
         }
@@ -129,44 +123,26 @@ function FeedPictureInsert(props) {
     // }
 
     return (
-        <>
-            <table>
-                <thead>
-                <tr>
-                {/*<th>이미지 미리 보기</th>*/}
-                </tr>
-                </thead>
+        <div style={{marginTop:"50px"}}>
+            <Button variant="contained" component="label" startIcon={<AddAPhotoIcon/>} style={{marginBottom:"50px"}}>
+                Upload
+                <input hidden type="file" accept="image/*" onChange={onChange}/>
+            </Button>
 
-                <tbody>
-                <tr>
-                    <td>
-                        <Button variant="contained" component="label">
-                            Upload
-                            <input hidden type="file" accept="image/*" onChange={onChange}/>
-                        </Button>
-
-
-
-                    </td>
-                </tr>
-                <tr>
-            <td>
-                <div>
-                    <Rendering></Rendering>
-                    <div style={{clear:"both"}}></div>
-                    {/*{*/}
-                    {/*    photoList?.map(photo =>*/}
-                    {/*        <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo.changeName} key={i++}/>*/}
-                    {/*    )*/}
-                    {/*}*/}
-                </div>
+            <div>
+                <Rendering/>
+                <div style={{clear:"both"}}></div>
+                {photoNoList}
+                {/*{*/}
+                {/*    photoList?.map(photo =>*/}
+                {/*        <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo.changeName} key={i++}/>*/}
+                {/*    )*/}
+                {/*}*/}
+            </div>
 
                 {/*<FeedPictureDelete photoNo={photoNo} getData={getData}></FeedPictureDelete>*/}
-            </td>
-                </tr>
-                </tbody>
-            </table>
-        </>
+
+        </div>
     );
 }
 

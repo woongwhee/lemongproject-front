@@ -34,7 +34,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                             alt='사진이없습니다'
                             style={{width:"300px", height:"300px"}}
                         />
-                        <p>{getPhotoNoList[i]}  :::  {[i]}</p>
+                        <span>{getPhotoNoList[i]}  :::  {[i]}</span>
                         <button
                             onClick={()=>{
                                 deletePhotoNoList(getPhotoNoList[i]); // 숫자 숨겨

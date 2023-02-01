@@ -47,7 +47,7 @@ function Login() {
             </div>
             <div className='horizon' />
             <div className='socialArea'>
-                <p>소셜 로그인</p>
+                {/*<p>소셜 로그인</p>*/}
                 <div>
                     <img className='social' src='LemongImg/SocialImg/KakaoLogin.png' alt='lemongLogo' />
                 </div>

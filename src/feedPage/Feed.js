@@ -40,7 +40,7 @@ function Feed(props) {
                 </div>
 
                 <div className="feed-photo">
-                    <p>피드번호 : {Feed.feedNo}</p>
+                    <span>피드번호 : {Feed.feedNo}</span>
                     <span>이름 : {Feed.userNo}</span>
 
                     <FeedPhoto filePathList={Feed.filePathList}></FeedPhoto>
@@ -57,7 +57,7 @@ function Feed(props) {
                 </div>
 
                 <div className="feed-content">
-                    <p>{Feed.userNo}(닉네임) : {Feed.feedContent}</p>
+                    <span>{Feed.userNo}(닉네임) : {Feed.feedContent}</span>
                 </div>
             </div>
         </div>
