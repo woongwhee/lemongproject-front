@@ -15,17 +15,17 @@ import {
   Route,
 } from "react-router-dom";
 import MyFeedDetails from './mypage/MyFeedDetails';
+import MainPage from "./mainPage/MainPage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
     // <App />
   // </React.StrictMode>
-  // <MainPage/>
 
  <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MyPage />} />
+        <Route path="/" element={<MainPage />} />
           <Route path='MyFeedDetails' element={<MyFeedDetails/>}>
 
           </Route>
@@ -35,12 +35,6 @@ root.render(
       </Routes>
  </BrowserRouter>
 
-  // <>
-  // {/* // // <TemplateCard></TemplateCard> */}
-  // // {/* <MyPageUpdate/> */}
-  // {/* // <MyPageProfile/> */}
-  // // {/* <MyPagePwdCheck/> */}
-  // {/* </> */}
 );
 
 // If you want to start measuring performance in your app, pass a function
