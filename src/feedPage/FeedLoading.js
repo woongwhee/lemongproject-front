@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
-import Spinner from 'react-bootstrap/Spinner';
+import {PacmanLoader} from "react-spinners";
 
 function FeedLoading(props) {
-    const [loading, setLoading] = useState(null);
+
     return (
-        <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        <div
+            style={{
+                position: "fixed",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+            }}>
+            <PacmanLoader color="#36d7b7" />
+        </div>
     );
 }
 

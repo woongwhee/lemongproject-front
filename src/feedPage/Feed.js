@@ -4,6 +4,7 @@ import FeedReply from './FeedReply';
 import FeedUpdate from "./FeedUpdate";
 import FeedDelete from "./FeedDelete";
 import FeedPhoto from "./FeedPhoto";
+import FeedLoading from "./FeedLoading";
 
 
 

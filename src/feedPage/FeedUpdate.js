@@ -128,6 +128,9 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                 putPhoto([newFilePathName]);
                 putPhotoNo(response.data.result.photoNo) // photoNo List 시키기
 
+                const timer = setTimeout(() => console.log('Initial timeout!'), 5000);
+                clearTimeout(timer);
+
                 e.target.value="";
             }
         }

@@ -2,6 +2,12 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import './FeedPicture.css'
 import FeedPictureDelete from "./FeedPictureDelete";
+import {Button, IconButton} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import {PhotoCamera} from "@mui/icons-material";
 
 function FeedPictureInsert(props) {
 
@@ -9,19 +15,21 @@ function FeedPictureInsert(props) {
         const result = [];
         for(let i = 0; i<photoFilePathList.length; i++){
             result.push(
-                <div key={i} style={{border:"1px solid red", width:"300px", float:"left"}}>
+                <div key={i} style={{border:"3px solid black", width:"310px", float:"left", marginLeft:"10px"}}>
+                    <IconButton aria-label="delete" size="large" style={{float:"right"}}>
+                        <DeleteIcon fontSize="inherit" onClick={()=>{
+                            deletePhotoNoList(photoNoList[i]); // 숫자 숨겨
+                            deletePhotoPathList(photoFilePathList[i]); // 위치 숨겨
+                            deleteClick(photoNoList[i]);}}// 숫자 지운
+                        />
+                    </IconButton>
                     <img
                         src={photoFilePathList[i]}
                         alt="사진이없습니다"
-                        style={{width:"300px", height:"300px"}}
+                        style={{width:"300px", height:"300px", clear:"both"}}
                     />
-                    <p>{photoNoList[i]}</p>
-                    <button onClick={()=>{
-                        deletePhotoNoList(photoNoList[i]); // 숫자 숨겨
-                        deletePhotoPathList(photoFilePathList[i]); // 위치 숨겨
-                        deleteClick(photoNoList[i]); // 숫자 지운
-                    }
-                    }>삭제하기</button>
+                    <p style={{margin:"auto", }}>{i+1} 번째 사진</p>
+
                 </div>
             )
         }
@@ -122,17 +130,23 @@ function FeedPictureInsert(props) {
 
     return (
         <>
-            <table style={{border:"3px solid purple"}}>
+            <table>
                 <thead>
                 <tr>
-                <th>이미지 미리 보기</th>
+                {/*<th>이미지 미리 보기</th>*/}
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr>
                     <td>
-                        <input type="file" accept="image/*" onChange={onChange}/>
+                        <Button variant="contained" component="label">
+                            Upload
+                            <input hidden type="file" accept="image/*" onChange={onChange}/>
+                        </Button>
+
+
+
                     </td>
                 </tr>
                 <tr>
