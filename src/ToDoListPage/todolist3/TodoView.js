@@ -39,13 +39,7 @@ function TodoView3(){
                   userNo : 1},
       });
       console.log('전송 성공');
-      setTodoList(res.data)
-      const clearTodoList = res.data.filter(todo => todo.clear === true);
-      const notClearTodoList = res.data.filter(todo => todo.clear === false);
-      setTodoList([
-        ...notClearTodoList,
-        ...clearTodoList
-      ]);
+      setTodoList(res.data);
     } catch(res){
       console.log("전송 실패")
     }

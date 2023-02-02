@@ -11,11 +11,28 @@ const TodoListBlock = styled.div`
 
 function TodoList({todoList, onDel, onToggle, onUpdate, onDelay, hide}) {
 
-    if(todoList===null)return <>로딩중</>
-    else
-    return (
-      <TodoListBlock>
-        {todoList.map((todo)=>{
+ 
+
+  return ( 
+    <>
+    <TodoListBlock>
+      <p>Daily Todo-List</p>
+      {todoList && todoList.map(todo =>(
+      <TodoItem
+        key={todo.todoNo}
+        todo={todo}
+        onDel={onDel}
+        onToggle={onToggle}
+        onUpdate={onUpdate}
+        onDelay={onDelay}
+      />
+      ))}
+    </TodoListBlock>
+
+    <TodoListBlock>
+      {todoList && todoList.map(todo =>(
+        <>
+        <p>Challenge Todo-List</p>
         <TodoItem
           key={todo.todoNo}
           todo={todo}
@@ -24,8 +41,10 @@ function TodoList({todoList, onDel, onToggle, onUpdate, onDelay, hide}) {
           onUpdate={onUpdate}
           onDelay={onDelay}
         />
-        })}
-      </TodoListBlock>
+        </>
+      ))}
+    </TodoListBlock>
+    </>
   );
 }
 

@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import axios from 'axios';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.css'; //부트스트랩 import
 
-import Join from './Member/Join';
-import FindPwd from './Member/FindPwd';
-import KakaoLogin from './Member/KakaoLogin';
+import { MyPage } from './mypage/MyPage';
+import MainPage from './ToDoListPage/MainPage'
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from './ToDoListPage/reducer/todoDateReduce'
 
-// import Expenses from './testingPage/Expenses';
-// import Invoices from './testingPage/Invoices';
-// import Home from './testingPage/Home';
-// import Invoice from './testingPage/Invoice';
+const store = createStore(reducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,7 +22,7 @@ root.render(
 
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
+        <Route path="/" element={<Provider store={store}><App /></Provider>} />
       <Route path="join" element={<Join />} />
       <Route path="findPwd" element={<FindPwd />} />
       <Route path="kakao" element={<KakaoLogin />} />
@@ -55,18 +53,9 @@ root.render(
   //   </Routes>
   // </BrowserRouter>
 
-
 );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();
-
-// export default axios.create({
-//   baseURL : "http://localhost:50000",
-//   header: {
-//     Authorization: 'bearer accessKey'
-//   }
-// });
-
+reportWebVitals();
