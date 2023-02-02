@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Login from './Member/Login';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import MainPage from "./ToDoListPage/MainPage";
+import {useLoginState} from "./Member/LoginContext";
+import {useSelector} from "react-redux";
 
 // import Expenses from './testingPage/Expenses';
 // import Invoices from './testingPage/Invoices';
@@ -10,16 +12,19 @@ import MainPage from "./ToDoListPage/MainPage";
 
 
 function App() {
+        let isLogin= useLoginState().isLogin;
+    useEffect(() => {
+        return () => {
+            {isLogin?<MainPage/>:<Login/>}
+        };
+    }, [isLogin]);
 
-    let userNo=sessionStorage.getItem("userNo");
-    if(userNo!=null){
-        return <MainPage/>
-    }
-    return (
-    
-    <div>
-      <Login />
-    </div>
+
+
+        return (
+            <>
+                    {isLogin?<MainPage/>:<Login/>}
+            </>)
 
 
     // 페이지 자체 이동 방법
@@ -50,8 +55,6 @@ function App() {
     //     이때, nav 내부의 내용은 여전히 고정되어 있다.
     //   */}
     // </div>
-
-  )
 
 }
 

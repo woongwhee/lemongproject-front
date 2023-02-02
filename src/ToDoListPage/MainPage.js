@@ -9,7 +9,7 @@ import Calendar from './calendar/Calendar';
 //메뉴바 컴포넌트
 import Menubar2 from "./menubar/Menubar2";
 
-import btnLogo from '../mypage/image/menu1.png';
+// import btnLogo from '../mypage/image/menu1.png';
 
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar
@@ -44,7 +44,7 @@ function MainPage() {
             {/*사이드바 영역 */}
             <div className="outer_menu">
                 <div className="menuBtn">
-                    <button className="mybtn1" style={{backgroundImage: `url(${btnLogo})`}}
+                    <button className="mybtn1"
                         onClick={() => setMenuClick((!menuClick))}></button>
                     {/* <button className="mybtn1" style={{backgroundImage: `url(${plusLogo})` , height}}></button> */}
                 </div>

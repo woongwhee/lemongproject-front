@@ -21,11 +21,9 @@ function FeedMenu(props) {
             </Button>
 
             <Offcanvas show={show} onHide={handleClose}>
-
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>메뉴바</Offcanvas.Title>
                 </Offcanvas.Header>
-
                 <Offcanvas.Body>
                     <Button onClick={pageOn}>피드메인</Button> <br/><br/><br/>
                     <Button onClick={pageOff}>Feed Insert</Button>

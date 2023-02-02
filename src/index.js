@@ -9,7 +9,7 @@ import Join from './Member/Join';
 import FindPwd from './Member/FindPwd';
 import KakaoLogin from './Member/KakaoLogin';
 import reducer from "./ToDoListPage/reducer";
-
+import {LoginProvider} from "./Member/LoginContext";
 const store = createStore(reducer);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -17,7 +17,7 @@ root.render(
     <BrowserRouter>
     <Provider store={store}>
     <Routes>
-      <Route path="/" element={<App/>} />
+        <Route path="/" element={<LoginProvider><App/></LoginProvider>} />
       <Route path="join" element={<Join />} />
       <Route path="findPwd" element={<FindPwd />} />
       <Route path="kakao" element={<KakaoLogin />} />
