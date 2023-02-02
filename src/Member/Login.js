@@ -12,9 +12,7 @@ function Login() {
 
     const [email, setEmail] = useState();
     const [userPwd, setUserPwd] = useState();
-
     const [noLoginMs, setNoLoginMs] = useState();
-
     const [noLoginCol, setNoLoginCol] = useState();
 
 
