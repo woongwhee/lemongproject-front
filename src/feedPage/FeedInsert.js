@@ -10,8 +10,6 @@ import SendIcon from '@mui/icons-material/Send';
 
 function FeedInsert() {
 
-
-
     const [userNo, SetUserNo] = useState();
     const [content, SetContent] = useState("");
 
