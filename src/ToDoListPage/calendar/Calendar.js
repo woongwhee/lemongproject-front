@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Calendar from 'react-calendar';
 //import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import moment from 'moment/moment';
 import { useDispatch } from 'react-redux';
+import axios from "axios";
 
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar
@@ -11,6 +12,9 @@ import { useDispatch } from 'react-redux';
 
 //redux 추가
 //npm install react-redux
+
+//useQuery설치
+//npm install react-query
 
 function Calendar2() {
   //기본적으로 캘린더가 선택할 수 있게 넣어줄 value
@@ -26,8 +30,25 @@ function Calendar2() {
     )
   }
 
+  //날짜 데이터 저장
+  const [mark, setMark] = useState([]);
 
+  //투두리스트가 존재하는 날짜 가져오기
+  const calTodo = async() => {
+    try{
+      const res = await axios.get("/api/todo/calTodo" , {
+        params : {userNo : 1},
+      });
+      setMark(res.data)
+      //console.log("캘린더 데이터"+res.data)
+    } catch(res){
+      console.log("전송 실패")
+    }
+  }
 
+  useEffect(() => {
+    calTodo();
+  },[mark])
 
 
   return (
@@ -35,7 +56,21 @@ function Calendar2() {
       {/* onChange: 값이 변경 될 때마다 호출되는 함수로 
       날짜가 클릭될 때 onSelectDay 함수를 호출해주었다. 
       선택한 값은 event 값에 배열로 들어가게 된다. */}
-      <Calendar onChange={onSelectDay} />
+      <Calendar 
+        onChange={onSelectDay} 
+        formatDay={(locale, date) => moment(date).format("DD")} //달력날짜에 '일' 삭제
+        tileContent={({ date, view }) => {
+          if (mark.find((x) => x === moment(date).format("YYMMDD"))) {
+            return (
+             <>
+               <div className="flex justify-center items-center absoluteDiv">
+                 <div className="dot"></div>
+               </div>
+             </>
+           );
+          }
+        }}
+      />
     </div>
   );
 

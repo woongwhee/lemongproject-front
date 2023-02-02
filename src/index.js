@@ -18,7 +18,7 @@ root.render(
   // Provider는 최상위 레벨에서 렌더링 된다
   // provider의 props로 store가 있으며 redux store를 할당한다.
   <Provider store={store}>
-    <MainPage/>
+      <MainPage/>
   </Provider>
   
 );
