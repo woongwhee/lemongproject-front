@@ -21,7 +21,12 @@ function FeedInsert() {
     const containContent = (e) => {
         e ? setDisalbe(false) : setDisalbe(true)
     }
+    useEffect(()=>{
+        if(content === "" || insertPhotoNo.length === 0){
+            setDisalbe(true);
+        }
 
+    })
     const checkContent = (insertFail) => {
         if (insertFail === "Fail") {
             return alert("내용입력은 필수 입니다.")
@@ -71,7 +76,7 @@ function FeedInsert() {
                                         window.location.reload();
                                     }).catch(function (res) {
                                         checkContent(res.data.Java);
-                                        console.log('실패함' + userNo, content)
+                                        console.log('실패함' + userNo, content, res.data.Java)
                                     })
                                 }}
                     >전송</Button>

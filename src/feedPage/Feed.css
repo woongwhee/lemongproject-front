@@ -33,9 +33,6 @@
 
 .feed-header-right {
     width: 100%;
-    display: flex;
-    justify-content: end;
-    padding-right: 15px;
 }
 
 .feed-photo {

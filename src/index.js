@@ -14,22 +14,9 @@ import FindPwd from './Member/FindPwd';
 
 
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
-    // <Test></Test>
-    // <Test1></Test1>
-    <FeedMenu></FeedMenu>
-    // <BrowserRouter>
-    //     <Routes>
-    //         <Route path="/" element={<App />} />
-    //         <Route path="join" element={<Join />} />
-    //         <Route path="findPwd" element={<FindPwd />} />
-    //         <Route path="feedMenu" element={<FeedMenu/>}/>
-    //     </Routes>
-    // </BrowserRouter>
+    <App></App>
 
 );
 

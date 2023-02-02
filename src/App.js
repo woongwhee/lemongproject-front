@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './Member/Login';
 import {BrowserRouter, Routes, Route, Outlet, Link} from 'react-router-dom';
+import FeedMenu from "./feedPage/FeedMenu";
 // import Expenses from './testingPage/Expenses';
 // import Invoices from './testingPage/Invoices';
 // import Home from './testingPage/Home';
@@ -9,10 +10,8 @@ import {BrowserRouter, Routes, Route, Outlet, Link} from 'react-router-dom';
 function App() {
 
   return (
-    
-    <div>
-      <Login />
-    </div>
+      <FeedMenu></FeedMenu>
+
 
 
     // 페이지 자체 이동 방법

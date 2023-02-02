@@ -34,8 +34,8 @@ function Feed(props) {
                         피드시간 : {Feed.feedAt} <br/>
                     </div>
                     <div className="feed-header-right">
-                        <FeedUpdate Feed={Feed}/>
-                        <FeedDelete Feed={Feed}/>
+                        <span style={{float:"right"}}><FeedDelete Feed={Feed}/></span>
+                        <span style={{float:"right"}}><FeedUpdate Feed={Feed}/></span>
                     </div>
                 </div>
 

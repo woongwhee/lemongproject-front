@@ -13,17 +13,21 @@ function FeedPictureInsert(props) {
         const result = [];
         for(let i = 0; i<photoFilePathList.length; i++){
             result.push(
-                <div key={i} style={{border:"3px solid black", width:"310px", float:"left", marginLeft:"10px"}}>
+                <div key={i} style={{border:"3px solid black", width:"310px", height:"380px", marginLeft:"10px",textAlign:"center",float:"left"}}>
+                    <div style={{float:"right"}}>
                     <CloseButton onClick={()=>{
                         deletePhotoNoList(photoNoList[i]); // 숫자 숨겨
                         deletePhotoPathList(photoFilePathList[i]); // 위치 숨겨
                         deleteClick(photoNoList[i]);}}// 숫자 지운/>
                         />
+                    </div>
+                    <div style={{clear:"both"}}>
                     <img
                         src={photoFilePathList[i]}
                         alt="사진이없습니다"
-                        style={{width:"300px", height:"300px", clear:"both"}}
+                        style={{width:"300px", height:"300px", clear:"both",}}
                     />
+                    </div>
                 </div>
             )
         }
@@ -100,12 +104,11 @@ function FeedPictureInsert(props) {
             }
         }
     }
-
     // const [ photoNo, setPhotoNo] = useState();
     // function callback(str) { // 사진 지우기 photoNo
     //     setPhotoNo(str);
     // }
-
+    //
     // const [deleteStatus, setDeleteStatus] = useState(0)
     // const deleteCallBack=()=>{
     //     if(deleteStatus === 'success'){
