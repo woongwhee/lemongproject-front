@@ -23,28 +23,28 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
     }
     const [newContent, setContent] = useState('');
 
-    const Nemo = memo(
-        ({
-             id,
-             index,
-             nemo,
-             moveNemo,
-             someDragging,
-             setSomeDragging,
-         }) => {
-            const [, dropLeft] = useDrop(
-                () => ({
-                    accept: ItemTypes.Nemo,
-                    canDrop: () => false,
-                    hover({ id: draggedId, index: orgIndex }) {
-                        if (draggedId !== id) {
-                            moveNemo(draggedId, index);
-                        }
-                    },
-                }),
-                [moveNemo]
-            );
-        }
+    // const Nemo = memo(
+    //     ({
+    //          id,
+    //          index,
+    //          nemo,
+    //          moveNemo,
+    //          someDragging,
+    //          setSomeDragging,
+    //      }) => {
+    //         const [, dropLeft] = useDrop(
+    //             () => ({
+    //                 accept: ItemTypes.Nemo,
+    //                 canDrop: () => false,
+    //                 hover({ id: draggedId, index: orgIndex }) {
+    //                     if (draggedId !== id) {
+    //                         moveNemo(draggedId, index);
+    //                     }
+    //                 },
+    //             }),
+    //             [moveNemo]
+    //         );
+    //     }
 
 
 
