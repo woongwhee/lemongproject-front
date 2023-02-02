@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Calendar from 'react-calendar';
 //import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
@@ -46,9 +46,6 @@ function Calendar2() {
     }
   }
 
-  useEffect(() => {
-    calTodo();
-  },[mark])
 
 
   return (
@@ -56,21 +53,7 @@ function Calendar2() {
       {/* onChange: 값이 변경 될 때마다 호출되는 함수로 
       날짜가 클릭될 때 onSelectDay 함수를 호출해주었다. 
       선택한 값은 event 값에 배열로 들어가게 된다. */}
-      <Calendar 
-        onChange={onSelectDay} 
-        formatDay={(locale, date) => moment(date).format("DD")} //달력날짜에 '일' 삭제
-        tileContent={({ date, view }) => {
-          if (mark.find((x) => x === moment(date).format("YYMMDD"))) {
-            return (
-             <>
-               <div className="flex justify-center items-center absoluteDiv">
-                 <div className="dot"></div>
-               </div>
-             </>
-           );
-          }
-        }}
-      />
+      <Calendar onChange={onSelectDay} />
     </div>
   );
 

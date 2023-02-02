@@ -3,19 +3,19 @@ import Login from './Member/Login';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import MainPage from "./ToDoListPage/MainPage";
 
-
-
 // import Expenses from './testingPage/Expenses';
 // import Invoices from './testingPage/Invoices';
 // import Home from './testingPage/Home';
 
 
+
 function App() {
+
     let userNo=sessionStorage.getItem("userNo");
-    if(userNo==null){
-        return <><MainPage/></>
+    if(userNo!=null){
+        return <MainPage/>
     }
-  return (
+    return (
     
     <div>
       <Login />

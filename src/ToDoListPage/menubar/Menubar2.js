@@ -21,7 +21,7 @@ class Menubar2 extends Component{
     super();
     
     this.state = {
-      menu: 0,
+      menu: 3,
     };
   }
 

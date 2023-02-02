@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import axios from "axios";
 import { async } from 'q';
 import TodoItem from './TodoItem';
+import {TodoProvider} from "../todolist/TodoContext";
 
 //리액트 두투라이브러리 추가
 // npx create-react-app react-todolist
@@ -148,15 +149,15 @@ function TodoView3(){
 
 
   return (
-    <>
+    <TodoProvider>
       <TodoTemplate>
         {/* <p onClick={click}>dd</p> */}
         <GlobalStyle />
-        <TodoDate /> {/*todo날짜 컴포넌트*/}
+        {/*<TodoDate /> /!*todo날짜 컴포넌트*!/*/}
         <TodoList todoList={todoList} onDel={onDel} onToggle={onToggle} onUpdate={onUpdate} onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
         <TodoCreate insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}
       </TodoTemplate>
-    </>
+    </TodoProvider>
   );
 }
 

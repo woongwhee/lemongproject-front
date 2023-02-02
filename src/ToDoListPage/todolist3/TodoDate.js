@@ -33,7 +33,6 @@ const TasksLeft = styled.div`
 function TodoDate() {
 
   const selectDay = useSelector((state) => state.selectDay)
-
   return (
     <TodoHeadBlock>
       <h1>{moment(selectDay.toString()).format('MM월 DD일')}</h1>
