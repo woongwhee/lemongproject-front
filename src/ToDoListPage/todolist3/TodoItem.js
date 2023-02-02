@@ -23,9 +23,23 @@ justify-content: center;
 color: #dee2e6;
 font-size: 24px;
 cursor: pointer;
-background-color: skyblue;
+//background-color: skyblue;
   &:hover {
-    color: #ff6b6b;
+    color: skyblue;
+  }
+  //display: none;
+`;
+
+const Delay = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+color: #dee2e6;
+font-size: 24px;
+cursor: pointer;
+//background-color: skyblue;
+  &:hover {
+    color: #f7ff03;
   }
   //display: none;
 `;
@@ -35,7 +49,7 @@ const TodoItemBlock = styled.div`
   align-items: center;
   padding-top: 12px;
   padding-bottom: 12px;
-  border: 3px solid orange;
+  //border: 3px solid orange;
   &:hover {
     ${Remove} {
       display: initial;
@@ -54,7 +68,7 @@ const CheckCircle = styled.div`
   justify-content: center;
   margin-right: 20px;
   cursor: pointer;
-  border: 3px solid purple;
+  //border: 3px solid purple;
   ${todo =>
     todo.clear &&
     css`
@@ -67,7 +81,7 @@ const Text = styled.div`
   flex: 1;
   font-size: 21px;
   color: #495057;
-  border: 3px solid pink;
+  //border: 3px solid pink;
   ${todo =>
     todo.clear &&
     css`
@@ -132,23 +146,28 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
           </>
         ) : (
           <> {/* 일반적으로 투두 생성시 나오는 버튼들 */}
-          <GiOrangeSlice onClick={()=>{onDelay(todo.todoNo, hide , setHide)}}/> {/* 내일로 미루기 */}
+          <Delay>
+            <GiOrangeSlice onClick={()=>{onDelay(todo.todoNo, hide , setHide)}}/> {/* 내일로 미루기 */}
+          </Delay>
           <Update>
             <MdOutlineCreate onClick={onClickEdite}/> {/* 수정하기 버튼 */}
           </Update>
+          <Remove >
+            <MdClear onClick={()=>onDel(todo.todoNo)}/> {/* 삭제버튼 */}
+          </Remove>
           </>
         )
       ) : null} {/* 완료된 투두일 경우 수정 버튼이 뜨지 않게 한다. */}
 
       {/* 삭제버튼   */}
-      {edite ? 
+      {/* {edite ? 
         //수정시에는 삭제버튼이 보이지 않게
         null : (
           <Remove >
             <MdClear onClick={()=>onDel(todo.todoNo)} />
           </Remove>
         )
-      } 
+      }  */}
     </TodoItemBlock>
   );
 }
