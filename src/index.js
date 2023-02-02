@@ -6,6 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import Join from './Member/Join';
+
+import {MyPage} from './mypage/MyPage';
+import MyPageUpdate from './mypage/MyPageUpdate';
+
+import ChallengeRoomCreate from './challengeChat/challengeRoomCreate';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,9 +23,11 @@ root.render(
 
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="join" element={<Join/>} />
-      <Route path="findPwd" element={<FindPwd/>} />
+      <Route path="/" element={<App />}/>
+      <Route path="join" element={<Join/>}/>
+      <Route path="mypage" element={<MyPage />}/>
+      <Route path="MypageUpdate" element={<MyPageUpdate />}/>
+      <Route path="ChallengeRoomCreate" element={<ChallengeRoomCreate />}/>
     </Routes>
   </BrowserRouter>
 

@@ -6,11 +6,12 @@ import './MyPageUpdate.css';
 
 // 부트스트랩
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
 import axios from "axios";
 import MyPageProfile from "./MyPageProfile";
 import MyPagePwdCheck from "./MypagePwdUpdate";
 import MyDelete from "./MyDelete";
+
+import { BsFillBrushFill , BsCheckLg } from "react-icons/bs";
 
 function MyPageUpdate(){
 
@@ -20,7 +21,8 @@ function MyPageUpdate(){
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
-    const userNo1 = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+    // const userNo1 = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+    const userNo1 = sessionStorage.getItem("userNo");
 
      // photo테이블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
      const [myprofile , setMyProfile] = useState();
@@ -46,65 +48,112 @@ function MyPageUpdate(){
              });
          } , []
      );
-        
-    // },[])
 
-    // // 리액트에서 스프링으로 유저 정보 보내기(Update) => NickName
-    // const updateNickName  = async() => {
-    //     const modifyNickname = prompt("[" + member.nickName + "]" + " 을(를) 어떤 닉네임으로 변경할까요?");
+     // 마이페이지 닉네임 체크 
+     const [mynickCheck , setMyNickCheck] = useState({
+        checkValue : '' ,
+     });
 
-    //     console.log(modifyNickname);
+     // 검색해온 닉네임 여따가 저장
+     const [saveCheckNick , setSaveCheckNick] = useState();
 
-    //     if(modifyNickname !== null){
-    //         const body = {
-    //             nickname : 'modifyNickname'
-    //         }
+     // 검색한 닉네임 저장
+     const CheckValHandle = (event) => {
 
-    //         const userNiname = axios.get("/api/member/checkNickName" , {
-    //             params:{
-    //                 modifyNickname : modifyNickname ,
-    //             }
-    //         }).then(function(){
-    //             if(userNiname.data){
-    //                 alert("NickName이 변경되었습니다.");
-    //                 return window.location.reload();
-    //             }
-    //         });
-    //     }
-    // }
+        const {name , value} = event.target;
 
-    //  // 리액트에서 스프링으로 유저 정보 보내기(Update) => NickName
-    //  const updateComment = async() => {
+        setMyNickCheck({
+            ...mynickCheck , 
+            [name]:value,
+        });
+     };
 
-    //     const modifyComment = prompt("Introdeuction을 입력해주세요.");
+     function MyPageNickCheck(){
+        if(mynickCheck.checkValue !== ""){
+            axios.get("/api/member/MyPageNickCheck" , {
+                params:{
+                    checkNick : mynickCheck.checkValue , 
+                }
+            }).then(function(res){
+                console.log(res + "데이터 전송 성공");
+                const data = res.data.result;
+                console.log(data);
+                setSaveCheckNick(data);
+            }).catch(function(){
+                console.log("데이터 전송 실패");
+            })
+        }
+     }
 
-    //     if(modifyComment !== null){
-    //         const body = {
-    //             comment : 'modifyComment'
-    //         }
+     function showCheckNick(){
+        if(saveCheckNick?.nickName == "" || mynickCheck?.checkValue ==""){
+            return <div></div>
+        }else if(saveCheckNick?.nickName === mynickCheck?.checkValue){
+            return <div style={{color:'red' , fontSize:'20px'}}>중복되는 닉네임 입니다.</div>
+        }else{
+            return <div style={{color:'green' , fontSize:'20px'}}>사용 가능한 닉네임 입니다.</div>
+        }
+     }
+     
+     // 중복 체크 후 닉네임 변경
+     function updateMyNickName(){
+        axios.get("/api/member/updateMyNick" , {
+            params:{
+                updateNick : mynickCheck.checkValue ,
+                userNo : userNo ,
+            }
+        }).then(function(res){
+            console.log(res + "데이터 전송 성공");
+            alert("닉네임 변경이 완료되었습니다.");
+        }).catch(function(){
+            console.log("데이터 전송 실패");
+        })
+     }
 
-    //         const userComment = axios.get("/api/member/updateComment" , {
-    //             params:{
-    //                 modifyComment : modifyComment ,
-    //             }
-    //         }).catch(function(){
-    //             if(userComment.data){
-    //                 alert("Introdeuction이 변경되었습니다.");
-    //                 return window.location.reload();
-    //             }
-    //         })
-    //     }
+     // 화면 보여주기
+     const [show , setShow] = useState(false);
 
-    // }
-    // if(isLoding) {return <h1>로딩중</h1>}
+     // 볼펜 버튼 클릭 시 div 보여주기
+     const  showIntro = () =>{
+        setShow(true);
+     }
+
+     // 변경할 자기소개 내용 저장하기
+     const [updateContent , setUpdateContent] = useState({
+        updateCont : '',
+     })
+
+     const UpdateContentHandle = (event) => {
+        const {name , value} = event.target;
+
+        setUpdateContent({
+            ...updateContent,
+            [name]:value,
+        });
+     };
+
+     function updateMyContent(){
+        axios.get("/api/member/updateMyContent" , {
+            params:{
+                updateCont : updateContent.updateCont ,
+                userNo : userNo ,
+            }
+        }).then(function(res){
+            console.log(res + "데이터 전송 성공");
+            alert("Introdeuction이 변경되었습니다.");
+            window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo;
+        }).catch(function(){
+            console.log("데이터 전송 실패");
+        })
+     }
 
     return(
-        <div >
+        <div>
             <form className="outer" >
 
                 <MyPageProfile myprofile={myprofile}/>    
                 <div className="outer_myContent">
-                    <h1 style={{marginTop: "130px" , marginLeft: "70px" , fontSize: "50px"}}>My ProFile</h1>
+                    <h1 style={{marginTop: "130px" , marginLeft: "70px" , fontSize: "50px"}}><b>My ProFile</b></h1>
 
                     <MyDelete/>
 
@@ -112,19 +161,38 @@ function MyPageUpdate(){
 
                     <br/><br/><br/>
 
-                    <h7 style={{marginLeft: "70px"}}>NickName</h7>
+                    <h6 style={{marginLeft: "70px"}}><b>NickName
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        NickNameCheck</b></h6>
                     <div className="outer_myNickUpdate">
                        <p>{myprofile?.nickName}</p>
                     </div>
-
-                    <br/>
-                        <MyPagePwdCheck/>
-                    <br/><br/><br/><br/>
-
-                    <h7 style={{marginLeft: "70px"}}>Introdeuction</h7>
-                    <div className="outer_Introdeuction">
-                        <p>{myprofile?.profileComment}</p>
+                    <div className="outer_myNickUpdateCheck">
+                        <input type="text" name="checkValue" placeholder="변경할 닉네임을 입력해주세요" className="form-control" 
+                        onChange={CheckValHandle} style={{height:'38px' , borderRadius:'0'}}></input>
+                        {showCheckNick()}
                     </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'0' , width:'100px'}} onClick={MyPageNickCheck}>체크</button>&nbsp;
+                    <button type="submit" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'0' , width:'100px'}} onClick={updateMyNickName}>변경</button>
+
+                    <br/><br/><br/>
+                        <MyPagePwdCheck/>
+                    <br/><br/>
+
+                    <h6 style={{marginLeft: "70px"}}><b>Introdeuction</b></h6>
+                    <BsFillBrushFill style={{marginTop:"-58px" , marginLeft:'180px'}} onClick={showIntro}></BsFillBrushFill>
+                    {show ? <form>
+                        <textarea name ="updateCont" onChange={UpdateContentHandle} className="outer_Introdeuction" style={{height:'168.5px'}}>
+                        </textarea> <BsCheckLg onClick={updateMyContent} style={{marginTop:'-455px' , marginLeft:'210px'}} ></BsCheckLg>
+                    </form> : <div className="outer_Introdeuction">
+                        <p>{myprofile?.profileComment}</p>
+                    </div>}
+                    
                 </div>
             </form>
         </div>

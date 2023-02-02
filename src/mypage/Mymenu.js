@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import MyAlert from "./MyAlert";
 import MySearch from "./MySearch";
 
+import Challenge from "../challengeChat/challenge";
+
 function Mymenu(props){
 
     let{myprofile}=props;
@@ -36,6 +38,7 @@ function Mymenu(props){
             {/* <Link to="/MyPageUpdate?userNo="> */}
                 {/* <button className="menuBtn" onClick={MovePage}>마이페이지</button> */}
                 {showBtn()}
+                <Challenge/>
             {/* </Link> */}
                 {/* <button className="menuBtn">피드작성</button> */}
             <div className="outer_menuPro">

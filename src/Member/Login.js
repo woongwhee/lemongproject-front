@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios'; // 액시오스
 import { Link } from 'react-router-dom';
 import '../styles/Login.css';
+import {MyPage} from '../mypage/MyPage';
 
 function Login() {
 
@@ -10,7 +11,8 @@ function Login() {
 
     // 로그인 클릭시 데이터 전송
     const loginClick = async(e,p) => {
-        let response = await axios.post('api/login',
+        console.log(e , p);
+        let response = await axios.post('api/p/login',
             ({'email':e,
               'userPwd':p
             })
@@ -20,7 +22,8 @@ function Login() {
             const userNo = response.data.result.userNo;
             alert("로그인에 성공하였습니다.")
             sessionStorage.setItem("userNo", userNo);
-            document.location.href = "/findPwd"; // 페이지 이동(임시)
+            // <MainPage/>
+           window.location.href = "http://localhost:3000/mypage?userNo="+userNo;
         } else {
             console.log('실패!')
             alert("잘못된 정보입니다. 다시 입력해주세요.")

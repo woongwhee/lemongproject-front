@@ -139,9 +139,9 @@
 .outer_content{
     border: 1px solid thistle;
     width: 69%;
-    height: 67%;
+    height: 37%;
     float: right;
-    margin-top: -180px;
+    margin-top: -100px;
     box-sizing: border-box;
     background-color: darkcyan;
 }
@@ -214,4 +214,9 @@
     border: 1px solid palevioletred;
     width: 100%;
     margin-top: 5px;
+}
+.followsize{
+    border: 1px solid violet;
+    width: 100%;
+    height: 40px;
 }

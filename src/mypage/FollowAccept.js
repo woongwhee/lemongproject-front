@@ -38,7 +38,7 @@ function FollowAccept(){
     useEffect(
         () => {
             axios.get("/api/follow/MyfollowerList" , {
-                params:{followerNo : follower , followerIngNo : followerIng}
+                params:{follower : follower}
             }).then(function(res){
                 console.log("데이터 전송 성공");
                 console.log(res.data.result);

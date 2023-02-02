@@ -1,0 +1,76 @@
+.outer_all{
+    border: 1px solid black;
+    width: 1463px;
+    height: 1226px;
+}
+.outer_1{
+    border: 1px solid blue;
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+.outer_2{
+    border: 1px solid green;
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+.outer_top3{
+    border: 1px solid coral;
+    width: 100%;
+    height: 40%;
+}
+.outer_rank{
+    border: 1px solid sienna;
+    width: 100%;
+    height: 60%;
+}
+.outer_t3{
+    border: 1px solid springgreen;
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+.outer_t1{
+    border: 1px solid tomato;
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+.outer_t2{
+    border: 1px solid violet;
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+.outer_chall{
+    border: 1px solid steelblue;
+    width: 97.5%;
+    height: 100px;
+    margin: auto;
+}
+.chatting-area{
+    border: 1px solid royalblue;
+    margin:auto;
+	height:1217px;
+	width:727px;
+	margin-bottom:50px;
+}
+.inputChatting{
+    width: 75%;
+    resize:none;
+}
+.send{
+    width: 23%;
+    height: 70px;
+}   
+.input-area{
+    width:100%;
+	display:flex;
+    margin-top: -125px;
+    margin-left: 10px;
+}
+.display-chatting{
+    overflow:auto;
+	list-style:none;
+}

@@ -15,6 +15,7 @@ import Mymenu from "./Mymenu";
 import MyFollowCount from "./MyFollowerCount";
 import AcceptFollowCount from "./AcceptFollowCount";
 import AcceptFollowingCount from "./AcceptFollowingCount";
+import MyFollowingCount from "./MyFollowingCount";
 
 // Tab -> 각 카테고리(피드 , 챌린지 , 템플릿)별 페이지 보여주기.
 // import {TabContent , TabPane , Nav , NavItem , NavLink} from "reactstrap";
@@ -78,6 +79,14 @@ function MyPage() {
             return <AcceptFollowCount/>
         }
     }
+
+    function followingComparison(){
+        if(params.get("userNo") === sessionStorage.getItem("userNo")){
+            return <MyFollowingCount/>
+        }else{
+            return <AcceptFollowingCount/>
+        }
+    }
  
     return(
 
@@ -111,14 +120,17 @@ function MyPage() {
                         <p>닉네임(아이디) : {myprofile?.nickName}</p>
                     </div>
                     <div className="outer_fall">
-                        <p>게시물(개수) / 팔로잉 / 팔로워 </p>
-                        
+                        <div className="followsize">
+                            <p style={{fontSize:'25px'}}><b>게시글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                팔로잉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팔로워</b></p>
+                                {followerComparison()}
+                                {followingComparison()}
+                        </div>
                     </div>
                     <div className="outer_content">
                         <p>자기소개 : {myprofile?.profileComment}</p>
                         <MyFollowApplication/>
-                        {followerComparison()}
-                        <AcceptFollowingCount/>
+                        
                     </div>
                 </div>
                 <div className="outer_btn">

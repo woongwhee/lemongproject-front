@@ -57,9 +57,17 @@
 }
 .outer_myNickUpdate{
     border: 1px solid seagreen;
-    width: 85%;
+    width: 27%;
     height: 4%;
     margin-left: 70px;
+    float: left;
+}
+.outer_myNickUpdateCheck{
+    border: 1px solid seagreen;
+    width: 27%;
+    height: 4%;
+    margin-left: 30px;
+    float: left;
 }
 .outer_passChange{
     border: 1px solid rosybrown;
@@ -78,4 +86,7 @@
     width: 85%;
     height: 17%;
     margin-left: 70px;
+}
+.nickCheckBtn{
+    width: ;
 }
