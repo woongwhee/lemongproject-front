@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
 import {ModalBody, ModalFooter} from "react-bootstrap";
@@ -23,49 +23,78 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
     }
     const [newContent, setContent] = useState('');
 
-    // const Nemo = memo(
-    //     ({
-    //          id,
-    //          index,
-    //          nemo,
-    //          moveNemo,
-    //          someDragging,
-    //          setSomeDragging,
-    //      }) => {
-    //         const [, dropLeft] = useDrop(
-    //             () => ({
-    //                 accept: ItemTypes.Nemo,
-    //                 canDrop: () => false,
-    //                 hover({ id: draggedId, index: orgIndex }) {
-    //                     if (draggedId !== id) {
-    //                         moveNemo(draggedId, index);
-    //                     }
-    //                 },
-    //             }),
-    //             [moveNemo]
-    //         );
-    //     }
 
 
 
+    const dragFunction = (event, type) => {
+        event.preventDefault(); // 페이지 이동 금지 시키기
+        event.stopPropagation(); // 상위 엘리먼트들로의 이벤트 전파 중지
+    }
+    const startClickPhoto=(e,t,i)=>{
+        console.log('시작' + t);
+        setStartPhotoNo(t);
+    }
+    const finishClickPhoto=(e,t)=>{
+        e.preventDefault(); // 페이지 이동 금지 시키기
+        e.stopPropagation(); // 상위 엘리먼트들로의 이벤트 전파 중지
+        console.log('끝' + t);
+        setFinishPhotoNo(t);
+    }
+    const [startPhotoNo,setStartPhotoNo] = useState();
+    const [finishPhotoNo,setFinishPhotoNo] = useState();
+
+    const changeValue = () =>{
+        axios.post('api/feed/changeValue',{
+            startPhoNo:startPhotoNo,
+            finishPhoNo:finishPhotoNo
+        }).then(function (res){
+            console.log('여긴피드업데이트')
+        })
+    }
+
+
+    const [getStartIndex, setStartIndex] = useState();
+    const [getFinishIndex, setFinishIndex] = useState();
+    const startIndex = (e) =>{
+        console.log("인덱스번호 : " + getPhotoNoList.indexOf(e))
+        setStartIndex(getPhotoNoList.indexOf(e))
+        console.log(getPhotoNoList);
+    }
+    const finishIndex = (e) =>{
+        console.log("인덱스번호 : " + getPhotoNoList.indexOf(e))
+        setFinishIndex(getPhotoNoList.indexOf(e))
 
 
 
+        let tmp = getPhotoNoList[getStartIndex] // tmp = [0]
+        getPhotoNoList[getStartIndex] = getPhotoNoList[getFinishIndex];
+        //                [0]                    [1]
+        getPhotoNoList[getFinishIndex] = tmp
+        //             [1]              [0]
 
-
-
-
-
-
-
+        console.log(getPhotoNoList);
+    }
 
     const Rendering = () => {
             const result = [];
             for (let i = 0; i < getFilePathList.length; i++) {
                 result.push(
-                <DndProvider backend={HTML5Backend}>
                     <div key={i}
-                         style={{border:"3px solid black", width:"310px", height:"380px", marginLeft:"10px",textAlign:"center",float:"left"}}>
+                         style={{border:"3px solid black", width:"310px", height:"380px", marginLeft:"10px",textAlign:"center",float:"left"}}
+                         onMouseDown={(e)=>{startClickPhoto(e,getPhotoNoList[i]); startIndex(getPhotoNoList[i]);}}
+
+                         onDragLeave={(event) => dragFunction(event)}
+                         // * onDragLeave : 드래그한 대상이 드랍하지 않고 떠나는 경우 이벤트가 발생 합니다.
+                         onDragEnter={(event) => dragFunction(event)}
+                         // * onDragEnter : 드래그한 대상이 드랍영역에 다다르면 이벤트가 발생 합니다.
+                         onDrop={(event) => {finishClickPhoto(event, getPhotoNoList[i]);changeValue();finishIndex(getPhotoNoList[i]);}}
+                         // * onDrop : 대상이 드랍되면 이벤트가 발생 합니다.
+                         onDragOver={(event) => { return dragFunction(event); }}
+                         // * onDragOver : 드래그 대상이 드랍영역에 오버(over)하는 경우 발생 합니다.
+                        // onDragStart={(event)=>{onDragStart(event,getPhotoNoList[i],'시작')}}
+                        //  onDragEnd={(event)=>{onDragEnd(event,getPhotoNoList[i],'끝')}}
+                        //  onDragOver={(e)=>{onDragOver(e)}}
+                    >
                         <div style={{float:"right"}}>
                             <CloseButton
                                 onClick={()=>{
@@ -79,15 +108,16 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                             src={getFilePathList[i]}
                             alt='사진이없습니다'
                             style={{width:"300px", height:"300px"}}
-                            onDrag
                         />
                         <span>{getPhotoNoList[i]}  :::  {[i]}</span>
                     </div>
-                </DndProvider>
                 );
             }
         return result;
     };
+
+
+
 
     const deletePhotoNoList=(i)=>{
         const newPlist=[...getPhotoNoList];
