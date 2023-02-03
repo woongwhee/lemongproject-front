@@ -8,8 +8,10 @@ import Buttonr from "react-bootstrap/Button";
 import {Button, IconButton} from "@mui/material";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import CloseButton from "react-bootstrap/CloseButton";
-import {DndProvider, DragPreviewImage, useDrop} from "react-dnd";
-import {HTML5Backend} from "react-dnd-html5-backend";
+import {DragPreviewImage} from "react-dnd";
+import {connect} from "react-redux";
+
+
 
 
 function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
@@ -56,24 +58,38 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
     const [getStartIndex, setStartIndex] = useState();
     const [getFinishIndex, setFinishIndex] = useState();
     const startIndex = (e) =>{
-        console.log("인덱스번호 : " + getPhotoNoList.indexOf(e))
+        console.log("시작인덱스번호 : " + getPhotoNoList.indexOf(e))
         setStartIndex(getPhotoNoList.indexOf(e))
-        console.log(getPhotoNoList);
+        // console.log(getPhotoNoList);
     }
-    const finishIndex = (e) =>{
-        console.log("인덱스번호 : " + getPhotoNoList.indexOf(e))
+    const finishIndex = (e) => {
+        console.log("끝인덱스번호 : " + getPhotoNoList.indexOf(e))
         setFinishIndex(getPhotoNoList.indexOf(e))
-
-
-
-        let tmp = getPhotoNoList[getStartIndex] // tmp = [0]
-        getPhotoNoList[getStartIndex] = getPhotoNoList[getFinishIndex];
-        //                [0]                    [1]
-        getPhotoNoList[getFinishIndex] = tmp
-        //             [1]              [0]
-
-        console.log(getPhotoNoList);
     }
+
+    const changeArray = (e) =>{
+        // const tmpe = (getPhotoNoList[getStartIndex]);
+        // getPhotoNoList[getStartIndex] = getPhotoNoList[getFinishIndex]
+        // getPhotoNoList[getFinishIndex] = tmpe;
+        // console.log(getPhotoNoList);
+        // const a = [getPhotoNoList]
+        // const b = [...a]
+        // const tmp = b[getStartIndex];
+        // b[getStartIndex] = b[getFinishIndex];
+        // b[getFinishIndex]= tmp;
+        //
+        // console.log(a);
+        // console.log(b);
+
+        console.log(getPhotoNoList)
+
+
+
+    }
+
+
+
+
 
     const Rendering = () => {
             const result = [];
@@ -82,12 +98,12 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                     <div key={i}
                          style={{border:"3px solid black", width:"310px", height:"380px", marginLeft:"10px",textAlign:"center",float:"left"}}
                          onMouseDown={(e)=>{startClickPhoto(e,getPhotoNoList[i]); startIndex(getPhotoNoList[i]);}}
-
+                         
                          onDragLeave={(event) => dragFunction(event)}
                          // * onDragLeave : 드래그한 대상이 드랍하지 않고 떠나는 경우 이벤트가 발생 합니다.
                          onDragEnter={(event) => dragFunction(event)}
                          // * onDragEnter : 드래그한 대상이 드랍영역에 다다르면 이벤트가 발생 합니다.
-                         onDrop={(event) => {finishClickPhoto(event, getPhotoNoList[i]);changeValue();finishIndex(getPhotoNoList[i]);}}
+                         onDrop={(event) => {finishClickPhoto(event, getPhotoNoList[i]);changeValue();finishIndex(getPhotoNoList[i]); changeArray(event);}}
                          // * onDrop : 대상이 드랍되면 이벤트가 발생 합니다.
                          onDragOver={(event) => { return dragFunction(event); }}
                          // * onDragOver : 드래그 대상이 드랍영역에 오버(over)하는 경우 발생 합니다.
@@ -104,10 +120,12 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                                 }}
                             />
                         </div>
+                        {/*<DragPreviewImage src={getFilePathList[i]}  connect={}/>*/}
                         <img
                             src={getFilePathList[i]}
                             alt='사진이없습니다'
                             style={{width:"300px", height:"300px"}}
+                            // draggable
                         />
                         <span>{getPhotoNoList[i]}  :::  {[i]}</span>
                     </div>
@@ -115,9 +133,6 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
             }
         return result;
     };
-
-
-
 
     const deletePhotoNoList=(i)=>{
         const newPlist=[...getPhotoNoList];
