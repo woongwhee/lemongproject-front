@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TodoItem from './TodoItem';
+import ChallTodoItem from './ChallTodoItem';
 
 const TodoListBlock = styled.div`
   flex: 1;
@@ -9,9 +10,7 @@ const TodoListBlock = styled.div`
   overflow-y: auto;
 `;
 
-function TodoList({todoList, onDel, onToggle, onUpdate, onDelay, hide}) {
-
- 
+function TodoList({todoList, onDel, onToggle, onUpdate, onDelay}) {
 
   return ( 
     <>
@@ -29,21 +28,18 @@ function TodoList({todoList, onDel, onToggle, onUpdate, onDelay, hide}) {
       ))}
     </TodoListBlock>
 
-    <TodoListBlock>
-      {todoList && todoList.map(todo =>(
+    {/* <TodoListBlock>
+      {chTodoList && chTodoList.map(chTodo =>(
         <>
         <p>Challenge Todo-List</p>
-        <TodoItem
-          key={todo.todoNo}
-          todo={todo}
-          onDel={onDel}
+        <ChallTodoItem
+          key={chTodo.todoNo}
+          chTodo={chTodo}
           onToggle={onToggle}
-          onUpdate={onUpdate}
-          onDelay={onDelay}
         />
         </>
       ))}
-    </TodoListBlock>
+    </TodoListBlock> */}
     </>
   );
 }

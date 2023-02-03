@@ -8,10 +8,12 @@ import 'bootstrap/dist/css/bootstrap.css'; //부트스트랩 import
 import { MyPage } from './mypage/MyPage';
 import MainPage from './ToDoListPage/MainPage'
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from './ToDoListPage/reducer/todoDateReduce'
+import { configureStore } from '@reduxjs/toolkit';
+import { legacy_createStore as createStore } from 'redux';
+import reducer from './reducer';
+import rootReducer from './reducer'
 
-const store = createStore(reducer);
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,7 +22,6 @@ root.render(
   <Provider store={store}>
       <MainPage/>
   </Provider>
-  
 );
 
 // If you want to start measuring performance in your app, pass a function
