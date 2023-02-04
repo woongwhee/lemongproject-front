@@ -15,13 +15,13 @@ function FeedInsert() {
 
     const [insertPhotoNo, setInsertPhotoNo] = useState([]);
 
-    const [disable, setDisalbe] = useState(true);
+    const [disable, setDisable] = useState(true);
     const containContent = (e) => {
-        e ? setDisalbe(false) : setDisalbe(true)
+        e ? setDisable(false) : setDisable(true)
     }
     useEffect(()=>{
         if(content === "" || insertPhotoNo.length === 0){
-            setDisalbe(true);
+            setDisable(true);
         }
 
     })
@@ -33,7 +33,9 @@ function FeedInsert() {
 
     return (
         <div style={{marginLeft:"100px", width:"60%"}}>
+
              <FeedPictureInsert setInsertPhotoNo={setInsertPhotoNo}></FeedPictureInsert>
+
                 <TextField
                 id="standard-multiline-flexible"
                 label="아이디 입력"
@@ -44,6 +46,7 @@ function FeedInsert() {
                     SetUserNo(e.target.value);
                 }}
                 />
+            <div>{insertPhotoNo}</div>
                     <Paper elevation={12}>
                         <TextField
                             id="outlined-multiline-static"

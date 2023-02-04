@@ -27,69 +27,77 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
 
 
 
-
+//----------------------------------------------------------------------+
     const dragFunction = (event, type) => {
         event.preventDefault(); // 페이지 이동 금지 시키기
         event.stopPropagation(); // 상위 엘리먼트들로의 이벤트 전파 중지
     }
-    const startClickPhoto=(e,t,i)=>{
+    // 사진 번호 가져오기
+    let arr = [];
+    const startClickPhoto=(t)=>{
         console.log('시작' + t);
-        setStartPhotoNo(t);
+        arr.push(t);
+
     }
     const finishClickPhoto=(e,t)=>{
-        e.preventDefault(); // 페이지 이동 금지 시키기
-        e.stopPropagation(); // 상위 엘리먼트들로의 이벤트 전파 중지
+        // e.preventDefault();
+        // e.stopPropagation();
         console.log('끝' + t);
-        setFinishPhotoNo(t);
+        arr.push(t);
+        console.log(arr)
     }
-    const [startPhotoNo,setStartPhotoNo] = useState();
-    const [finishPhotoNo,setFinishPhotoNo] = useState();
-
     const changeValue = () =>{
         axios.post('api/feed/changeValue',{
-            startPhoNo:startPhotoNo,
-            finishPhoNo:finishPhotoNo
+            startPhoNo:arr[0],
+            finishPhoNo:arr[1]
         }).then(function (res){
             console.log('여긴피드업데이트')
+            arr = [];
+            console.log("피드업데이트후 arr : " + arr);
         })
     }
+//----------------------------------------------------------------------+
 
-
-    const [getStartIndex, setStartIndex] = useState();
-    const [getFinishIndex, setFinishIndex] = useState();
+    // 인덱스 바꾸기
+    let arrCh = []
     const startIndex = (e) =>{
-        console.log("시작인덱스번호 : " + getPhotoNoList.indexOf(e))
-        setStartIndex(getPhotoNoList.indexOf(e))
-        // console.log(getPhotoNoList);
+        console.log("시작인덱스번호 : " + getPhotoNoList.indexOf(e) + "리스트 : " + getPhotoNoList);
+        const newNo = getPhotoNoList.indexOf(e)
+        arrCh.push(newNo);
     }
     const finishIndex = (e) => {
         console.log("끝인덱스번호 : " + getPhotoNoList.indexOf(e))
-        setFinishIndex(getPhotoNoList.indexOf(e))
+        const newNo = getPhotoNoList.indexOf(e)
+        arrCh.push(newNo)
+        console.log("바꿀인덱스 : "+arrCh);
     }
-
     const changeArray = (e) =>{
-        // const tmpe = (getPhotoNoList[getStartIndex]);
-        // getPhotoNoList[getStartIndex] = getPhotoNoList[getFinishIndex]
-        // getPhotoNoList[getFinishIndex] = tmpe;
-        // console.log(getPhotoNoList);
-        // const a = [getPhotoNoList]
-        // const b = [...a]
-        // const tmp = b[getStartIndex];
-        // b[getStartIndex] = b[getFinishIndex];
-        // b[getFinishIndex]= tmp;
-        //
-        // console.log(a);
-        // console.log(b);
+        const photoNo = [...getPhotoNoList]
+        photoNo.splice(arrCh[0],1,arr[1]) // 0, 1, 477
+        photoNo.splice(arrCh[1],1,arr[0]) // 1, 1, 476
+        console.log("복사본바꾼리스트 : "+photoNo);
+        setPhotoNoList(photoNo);
+    }
+//----------------------------------------------------------------------+
 
-        console.log(getPhotoNoList)
-
-
+    // 파일위치
+    let arrFile = []
+    const startPath = (t) =>{
+        arrFile.push(t)
 
     }
-
-
-
-
+    const finalPath = (t) =>{
+        arrFile.push(t)
+        console.log(arrFile);
+    }
+    const changePath = (e) =>{
+        const filePath = [...getFilePathList]
+        filePath.splice(arrCh[0],1,arrFile[1])
+        filePath.splice(arrCh[1],1,arrFile[0])
+        console.log(filePath);
+        setFilePathList(filePath);
+    }
+//----------------------------------------------------------------------+
 
     const Rendering = () => {
             const result = [];
@@ -97,14 +105,31 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                 result.push(
                     <div key={i}
                          style={{border:"3px solid black", width:"310px", height:"380px", marginLeft:"10px",textAlign:"center",float:"left"}}
-                         onMouseDown={(e)=>{startClickPhoto(e,getPhotoNoList[i]); startIndex(getPhotoNoList[i]);}}
+                         onDragStart={(e)=>{
+                             startClickPhoto(getPhotoNoList[i]);
+                             startIndex(getPhotoNoList[i]);
+                             startPath(getFilePathList[i]);
+                         }}
                          
                          onDragLeave={(event) => dragFunction(event)}
                          // * onDragLeave : 드래그한 대상이 드랍하지 않고 떠나는 경우 이벤트가 발생 합니다.
-                         onDragEnter={(event) => dragFunction(event)}
+
+                         onDragEnter={(event) => {
+                             dragFunction(event);
+
+                            }
+                         }
                          // * onDragEnter : 드래그한 대상이 드랍영역에 다다르면 이벤트가 발생 합니다.
-                         onDrop={(event) => {finishClickPhoto(event, getPhotoNoList[i]);changeValue();finishIndex(getPhotoNoList[i]); changeArray(event);}}
+                         onDrop={(event) => {
+                             finishClickPhoto(event, getPhotoNoList[i]);
+                             finishIndex(getPhotoNoList[i]);
+                             finalPath(getFilePathList[i]);
+                             changeValue();
+                             changeArray(event);
+                             changePath(event);
+                         }}
                          // * onDrop : 대상이 드랍되면 이벤트가 발생 합니다.
+
                          onDragOver={(event) => { return dragFunction(event); }}
                          // * onDragOver : 드래그 대상이 드랍영역에 오버(over)하는 경우 발생 합니다.
                         // onDragStart={(event)=>{onDragStart(event,getPhotoNoList[i],'시작')}}
@@ -125,7 +150,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                             src={getFilePathList[i]}
                             alt='사진이없습니다'
                             style={{width:"300px", height:"300px"}}
-                            // draggable
+                            draggable
                         />
                         <span>{getPhotoNoList[i]}  :::  {[i]}</span>
                     </div>
@@ -133,6 +158,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
             }
         return result;
     };
+//----------------------------------------------------------------------+
 
     const deletePhotoNoList=(i)=>{
         const newPlist=[...getPhotoNoList];
@@ -156,31 +182,18 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
             console.log("실패 : "+res.data)
         })
     }
+//----------------------------------------------------------------------+
 
     const [getPhotoNoList, setPhotoNoList] = useState(photoNoList);     // 원래 사진번호
     const [getFilePathList, setFilePathList] = useState(filePathList);  // 원래 파일위치
 
-    // const [getAddPhotoNoList, addPhotoNoList] = useState([]);
-    // const newPhotoNoList = () =>{
-    //         const newPlist=[...getAddPhotoNoList];
-    //         setPhotoNoList(newPlist);
-    // }
-    //
-    // const [getAddPhotoPathList, addPhotoPathList] = useState([]);
-    // const newPhotoPathList=()=>{
-    //     const newPlist=[...getAddPhotoPathList];
-    //     setFilePathList(newPlist);
-    // }
 
-
-    // const [getNewPhotoNoList, setNewPhotoNoList] = useState(photoNoList);
     const putPhotoNo = (PhotoNo) => {
         const newList=[...getPhotoNoList,PhotoNo];
         setPhotoNoList(newList);
         console.log(newList);
     }
 
-    // const [getNewPhotoList,setNewPhotoList]=useState(filePathList);
     const putPhoto = (newPhoto) => {
         const newPList=[...getFilePathList,newPhoto]
         setFilePathList(newPList);
@@ -221,7 +234,23 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
             }
         }
     }
-
+    const [disable, setDisable] = useState(true);
+    const containContent = (e) => {
+        e ? setDisable(false) : setDisable(true)
+    }
+    useEffect(()=>{
+        if(newContent === "" || getPhotoNoList.length === 0){
+            setDisable(true);
+        }
+        if(getPhotoNoList.toString() !== photoNoList.toString()){
+            setDisable(false);
+        }
+    })
+    const checkContent = (insertFail) => {
+        if (insertFail === "Fail") {
+            return alert("내용입력은 필수 입니다.")
+        }
+    }
     return (
         <>
         <Buttonr
@@ -278,35 +307,39 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
 
                 <div style={{clear:"both"}}></div>
 
-                <div style={{marginTop:"50px"}}>원래 피드 내용 : {feedContent}</div>
+                {/*<div style={{marginTop:"50px"}}>원래 피드 내용 : {feedContent}</div>*/}
                 <FloatingLabel controlId="floatingTextarea2" label="내용수정">
                     <Form.Control
                         as="textarea"
                         placeholder="Leave a comment here"
                         style={{ height: '200px', resize:'none', marginTop:'30px'}}
-                        onChange={(e)=> {setContent(e.target.value);}}
+                        onChange={(e)=> {
+                            setContent(e.target.value);
+                            containContent(e);
+                        }}
                         defaultValue={feedContent}
                     />
                 </FloatingLabel>
             </ModalBody>
             <ModalFooter>
             <Button variant="contained"
-                    onClick={
-                () => {axios.post(
-                'api/feed/updateFeed',
-                {feedNo:feedNo, feedContent:newContent, photoNo:getPhotoNoList}
-                ).catch(function () {
-                    console.log('실패함')
-
-                }).then(function (res){
-                    console.log(feedNo)
-                    alert('업테이트성공');
-                    handleClose();
-                    window.location.reload("/main");
-                })
-                }
-
-            }>수정하기</Button>
+                    onClick={ () => {
+                    axios.post(
+                        'api/feed/updateFeed',
+                        {feedNo: feedNo,
+                            feedContent: newContent,
+                            photoNo: getPhotoNoList
+                        }).catch(function (res) {
+                        console.log('실패함');
+                        checkContent(res.data.Java);
+                        }).then(function (res) {
+                            console.log(feedNo)
+                            alert('업테이트성공');
+                            handleClose();
+                            window.location.reload("/main");
+                        })}}
+                    disabled={disable}
+            >수정하기</Button>
             </ModalFooter>
         </Modal>
         </>
