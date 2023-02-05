@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './Login.css';
 import './Join.css';
 import { KAKAO_AUTH_URL } from './KakaoLoginData';
+import NaverLoginBtn from './NaverLoginBtn';
 
 function Login() {
 
@@ -62,9 +63,12 @@ function Login() {
                         <img className='social' src='LemongImg/SocialImg/KakaoLogin.png' alt='lemongLogo' />
                     </div>
                 </a>
-                <div>
-                <img className='social' src='LemongImg/SocialImg/NaverLogin.png' alt='lemongLogo' />
-                </div>
+                {/* <a href="/naver">
+                    <div>
+                        <img className='social' src='LemongImg/SocialImg/NaverLogin.png' alt='lemongLogo' />
+                    </div>
+                </a> */}
+                <NaverLoginBtn/>
                 <br />
                 <div className='menu'>
                     <Link to="/join" style={{ textDecoration: 'none' }}>

@@ -10,6 +10,8 @@ import Join from './Member/Join';
 import FindPwd from './Member/FindPwd';
 import KakaoLogin from './Member/KakaoLogin';
 import SetNick from './Member/SetNick';
+import NaverLogin from './Member/NaverLogin';
+import NaverLoginBtn from './Member/NaverLoginBtn';
 
 // import Expenses from './testingPage/Expenses';
 // import Invoices from './testingPage/Invoices';
@@ -30,6 +32,8 @@ root.render(
       <Route path="findPwd" element={<FindPwd />} />
       <Route path="kakao" element={<KakaoLogin />} />
       <Route path="setNick" element={<SetNick />} />
+      <Route path='naverBtn' element={<NaverLoginBtn />} />
+      <Route path='naver' element={<NaverLogin />} />
     </Routes>
   </BrowserRouter>
 
