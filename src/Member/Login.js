@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // 액시오스
 import { Link } from 'react-router-dom';
-import '../styles/Login.css';
-import '../styles/Join.css';
-import { KAKAO_AUTH_URL, BACK_KAKAO_AUTH_URL } from './KakaoLoginData';
+import './Login.css';
+import './Join.css';
+import { KAKAO_AUTH_URL } from './KakaoLoginData';
 
 function Login() {
 
