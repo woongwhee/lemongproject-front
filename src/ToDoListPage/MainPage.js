@@ -10,6 +10,7 @@ import Calendar from './calendar/Calendar';
 import Menubar2 from "./menubar/Menubar2";
 import {Button} from "@mui/material";
 import {useLoginDispatch} from "../Member/LoginContext";
+import axios from "axios";
 
 // import btnLogo from '../mypage/image/menu1.png';
 
@@ -23,10 +24,11 @@ import {useLoginDispatch} from "../Member/LoginContext";
 
 function LogoutButton() {
     const dispatch= useLoginDispatch();
-    const logout=()=>{
+    const logout=async ()=>{
+        await axios.get("/api/member/logout");
+
         dispatch({
-            type:"logout",
-            userNo:1
+            type:"logout"
         });
     }
 

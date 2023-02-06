@@ -10,8 +10,6 @@ function loginReducer(state, action) {
         case 'login':
             return action.payload;
         case 'unLogin':
-            console.log(action.userNo);
-
             return initialLogin;
         case 'logout':
             return initialLogin;
@@ -21,9 +19,7 @@ function loginReducer(state, action) {
             return state;
     }
 }
-const logout=()=>{
-    axios.get("/member/logout");
-}
+
 // state가 undefined이면 initialState를 기본값으로 사용
 const initialLogin = [
     {

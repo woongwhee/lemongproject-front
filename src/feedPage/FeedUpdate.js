@@ -8,8 +8,6 @@ import Buttonr from "react-bootstrap/Button";
 import {Button, IconButton} from "@mui/material";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import CloseButton from "react-bootstrap/CloseButton";
-import {DragPreviewImage} from "react-dnd";
-import {connect} from "react-redux";
 
 
 
