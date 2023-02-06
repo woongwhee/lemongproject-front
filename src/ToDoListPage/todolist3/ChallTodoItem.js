@@ -45,7 +45,7 @@ const Text = styled.div`
     `}
 `;
 
-function ChallTodoItem({chTodo, onToggle}) {
+function ChallTodoItem({chTodo, onToggleCh}) {
 
   const dispatch = useDispatch();
 
@@ -58,7 +58,7 @@ function ChallTodoItem({chTodo, onToggle}) {
   return (
     <TodoItemBlock>
         {/* 완료상태 */}
-        <CheckCircle clear={chTodo.clear} onClick={()=>{onToggle(chTodo.todoNo); moveMark();}}>
+        <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
             {chTodo.clear && <MdDone /> }
         </CheckCircle>
 

@@ -12,7 +12,7 @@ const TodoListBlock = styled.div`
   overflow-y: auto;
 `;
 
-function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onDelay}) {
+function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, onUpdate, onDelay}) {
 
   //const chTodos = chList[0].todoList;
   //console.log(chTodos);
@@ -81,7 +81,7 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
                   <ChallTodoItem
                   key={chTodo.todoNo}
                   chTodo={chTodo}
-                  onToggle={onToggle}
+                  onToggleCh={onToggleCh}
                   />
                   </>
                 )

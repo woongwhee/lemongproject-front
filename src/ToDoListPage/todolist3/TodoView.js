@@ -141,14 +141,29 @@ function TodoView3(){
       setTodoList(todoList.map(todo =>
         todo.todoNo === todoNo ? { ...todo, clear: !todo.clear } : todo
       ));
-      setChList(chList.map(todo =>
-        todo.todoNo === todoNo ? { ...todo, clear: !todo.clear } : todo
-      ));
       console.log("변경 완료!");
     }).catch(function(){
       console.log("변경 실패!");
     })
   }
+
+    //챌린지 투두 완료
+    const onToggleCh = async(todoNo) => {
+      axios.get('/api/chTodo/clearChTodo', {
+        params : {todoNo : todoNo}
+      }).then(function(res){
+        // setChList(chList.map(chLists => 
+        //   chLists.todoList.map(chTodo =>
+        //     chTodo.todoNo === todoNo ? { ...chTodo, clear: !chTodo.clear } : chTodo
+        // )));
+        setChList(chList.map(todo =>
+          todo.todoNo === todoNo ? { ...todo, clear: !todo.clear } : todo
+        ));
+        console.log("변경 완료!");
+      }).catch(function(){
+        console.log("변경 실패!");
+      })
+    }
 
   //투두 수정   
   const onUpdate = async(todoNo, editeTodo, setEdite) => {
@@ -198,6 +213,7 @@ function TodoView3(){
          chList={chList}
          onDel={onDel} 
          onToggle={onToggle} 
+         onToggleCh={onToggleCh}
          onUpdate={onUpdate} 
          onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
         <TodoCreate insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}
