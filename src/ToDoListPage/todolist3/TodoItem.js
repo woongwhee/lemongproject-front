@@ -2,6 +2,9 @@ import React , {useState, useEffect} from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete, MdCreate, MdOutlineCreate, MdClear } from 'react-icons/md';
 import { GiOrangeSlice }  from "react-icons/gi";
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import moveMark  from '../../reducer/mark';
 
 const Remove = styled.div`
   display: flex;
@@ -90,15 +93,14 @@ const Text = styled.div`
 `;
 
 function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
+
+  const dispatch = useDispatch();
   
   //수정 모드 확인하기 위한 값
   const [edite, setEdite] = useState(false);
   
   //수정된 투두 content
   const [editeTodo, setEditeTodo] = useState(todo.todoContent);
-
-  //내일로 미루기 화면 hide
-  const [hide , setHide] = useState(false);
 
   //수정버튼을 눌렀을 때 input창으로 변환
   const onClickEdite = () => {
@@ -115,12 +117,14 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
     setEditeTodo(e.target.value);
   }
 
-
+  function moveMark(){
+    dispatch({type : 'MOVE' });
+  }
 
   return (
     <TodoItemBlock>
-      {/* 완료상태 */}
-      <CheckCircle clear={todo.clear} onClick={()=>onToggle(todo.todoNo)}>
+      {/* 완료 */}
+      <CheckCircle clear={todo.clear} onClick={()=>{onToggle(todo.todoNo); moveMark();}}>
         {todo.clear && <MdDone /> }
       </CheckCircle>
 
@@ -147,13 +151,13 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
         ) : (
           <> {/* 일반적으로 투두 생성시 나오는 버튼들 */}
           <Delay>
-            <GiOrangeSlice onClick={()=>{onDelay(todo.todoNo, hide , setHide)}}/> {/* 내일로 미루기 */}
+            <GiOrangeSlice onClick={()=>{onDelay(todo.todoNo); moveMark();}} /> {/* 내일로 미루기 */}
           </Delay>
           <Update>
             <MdOutlineCreate onClick={onClickEdite}/> {/* 수정하기 버튼 */}
           </Update>
           <Remove >
-            <MdClear onClick={()=>onDel(todo.todoNo)}/> {/* 삭제버튼 */}
+            <MdClear onClick={()=>{onDel(todo.todoNo); moveMark();}}/> {/* 삭제버튼 */}
           </Remove>
           </>
         )
