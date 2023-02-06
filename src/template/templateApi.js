@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-    API_URL, REVIEW_INSERT,
+    REVIEW_INSERT,
     TEMPLATE_DETAIL,
     TEMPLATE_LIST,
     TODO_DETAIL,

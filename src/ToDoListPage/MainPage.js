@@ -8,6 +8,8 @@ import Profile from "./profile/Profile";
 import Calendar from './calendar/Calendar';
 //메뉴바 컴포넌트
 import Menubar2 from "./menubar/Menubar2";
+import {Button} from "@mui/material";
+import {useLoginDispatch} from "../Member/LoginContext";
 
 // import btnLogo from '../mypage/image/menu1.png';
 
@@ -19,6 +21,24 @@ import Menubar2 from "./menubar/Menubar2";
 // npm i react-icons styled-components
 
 
+function LogoutButton() {
+    const dispatch= useLoginDispatch();
+    const logout=()=>{
+        dispatch({
+            type:"logout",
+            userNo:1
+        });
+    }
+
+
+    return (
+        <Button onClick={logout}>
+            로그아웃
+        </Button>
+
+    );
+}
+
 function MainPage() {
     // Apikey를 환경변수를 이용해 숨기기.
     const apiKey = process.env.REACT_APP_CAL_API_KEY;
@@ -29,13 +49,13 @@ function MainPage() {
     return(
 
         <div className="outer">
+            <LogoutButton></LogoutButton>
             {/* 캘린더 영역 */}
             <div className="outer_date">
                 <Profile/>
                 <br/><br/>
                 <Calendar/>
             </div>
-
             {/*메인menubar */}
           <Menubar2/>
             {/*사이드바 영역 */}

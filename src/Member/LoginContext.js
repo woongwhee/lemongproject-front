@@ -10,6 +10,10 @@ function loginReducer(state, action) {
         case 'login':
             return action.payload;
         case 'unLogin':
+            console.log(action.userNo);
+
+            return initialLogin;
+        case 'logout':
             return initialLogin;
         case 'data':
             return state.filter(todo => todo.id !== action.id);
@@ -17,12 +21,15 @@ function loginReducer(state, action) {
             return state;
     }
 }
-
+const logout=()=>{
+    axios.get("/member/logout");
+}
 // state가 undefined이면 initialState를 기본값으로 사용
 const initialLogin = [
     {
         isLogin: false,
         profile: null,
+        socialType:"NONE",
         AccessToken: null
     }
 ];

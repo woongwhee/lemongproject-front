@@ -10,11 +10,11 @@ import FindPwd from './Member/FindPwd';
 import KakaoLogin from './Member/KakaoLogin';
 import reducer from "./ToDoListPage/reducer";
 import {LoginProvider} from "./Member/LoginContext";
-const store = createStore(reducer);
 import SetNick from './Member/SetNick';
 import NaverLogin from './Member/NaverLogin';
 import NaverLoginBtn from './Member/NaverLoginBtn';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const store = createStore(reducer);
 
 root.render(
     <BrowserRouter>
@@ -28,6 +28,7 @@ root.render(
       <Route path='naverBtn' element={<NaverLoginBtn />} />
       <Route path='naver' element={<NaverLogin />} />
     </Routes>
+    </Provider>
   </BrowserRouter>
 
 

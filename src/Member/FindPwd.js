@@ -6,7 +6,6 @@ import { KAKAO_LOGOUT_URL } from './KakaoLoginData';
 
 
 function FindPwd() {
-    
        // 로그아웃
        const logoutKakao = () => {
         const logout = KAKAO_LOGOUT_URL;
