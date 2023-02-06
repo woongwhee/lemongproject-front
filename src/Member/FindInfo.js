@@ -35,7 +35,7 @@ function FindInfo() {
 
 
     // 이름 공백 체크
-    const changeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const changeName = useCallback((e) => {
         const nameCurrent = e.target.value
         setUserName(nameCurrent)
 
@@ -48,7 +48,7 @@ function FindInfo() {
 
 
     // 이메일 형식 체크
-    const changeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const changeEmail = useCallback((e => {
         const emailRegex = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
         const emailCurrent = e.target.value
         setEmail(emailCurrent)
@@ -62,7 +62,7 @@ function FindInfo() {
             setEmailColor("chAlarm okAlarm")
             setIsEmail(true)
         }
-    }, [])
+    }, []));
 
 
     // 이메일 인증 버튼
@@ -82,8 +82,6 @@ function FindInfo() {
             setIsEmailBtn(false)
         }
     }
-
-
     // 인증번호 확인
     const chEmailNum = async(email, emailNum) => {
         let response = await axios.post('api/p/findPwd/chEmailNum',
@@ -101,12 +99,8 @@ function FindInfo() {
             setIsEmailNumBtn(false)
         }
     }
-
-
     // 버튼 활성화 여부
     const toNewPwd = isName && isEmail && isEmailBtn && isEmailNumBtn
-
-
     return(
         <div>
             <div className="findInfoWrap">

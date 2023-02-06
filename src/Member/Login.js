@@ -1,34 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'; // 액시오스
 import { Link } from 'react-router-dom';
 import './Login.css';
 import './Join.css';
 import { KAKAO_AUTH_URL } from './KakaoLoginData';
 import { Client_Id, Naver_CallBack_URL } from './NaverData';
+import {useLoginDispatch} from "./LoginContext";
+import profile from "../ToDoListPage/profile/Profile";
+import {useAsync} from "react-async-hook";
+
+
+
 
 function Login() {
-
     const [email, setEmail] = useState();
     const [userPwd, setUserPwd] = useState();
-
     const [noLoginMs, setNoLoginMs] = useState();
-
     const [noLoginCol, setNoLoginCol] = useState();
-
-
-    // 로그인 클릭시 데이터 전송
-    const loginClick = async(e,p) => {
+    const loginDispatch=useLoginDispatch();
+    const loginSuccess = (result) => {
+        loginDispatch({
+            type: 'login',
+            payload: {
+                isLogin: true,
+                profile:result
+            }
+        })
+    }
+    const checkLogin= async() => {
+        const res = await axios.get(`/api/p/checkLogin`);
+        if ( res.status != 200 ) throw new Error(res.statusText);
+        if (res.data.code === '2000') {
+            loginSuccess(res.data.result);
+            return res;
+        }
+    }
+    const loginClick = async (e, p) => {
         let response = await axios.post('api/p/login',
-            ({'email':e,
-              'userPwd':p
+            ({
+                'email': e,
+                'userPwd': p
             })
         )
-        if(response.data.code === '2000') {
-            console.log('성공!')
-            const userNo = response.data.result.userNo;
+        if (response.data.code === '2000') {
             alert("로그인에 성공하였습니다.")
-            sessionStorage.setItem("userNo", userNo);
-            document.location.href = "/findPwd"; // 페이지 이동(임시)
+            loginSuccess(response.data.result);
+            // sessionStorage.setItem("userNo", userNo);
+            // document.location.href = "/findPwd"; // 페이지 이동(임시)
         } else {
             console.log('실패!')
             setNoLoginMs("잘못된 회원 정보입니다. 다시 입력해주세요.")
@@ -36,6 +54,11 @@ function Login() {
         }
         
     }
+
+    const { data, error, isPending } = useAsync(checkLogin);
+    if ( isPending ) return "Loading...";
+    if ( error ) return `Something went wrong: ${error.message}`;
+        // 로그인 클릭시 데이터 전송
 
 
     // 네이버 로그인
@@ -84,11 +107,11 @@ function Login() {
 
 
 
-    
+
 
     // 화면 설계
     return (
-        
+
         <div className='loginArea'>
             <div className='logo'>
                 <img className='logo' src='LemongImg/CommonImg/LemongLogo.png' alt='lemongLogo' />
@@ -111,9 +134,9 @@ function Login() {
                         <img className='social' src='LemongImg/SocialImg/KakaoLogin.png' alt='lemongLogo' />
                     </div>
                 </a>
-                <div id="naverIdLogin" style={{display: "none"}}></div> 
+                <div id="naverIdLogin" style={{display: "none"}}></div>
                 <div>
-                    <img className='social' src='LemongImg/SocialImg/NaverLogin.png' alt='lemongLogo' 
+                    <img className='social' src='LemongImg/SocialImg/NaverLogin.png' alt='lemongLogo'
                         onClick={handleNaverClick} />
                 </div>
                 {/* id 값이 naverIdLogin인 div가 반드시 있어야 한다. */}
