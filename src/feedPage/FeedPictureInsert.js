@@ -102,7 +102,7 @@ function FeedPictureInsert(props) {
                         src={photoFilePathList[i]}
                         alt="사진이없습니다"
                         style={{width:"300px", height:"300px", clear:"both",}}
-                        draggable
+                        draggable={true}
                     />
                     </div>
                 </div>

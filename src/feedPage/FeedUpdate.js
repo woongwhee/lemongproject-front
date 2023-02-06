@@ -114,7 +114,6 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
 
                          onDragEnter={(event) => {
                              dragFunction(event);
-
                             }
                          }
                          // * onDragEnter : 드래그한 대상이 드랍영역에 다다르면 이벤트가 발생 합니다.
@@ -148,7 +147,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                             src={getFilePathList[i]}
                             alt='사진이없습니다'
                             style={{width:"300px", height:"300px"}}
-                            draggable
+                            draggable={true}
                         />
                         <span>{getPhotoNoList[i]}  :::  {[i]}</span>
                     </div>
