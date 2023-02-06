@@ -8,7 +8,7 @@ import {createStore} from "redux";
 import Join from './Member/Join';
 import FindPwd from './Member/FindPwd';
 import KakaoLogin from './Member/KakaoLogin';
-import reducer from "./ToDoListPage/reducer";
+import reducer from "./reducer";
 import {LoginProvider} from "./Member/LoginContext";
 import SetNick from './Member/SetNick';
 import NaverLogin from './Member/NaverLogin';

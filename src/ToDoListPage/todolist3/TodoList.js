@@ -12,7 +12,7 @@ const TodoListBlock = styled.div`
   overflow-y: auto;
 `;
 
-function TodoList({todoList, setTodoList, onDel, onToggle, onUpdate, onDelay}) {
+function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onDelay}) {
   
   const onDragEnd = (res) => {
     console.log("드래그")
@@ -95,18 +95,16 @@ function TodoList({todoList, setTodoList, onDel, onToggle, onUpdate, onDelay}) {
       ))}
     </TodoListBlock> */}
 
-    {/* <TodoListBlock>
-      {chTodoList && chTodoList.map(chTodo =>(
-        <>
-        <p>Challenge Todo-List</p>
+    <TodoListBlock>
+    <p>Challenge Todo-List</p>
+      {chList && chList.map(chTodo =>(
         <ChallTodoItem
           key={chTodo.todoNo}
           chTodo={chTodo}
           onToggle={onToggle}
         />
-        </>
       ))}
-    </TodoListBlock> */}
+    </TodoListBlock>
     </>
   );
 }
