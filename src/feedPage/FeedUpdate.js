@@ -8,6 +8,7 @@ import Buttonr from "react-bootstrap/Button";
 import {Button, IconButton} from "@mui/material";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import CloseButton from "react-bootstrap/CloseButton";
+import TreeItem from "@mui/lab/TreeItem";
 
 
 
@@ -250,10 +251,11 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
     }
     return (
         <>
-        <Buttonr
-            variant="outline-dark"
-            size="sm"
-            onClick={handleShow}>업데이트</Buttonr>
+        {/*<Buttonr*/}
+        {/*    variant="outline-dark"*/}
+        {/*    size="sm"*/}
+        {/*    onClick={handleShow}>업데이트</Buttonr>*/}
+        <TreeItem nodeId="3" label="업데이트" onClick={handleShow} />
         <Modal
             show={show}
             onHide={handleClose}

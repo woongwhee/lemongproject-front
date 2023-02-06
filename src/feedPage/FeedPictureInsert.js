@@ -80,12 +80,12 @@ function FeedPictureInsert(props) {
                 <div
                     key={i}
                     style={{
-                        border:"3px solid black",
+                        border:"3px solid coral",
                         marginLeft:"10px",
                         textAlign:"center",
                         float:"left",
                         width:"300px",
-                        height:"300px"
+                        height:"380px"
 
                 }}
                     onDragStart={(e)=>{
@@ -113,7 +113,10 @@ function FeedPictureInsert(props) {
                             />
                         </Row>
                         <Row>
-                            <img src={photoFilePathList[i]} alt="없는사진" style={{height:"300px"}}/>
+                            <img
+                                src={photoFilePathList[i]}
+                                alt="없는사진"
+                                style={{height:"300px"}}/>
                         </Row>
                         <Row>
                             {i+1} 번째 사진
@@ -197,38 +200,20 @@ function FeedPictureInsert(props) {
             }
         }
     }
-    // const [ photoNo, setPhotoNo] = useState();
-    // function callback(str) { // 사진 지우기 photoNo
-    //     setPhotoNo(str);
-    // }
-    //
-    // const [deleteStatus, setDeleteStatus] = useState(0)
-    // const deleteCallBack=()=>{
-    //     if(deleteStatus === 'success'){
-    //         photoList.pop();
-    //         const newList=[...photoNoList];
-    //         newList.pop();
-    //         setPhotoNoList(newList);
-    //         setPhotoNo(newList[newList.length-1]);
-    //         props.setInsertPhotoNo(photoNoList);
-    //     }
-    // }
-    // const getData = (Java) => {
-    //     setDeleteStatus(Java); // 'success'을 가져옴
-    //     deleteCallBack();
-    // }
-
     return (
         <div>
-            <Button variant="contained" component="label" startIcon={<AddAPhotoIcon/>} style={{marginBottom:"50px"}}>
+            <Button
+                variant="contained"
+                component="label"
+                startIcon={<AddAPhotoIcon/>}
+                style={{marginBottom:"10px"}}>
                 Upload
                 <input hidden type="file" accept="image/*" onChange={onChange}/>
             </Button>
-
             <div>
                 <Rendering/>
                 <div style={{clear:"both"}}></div>
-                {photoNoList}
+                {/*{photoNoList}*/}
             </div>
         </div>
     );

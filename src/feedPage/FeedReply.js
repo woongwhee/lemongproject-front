@@ -1,27 +1,38 @@
 import React, {useState} from 'react';
-import Modal from "react-modal";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import FeedReplyInsert from "./FeedReplyInsert";
-import CloseButton from 'react-bootstrap/CloseButton';
+import "./FeedReply.css"
+import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FeedDelete from "./FeedDelete";
+import FeedDetail from "./FeedDetail";
 
 function FeedReply(props) {
     let feedNo = props.feedNo;
 
-    const [isOpen, setOpen] = useState(false);
-    const openClick = () => {
-        setOpen(true);
-    };
-    const closeClick = () => {
-        setOpen(false);
-    };
-
-
+    const [show, setShow] = useState(false);
     return (
         <>
-        <button onClick={openClick}>📢</button>
-        <Modal isOpen={isOpen}ariaHideApp={false}>
-            <CloseButton onClick={closeClick} style={{float:'right'}}></CloseButton>
-            <FeedReplyInsert feedNo={feedNo}/>
-        </Modal>
+            <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
+                <FavoriteIcon />
+            </IconButton>
+            <Modal
+                show={show}
+                onHide={() => setShow(false)}
+                dialogClassName="modal-90w"
+                aria-labelledby="example-custom-modal-styling-title"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="example-custom-modal-styling-title">
+                        댓글 입니다
+                    </Modal.Title>
+                </Modal.Header>
+                    <Modal.Body>
+                        {/*<FeedReplyInsert feedNo={feedNo}/>*/}
+                        <FeedDetail feedNo={feedNo}></FeedDetail>
+                    </Modal.Body>
+            </Modal>
         </>
     );
 }
