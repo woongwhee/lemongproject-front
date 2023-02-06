@@ -1,19 +1,23 @@
 .menubar-box{
     box-sizing: border-box;
+    display: inline-block;
     border: 1px solid pink;
     width: 45%;
     height: 100%;
     float: left;
-    margin: auto;
+    /*margin: auto;*/
 }
 .menuBar{
-    /* padding: 1rem; */
+    /*padding: 1rem; */
     background: white;
     width: 100%;
     margin-bottom: 1rem;
 }
+.tabs {
+    height: 13%;
+}
 .tabs li{
-    font-size: 33px;
+    font-size: 27px;
     font-weight: bold;
     display: inline-block;
     color: #c4c4c4;
@@ -22,4 +26,8 @@
 .tabs li.active{
     color: black;
     height: 100%;
+}
+.contentArea{
+    height: 87%;
+    width: 100%;
 }

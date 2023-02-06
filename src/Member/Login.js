@@ -10,11 +10,7 @@ import {useAsync} from "react-async-hook";
 
 
 
-const checkLogin= async() => {
-    const res = await axios.get(`/api/p/checkLogin`);
-    if ( res.status != 200 ) throw new Error(res.statusText);
-    return res;
-}
+
 function Login() {
     const [email, setEmail] = useState();
     const [userPwd, setUserPwd] = useState();
@@ -26,10 +22,17 @@ function Login() {
             type: 'login',
             payload: {
                 isLogin: true,
-                profile: result.profile,
-                AccessToken: result.accessToken
+                profile:result
             }
         })
+    }
+    const checkLogin= async() => {
+        const res = await axios.get(`/api/p/checkLogin`);
+        if ( res.status != 200 ) throw new Error(res.statusText);
+        if (res.data.code === '2000') {
+            loginSuccess(res.data.result);
+            return res;
+        }
     }
     const loginClick = async (e, p) => {
         let response = await axios.post('api/p/login',

@@ -7,26 +7,32 @@ const TemplateNextIdContext = createContext(null);
 
 function templateReducer(state, action) {
     switch (action.type) {
-        case 'ROAD':
-            return state.concat(action.todo);
-        case 'TOGGLE':
-            return state.map(todo =>
-                todo.id === action.id ? { ...todo, done: !todo.done } : todo
-            );
-        case 'REMOVE':
-            return state.filter(todo => todo.id !== action.id);
+        case 'DETAIL':
+            return {index:1,templateNo:action.templateNo,list: state.list};
+        case 'ADDLIST' :
+            state.list=state.list.concat(action.list)
+            return state;
+        case 'CATEGORY' :
+            return {...initialParam,categoryNo: action.categoryNo}
+        case 'WRITE':
+            return {...state,index:2};
         default:
             return state;
     }
 }
 
 // state가 undefined이면 initialState를 기본값으로 사용
-const initialTemplate = [
-];
+const initialParam = {
+    index: 0,
+    templateNo: null,
+    categoryNo:0,
+    page:0,
+    list:[]
+};
 
-export function TodoProvider({ children }) {
-    const [state, dispatch] = useReducer(templateReducer, initialTemplate);
-    const nextId = useRef(5);
+export function TemplateProvider({ children }) {
+    const [state, dispatch] = useReducer(templateReducer, initialParam);
+    const nextId = useRef(6);
 
     return (
         <TemplateStateContext.Provider value={state}>
@@ -46,7 +52,6 @@ export function useTemplateState() {
 export function useTemplateDispatch() {
     return useContext(TemplateDispatchContext);
 }
-
 export function useTemplateNextId() {
     return useContext(TemplateNextIdContext);
 }

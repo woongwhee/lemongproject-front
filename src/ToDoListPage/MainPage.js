@@ -37,10 +37,7 @@ function MainPage() {
             </div>
 
             {/*메인menubar */}
-            <div>
-              <Menubar2/>
-            </div>
-
+          <Menubar2/>
             {/*사이드바 영역 */}
             <div className="outer_menu">
                 <div className="menuBtn">
