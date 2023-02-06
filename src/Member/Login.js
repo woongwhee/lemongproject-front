@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // 액시오스
 import { Link } from 'react-router-dom';
 import './Login.css';
 import './Join.css';
 import { KAKAO_AUTH_URL } from './KakaoLoginData';
-import NaverLoginBtn from './NaverLoginBtn';
+import { Client_Id, Naver_CallBack_URL } from './NaverData';
 
 function Login() {
 
@@ -36,6 +36,54 @@ function Login() {
         }
         
     }
+
+
+    // 네이버 로그인
+    const { naver } = window;
+    const NAVER_CLIENT_ID = Client_Id;
+    const NAVER_CALLBACK_URL = Naver_CallBack_URL;
+
+
+    const initializeNaverLogin = () => {
+        const nLogin = new naver.LoginWithNaverId({
+            clientId: NAVER_CLIENT_ID,
+            callbackUrl: NAVER_CALLBACK_URL,
+            isPopup: false,
+            loginButton: { color: 'green', type: 1, height: '47' },
+        });
+        nLogin.init();
+
+        // 프론트에서 회원정보를 가지고 올 경우?
+        // 이 내부에서 작성하면 된다.
+        // nLogin.getLoginStatus(async function(status) {
+        //     if(status) {
+        //         const userId = nLogin.user.getEmail()
+        //         const userName = nLogin.user.getName()
+        //         console.log(userId)
+        //         console.log(userName)
+        //     }
+        // })
+    }
+
+
+
+    useEffect( () => {
+        initializeNaverLogin()
+    }, [])
+
+
+    const handleNaverClick = () => {
+        const naverLoginButton = document.getElementById("naverIdLogin_loginButton");
+        if(naverLoginButton) naverLoginButton.click();
+    }
+
+
+
+
+
+
+
+
     
 
     // 화면 설계
@@ -63,12 +111,12 @@ function Login() {
                         <img className='social' src='LemongImg/SocialImg/KakaoLogin.png' alt='lemongLogo' />
                     </div>
                 </a>
-                {/* <a href="/naver">
-                    <div>
-                        <img className='social' src='LemongImg/SocialImg/NaverLogin.png' alt='lemongLogo' />
-                    </div>
-                </a> */}
-                <NaverLoginBtn/>
+                <div id="naverIdLogin" style={{display: "none"}}></div> 
+                <div>
+                    <img className='social' src='LemongImg/SocialImg/NaverLogin.png' alt='lemongLogo' 
+                        onClick={handleNaverClick} />
+                </div>
+                {/* id 값이 naverIdLogin인 div가 반드시 있어야 한다. */}
                 <br />
                 <div className='menu'>
                     <Link to="/join" style={{ textDecoration: 'none' }}>

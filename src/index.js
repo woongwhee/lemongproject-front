@@ -32,8 +32,8 @@ root.render(
       <Route path="findPwd" element={<FindPwd />} />
       <Route path="kakao" element={<KakaoLogin />} />
       <Route path="setNick" element={<SetNick />} />
-      <Route path='naverBtn' element={<NaverLoginBtn />} />
-      <Route path='naver' element={<NaverLogin />} />
+      <Route path='naver' element={<NaverLoginBtn />} />
+      <Route path='naverTest' element={<NaverLogin />} />
     </Routes>
   </BrowserRouter>
 
