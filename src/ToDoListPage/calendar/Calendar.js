@@ -31,11 +31,6 @@ function Calendar2() {
     )
   };
 
-  // const pickTodo = () => {
-  //   dispatch({type : TODO});
-  // }
-
-
   //데일리 투두 캘린더에 마크 표시
   const [mark, setMark] = useState([]);
   // 투두 변동 시 캘린더 마크 변동
@@ -70,7 +65,7 @@ function Calendar2() {
       날짜가 클릭될 때 onSelectDay 함수를 호출해주었다. 
       선택한 값은 event 값에 배열로 들어가게 된다. */}
       <Calendar 
-        onChange={selectDay} 
+        onChange={selectDay} //선택한 날짜 todolist에 보내기
         formatDay={(locale, date) => moment(date).format("DD")} //달력날짜에 '일' 삭제
         tileContent={({ date, view }) => {
           if (mark.find((x) => x === moment(date).format("YYMMDD"))) {

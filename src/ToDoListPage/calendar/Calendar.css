@@ -111,6 +111,7 @@
     font-weight: bolder;
     border-radius: 18px;
   }
+  /*오늘 날짜 hover*/
   .react-calendar__tile--now:enabled:hover,
   .react-calendar__tile--now:enabled:focus {
     background: #ffffa9;
@@ -132,7 +133,7 @@
   /*선택된 날짜 */
   .react-calendar__tile--active:enabled:hover,
   .react-calendar__tile--active:enabled:focus {
-    background: #f7ff03;
+    background:  #63097f;
   }
   .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;

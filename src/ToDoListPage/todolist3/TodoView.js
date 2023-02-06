@@ -64,7 +64,7 @@ function TodoView3(){
         userNo : 1,
         todoContent : inputValue,
         clear : false,
-        value : 1,
+        value : 0,
         todoDate :  todoDate,
         todoNo : 0
       })
@@ -77,6 +77,7 @@ function TodoView3(){
           todoContent : inputValue,
           clear : false,
           todoNo : res.data.todoNo,
+          value : res.data.value,
         }
       ])
       setInputValue('');
@@ -138,16 +139,16 @@ function TodoView3(){
     axios.get('api/todo/delayTodo', ({
       params: {todoNo : todoNo}
     })
-  ).then(function(res){
-    // setTodoList(todoList.map((todo) =>({
-    //   ...todo
-    // })));
-    setTodoList(todoList.filter(todo => todo.todoNo !== todoNo));
-    console.log("미루기 완료");
-  }).catch(function(){
-    console.log("미루기 실패")
-  })
-}
+    ).then(function(res){
+      // setTodoList(todoList.map((todo) =>({
+      //   ...todo
+      // })));
+      setTodoList(todoList.filter(todo => todo.todoNo !== todoNo));
+      console.log("미루기 완료");
+    }).catch(function(){
+      console.log("미루기 실패")
+    })
+  }
 
 
 
@@ -157,7 +158,13 @@ function TodoView3(){
         {/* <p onClick={click}>dd</p> */}
         <GlobalStyle />
         <TodoDate /> {/*todo날짜 컴포넌트*/}
-        <TodoList todoList={todoList} onDel={onDel} onToggle={onToggle} onUpdate={onUpdate} onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
+        <TodoList 
+         todoList={todoList}
+         setTodoList={setTodoList}
+         onDel={onDel} 
+         onToggle={onToggle} 
+         onUpdate={onUpdate} 
+         onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
         <TodoCreate insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}
       </TodoTemplate>
     </>
