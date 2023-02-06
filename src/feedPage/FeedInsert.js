@@ -10,18 +10,21 @@ import SendIcon from '@mui/icons-material/Send';
 
 function FeedInsert() {
 
-
-
     const [userNo, SetUserNo] = useState();
     const [content, SetContent] = useState("");
 
     const [insertPhotoNo, setInsertPhotoNo] = useState([]);
 
-    const [disable, setDisalbe] = useState(true);
+    const [disable, setDisable] = useState(true);
     const containContent = (e) => {
-        e ? setDisalbe(false) : setDisalbe(true)
+        e ? setDisable(false) : setDisable(true)
     }
+    useEffect(()=>{
+        if(content === "" || insertPhotoNo.length === 0){
+            setDisable(true);
+        }
 
+    })
     const checkContent = (insertFail) => {
         if (insertFail === "Fail") {
             return alert("내용입력은 필수 입니다.")
@@ -30,7 +33,9 @@ function FeedInsert() {
 
     return (
         <div style={{marginLeft:"100px", width:"60%"}}>
+
              <FeedPictureInsert setInsertPhotoNo={setInsertPhotoNo}></FeedPictureInsert>
+
                 <TextField
                 id="standard-multiline-flexible"
                 label="아이디 입력"
@@ -41,6 +46,7 @@ function FeedInsert() {
                     SetUserNo(e.target.value);
                 }}
                 />
+            <div>{insertPhotoNo}</div>
                     <Paper elevation={12}>
                         <TextField
                             id="outlined-multiline-static"
@@ -71,7 +77,7 @@ function FeedInsert() {
                                         window.location.reload();
                                     }).catch(function (res) {
                                         checkContent(res.data.Java);
-                                        console.log('실패함' + userNo, content)
+                                        console.log('실패함' + userNo, content, res.data.Java)
                                     })
                                 }}
                     >전송</Button>

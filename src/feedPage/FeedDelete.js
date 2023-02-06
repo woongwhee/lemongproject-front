@@ -30,7 +30,10 @@ function FeedDelete(props) {
 
     return (
         <>
-            <Button variant="danger" size="sm" onClick={handleShow}>삭제하기</Button>
+            <Button
+                variant="danger"
+                size="sm"
+                onClick={handleShow}>삭제하기</Button>
             <Modal
                 show={show}
                 onHide={handleClose}

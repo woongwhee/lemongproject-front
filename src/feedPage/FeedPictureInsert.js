@@ -9,21 +9,102 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 function FeedPictureInsert(props) {
 
+    const dragFunction = (event) => {
+        event.preventDefault(); // 페이지 이동 금지 시키기
+        event.stopPropagation(); // 상위 엘리먼트들로의 이벤트 전파 중지
+    }
+    // 사진 번호 가져오기
+    let arr = [];
+    const startClickPhoto=(t)=>{
+        console.log('시작' + t);
+        arr.push(t);
+    }
+    const finishClickPhoto=(e,t)=>{
+        // e.preventDefault();
+        // e.stopPropagation();
+        console.log('끝' + t);
+        arr.push(t);
+        console.log(arr)
+    }
+    //-----------------------------------------------------
+    // 인덱스 바꾸기
+    let arrCh = []
+    const startIndex = (e) =>{
+        console.log("시작인덱스번호 : " + photoNoList.indexOf(e) + "리스트 : " + photoNoList);
+        const newNo = photoNoList.indexOf(e)
+        arrCh.push(newNo);
+    }
+    const finishIndex = (e) => {
+        console.log("끝인덱스번호 : " + photoNoList.indexOf(e))
+        const newNo = photoNoList.indexOf(e)
+        arrCh.push(newNo)
+        console.log("바꿀인덱스 : "+arrCh);
+    }
+    const changeArray = (e) =>{
+        const photoNo = [...photoNoList]
+        photoNo.splice(arrCh[0],1,arr[1]) // 0, 1, 477
+        photoNo.splice(arrCh[1],1,arr[0]) // 1, 1, 476
+        console.log("복사본바꾼리스트 : "+photoNo);
+        setPhotoNoList(photoNo);
+    }
+    //-----------------------------------------------------
+    // 파일위치
+    let arrFile = []
+    const startPath = (t) =>{
+        arrFile.push(t)
+
+    }
+    const finalPath = (t) =>{
+        arrFile.push(t)
+        console.log(arrFile);
+    }
+    const changePath = (e) =>{
+        const filePath = [...photoFilePathList]
+        filePath.splice(arrCh[0],1,arrFile[1])
+        filePath.splice(arrCh[1],1,arrFile[0])
+        console.log(filePath);
+        setPhotoFilePathList(filePath);
+    }
+    //-----------------------------------------------------
+
     const Rendering=()=>{
         const result = [];
         for(let i = 0; i<photoFilePathList.length; i++){
             result.push(
-                <div key={i} style={{border:"3px solid black", width:"310px", float:"left", marginLeft:"10px"}}>
+                <div
+                    key={i}
+                    style={{border:"3px solid black", width:"310px", height:"380px", marginLeft:"10px",textAlign:"center",float:"left"}}
+                    onDragStart={(e)=>{
+                        startClickPhoto(photoNoList[i]);
+                        startIndex(photoNoList[i]);
+                        startPath(photoFilePathList[i]);
+                    }}
+                    onDragLeave={(event) => dragFunction(event)}
+                    onDragEnter={(event) => {dragFunction(event);}}
+                    onDrop={(event) => {
+                        finishClickPhoto(event, photoNoList[i]);
+                        finishIndex(photoNoList[i]);
+                        finalPath(photoFilePathList[i]);
+                        changeArray(event);
+                        changePath(event);
+                    }}
+                    onDragOver={(event) => { return dragFunction(event); }}
+                >
+                    <div style={{float:"right"}}>
                     <CloseButton onClick={()=>{
                         deletePhotoNoList(photoNoList[i]); // 숫자 숨겨
                         deletePhotoPathList(photoFilePathList[i]); // 위치 숨겨
                         deleteClick(photoNoList[i]);}}// 숫자 지운/>
                         />
+                    </div>
+                    <div style={{clear:"both"}}>
                     <img
                         src={photoFilePathList[i]}
                         alt="사진이없습니다"
-                        style={{width:"300px", height:"300px", clear:"both"}}
+                        style={{width:"300px", height:"300px", clear:"both",}}
+                        draggable
                     />
+                    </div>
                 </div>
             )
         }
@@ -66,8 +147,8 @@ function FeedPictureInsert(props) {
     const putPhotoNo = (PhotoNo) => {
         const newList=[...photoNoList,PhotoNo];
         setPhotoNoList(newList);
-        props.setInsertPhotoNo(newList);
     }
+    props.setInsertPhotoNo(photoNoList);
 
     const onChange = async (e) => {
         e.preventDefault();
@@ -100,12 +181,11 @@ function FeedPictureInsert(props) {
             }
         }
     }
-
     // const [ photoNo, setPhotoNo] = useState();
     // function callback(str) { // 사진 지우기 photoNo
     //     setPhotoNo(str);
     // }
-
+    //
     // const [deleteStatus, setDeleteStatus] = useState(0)
     // const deleteCallBack=()=>{
     //     if(deleteStatus === 'success'){
@@ -133,15 +213,7 @@ function FeedPictureInsert(props) {
                 <Rendering/>
                 <div style={{clear:"both"}}></div>
                 {photoNoList}
-                {/*{*/}
-                {/*    photoList?.map(photo =>*/}
-                {/*        <img alt="피드사진입니다." style={{width:"100px", height:"100px"}} src={photo?.filePath+photo.changeName} key={i++}/>*/}
-                {/*    )*/}
-                {/*}*/}
             </div>
-
-                {/*<FeedPictureDelete photoNo={photoNo} getData={getData}></FeedPictureDelete>*/}
-
         </div>
     );
 }

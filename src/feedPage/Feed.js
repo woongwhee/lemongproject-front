@@ -5,6 +5,8 @@ import FeedUpdate from "./FeedUpdate";
 import FeedDelete from "./FeedDelete";
 import FeedPhoto from "./FeedPhoto";
 import FeedLoading from "./FeedLoading";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
 
 
@@ -34,8 +36,10 @@ function Feed(props) {
                         피드시간 : {Feed.feedAt} <br/>
                     </div>
                     <div className="feed-header-right">
-                        <FeedUpdate Feed={Feed}/>
-                        <FeedDelete Feed={Feed}/>
+                        <span style={{float:"right"}}><FeedDelete Feed={Feed}/></span>
+                        <DndProvider backend={HTML5Backend}>
+                        <span style={{float:"right"}}><FeedUpdate Feed={Feed}/></span>
+                        </DndProvider>
                     </div>
                 </div>
 
