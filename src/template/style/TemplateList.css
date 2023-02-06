@@ -1,8 +1,10 @@
 .template-list{
     display: inline-block;
-    width: 100%;
-    margin: auto;
-    overflow: scroll;
+    width: 800px;
+    /*margin: auto;*/
+    margin-left: 200px;
+    /*border: 1px solid red;*/
+    /*overflow: scroll;*/
     /*grid-template-columns: repeat(2, 1fr);*/
     /*grid-template-rows: repeat(5, 1fr);*/
     /*grid-column-gap: 10px;*/
@@ -33,7 +35,7 @@
 
 .Template-Card{
     width: 45%;
-    height: 120px;
+    height: 130px;
     border:1px solid black;
     display: inline-block;
     margin-left:10px ;
@@ -44,6 +46,7 @@
 .Card-Img{
     width: 100px;
     height: 100px;
+    float: left;
 }
 .Card-Img img{
     width: 100%;
