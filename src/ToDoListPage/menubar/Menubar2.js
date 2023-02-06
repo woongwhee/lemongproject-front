@@ -21,7 +21,7 @@ class Menubar2 extends Component{
     super(props);
     
     this.state = {
-      menu: 3,
+      menu: 0,
     };
   }
 
@@ -32,7 +32,7 @@ class Menubar2 extends Component{
 
   render(){
     const pickTodo = this.props.menuList2;
-    console.log("pick me:"+ pickTodo);
+    //console.log("pick me:"+ pickTodo);
     const {other} = this.props;
 
     return(

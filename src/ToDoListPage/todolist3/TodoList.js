@@ -13,6 +13,9 @@ const TodoListBlock = styled.div`
 `;
 
 function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onDelay}) {
+
+  //const chTodos = chList[0].todoList;
+  //console.log(chTodos);
   
   const onDragEnd = (res) => {
     console.log("드래그")
@@ -67,12 +70,24 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
                     onDelay={onDelay}
                     index={todo.value}
                   />
+                  
                   </div>
                 )}
               </Draggable>
-              
+              ))}
+              {chList && chList.map(chTodos => (
+                chTodos.todoList.map(chTodo => 
+                 <>
+                  <ChallTodoItem
+                  key={chTodo.todoNo}
+                  chTodo={chTodo}
+                  onToggle={onToggle}
+                  />
+                  </>
+                )
               ))}
             {provided.placeholder} 
+
           </TodoListBlock>
         )}
         
@@ -95,16 +110,22 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
       ))}
     </TodoListBlock> */}
 
-    <TodoListBlock>
-    <p>Challenge Todo-List</p>
-      {chList && chList.map(chTodo =>(
+    {/* <TodoListBlock>
+    {chList && <p>Challenge Todo-List</p>}
+    {chList && chList.map(chTodos => (
+      chTodos.todoList.map(chTodo => 
+        <>
         <ChallTodoItem
-          key={chTodo.todoNo}
-          chTodo={chTodo}
-          onToggle={onToggle}
+        key={chTodo.todoNo}
+        chTodo={chTodo}
+        onToggle={onToggle}
         />
-      ))}
-    </TodoListBlock>
+        </>
+      )
+    ))}
+    </TodoListBlock> */}
+
+
     </>
   );
 }

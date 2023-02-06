@@ -28,12 +28,15 @@ function TodoView3(){
   //선택한 투두리스트 날짜 
   const selectDay = useSelector((state)=> state.date.selectDay);
   const todoDate = new moment(selectDay).format('YYMMDD');
-  console.log(todoDate);
+  //console.log(todoDate);
 
   //입력 내용 리스트 배열로 저장
   const [todoList, setTodoList] = useState([]);
 
   const [chList , setChList] = useState([]);
+  //chList && chList.map(chLists => chLists.todoList.map(chTodo => console.log(chTodo)));
+  //console.log(chTodos);
+  //console.log(chList.todoList);
 
   // let userNo = sessionStorage.getItem("userNo");
   //let {profile}=useLoginState();
@@ -63,9 +66,10 @@ function TodoView3(){
       const res = await axios.get(`/api/todo/daily/${todoDate}`)
       let result=codeHandler(res);
       setTodoList(result.normalList);
-      setChList(result.challengeList[0].todoList);
+      setChList(result.challengeList);
       //console.log(result.challengeList[0].todoList);
-      console.log(todoList);
+      //console.log(chList);
+      //console.log(chList.todoList);
     } catch(res){
       console.log("전송 실패")
     }
@@ -128,7 +132,7 @@ function TodoView3(){
     }
   };
 
-  //투두 일정완료
+  //투두 완료
   const onToggle = async(todoNo) => {
     axios.get('/api/todo/clearTodo', {
       params : {todoNo : todoNo}

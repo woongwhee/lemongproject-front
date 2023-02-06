@@ -53,6 +53,8 @@ function ChallTodoItem({chTodo, onToggle}) {
     dispatch({type : 'MOVE' });
   }
 
+ //console.log("chTodo: "+chTodo.todoList);
+
   return (
     <TodoItemBlock>
         {/* 완료상태 */}
