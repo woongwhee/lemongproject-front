@@ -2,42 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { MyPage } from './mypage/MyPage';
-import MyPageUpdate from './mypage/MyPageUpdate';
-import TemplateCard from './component/Template/TemplateCard';
-// import MainPage from './mainPage/MainPage'
-import MyPageProfile from './mypage/MyPageProfile';
-import MyPagePwdCheck from './mypage/MypagePwdUpdate';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import MyFeedDetails from './mypage/MyFeedDetails';
-import MainPage from "./mainPage/MainPage";
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {Provider} from "react-redux";
+import {createStore} from "redux";
+import Join from './Member/Join';
+import FindPwd from './Member/FindPwd';
+import KakaoLogin from './Member/KakaoLogin';
+import reducer from "./ToDoListPage/reducer";
+import {LoginProvider} from "./Member/LoginContext";
+const store = createStore(reducer);
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-  // <React.StrictMode>
-    // <App />
-  // </React.StrictMode>
-
- <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-          <Route path='MyFeedDetails' element={<MyFeedDetails/>}>
-
-          </Route>
-          <Route path='MyPageUpdate' element={<MyPageUpdate/>}>
-
-          </Route>
-      </Routes>
- </BrowserRouter>
-
+    <BrowserRouter>
+    <Provider store={store}>
+    <Routes>
+        <Route path="/" element={<LoginProvider><App/></LoginProvider>} />
+      <Route path="join" element={<Join />} />
+      <Route path="findPwd" element={<FindPwd />} />
+      <Route path="kakao" element={<KakaoLogin />} />
+    </Routes>
+    </Provider>
+    </BrowserRouter>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

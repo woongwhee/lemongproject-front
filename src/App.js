@@ -1,27 +1,20 @@
-// import logo from './logo.svg';
-// import './App.css';
-// import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
+import Login from './Member/Login';
+import MainPage from "./ToDoListPage/MainPage";
+import {useLoginState} from "./Member/LoginContext";
 
-// function App() {
-//   const [message, setMessage]=useState([]);
-//   useEffect(()=>{
-//     fetch("/api/hello")
-//         .then((res)=>{
-//           return res.json();
-//         })
-//         .then((data)=>{
-//             setMessage(data);
-//         });
-//   },[]);
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <ul>
-//           {message.map((v,idx)=><li key={`${idx}-${v}`}>{v}</li>)}
-//         </ul>
-//       </header>
-//     </div>
-//   );
-// }
 
-// export default App;
+function App() {
+    let {isLogin} = useLoginState();
+    // useEffect(() => {
+    //     return () => {
+    //             {isLogin ? <MainPage/> : <Login/>}
+    //     };
+    // }, [isLogin]);
+    //
+
+    return (
+        <>{isLogin ? <MainPage/> : <Login isLogin={isLogin}/>}</>)
+}
+
+export default App;
