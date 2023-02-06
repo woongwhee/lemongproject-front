@@ -6,6 +6,8 @@ import FeedPictureInsert from "./FeedPictureInsert";
 import {Paper, Stack, TextField} from "@mui/material";
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import ButtonR from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 
 function FeedInsert() {
@@ -30,23 +32,41 @@ function FeedInsert() {
             return alert("내용입력은 필수 입니다.")
         }
     }
-
+    const [fullscreen, setFullscreen] = useState(true);
+    const [show, setShow] = useState(false);
+    function handleShow(breakpoint) {
+        setFullscreen(breakpoint);
+        setShow(true);
+    }
     return (
-        <div style={{marginLeft:"100px", width:"60%"}}>
-
-             <FeedPictureInsert setInsertPhotoNo={setInsertPhotoNo}></FeedPictureInsert>
-
-                <TextField
-                id="standard-multiline-flexible"
-                label="아이디 입력"
-                multiline
-                maxRows={4}
-                variant="standard"
-                onChange={(e) => {
-                    SetUserNo(e.target.value);
-                }}
-                />
-            <div>{insertPhotoNo}</div>
+        <div className="feed-insert-body">
+            <br/><br/>
+            <ButtonR className="me-2 mb-2" onClick={(e) => handleShow(e)}>
+                피드 게시물 작성
+            </ButtonR>
+            <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>FeedInsert</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>
+                        <FeedPictureInsert setInsertPhotoNo={setInsertPhotoNo}></FeedPictureInsert>
+                    </div>
+                    <div>
+                        <TextField
+                            id="standard-multiline-flexible"
+                            label="아이디 입력"
+                            multiline
+                            maxRows={4}
+                            variant="standard"
+                            onChange={(e) => {
+                                SetUserNo(e.target.value);
+                            }}
+                        />
+                    </div>
+                    <div>
+                        {insertPhotoNo}
+                    </div>
                     <Paper elevation={12}>
                         <TextField
                             id="outlined-multiline-static"
@@ -61,7 +81,6 @@ function FeedInsert() {
                         />
                     </Paper>
                     <br/>
-
                     <Button style={{float:"right"}}
                             disabled={disable}
                             variant="outlined"
@@ -81,8 +100,12 @@ function FeedInsert() {
                                     })
                                 }}
                     >전송</Button>
+                </Modal.Body>
+            </Modal>
+        </div>
 
-            </div>
+
+
     );
 
 }

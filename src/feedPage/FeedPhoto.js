@@ -14,6 +14,7 @@ function FeedPhoto({filePathList}) {
                         className="d-block w-100"
                         src={path}
                         alt='사진이없습니다'
+                        style={{width:"100%", height:"450px"}}
                     />
                 </Carousel.Item>
             );})

@@ -4,9 +4,6 @@ import TemplateListView from "./page/TemplateListView";
 import TemplateDetailView from "./page/TemplateDetailView";
 import TemplateWriteView from "./page/TemplateWriteView";
 
-
-
-
 const TemplateSwitcher = () => {
 
     const state = useTemplateState();

@@ -5,6 +5,12 @@ import {Button, IconButton} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseButton from "react-bootstrap/CloseButton";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import Card from 'react-bootstrap/Card';
+import ButtonR from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import {CardFooter} from "reactstrap";
 
 
 function FeedPictureInsert(props) {
@@ -73,7 +79,15 @@ function FeedPictureInsert(props) {
             result.push(
                 <div
                     key={i}
-                    style={{border:"3px solid black", width:"310px", height:"380px", marginLeft:"10px",textAlign:"center",float:"left"}}
+                    style={{
+                        border:"3px solid black",
+                        marginLeft:"10px",
+                        textAlign:"center",
+                        float:"left",
+                        width:"300px",
+                        height:"300px"
+
+                }}
                     onDragStart={(e)=>{
                         startClickPhoto(photoNoList[i]);
                         startIndex(photoNoList[i]);
@@ -90,22 +104,24 @@ function FeedPictureInsert(props) {
                     }}
                     onDragOver={(event) => { return dragFunction(event); }}
                 >
-                    <div style={{float:"right"}}>
-                    <CloseButton onClick={()=>{
-                        deletePhotoNoList(photoNoList[i]); // 숫자 숨겨
-                        deletePhotoPathList(photoFilePathList[i]); // 위치 숨겨
-                        deleteClick(photoNoList[i]);}}// 숫자 지운/>
-                        />
-                    </div>
-                    <div style={{clear:"both"}}>
-                    <img
-                        src={photoFilePathList[i]}
-                        alt="사진이없습니다"
-                        style={{width:"300px", height:"300px", clear:"both",}}
-                        draggable={true}
-                    />
-                    </div>
+                    <Container>
+                        <Row>
+                            <CloseButton onClick={()=>{
+                                deletePhotoNoList(photoNoList[i]); // 숫자 숨겨
+                                deletePhotoPathList(photoFilePathList[i]); // 위치 숨겨
+                                deleteClick(photoNoList[i]);}}// 숫자 지운/>
+                            />
+                        </Row>
+                        <Row>
+                            <img src={photoFilePathList[i]} alt="없는사진" style={{height:"300px"}}/>
+                        </Row>
+                        <Row>
+                            {i+1} 번째 사진
+                        </Row>
+                    </Container>
                 </div>
+
+
             )
         }
         return result;
@@ -203,7 +219,7 @@ function FeedPictureInsert(props) {
     // }
 
     return (
-        <div style={{marginTop:"50px"}}>
+        <div>
             <Button variant="contained" component="label" startIcon={<AddAPhotoIcon/>} style={{marginBottom:"50px"}}>
                 Upload
                 <input hidden type="file" accept="image/*" onChange={onChange}/>

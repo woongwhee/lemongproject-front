@@ -33,11 +33,10 @@ function FeedBody(){
     );
     let i=0;
     return(
-        <div className="App">
-            <header className="App-header">
-                {loading ? <FeedLoading/> : testStr?.map(e=><Feed key={i++} {...e} />)}
-
-            </header>
+        <div>
+            <div style={{overflow:"scroll", height:"800px"}}>
+            {loading ? <FeedLoading/> : testStr?.map(e=><Feed key={i++} {...e} />)}
+            </div>
         </div>
     );
 }

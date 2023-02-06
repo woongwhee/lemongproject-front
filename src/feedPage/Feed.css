@@ -3,10 +3,12 @@
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
+    /*overflow: hidden;*/
+    /*border: 1px solid red;*/
 }
 
 .feed {
-    width: 500px;
+    width: 36%;
     margin-bottom: 50px;
     background-color: white;
     border-radius: 5px;

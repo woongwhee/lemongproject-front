@@ -149,7 +149,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                             style={{width:"300px", height:"300px"}}
                             draggable={true}
                         />
-                        <span>{getPhotoNoList[i]}  :::  {[i]}</span>
+                        <span>{i+1} 번째 사진</span>
                     </div>
                 );
             }
@@ -254,7 +254,6 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
             variant="outline-dark"
             size="sm"
             onClick={handleShow}>업데이트</Buttonr>
-
         <Modal
             show={show}
             onHide={handleClose}
@@ -266,15 +265,6 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                 </Modal.Title>
             </Modal.Header>
             <ModalBody>
-                {/*<FeedUpdatePhotoInsert*/}
-                {/*    photoNoList = {getPhotoNoList}*/}
-                {/*   addPhotoNoList={addPhotoNoList}*/}
-                {/*   filePathList={getFilePathList}*/}
-                {/*   addPhotoPathList={addPhotoPathList}*/}
-                {/*    newPhotoNoList={newPhotoNoList}*/}
-                {/*    newPhotoPathList={newPhotoPathList}*/}
-                {/*>*/}
-                {/*</FeedUpdatePhotoInsert>*/}
                 <div>
                     <Button variant="contained" component="label" startIcon={<AddAPhotoIcon/>} style={{marginBottom:"50px"}}>
                         Upload
@@ -285,16 +275,6 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                         onChange={onChange}
                     />
                     </Button>
-                    {/*<button onClick={*/}
-                    {/*    ()=>{*/}
-                    {/*        newPhotoNoList();*/}
-                    {/*        newPhotoPathList();*/}
-                    {/*        }}>*/}
-                    {/*    수정하기</button>*/}
-                </div>
-                <div>
-                현재피드 포토 : {getPhotoNoList} <br/><br/>
-                현재피드 파일위치 : {getFilePathList}<br/>
                 </div>
                 <div>
                     {Rendering()}
