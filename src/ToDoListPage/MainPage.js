@@ -8,8 +8,11 @@ import Profile from "./profile/Profile";
 import Calendar from './calendar/Calendar';
 //메뉴바 컴포넌트
 import Menubar2 from "./menubar/Menubar2";
+import {Button} from "@mui/material";
+import {useLoginDispatch} from "../Member/LoginContext";
+import axios from "axios";
 
-import btnLogo from '../mypage/image/menu1.png';
+// import btnLogo from '../mypage/image/menu1.png';
 
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar
@@ -19,32 +22,48 @@ import btnLogo from '../mypage/image/menu1.png';
 // npm i react-icons styled-components
 
 
+function LogoutButton() {
+    const dispatch= useLoginDispatch();
+    const logout=async ()=>{
+        await axios.get("/api/member/logout");
+
+        dispatch({
+            type:"logout"
+        });
+    }
+
+
+    return (
+        <Button onClick={logout}>
+            로그아웃
+        </Button>
+
+    );
+}
+
 function MainPage() {
     // Apikey를 환경변수를 이용해 숨기기.
     const apiKey = process.env.REACT_APP_CAL_API_KEY;
-    
+
     // 버튼 클릭 시 Menu 보이게 하기.
     const [menuClick , setMenuClick] = useState(false);
 
     return(
 
         <div className="outer">
+            <LogoutButton></LogoutButton>
             {/* 캘린더 영역 */}
             <div className="outer_date">
                 <Profile/>
                 <br/><br/>
                 <Calendar/>
             </div>
-
             {/*메인menubar */}
-            <div>
-              <Menubar2/>
-            </div>
-
+          <Menubar2/>
             {/*사이드바 영역 */}
             <div className="outer_menu">
                 <div className="menuBtn">
-                    <button className="mybtn1" style={{backgroundImage: `url(${btnLogo})`}}
+                    <button className="mybtn1"
                         onClick={() => setMenuClick((!menuClick))}></button>
                     {/* <button className="mybtn1" style={{backgroundImage: `url(${plusLogo})` , height}}></button> */}
                 </div>

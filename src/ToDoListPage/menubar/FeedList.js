@@ -1,9 +1,10 @@
 import { Component } from "react";
 import React from 'react'
+import FeedMenu from "../../feedPage/FeedMenu";
 
 function FeedList() {
   return (
-    <div>FeedList</div>
+    <FeedMenu></FeedMenu>
   )
 }
 

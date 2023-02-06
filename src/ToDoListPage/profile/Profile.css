@@ -40,6 +40,11 @@
     width: 100%;
     background-color: rgb(16, 160, 52);
 }
+.pro-pic img{
+    height: 95%;
+    width: 95%;
+    border-radius: 10px;
+}
 hr{
     border: 1px solid black;
 

@@ -32,9 +32,10 @@ const TasksLeft = styled.div`
 
 function TodoDate() {
 
+  // const selectDay = useSelector((state) => state.selectDay)
   const selectDay = useSelector((state) => state.date.selectDay)
   //console.log(selectDay);
- 
+
 
   return (
     <TodoHeadBlock>

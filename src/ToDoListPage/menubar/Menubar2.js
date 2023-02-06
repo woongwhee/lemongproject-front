@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import './Menubar2.css';
 import FeedList from "./FeedList";
 import ChallengeList from "./ChallengeList";
-import TemplateList from "./TemplateList";
+import TemplateView from "./TemplateView";
 import TodoView3 from "../todolist3/TodoView";
 
 import { connect } from 'react-redux';
@@ -12,8 +12,8 @@ const menuList = {
   0: <TodoView3 />,
   1: <FeedList />,
   2: <ChallengeList />,
-  3: <TemplateList />,
-};
+  3: <TemplateView />
+}
 
 
 class Menubar2 extends Component{
@@ -21,7 +21,7 @@ class Menubar2 extends Component{
     super(props);
     
     this.state = {
-      menu: 0,
+      menu: 3,
     };
   }
 

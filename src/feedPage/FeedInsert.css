@@ -1,0 +1,12 @@
+.feed-insert{
+    display: flex;
+}
+.feed-insert-body{
+    height: 620px;
+    border-radius: 6px;
+    border: 2px solid black;
+}
+
+.feed-insert-button{
+    float: right;
+}

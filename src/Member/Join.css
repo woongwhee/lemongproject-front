@@ -1,0 +1,155 @@
+.JoinArea {
+    /* border: 3px solid #ba99c396; */
+    /* box-shadow: 0px 0px 5px 5px #ba99c396; */
+    box-sizing: border-box;
+    width: 25rem;
+    height: 40rem;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+}
+
+.logo {
+    width: 80%;
+    box-sizing: border-box;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    /* border: 1px solid black; */
+}
+
+.intro {
+    text-align: center;
+    color: #BA99C3;
+    /* border: 1px solid black; */
+    margin-top: 0px;
+}
+
+.profInput {
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+    margin: auto;
+    text-align: center;
+}
+
+.chAlarm {
+    text-align: left;
+    margin-left: 1rem;
+    box-sizing: border-box;
+    margin-top: 2px;
+    font-size: 11px;
+}
+
+.noAlarm {
+    color: red;
+}
+
+.okAlarm {
+    color: green;
+}
+
+/* 여기 꼭 지우기 */
+div {
+    /* border: 1px solid black; */
+}
+
+.profInput div {
+    margin: 20px;
+    padding: 0px;
+}
+
+.profInput div:first-child {
+    margin-top: 0px;
+}
+
+.profInput input {
+    width: 20rem;
+    height: 2.5rem;
+    border: 1.8px solid #BA99C3;
+    padding-left: 15px;
+}
+
+.nickInput>input {
+    position: relative;
+}
+
+.emailInput>input {
+    position: relative;
+}
+
+.emailNumInput>input {
+    position: relative;
+}
+
+.joinBtn {
+    margin: auto;
+    text-align: center;
+}
+
+.joinBtn>button {
+    /* background-color: #ba99c3a3; */
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    width: 17.5rem;
+    height: 2.5rem;
+    border: 1px solid #BA99C3;
+    border-radius: 5px;
+}
+
+.joinBtn>button:hover {
+    cursor: pointer;
+    /* background-color: #BA99C3; */
+}
+
+.joinBtn>button:disabled {
+    background-color: #ba99c383;
+}
+
+.joinBtn>button:enabled {
+    background-color: #BA99C3;
+}
+
+
+
+
+
+
+
+
+
+
+/* 체크 버튼 */
+/* relative로 이미지 완전 확정되고 위치 고정시키기 */
+.chBtn {
+    background-color: #ffff00;
+    border: 0.5px solid gray;
+    width: 5.5rem;
+    height: 2rem;
+    border-radius: 15px;
+    position: absolute;
+}
+
+.chBtn:hover {
+    cursor: pointer;
+}
+
+.nickBtn {
+    top: 13.5rem;
+    right: 2.5rem;
+}
+
+.eBtn {
+    top: 26rem;
+    right: 2.5rem;
+}
+
+.enBtn {
+    top: 30.2rem;
+    right: 2.5rem;
+}
+

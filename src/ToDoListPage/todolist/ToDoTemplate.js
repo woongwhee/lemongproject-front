@@ -22,5 +22,5 @@ const TodoTemplateBlock = styled.div `
 function TodoTemplate({ children }) {
     return <TodoTemplateBlock>{children}</TodoTemplateBlock>
 }
- 
+
 export default TodoTemplate;
