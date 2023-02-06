@@ -90,8 +90,8 @@ function AcceptFollowCount(){
     //      </div>
     //     </div>
     // </div>
-    <div className="followCount">
-            <span data-bs-toggle="modal" data-bs-target="#exampleModal1" onClick={ShowAcceptFollower} style={{fontSize:'30px' , marginLeft:'430px'}}>{AcceptCount?.count}</span>
+    <div className="followCount" style={{marginTop:'-54px'}}>
+            <span data-bs-toggle="modal" data-bs-target="#exampleModal1" onClick={ShowAcceptFollower} style={{fontSize:'27px' , marginLeft:'415px' , fontFamily:'Quicksand-Regular'}}><b>{AcceptCount?.count}</b></span>
             <div className="App">
             <div class="container p-5">
             

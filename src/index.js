@@ -12,6 +12,7 @@ import {MyPage} from './mypage/MyPage';
 import MyPageUpdate from './mypage/MyPageUpdate';
 
 import ChallengeRoomCreate from './challengeChat/challengeRoomCreate';
+import ChallengeChatRoom from './challengeChat/challengeChatRoom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -30,6 +31,8 @@ root.render(
       <Route path="ChallengeRoomCreate" element={<ChallengeRoomCreate />}/>
     </Routes>
   </BrowserRouter>
+
+  // <ChallengeChatRoom/>
 
 
   // 페이지 자체가 이동하는 코드

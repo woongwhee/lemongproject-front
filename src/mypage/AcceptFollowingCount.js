@@ -89,7 +89,7 @@ function AcceptFollowingCount(){
     //     </div>
     // </div>
     <div className="followCount">
-            <span data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={ShowAcceptFollowing}><p style={{fontSize:'30px' , marginLeft : '230px' , marginTop:'-140px'}}>{AcceptFollowingCount?.count}</p></span>
+            <span data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={ShowAcceptFollowing}><p style={{fontSize:'27px' , marginLeft : '255px' , marginTop:'-137px' , fontFamily:'Quicksand-Regular'}}><b>{AcceptFollowingCount?.count}</b></p></span>
             <div className="App">
             <div class="container p-5">
             

@@ -67,8 +67,8 @@ function MyFollowCount(){
     let i = 0;
 
     return(
-        <div className="followCount">
-            <span data-bs-toggle="modal" data-bs-target="#exampleModal1" onClick={ShowMyFollower} style={{fontSize:'30px' , marginLeft:'430px'}}>{myfollow?.count}</span>
+        <div className="followCount" style={{marginTop:'-54px'}}>
+            <span data-bs-toggle="modal" data-bs-target="#exampleModal1" onClick={ShowMyFollower} style={{fontSize:'27px' , marginLeft:'415px' , fontFamily:'Quicksand-Regular'}}><b>{myfollow?.count}</b></span>
             <div className="App">
             <div class="container p-5">
             

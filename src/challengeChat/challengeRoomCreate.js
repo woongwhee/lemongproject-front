@@ -2,8 +2,9 @@ import React , {useState , useEffect} from "react";
 import axios from "axios";
 
 import cImage from'./image/물통.jpg';
-import ChallengeChatRoom from "./challengeChatRoom";
-
+// import ChallengeChatRoom from "./challengeChatRoom";
+import Chat from "./testChating";
+import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 import './challenge.css';
 
 // 날짜 포맷
@@ -44,9 +45,10 @@ function ChallengeRoomCreate(){
 
     return(
         <div className="App">
+         <ChallengeChatRoom/>
         <div class="container p-5">
             
-             <div class="btn btn-outline-dark" style={{width:'850px' , height:'300px' , borderRadius:'0'}} data-bs-toggle="modal" data-bs-target={"#exampleModalChallenge"}>
+             <div class="btn btn-outline-dark" style={{width:'850px' , height:'300px' , borderRadius:'0' , position:'absolute'}} data-bs-toggle="modal" data-bs-target={"#exampleModalChallenge"}>
                 <div className="thum">
                 <br/><br/>
                 <h1 style={{float:'left'}}><b>{challengeData?.challengeTitle}</b></h1> <br/><br/><br/> 
@@ -89,7 +91,8 @@ function ChallengeRoomCreate(){
                                     </div>
                                 </div>
                                 <div className="outer_2">
-                                    <ChallengeChatRoom challengeData={challengeData}/>
+                                    {/* <ChallengeChatRoom challengeData={challengeData}/> */}
+                                    <Chat/>
                                 </div>
                             </div>
                          </div>

@@ -45,10 +45,11 @@ function MyPageProfile(props){
     )
 
     return(
-        <div className="outer_proUpdate">
+        <div>
+            <div className="outer_proUpdate">
                 <div className="outer_myProUpdate">
                     <p>마이페이지 프로필 업데이트</p>
-                    <img src={saveFilePath+myprofile?.photo?.changeName} style={{marginLeft:'150px'}} className="profileImg"></img>
+                    <img src={saveFilePath+myprofile?.photo?.changeName} style={{marginLeft:'100px'}} className="profileImg"></img>
                     
                 </div>
                     <ProFileData userNo={userNo}/>
@@ -69,6 +70,8 @@ function MyPageProfile(props){
                     <p>핸드폰 번호: </p>
                 </div>
             </div>
+        </div>
+        
     );
 };
 

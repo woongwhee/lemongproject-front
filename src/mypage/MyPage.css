@@ -1,28 +1,29 @@
 .outer{
     border: 1px solid black;
-    width: 1900px;
+    width: 1500px;
     height: 1000px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 0px;
+    margin-left: 430px;
 }
 .outer_date{
     border: 1px solid red;
-    width: 33%;
+    width: 43%;
     height: 100%;
     float: left;
 }
 .outer_pro{
     border: 1px solid blue;
-    width: 45%;
+    width: 56.4%;
     height: 100%;
     float: left;
 }
-.outer_menu{
+/* .outer_menu{
     border: 1px solid green;
     width: 21.4%;
     height: 100%;
     float: right;
-}
+} */
 .outer_MyPro{
     border: 1px solid sienna;
     width: 85%;
@@ -33,21 +34,21 @@
 .outer_Feed{
     border: 1px solid springgreen;
     width: 85%;
-    height: 65%;
+    height: 67%;
     margin: auto;
     margin-top: 0px;
 }
 .outer_Chall{
     border: 1px solid violet;
     width: 85%;
-    height: 65%;
+    height: 67%;
     margin: auto;
     margin-top: 0px;
 }
 .outer_Temp{
     border: 1px solid tomato;
     width: 85%;
-    height: 65%;
+    height: 67%;
     margin: auto;
     margin-top: 0px;
 }
@@ -113,37 +114,37 @@
     background-color: yellow;
 }
 .outer_proimg{
-    border: 1px solid cornflowerblue;
+    /* border: 1px solid cornflowerblue; */
     width: 30%;
     height: 100%;
-    background-color: chartreuse;
+    /* background-color: chartreuse; */
 }
 .outer_id{
-    border: 1px solid thistle;
+    /* border: 1px solid thistle; */
     width: 69%;
     height: 20%;
     float: right;
     box-sizing: border-box;
     margin-top: -265px;
-    background-color: cadetblue;
+    /* background-color: cadetblue; */
 }
 .outer_fall{
-    border: 1px solid skyblue;
+    /* border: 1px solid skyblue; */
     width: 69%;
     height: 20%;
     float: right;
     margin-top: -216px;
     box-sizing: border-box;
-    background-color: coral;
+    /* background-color: coral; */
 }
 .outer_content{
-    border: 1px solid thistle;
+    /* border: 1px solid thistle; */
     width: 69%;
     height: 37%;
     float: right;
-    margin-top: -100px;
+    margin-top: -150px;
     box-sizing: border-box;
-    background-color: darkcyan;
+    /* background-color: darkcyan; */
 }
 .outer_feedThum{
     border: 1px solid tomato;
@@ -193,8 +194,8 @@
     height: 50px;
 }
 .searchbtn{
-    width: 30%;
-    height: 51.5px;
+    width: 29.7%;
+    height: 50px;
 }
 .searchUserList{
     border: 1px solid tomato;
@@ -204,19 +205,67 @@
     margin-top: 7px;
 }
 .followAcceptList{
-    border: 1px solid tomato;
-    width: 95%;
-    height: 610px;
-    margin-left: 10px;
-    margin-top: 7px;
+    /* border: 1px solid palevioletred; */
+    width: 100%;
+    height: 70px;
+    margin-top: 5px;
+    float: left;
 }
 .sUserList{
-    border: 1px solid palevioletred;
+    /* border: 1px solid palevioletred; */
+    background-color: #ffffff;
+    background-color: rgba(206, 191, 191, 0.13);
     width: 100%;
+    height: 70px;
     margin-top: 5px;
+    float: left;
 }
 .followsize{
-    border: 1px solid violet;
+    /* border: 1px solid violet; */
     width: 100%;
     height: 40px;
+}
+#serchOuter:hover {
+    letter-spacing: 0.3px;
+    transform: scale(0.99);
+    box-shadow: -5px 0px 25px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 1.5s;
+}
+
+#alerthOuter:hover {
+    letter-spacing: 0.3px;
+    transform: scale(0.99);
+    box-shadow: -5px 0px 25px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 1.5s;
+}
+
+#alerthOuter{
+    font-weight: bold;
+    text-align: center;
+    background-color: #ffffff;
+    background-color: rgba(203, 203, 203, 0.14);
+}
+
+#serchOuter{
+    font-weight: bold;
+    text-align: center;
+    background-color: #ffffff;
+    background-color: rgba(203, 203, 203, 0.14);
+}
+#searchbbbar{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background-color: #ffffff;
+    background-color: rgba(241, 240, 240, 0.077); 
+    margin-left: -20px;
+    margin-top: 10px;
+    background-color:transparent;
+    outline: none;
+}
+.nickFont{
+    font-size: 30px;
+    font-family: 'SourceSansPro-Light';
 }

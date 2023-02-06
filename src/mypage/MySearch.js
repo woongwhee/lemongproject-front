@@ -2,6 +2,9 @@ import React , {useState , useEffect} from "react";
 import { Component } from "react";
 import axios from "axios";
 
+
+import { CiLocationArrow1 } from "react-icons/ci";
+
 import './MyPage.css';
 import SearchUserList from "./SearchUserList";
 
@@ -59,14 +62,17 @@ function MySearch(props){
 
     let i = 0;
     return(
-        <div className="outer_req1">
-            <form id="searchForm" name="searchForm" onSubmit={handleSubmit}>
+        <div id="serchOuter" style={{width:'20%' , marginLeft:'-15px' , height:'1000px' , marginTop:'-16px' , position:'absolute'}}>
+        {/* // <div className="outer_req1"> */}
+            <form id="searchForm" name="searchForm" onSubmit={handleSubmit}> 
                 <div className="outer_searchBtn">
-                    <input type="search" name="searcValue" className="searchbar" placeholder="아이디를 입력해주세요." onChange={SearchValHandle}></input>
-                        <button type="submit" className="searchbtn" onClick={SerchUser}>검색</button>
+                    <input type="search" name="searcValue" className="searchbar" placeholder="아이디를 입력해주세요." onChange={SearchValHandle}
+                    id="searchbbbar"></input>
+                        <CiLocationArrow1 type="submit" className="searchbtn" onClick={SerchUser} style={{width:'30px' , marginLeft:'30px' , marginTop:'10px'}}>검색</CiLocationArrow1>
                     <SearchUserList userList={userList}/>
                 </div>
             </form>
+        {/* // </div> */}
         </div>
     )
 }

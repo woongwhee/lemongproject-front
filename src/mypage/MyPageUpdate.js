@@ -10,6 +10,7 @@ import axios from "axios";
 import MyPageProfile from "./MyPageProfile";
 import MyPagePwdCheck from "./MypagePwdUpdate";
 import MyDelete from "./MyDelete";
+import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 
 import { BsFillBrushFill , BsCheckLg } from "react-icons/bs";
 
@@ -149,7 +150,8 @@ function MyPageUpdate(){
 
     return(
         <div>
-            <form className="outer" >
+            <ChallengeChatRoom/>
+            <form className="outer" style={{position:'absolute'}}>
 
                 <MyPageProfile myprofile={myprofile}/>    
                 <div className="outer_myContent">
@@ -177,8 +179,8 @@ function MyPageUpdate(){
                         {showCheckNick()}
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="button" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'0' , width:'100px'}} onClick={MyPageNickCheck}>체크</button>&nbsp;
-                    <button type="submit" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'0' , width:'100px'}} onClick={updateMyNickName}>변경</button>
+                    <button type="button" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'0' , width:'70px'}} onClick={MyPageNickCheck}>체크</button>&nbsp;
+                    <button type="submit" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'0' , width:'70px'}} onClick={updateMyNickName}>변경</button>
 
                     <br/><br/><br/>
                         <MyPagePwdCheck/>
