@@ -34,16 +34,27 @@ function TodoView3(){
 
   //투두리스트 가져오기(get요청)
   //비동기처리를 해야하므로 async/await 구문을 통해서 처리합니다.
+  // const fetchTodo = async() => {
+  //   try{
+  //     const res = await axios.get("/api/todo/getTodo" , {
+  //       params : {todoDate : todoDate,
+  //                 userNo : 1},
+  //     });
+  //     console.log('전송 성공');
+  //     setTodoList(res.data);
+  //   } catch(res){
+  //     console.log("전송 실패")
+  //   }
+  // }
+
   const fetchTodo = async() => {
     try{
-      const res = await axios.get("/api/todo/getTodo" , {
-        params : {todoDate : todoDate,
-                  userNo : 1},
+      const res = await axios.get("/api/todo/daily" , {
+        params : {todoDate : selectDay,
+                  loginUser : 1},
       });
       console.log('전송 성공');
       setTodoList(res.data);
-      //setTodoList(res.data.todo)
-      //setChTodoList(res.date.chall)
     } catch(res){
       console.log("전송 실패")
     }
