@@ -11,6 +11,9 @@ import KakaoLogin from './Member/KakaoLogin';
 import reducer from "./ToDoListPage/reducer";
 import {LoginProvider} from "./Member/LoginContext";
 const store = createStore(reducer);
+import SetNick from './Member/SetNick';
+import NaverLogin from './Member/NaverLogin';
+import NaverLoginBtn from './Member/NaverLoginBtn';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -21,7 +24,11 @@ root.render(
       <Route path="join" element={<Join />} />
       <Route path="findPwd" element={<FindPwd />} />
       <Route path="kakao" element={<KakaoLogin />} />
+      <Route path="setNick" element={<SetNick />} />
+      <Route path='naverBtn' element={<NaverLoginBtn />} />
+      <Route path='naver' element={<NaverLogin />} />
     </Routes>
-    </Provider>
-    </BrowserRouter>
+  </BrowserRouter>
+
+
 );

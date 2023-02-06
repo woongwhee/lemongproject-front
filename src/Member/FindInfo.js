@@ -3,8 +3,8 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
 
-import '../styles/FindInfo.css'
-import '../styles/Join.css'
+import './FindInfo.css'
+import './Join.css'
 
 
 function FindInfo() {
