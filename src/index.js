@@ -13,9 +13,10 @@ import {LoginProvider} from "./Member/LoginContext";
 import SetNick from './Member/SetNick';
 import NaverLogin from './Member/NaverLogin';
 import NaverLoginBtn from './Member/NaverLoginBtn';
+import 'bootstrap/dist/css/bootstrap.css';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = createStore(reducer);
-
 root.render(
     <BrowserRouter>
     <Provider store={store}>

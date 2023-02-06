@@ -6,13 +6,6 @@ import {useLoginState} from "./Member/LoginContext";
 
 function App() {
     let {isLogin} = useLoginState();
-    // useEffect(() => {
-    //     return () => {
-    //             {isLogin ? <MainPage/> : <Login/>}
-    //     };
-    // }, [isLogin]);
-    //
-
     return (
         <>{isLogin ? <MainPage/> : <Login isLogin={isLogin}/>}</>)
 }
