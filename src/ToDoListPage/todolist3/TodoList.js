@@ -12,35 +12,36 @@ const TodoListBlock = styled.div`
   overflow-y: auto;
 `;
 
-function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, onUpdate, onDelay}) {
+function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onDelay}) {
 
   //const chTodos = chList[0].todoList;
   //console.log(chTodos);
   let arr = [];
   const onDragStart = () => {
-    arr.push(todoList);
-    // console.log("기존리스트"+arr);
+    todoList.map(todo => arr.push(todo.todoNo));
+    console.log("추가 전"+arr);
   }
   
   const onDragEnd = (res) => {
-    console.log(res);
+    //console.log(res);
     if (!res.destination) return;
     
     const dndTodoList = [...todoList];
     const [reorderedItem] = dndTodoList.splice(res.source.index, 1);
     dndTodoList.splice(res.destination.index, 0, reorderedItem);
     setTodoList(dndTodoList);
-
     //console.log(dndTodoList);
-    arr.push(dndTodoList);
-    //console.log("추가 후"+arr);
+
+    dndTodoList.map(todo => arr.push(todo.todoNo));
+    //arr.push(dndTodoList);
+    console.log("추가 후"+arr);
 
     axios.post('api/todo/dndTodo', {
       originArr : arr[0],
       changeArr : arr[1],
-    }).then(function(){
+    }).then(function(res){
       //setTodoList(dndTodoList);
-      arr = [];
+      console.log(res.data);
       console.log("최종"+arr);
       console.log("dnd 완료");
     }).catch(function(){
@@ -52,12 +53,12 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
   return ( 
     <>
     <p>Daily Todo-List</p>
-    <DragDropContext onDragStart={(res)=> onDragStart(res)} onDragEnd={onDragEnd} >
+    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd} >
       <Droppable droppableId="drop-area">
         {provided => (
           <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}>
             {todoList && todoList.map((todo, index) =>(
-              <Draggable draggableId={String(todo.todoNo)} index={todo.value} key={todo.todoNo}>
+              <Draggable draggableId={String(todo.todoNo)} index={index} key={todo.todoNo}>
                 {provided => (
                   <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                   <TodoItem
@@ -67,7 +68,7 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
                     onToggle={onToggle}
                     onUpdate={onUpdate}
                     onDelay={onDelay}
-                    index={todo.value}
+                    index={index}
                   />
                   </div>
                 )}
@@ -80,7 +81,6 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
                   <ChallTodoItem
                   key={chTodo.todoNo}
                   chTodo={chTodo}
-                  onToggleCh={onToggleCh}
                   />
                 )
               ))}

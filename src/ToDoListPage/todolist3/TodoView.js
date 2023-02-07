@@ -69,6 +69,7 @@ function TodoView3(){
       let result=codeHandler(res);
       setTodoList(result.normalList);
       setChList(result.challengeList);
+      console.log(res.data.result.normalList);
       //console.log(result.challengeList[0].todoList);
       //console.log(chList);
       //console.log(chList.todoList);
