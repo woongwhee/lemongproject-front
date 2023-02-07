@@ -21,6 +21,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TreeItem from "@mui/lab/TreeItem";
 import TreeView from '@mui/lab/TreeView';
 import FeedReply from "./FeedReply";
+import "./Feed.css"
 
 
 const ExpandMore = styled((props) => {
@@ -50,7 +51,8 @@ export default function RecipeReviewCard(props) {
     const [focusDisabledItems, setFocusDisabledItems] = React.useState(false);
 
     return (
-        <Card sx={{ maxWidth: 345, border:"1px solid gray" }}>
+        <div className="feed-container">
+        <Card sx={{ maxWidth: 400,minWidth:400 ,border:"1px solid gray"}}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -134,5 +136,6 @@ export default function RecipeReviewCard(props) {
                 </CardContent>
             </Collapse>
         </Card>
+        </div>
     );
 }
