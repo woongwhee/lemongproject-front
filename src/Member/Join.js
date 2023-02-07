@@ -11,7 +11,6 @@ function Join() {
     const [reUserPwd, setReUserPwd] = useState();
     const [email, setEmail] = useState();
     const [emailNum, setEmailNum] = useState();
-    const [socialType, setSocialType] = useState("NONE");
 
     // 알림 색깔
     const [errorColor, setErrorColor] = useState();
@@ -179,13 +178,12 @@ function Join() {
 
 
     // 회원가입 클릭시 데이터 전송
-    const joinClick = async(name, nick, pwd, email, socialType) => {
+    const joinClick = async(name, nick, pwd, email) => {
         let response = await axios.post('api/p/join',
             ({'userName':name,
               'nickName':nick,
               'userPwd':pwd,
               'email':email,
-              'socialType':socialType
             })
         )
         if(response.data.code === '2000') {
@@ -262,7 +260,7 @@ function Join() {
                 </div>
                 <br />
                 <div className="joinBtn">
-                    <button onClick={() => {joinClick(userName, nickName, userPwd, email, socialType);}} disabled={!isJoinBtn}>
+                    <button onClick={() => {joinClick(userName, nickName, userPwd, email);}} disabled={!isJoinBtn}>
                         회 원 가 입
                     </button>
                 </div>

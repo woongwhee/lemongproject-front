@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // 액시오스
 import { Link } from 'react-router-dom';
 import './Login.css';
@@ -13,6 +13,13 @@ import {useAsync} from "react-async-hook";
 
 
 function Login() {
+
+    useEffect( () => {
+        initializeNaverLogin()
+    }, [])
+
+
+
     const [email, setEmail] = useState();
     const [userPwd, setUserPwd] = useState();
     const [noLoginMs, setNoLoginMs] = useState();
@@ -44,9 +51,8 @@ function Login() {
         )
         if (response.data.code === '2000') {
             alert("로그인에 성공하였습니다.")
+            console.log(response.data.result)
             loginSuccess(response.data.result);
-            // sessionStorage.setItem("userNo", userNo);
-            // document.location.href = "/findPwd"; // 페이지 이동(임시)
         } else {
             console.log('실패!')
             setNoLoginMs("잘못된 회원 정보입니다. 다시 입력해주세요.")
@@ -89,23 +95,10 @@ function Login() {
     }
 
 
-
-    useEffect( () => {
-        initializeNaverLogin()
-    }, [])
-
-
     const handleNaverClick = () => {
         const naverLoginButton = document.getElementById("naverIdLogin_loginButton");
         if(naverLoginButton) naverLoginButton.click();
     }
-
-
-
-
-
-
-
 
 
 

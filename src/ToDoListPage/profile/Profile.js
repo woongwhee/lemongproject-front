@@ -8,7 +8,7 @@ function Profile() {
 
   return (
     <div className='profile-box'>
-        <div className='pro-pic'><img className={"profile"} src={photo.filePath+"/"+photo.changeName} alt={photo.originName}/></div>
+        <div className='pro-pic'>{photo&&<img className={"profile"} src={photo.filePath+"/"+photo.changeName} alt={photo.originName}/>}</div>
         <div className='pro-nic'>{profile.nickName}</div>
         <div className='pro-post-count'>오늘할일: </div>
         <div className='pro-following-count'>팔로잉</div>

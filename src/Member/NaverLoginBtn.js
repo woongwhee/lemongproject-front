@@ -1,9 +1,28 @@
 import axios from 'axios';
 import { useEffect } from 'react';
+import {useLoginDispatch} from "./LoginContext";
 
 
 
 function NaverLoginBtn() {
+
+
+    useEffect( () => {
+        userAccessToken()
+    }, [])
+
+
+    const loginDispatch = useLoginDispatch();
+    const loginSuccess = (result) => {
+        loginDispatch({
+            type: 'login',
+            payload: {
+                isLogin: true,
+                profile: result,
+                socialType:"NAVER"
+            }
+        })
+    }
 
 
     const userAccessToken = () => {
@@ -12,8 +31,7 @@ function NaverLoginBtn() {
 
     const getToken = () => {
         const token = window.location.href.split("=")[1].split('&')[0]
-        console.log(token)
-        sessionStorage.setItem('access_Token', token)
+        // sessionStorage.setItem('access_Token', token)
         axios({
             url:'api/p/naverLogin',
             method:'GET',
@@ -21,11 +39,11 @@ function NaverLoginBtn() {
         }) .then((res) => {
             if(res.data.code === '2000') {
                 console.log('성공')
-                sessionStorage.setItem("userNo", res.data.result.userNo)
-                document.location.href = '/naverTest';
+                console.log(res.data.result)
+                document.location.href = '/';
             } else {
                 console.log('닉네임 설정하기')
-                sessionStorage.setItem("userNo", res.data.result.userNo);
+                // sessionStorage.setItem("userNo", res.data.result.userNo);
                 document.location.href="/setNick";
             }
         })
@@ -35,10 +53,6 @@ function NaverLoginBtn() {
     }
 
 
-
-    useEffect( () => {
-        userAccessToken()
-    }, [])
 
 
 
