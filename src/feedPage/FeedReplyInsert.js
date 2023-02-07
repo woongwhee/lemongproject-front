@@ -5,6 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 function FeedReplyInsert(props) {
+
     const [id, SetId] = useState();
 
     const [replyContent, SetReplyContent] = useState();
@@ -15,7 +16,7 @@ function FeedReplyInsert(props) {
     return (
         <>
         <div>
-            <FeedReplyList feedNo={feedNo}/>
+            <FeedReplyList feedNo={feedNo} />
         </div>
 
             <InputGroup className="mb-2" style={{marginTop:"30px"}}>
@@ -29,7 +30,7 @@ function FeedReplyInsert(props) {
                 />
             </InputGroup>
 
-            <div style={{marginTop:"30px"}}>피드번호 : {feedNo}</div>
+            {/*<div style={{marginTop:"30px"}}>피드번호 : {Feed.feedNo}</div>*/}
 
             <InputGroup className="mb-2" style={{marginTop:"30px"}}>
                 <InputGroup.Text id="inputGroup-sizing-default">
@@ -43,13 +44,6 @@ function FeedReplyInsert(props) {
             </InputGroup>
 
 
-        {/*아이디 : <input type="text" onChange={(e)=> {SetId(e.target.value);}} placeholder="숫자만입력"/>*/}
-        {/*    <br/>*/}
-        {/*피드번호 : {feedNo}*/}
-        {/*    <br/>*/}
-        {/*댓글내용 : <input type="text" onChange={(e)=> {SetReplyContent(e.target.value);}}/>*/}
-        {/*    <br/>*/}
-
             <Button style={{marginTop:"40px", float:"right"}} onClick={
                 () => axios.post('api/feed/insertReply',{
                     userNo:id,
@@ -59,9 +53,9 @@ function FeedReplyInsert(props) {
                     console.log(res.data)
                     SetId('');
                     SetReplyContent('');
-                    window.location.reload("/main");
+                    // window.location.reload("/main");
                 }).catch(function (){
-                    console.log('실패함 '+id,feedNo,replyContent);
+                    console.log('실패함 '+id,replyContent);
                 })
             }
         >댓글쓰기</Button>

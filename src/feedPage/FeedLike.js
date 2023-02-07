@@ -8,14 +8,15 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FeedDelete from "./FeedDelete";
 import FeedDetail from "./FeedDetail";
 
-function FeedReply({feedNo}) {
-    // let feedNo = props.feedNo;
+function FeedLike(props) {
+    let Feed = props.Feed;
 
     const [show, setShow] = useState(false);
+
     return (
         <>
             <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
-                <FavoriteIcon />댓글 {feedNo}
+                <FavoriteIcon />
             </IconButton>
             <Modal
                 show={show}
@@ -25,16 +26,16 @@ function FeedReply({feedNo}) {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">
-                        댓글 입니다
+                        좋아요
                     </Modal.Title>
                 </Modal.Header>
-                    <Modal.Body>
-                        <FeedReplyInsert feedNo={feedNo}/>
-                        {/*<FeedDetail Feed={Feed}></FeedDetail>*/}
-                    </Modal.Body>
+                <Modal.Body>
+                    {/*<FeedReplyInsert feedNo={feedNo}/>*/}
+                    <FeedDetail Feed={Feed}></FeedDetail>
+                </Modal.Body>
             </Modal>
         </>
     );
 }
 
-export default FeedReply;
+export default FeedLike;

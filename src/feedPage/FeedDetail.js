@@ -10,11 +10,17 @@ import Carousel from "react-bootstrap/Carousel";
 import FeedLoading from "./FeedLoading";
 import Feed from "./Feed1";
 import FeedDetailPhoto from "./FeedDetailPhoto";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import './FeedDetail.css'
+import FeedReplyInsert from "./FeedReplyInsert";
+
 function FeedDetail(props) {
 
     const [ testStr, setTestStr ] = useState();
 
-    const feedNo = props.feedNo;
+    const Feed = props.Feed;
 
     function callback(str) {
         setTestStr(str);
@@ -22,67 +28,29 @@ function FeedDetail(props) {
 
     useEffect(()=>{axios({
         url:'/api/feed/detailFeed',
-        params:{feedNo:feedNo}
+        params:{feedNo:Feed.feedNo}
     }).then((res)=>{
         console.log(res.data)
         callback(res.data)
         setLoading(false);
     })
     }, [])
-
-    const [id, SetId] = useState();
-
-    const [replyContent, SetReplyContent] = useState();
-
     const [loading, setLoading] = useState(true);
     let i=0;
     return (
         <>
-            <div>
-                <div style={{width:"500px", height:"800px"}}>
-                    {loading ? <FeedLoading/> : testStr?.map(e=><FeedDetailPhoto key={i++} {...e} />)}
+            <div className="container">
+                <div className="photoArea">
+                    {loading ? <FeedLoading/> : testStr?.map(e => <FeedDetailPhoto key={i++} {...e} />)}
+                </div>
+                <div className="detailRight">
+                <div className="contentArea" style={{border:"1px solid blue"}}>
+                    피드내용
+                    {Feed}
+                </div>
+                <FeedReplyInsert Feed={Feed}></FeedReplyInsert>
                 </div>
             </div>
-            <div style={{border:"1px solid black"}}>
-            <InputGroup className="mb-2" style={{marginTop:"30px"}}>
-                <InputGroup.Text id="inputGroup-sizing-default" placeholder="숫자만입력">
-                    아이디
-                </InputGroup.Text>
-                <Form.Control
-                    aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default"
-                    onChange={(e)=> {SetId(e.target.value);}}
-                />
-            </InputGroup>
-
-            <div style={{marginTop:"30px"}}>피드번호 : {feedNo}</div>
-
-            <InputGroup className="mb-2" style={{marginTop:"30px"}}>
-                <InputGroup.Text id="inputGroup-sizing-default">
-                    댓글내용
-                </InputGroup.Text>
-                <Form.Control
-                    aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default"
-                    onChange={(e)=> {SetReplyContent(e.target.value);}}
-                />
-            </InputGroup>
-            </div>
-            <Button style={{marginTop:"40px", float:"right"}} onClick={
-                () => axios.post('api/feed/insertReply',{
-                    userNo:id,
-                    feedNo:feedNo,
-                    replyContent:replyContent
-                }).then(function (res){
-                    console.log(res.data)
-                    SetId('');
-                    SetReplyContent('');
-                    window.location.reload("/main");
-                }).catch(function (){
-                    console.log('실패함 '+id,feedNo,replyContent);
-                })
-            }
-            >댓글쓰기</Button>
         </>
 
 

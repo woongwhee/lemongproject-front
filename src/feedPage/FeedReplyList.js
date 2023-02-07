@@ -3,15 +3,12 @@ import {useEffect, useState} from "react";
 import FeedReplyResultList from "./FeedReplyResultList";
 import Table from 'react-bootstrap/Table';
 
-function FeedReplyList(props){
-    const [ testStr, setTestStr ] = useState();
-
-    const feedNo = props.feedNo;
+function FeedReplyList({feedNo}){
+    const [ testStr, setTestStr ] = useState([]);
 
     function callback(str) {
         setTestStr(str);
     }
-
     useEffect(
         () => {
             axios({
@@ -21,14 +18,12 @@ function FeedReplyList(props){
                     feedNo:feedNo
                 }
             }).then((res) => {
-                callback(res.data.result);
-                console.log(res.data.result);
+                callback(res.data);
+                console.log(res.data);
+                console.log(testStr)
             })
         }, []
-    );
-
-    let i=0;
-
+    );let i=0;
     return(
         <div>
             <Table striped>
@@ -45,6 +40,7 @@ function FeedReplyList(props){
                     {testStr?.map(e=><FeedReplyResultList key={i++} {...e} feedNo={feedNo}/>)}
                 </tbody>
             </Table>
+
         </div>
         )
 
