@@ -58,9 +58,9 @@ function ChallTodoItem({chTodo, onToggleCh}) {
   return (
     <TodoItemBlock>
         {/* 완료상태 */}
-        <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
+        {/* <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
             {chTodo.clear && <MdDone /> }
-        </CheckCircle>
+        </CheckCircle> */}
 
         {/* 내용 */}
         <Text clear={chTodo.clear}>{chTodo.todoContent}</Text>

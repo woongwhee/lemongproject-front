@@ -54,7 +54,7 @@ function MainPage() {
             <LogoutButton></LogoutButton>
             {/* 캘린더 영역 */}
             <div className="outer_date">
-                <Profile/>
+                {/* <Profile/> */}
                 <br/><br/>
                 <Calendar/>
             </div>

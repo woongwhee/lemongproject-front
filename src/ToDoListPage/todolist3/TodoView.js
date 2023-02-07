@@ -33,15 +33,17 @@ function TodoView3(){
   //입력 내용 리스트 배열로 저장
   const [todoList, setTodoList] = useState([]);
 
+  //챌린지 투두리스트
   const [chList , setChList] = useState([]);
+  //const [chTodo, setChTodo] = useState([chList.map(chTodos => chTodos.todoList.map(chTodo))]);
   //chList && chList.map(chLists => chLists.todoList.map(chTodo => console.log(chTodo)));
   //console.log(chTodos);
   //console.log(chList.todoList);
 
+  //로그인 유저 정보 가져오기
   // let userNo = sessionStorage.getItem("userNo");
+  
   //let {profile}=useLoginState();
-
-
   //console.log(profile);
   
 
@@ -132,7 +134,7 @@ function TodoView3(){
     }
   };
 
-  //투두 완료
+  //데일리 투두 완료
   const onToggle = async(todoNo) => {
     axios.get('/api/todo/clearTodo', {
       params : {todoNo : todoNo}
@@ -147,23 +149,21 @@ function TodoView3(){
     })
   }
 
-    //챌린지 투두 완료
-    const onToggleCh = async(todoNo) => {
-      axios.get('/api/chTodo/clearChTodo', {
-        params : {todoNo : todoNo}
-      }).then(function(res){
-        // setChList(chList.map(chLists => 
-        //   chLists.todoList.map(chTodo =>
-        //     chTodo.todoNo === todoNo ? { ...chTodo, clear: !chTodo.clear } : chTodo
-        // )));
-        setChList(chList.map(todo =>
-          todo.todoNo === todoNo ? { ...todo, clear: !todo.clear } : todo
-        ));
-        console.log("변경 완료!");
-      }).catch(function(){
-        console.log("변경 실패!");
-      })
-    }
+  //챌린지 투두 완료
+  // const onToggleCh = async(todoNo) => {
+  //   axios.get('/api/chTodo/clearChTodo', {
+  //     params : {todoNo : todoNo}
+  //   }).then(function(res){
+  //     setChList(chList.map(chLists => 
+  //       chLists.todoList.map(chTodo =>
+  //         chTodo.todoNo === todoNo ? { ...chTodo, clear: !chTodo.clear } : chTodo
+  //     )));
+  //     console.log(chTodo);
+  //     console.log("변경 완료!");
+  //   }).catch(function(){
+  //     console.log("변경 실패!");
+  //   })
+  // }
 
   //투두 수정   
   const onUpdate = async(todoNo, editeTodo, setEdite) => {
@@ -213,7 +213,6 @@ function TodoView3(){
          chList={chList}
          onDel={onDel} 
          onToggle={onToggle} 
-         onToggleCh={onToggleCh}
          onUpdate={onUpdate} 
          onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
         <TodoCreate insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}

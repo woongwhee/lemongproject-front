@@ -50,14 +50,24 @@ function Calendar2() {
   
   useEffect(() => {
     calTodo();
+    calChTodo();
   },[moveMark])
 
 
   //챌린지 투두 캘린더에 마크 표시
   const [chMark, setChMark] = useState([]);
   //챌린지 삭제,완료시 캘린더 마크 변동
-
-
+  const calChTodo=()=>{
+    axios.get("/api/chTodo/calChTodo" 
+      
+    ).then(function(res){
+      setChMark(res.data);
+      //console.log("캘린더 데이터"+res.data);
+    }).catch(function(res){
+      console.log("오류 발생")
+      console.log(res.data);
+    })
+  }
 
   return (
     <div>
@@ -73,6 +83,15 @@ function Calendar2() {
              <>
                <div className="flex justify-center items-center absoluteDiv">
                  <div className="dot"></div>
+               </div>
+             </>
+           );
+          }
+          if (chMark.find((x) => x === moment(date).format("YYMMDD"))) {
+            return (
+             <>
+               <div className="flex justify-center items-center absoluteDiv">
+                 <div className="dot2"></div>
                </div>
              </>
            );
