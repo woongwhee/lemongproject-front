@@ -1,23 +1,49 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import FeedReplyList from "./FeedReplyList";
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-function FeedReplyInsert(props) {
+import Table from "react-bootstrap/Table";
+import FeedReplyResultList from "./FeedReplyResultList";
+import Carousel from "react-bootstrap/Carousel";
+import FeedLoading from "./FeedLoading";
+import Feed from "./Feed1";
+import FeedDetailPhoto from "./FeedDetailPhoto";
+function FeedDetail(props) {
+
+    const [ testStr, setTestStr ] = useState();
+
+    const feedNo = props.feedNo;
+
+    function callback(str) {
+        setTestStr(str);
+    }
+
+    useEffect(()=>{axios({
+        url:'/api/feed/detailFeed',
+        params:{feedNo:feedNo}
+    }).then((res)=>{
+        console.log(res.data)
+        callback(res.data)
+        setLoading(false);
+    })
+    }, [])
+
     const [id, SetId] = useState();
 
     const [replyContent, SetReplyContent] = useState();
 
-    let feedNo = props.feedNo;
-
-
+    const [loading, setLoading] = useState(true);
+    let i=0;
     return (
         <>
-        <div>
-            <FeedReplyList feedNo={feedNo}/>
-        </div>
-
+            <div>
+                <div style={{width:"500px", height:"800px"}}>
+                    {loading ? <FeedLoading/> : testStr?.map(e=><FeedDetailPhoto key={i++} {...e} />)}
+                </div>
+            </div>
+            <div style={{border:"1px solid black"}}>
             <InputGroup className="mb-2" style={{marginTop:"30px"}}>
                 <InputGroup.Text id="inputGroup-sizing-default" placeholder="숫자만입력">
                     아이디
@@ -41,15 +67,7 @@ function FeedReplyInsert(props) {
                     onChange={(e)=> {SetReplyContent(e.target.value);}}
                 />
             </InputGroup>
-
-
-        {/*아이디 : <input type="text" onChange={(e)=> {SetId(e.target.value);}} placeholder="숫자만입력"/>*/}
-        {/*    <br/>*/}
-        {/*피드번호 : {feedNo}*/}
-        {/*    <br/>*/}
-        {/*댓글내용 : <input type="text" onChange={(e)=> {SetReplyContent(e.target.value);}}/>*/}
-        {/*    <br/>*/}
-
+            </div>
             <Button style={{marginTop:"40px", float:"right"}} onClick={
                 () => axios.post('api/feed/insertReply',{
                     userNo:id,
@@ -64,11 +82,11 @@ function FeedReplyInsert(props) {
                     console.log('실패함 '+id,feedNo,replyContent);
                 })
             }
-        >댓글쓰기</Button>
+            >댓글쓰기</Button>
         </>
 
 
     );
 }
 
-export default FeedReplyInsert;
+export default FeedDetail;

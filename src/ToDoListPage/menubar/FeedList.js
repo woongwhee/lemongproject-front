@@ -1,10 +1,11 @@
 import { Component } from "react";
 import React from 'react'
 import FeedMenu from "../../feedPage/FeedMenu";
+import FeedBody from "../../feedPage/FeedBody";
 
 function FeedList() {
   return (
-    <FeedMenu></FeedMenu>
+    <FeedBody></FeedBody>
   )
 }
 

@@ -5,7 +5,7 @@ import TemplateSwitcher from "../../template/TemplateSwitcher";
 function TemplateView() {
   return (
       <TemplateProvider>
-        <TemplateSwitcher/>
+          <TemplateSwitcher/>
       </TemplateProvider>
   )
 }

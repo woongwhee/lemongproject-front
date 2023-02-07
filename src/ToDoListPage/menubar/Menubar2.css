@@ -30,4 +30,5 @@
 .contentArea{
     height: 87%;
     width: 100%;
+    border: 1px solid red;
 }

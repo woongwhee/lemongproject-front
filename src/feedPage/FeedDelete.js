@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
+import {Alert} from "@mui/lab";
+import TreeItem from "@mui/lab/TreeItem";
 
 function FeedDelete(props) {
 
@@ -14,6 +16,9 @@ function FeedDelete(props) {
 
     const feedNo = Feed.feedNo;
     // const photoNo = Feed.photoNoList[0];
+    const deleteSuccess = () => {return(<Alert variant="outlined" severity="success">
+        This is a success alert — check it out!
+    </Alert>)};
 
     const deleteFeed = () => {
             axios.post(
@@ -21,19 +26,18 @@ function FeedDelete(props) {
                     feedNo:feedNo,
                     // photoNo:photoNo
                 }).then(function (){
-                    alert('삭제성공');
+                    deleteSuccess();
                     handleClose();
                     window.location.reload("/main");
                 })
     }
-
-
     return (
         <>
-            <Button
-                variant="danger"
-                size="sm"
-                onClick={handleShow}>삭제하기</Button>
+            {/*<Button*/}
+            {/*    variant="danger"*/}
+            {/*    size="sm"*/}
+            {/*    onClick={handleShow}>삭제하기</Button>*/}
+            <TreeItem nodeId="2" label="삭제하기" onClick={handleShow}/>
             <Modal
                 show={show}
                 onHide={handleClose}

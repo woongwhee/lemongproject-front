@@ -1,8 +1,7 @@
 import TodoList from "../ToDoListPage/todolist3/TodoList";
 import ChallengeList from "../ToDoListPage/menubar/ChallengeList";
 import FeedList from "../ToDoListPage/menubar/FeedList";
-// import TemplateList from "../ToDoListPage/menubar/TemplateList";
-//
+
 // Action types
 export const OTHER = 'page/OTHER';
 export const TODO = 'page/TODO';

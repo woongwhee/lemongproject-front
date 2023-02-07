@@ -12,7 +12,8 @@ function FeedReplyResultList(props) {
             <td>{userNo}</td>
             <td>{replyContent}</td>
             <td>{replyAt}</td>
-            <td style={{cursor:"pointer"}} onClick={ () => axios.post('api/feed/deleteReply',
+            <td style={{cursor:"pointer"}}
+                onClick={ () => axios.post('api/feed/deleteReply',
                 {
                     feedNo:feedNo,
                     replyNo:replyNo
@@ -26,5 +27,4 @@ function FeedReplyResultList(props) {
 
     );
 }
-
 export default FeedReplyResultList;
