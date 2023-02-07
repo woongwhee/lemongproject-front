@@ -119,7 +119,7 @@ function MyPage() {
                 <div className="outer_pro">
                     <div className="outer_MyPro">
                         <div className="outer_proimg">
-                            <img src={saveFilePath+myprofile?.photo?.changeName} style={{marginLeft:'7px' , marginTop:'0px'}} className="profileImg"></img>
+                            <img src={myprofile?.photo?.filePath+myprofile?.photo?.changeName} style={{marginLeft:'7px' , marginTop:'0px'}} className="profileImg"></img>
                         </div>
                         <div className="outer_id">
                             <p className="nickFont" style={{marginTop:'7px'}}><b>{myprofile?.nickName}</b><img src={mark} style={{width:'25px' , height:'25px' , marginLeft:'7px' , marginTop:'-5px'}}/></p>

@@ -60,7 +60,7 @@ function ChallengeRoomCreate(){
             
              <div class="modal fade" id="exampleModalChallenge" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" style={{margin:'auto' , marginTop:'50px'}}>
-                <div class="modal-content" style={{width:'1500px' , height:'1430px' , borderRadius:'0'}}>
+                <div class="modal-content" style={{width:'1000px' , height:'1430px' , borderRadius:'0'}}>
                    <div class="modal-header">
                    <h1><b>{challengeData?.challengeTitle}</b></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

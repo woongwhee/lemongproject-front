@@ -2,7 +2,7 @@ import React , {useState , useEffect} from "react";
 import axios from "axios";
 import './challenge.css';
 
-import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiCirclePlus} from "react-icons/ci";
+import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiSquarePlus} from "react-icons/ci";
 import {Nav} from 'react-bootstrap';
 import MySearch from "../mypage/MySearch";
 import MyAlert from "../mypage/MyAlert";
@@ -44,6 +44,10 @@ function ChallengeChatRoom(props){
         window.location.href = "http://localhost:3000/ChallengeRoomCreate";
     }
 
+    function feedInsertPage(){
+        window.location.href = "http://localhost:3000/FeedInsert?userNo="+userNo; 
+    }
+
     return(
         <div class="container-fluid" style={{position:'absolute'}}>
             <div class="row">
@@ -78,9 +82,9 @@ function ChallengeChatRoom(props){
                                 </a>
                             </li>
                             <li>
-                                <a id="hbtn" href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+                                <a id="hbtn" onClick={feedInsertPage} href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
                                     {/* <i class="bi-people fs-1"></i> */}
-                                    <CiCirclePlus class="bi-house fs-1" style={{color:'black' , width:'30px' , marginLeft:'-5px'}}></CiCirclePlus>
+                                    <CiSquarePlus class="bi-house fs-1" style={{color:'black' , width:'30px' , marginLeft:'-5px'}}></CiSquarePlus>
                                 </a>
                             </li>
                             <li>

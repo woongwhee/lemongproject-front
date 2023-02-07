@@ -76,7 +76,7 @@ function MyFollowingCount(){
                    </div>
                    <div class="modal-footer">
                         {myfollowingList?.map(e => <div>
-                            <img key={i++} {...e} src={saveFilePath+e?.photo?.changeName} style={{width:'70px' , height:'70px', borderRadius:'50%' , backgroundColor:'gray' }}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'30px'}}>{e?.profile?.nickName}</span>
+                            <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'70px' , height:'70px', borderRadius:'50%' , backgroundColor:'gray' }}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'30px'}}>{e?.profile?.nickName}</span>
                             <button type="button" key={i++} {...e} class="btn btn-warning" style={{width:'120px' , fontSize:'23px' , float:'right' , marginTop:'13px' , marginLeft:'200px'}} 
                             onClick={() => {goUserPage(window.location.href = "http://localhost:3000/mypage?userNo="+e?.profile?.userNo)}}>방문하기</button>
                         </div>)}

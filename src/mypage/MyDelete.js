@@ -44,7 +44,7 @@ function MyDelete(){
         <div className="App">
         <div class="container p-5">
             
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{float:'right' , marginRight:'25px' , borderRadius:'0'}}>
+             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{float:'right' , marginRight:'-3px' , borderRadius:'0'}}>
              회원 탈퇴
              </button>
             

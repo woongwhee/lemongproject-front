@@ -2,6 +2,14 @@ import * as React from 'react';
 import axios from 'axios';
 import ProfileUpdate from './MyPageProfileUpdate';
 
+import { confirmAlert } from "react-confirm-alert";
+import './react-confirm-alert.css';
+
+import './MyPageUpdate.css';
+import { width } from 'dom7';
+
+import { TiTick } from "react-icons/ti";
+
 const ProFileData = (props): JSX.Element => {
 
     let{userNo}=props;
@@ -31,19 +39,63 @@ const ProFileData = (props): JSX.Element => {
         axios.post('/api/member/insertUserProfile', 
             formData , {headers: {
             "Content-Type": "multipart/form-data",
-        }}).catch(function(error) {
+        }}).then(function(){
+            confirmAlert({
+                title: "Success",
+                message: "변경이 완료되었습니다.",
+                buttons: [
+                  {
+                    label: "Yes" ,
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+                  }
+                ]
+              })
+        }).catch(function(error) {
             console.log("실패");
             console.log(error);
             console.log(formData); // formData형식으로 잘 들어간 것 확인.
+            confirmAlert({
+                title: "Fail",
+                message: "변경에 실패하였습니다.",
+                buttons: [
+                  {
+                    label: "Yes" ,
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+                  }
+                ]
+              })
           });
     };
+
+    // 프로필 insert 알람
+    const submitUpProfile = () => {
+        confirmAlert({
+          title: "Profile Update",
+          message: "프로필을 변경하시겠습니까?",
+          buttons: [
+            {
+              label: "Yes",
+              onClick: () => onFileUpload()
+            },
+            {
+              label: "No"
+              // onClick: () => alert("Click No")
+            }
+          ]
+        });
+      }
 
 
     return (
         <div>
-            <input type="file" multiple /* 파일 여러개 선택 가능하게 하기 */ onChange={onSaveFiles} />
-            <button onClick={onFileUpload}>프로필 업로드</button>
-            <ProfileUpdate userNo={userNo}/>
+            <input name="proFile" id="proFile" type="file" multiple /* 파일 여러개 선택 가능하게 하기 */ onChange={onSaveFiles} />
+            <div type="button" style={{marginTop:'-230px' , marginLeft:'100px'}}>
+                <label for="proFile" style={{border:'none' , width:'200px' , height:'200px' , borderRadius:'50%'}}>
+                    
+                </label>
+            </div>
+            <TiTick id="pbtn" type='button'onClick={submitUpProfile} style={{marginLeft:'275px' , marginTop:'-80px' , fontSize:'35px'}}>프로필 업로드</TiTick>
+            {/* <ProfileUpdate userNo={userNo}/> */}
         </div>
     );
 };

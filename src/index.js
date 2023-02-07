@@ -13,6 +13,7 @@ import MyPageUpdate from './mypage/MyPageUpdate';
 
 import ChallengeRoomCreate from './challengeChat/challengeRoomCreate';
 import ChallengeChatRoom from './challengeChat/challengeChatRoom';
+import FeedInsert from './feedPage/FeedInsert';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -29,6 +30,7 @@ root.render(
       <Route path="mypage" element={<MyPage />}/>
       <Route path="MypageUpdate" element={<MyPageUpdate />}/>
       <Route path="ChallengeRoomCreate" element={<ChallengeRoomCreate />}/>
+      <Route path="FeedInsert" element={<FeedInsert />}/>
     </Routes>
   </BrowserRouter>
 
