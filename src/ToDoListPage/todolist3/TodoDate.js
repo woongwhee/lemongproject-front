@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-//import { useTodoState } from './TodoContext';
 import moment from 'moment/moment';
+import 'moment/locale/ko';
 import Calendar2 from '../calendar/Calendar';
+import { useSelector } from 'react-redux';
 
 const TodoHeadBlock = styled.div`
   h1 {
@@ -29,17 +30,20 @@ const TasksLeft = styled.div`
   font-weight: bold;
 `;
 
-function TodoDate({todoDate}) {
-  const today = moment(todoDate).format("yyyy년 MM월 DD일");
-  //console.log("todoDate",todoDate)
+function TodoDate() {
+
+  // const selectDay = useSelector((state) => state.selectDay)
+  const selectDay = useSelector((state) => state.date.selectDay)
+  //console.log(selectDay);
+
 
   return (
     <TodoHeadBlock>
-      <h1>{today}</h1>
-      <div className="day">화요일</div>
-      <div className="tasks-left">할 일 2개 남음</div>
+      <h1>{moment(selectDay).format('MM월 DD일')}</h1>
+      <div className="day">{moment(selectDay).format('ddd요일')}</div>
+      {/* <div className="tasks-left">할 일 2개 남음</div> */}
     </TodoHeadBlock>
   );
 }
 
-export default TodoDate;
+export default React.memo(TodoDate);

@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect} from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import axios from 'axios';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -77,61 +78,33 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
-function TodoCreate({onAdd, todoDate }) {
+function TodoCreate({insertTodo}) {
+  //투두 추가 토글
   const [open, setOpen] = useState(false);
- 
   const onToggle = () => setOpen(!open);
 
-  //입력창 값 저장
-  const [inputValue, setInputValue] = useState('')
+  //투두 날짜
+  let selectDay = useSelector((state)=> state.selectDay);
+  const todoDate = new moment(selectDay).format('YYMMDD');
 
-  //투두넘버
-  const todoNo = useRef(0)
+  //입력값 저장할 state
+  const [inputValue, setInputValue] = useState('');
 
-  //임시 투두 날짜
-  const today = moment(todoDate).format("yyyy년 MM월 DD일");
-
-  //const textRef = useRef()
-
+  //입력값 저장
   const onCreate = (event) => {
-    setInputValue(event.target.value)
-    console.log(inputValue)
+    setInputValue(event.target.value);
   } 
 
-  const onSubmit = (e) => {
-    e.preventDefault() //새로고침 방지
-
-    if(!inputValue) return //공백 입력 방지
-
-    onAdd(inputValue) //입력 내용 추가
-
-    setInputValue('')
-
-    //textRef.current.focus();
-  }
-
-  const insertTodo = () => {
-    axios({
-      method: 'post',
-      url: '/api/todo/insert',
-      data: {
-        id : todoNo.current++, 
-        userNo : 1,
-        date : today,
-        content : inputValue,
-        done : false,
-        sort : 1
-      }
-    })
-  }
+  //로그인 userno정보 
+  let userNo = sessionStorage.getItem("userNo");
 
   return (
     <>
       {open && (
         <InsertFormPositioner>
-          <InsertForm onSubmit={onSubmit}>
-            <Input type="text" value={inputValue} onChange={onCreate}/>
-            <button onClick={insertTodo}>add</button>
+          <InsertForm onSubmit={(e)=>{e.preventDefault(); insertTodo(inputValue, setInputValue, open, setOpen, todoDate);}}>
+            <Input type="text" value={inputValue} onChange={onCreate} autoFocus/>
+            {/* <button onClick={()=>{insertTodo(inputValue, setInputValue, todoDate)} } >add</button> */}
           </InsertForm>
         </InsertFormPositioner>
       )}

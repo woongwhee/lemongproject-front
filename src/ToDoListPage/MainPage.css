@@ -1,9 +1,9 @@
 .outer{
     border: 1px solid black;
-    width: 1900px;
-    height: 1000px;
+    width: 100%;
+    height: 95vh;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 20px;
 }
 .outer_date{
     border: 1px solid red;
@@ -12,6 +12,16 @@
     float: left;
     background-color: gainsboro;
 }
+.outer_Temp{
+    border: 1px solid green;
+/*    width: 95%;*/
+/*    height: 100%;*/
+/*    margin: 5px;*/
+/*    float: left;*/
+/*    !*margin-top: 0px;*!*/
+/*    position: relative;*/
+/*    !*overflow: scroll;*!*/
+}
 .outer_pro{
     border: 1px solid blue;
     width: 45%;
@@ -19,7 +29,7 @@
     float: left;
 }
 .outer_menu{
-    border: 1px solid green;
+    border: 10px solid green;
     width: 21.4%;
     height: 100%;
     float: right;
@@ -45,13 +55,7 @@
     margin: auto;
     margin-top: 0px;
 }
-.outer_Temp{
-    border: 1px solid tomato;
-    width: 85%;
-    height: 65%;
-    margin: auto;
-    margin-top: 0px;
-}
+
 .outer_btn{
     border: 1px solid salmon;
     margin: auto;
@@ -76,15 +80,15 @@
 .menuBtn{
     border: 1px solid sienna;
     width: 100%;
-    height: 5%; 
+    height: 5%;
 }
 .mybtn1{
     width: 17%;
     height: 100%;
     float: right;
     border: 0;
-    background: none;
-    background-color: Transparent;
+    /*background: none;*/
+    /*background-color: Transparent;*/
 }
 .outer_menuPro{
     border: 1px solid royalblue;
@@ -136,15 +140,7 @@
     box-sizing: border-box;
     background-color: coral;
 }
-.outer_content{
-    border: 1px solid thistle;
-    width: 69%;
-    height: 43%;
-    float: right;
-    margin-top: -120px;
-    box-sizing: border-box;
-    background-color: darkcyan;
-}
+
 .outer_nick{
     border: 1px solid steelblue;
     width: 69%;

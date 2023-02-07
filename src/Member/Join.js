@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
 
-import '../styles/Join.css';
+import './Join.css';
 
 function Join() {
 
@@ -11,9 +11,9 @@ function Join() {
     const [reUserPwd, setReUserPwd] = useState();
     const [email, setEmail] = useState();
     const [emailNum, setEmailNum] = useState();
+    const [socialType, setSocialType] = useState("NONE");
 
     // 알림 색깔
-    const [nameColor, setNameColor] = useState();
     const [errorColor, setErrorColor] = useState();
     const [pwdColor, setPwdColor] = useState();
     const [rePwdColor, setRePwdColor] = useState();
@@ -22,7 +22,6 @@ function Join() {
 
 
     // 에러 메세지 변수
-    const [nameError, setNameError] = useState();
     const [nickError, setNickError] = useState();
     const [pwdError, setPwdError] = useState();
     const [rePwdError, setRePwdError] = useState();
@@ -40,7 +39,6 @@ function Join() {
     const [isNickBtn, setIsNickBtn] = useState(false);
     const [isEmailBtn, setIsEmailBtn] = useState(false);
     const [isEmailNumBtn, setIsEmailNumBtn] = useState(false);
-    // const [isJoinBtn, setIsJoinBtn] = useState(false);
     
 
     // 이름 공백 체크
@@ -54,8 +52,6 @@ function Join() {
             setIsName(true)
         }
     }, [])
-
-
 
 
 
@@ -107,7 +103,7 @@ function Join() {
             setRePwdColor("chAlarm okAlarm")
             setIsRePwd(true)
         } else {
-            setRePwdError("비밀번호가 일치하지않습니다.")
+            setRePwdError("비밀번호가 일치하지 않습니다.")
             setRePwdColor("chAlarm noAlarm")
             setIsRePwd(false)
         }
@@ -122,11 +118,11 @@ function Join() {
         setEmail(emailCurrent)
 
         if(!emailRegex.test(emailCurrent)) {
-            setEmailMs("유효하지 않은 이메일 주소 입니다.")
+            setEmailMs("유효하지 않은 이메일 주소입니다.")
             setEmailColor("chAlarm noAlarm")
             setIsEmail(false)
         } else {
-            setEmailMs("유효한 이메일 주소 입니다.")
+            setEmailMs("유효한 이메일 주소입니다.")
             setEmailColor("chAlarm okAlarm")
             setIsEmail(true)
         }
@@ -139,7 +135,12 @@ function Join() {
         let response = await axios.post('api/p/join/chEmail',
             ({'email':email})
         )
-        if(response.data.code === '2000') {
+        if(response.data.code === '3006') {
+            console.log("중복된 이메일")
+            setEmailMs("이미 존재하는 이메일입니다.")
+            setEmailColor("chAlarm noAlarm")
+            setIsEmailBtn(false)
+        } else if(response.data.code === '2000') {
             console.log("테스팅 중~")
             setEmailMs("인증번호가 발송되었습니다.")
             setEmailColor("chAlarm")
@@ -178,17 +179,18 @@ function Join() {
 
 
     // 회원가입 클릭시 데이터 전송
-    const joinClick = async(name, nick, pwd, email) => {
+    const joinClick = async(name, nick, pwd, email, socialType) => {
         let response = await axios.post('api/p/join',
             ({'userName':name,
               'nickName':nick,
               'userPwd':pwd,
-              'email':email
+              'email':email,
+              'socialType':socialType
             })
         )
         if(response.data.code === '2000') {
             alert("어서오세요. 여러분의 꿈을 응원합니다. :)")
-            // document.location.href = "/"; // 회원가입 성공 시 로그인 페이지로
+            document.location.href = "/"; // 회원가입 성공 시 로그인 페이지로
         } else {
             alert.log('회원가입 실패');
         }
@@ -214,10 +216,7 @@ function Join() {
                     {/* 이름 */}
                     <div className="nameInput">    
                         <input type="text" id="userName" name="userName" placeholder="이름" required 
-                            onChange={(e) => {
-                                onChangeName(e);
-                                // setUserName(e.target.value);
-                            }} />
+                            onChange={(e) => {onChangeName(e);}} />
                     </div>
                     {/* 닉네임 */}
                     <div className="nickInput">
@@ -263,7 +262,7 @@ function Join() {
                 </div>
                 <br />
                 <div className="joinBtn">
-                    <button onClick={() => {joinClick(userName, nickName, userPwd, email);}} disabled={!isJoinBtn}>
+                    <button onClick={() => {joinClick(userName, nickName, userPwd, email, socialType);}} disabled={!isJoinBtn}>
                         회 원 가 입
                     </button>
                 </div>

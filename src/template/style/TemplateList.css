@@ -1,0 +1,61 @@
+.template-list{
+    display: inline-block;
+    width: 50%;
+    /*margin: auto;*/
+    margin-left: 200px;
+    /*border: 1px solid red;*/
+    /*overflow: scroll;*/
+    /*grid-template-columns: repeat(2, 1fr);*/
+    /*grid-template-rows: repeat(5, 1fr);*/
+    /*grid-column-gap: 10px;*/
+    /*grid-row-gap: 0px;*/
+}
+.Write-Button{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom:5%;
+    right:5%
+}
+.Write-Button img{
+    width: 100%;
+    height: 100%;
+}
+.Category-Button{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom:5%;
+    right:15%
+}
+.Category-Button img{
+    width: 100%;
+    height: 100%;
+}
+
+.Template-Card{
+    width: 45%;
+    height: 130px;
+    border:1px solid black;
+    display: inline-block;
+    margin-left:10px ;
+    padding: 5px;
+    position: relative;
+}
+
+.Card-Img{
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+.Card-Img img{
+    width: 100%;
+    height: 100%;
+}
+.category-select img{
+    width: 100px;
+    height: 100px;
+}
+.category-select{
+    all:unset;
+}

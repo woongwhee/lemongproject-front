@@ -1,9 +1,9 @@
 import React , {useState , useEffect} from "react";
 import axios from "axios";
 
-import cImage from'./image/물통.jpg';
+// import cImage from'./image/물통.jpg';
 // import ChallengeChatRoom from "./challengeChatRoom";
-import Chat from "./testChating";
+// import Chat from "./testChating";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 import './challenge.css';
 
@@ -11,6 +11,7 @@ import './challenge.css';
 import moment from 'moment';
 //선언하지 않아도, 디바이스 혹은 locale의 시간을 불러온다. 
 import 'moment/locale/ko';
+import {Chat} from "@mui/icons-material";
 
 function ChallengeRoomCreate(){
 
@@ -54,7 +55,7 @@ function ChallengeRoomCreate(){
                 <h1 style={{float:'left'}}><b>{challengeData?.challengeTitle}</b></h1> <br/><br/><br/> 
                 <h4 style={{float:'left'}}><span>{challengeData?.challengeInfo}</span></h4> <br/><br/><br/>
                 <h4 style={{float:'left'}}><b>{moment(challengeData?.startDate).format('YYYY년 MM월 DD일')} ㅡ  {moment(challengeData?.endDate).format('YYYY년 MM월 DD일')}</b></h4>
-                    <img src={cImage} alt="썸네일" style={{width:'270px' , height:'297px' , marginTop:'-235px' , marginLeft:'565px'}}/>
+                    {/*<img src={cImage} alt="썸네일" style={{width:'270px' , height:'297px' , marginTop:'-235px' , marginLeft:'565px'}}/>*/}
                 </div>
              </div>
             
@@ -92,7 +93,7 @@ function ChallengeRoomCreate(){
                                 </div>
                                 <div className="outer_2">
                                     {/* <ChallengeChatRoom challengeData={challengeData}/> */}
-                                    <Chat/>
+                                    {/*<Chat/>*/}
                                 </div>
                             </div>
                          </div>

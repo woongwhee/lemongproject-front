@@ -29,9 +29,7 @@ function FeedReplyInsert(props) {
                 />
             </InputGroup>
 
-
             <div style={{marginTop:"30px"}}>피드번호 : {feedNo}</div>
-
 
             <InputGroup className="mb-2" style={{marginTop:"30px"}}>
                 <InputGroup.Text id="inputGroup-sizing-default">

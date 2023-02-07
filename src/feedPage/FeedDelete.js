@@ -2,21 +2,42 @@ import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
+import {Alert} from "@mui/lab";
+import TreeItem from "@mui/lab/TreeItem";
 
 function FeedDelete(props) {
 
-    let feedNo = props.feedNo;
+    let Feed = props.Feed;
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const kfkf = 'adsf';
+    const feedNo = Feed.feedNo;
+    // const photoNo = Feed.photoNoList[0];
+    const deleteSuccess = () => {return(<Alert variant="outlined" severity="success">
+        This is a success alert — check it out!
+    </Alert>)};
 
+    const deleteFeed = () => {
+            axios.post(
+                'api/feed/deleteFeed',{
+                    feedNo:feedNo,
+                    // photoNo:photoNo
+                }).then(function (){
+                    deleteSuccess();
+                    handleClose();
+                    window.location.reload("/main");
+                })
+    }
     return (
         <>
-            <Button variant="danger" size="sm" onClick={handleShow}>삭제하기</Button>
+            {/*<Button*/}
+            {/*    variant="danger"*/}
+            {/*    size="sm"*/}
+            {/*    onClick={handleShow}>삭제하기</Button>*/}
+            <TreeItem nodeId="2" label="삭제하기" onClick={handleShow}/>
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -34,18 +55,7 @@ function FeedDelete(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         닫기
                     </Button>
-                    <Button variant="danger" onClick={
-                        ()=> {axios.post(
-                            'api/feed/deleteFeed',{
-                                feedNo:feedNo
-                            }).then(function (){
-                                console.log(feedNo)
-                                alert('삭제성공');
-                                handleClose();
-                                window.location.reload("/main");
-                            }
-                        )}
-                    }>삭제하기</Button>
+                    <Button variant="danger" onClick={deleteFeed}>삭제하기</Button>
                 </Modal.Footer>
             </Modal>
         </>
