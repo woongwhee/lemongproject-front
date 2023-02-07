@@ -36,11 +36,11 @@ function Login() {
         }
     }
     const loginClick = async (e, p) => {
-        let response = await axios.post('api/p/login',
-            ({
+        let response = await axios.post('/api/p/login',
+            {
                 'email': e,
                 'userPwd': p
-            })
+            }
         )
         if (response.data.code === '2000') {
             alert("로그인에 성공하였습니다.")

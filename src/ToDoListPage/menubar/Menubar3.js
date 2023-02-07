@@ -12,6 +12,7 @@ import {Component} from "react";
 import TemplateCard from "../../template/component/TemplateCard";
 import TemplateList from "../../template/component/TemplateList";
 import TemplateListView from "../../template/page/TemplateListView";
+import Test1 from "../../feedPage/Test1";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -73,7 +74,8 @@ export default function BasicTabs() {
                 <TodoView3 />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <ChallengeList />
+                {/*<ChallengeList />*/}
+                <Test1></Test1>
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <FeedList/>

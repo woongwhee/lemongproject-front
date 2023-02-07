@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
-import Feed from "./Feed";
+import Feed from "./Feed1";
 import FeedLoading from "./FeedLoading";
 
 

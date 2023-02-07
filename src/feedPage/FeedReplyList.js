@@ -22,6 +22,7 @@ function FeedReplyList(props){
                 }
             }).then((res) => {
                 callback(res.data.result);
+                console.log(res.data.result);
             })
         }, []
     );
