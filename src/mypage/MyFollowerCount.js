@@ -4,6 +4,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
+import './MyPage.css';
 
 function MyFollowCount(){
 
@@ -74,18 +75,21 @@ function MyFollowCount(){
             
              <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" style={{margin:'auto' , marginTop:'50px'}}>
-                <div class="modal-content" style={{width:'400px' , height:'800px' , borderRadius:'0'}}>
+                <div class="modal-content" style={{width:'400px' , height:'700px' , borderRadius:'0'}}>
                    <div class="modal-header">
-                        <h5>MyFollower</h5>
+                        <h5 style={{fontFamily:'SourceSansPro-Light' , fontSize:'25px'}}><b>MyFollower</b></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                    </div>
-                   <div class="modal-footer" style={{overflow:'scroll' , height:'733px'}}>
-                        {myfollowerList?.map(e => <div>
-                            <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'70px' , height:'70px', borderRadius:'50%' , backgroundColor:'gray' }}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'30px'}}>{e?.profile?.nickName}</span>
-                            <button type="button" key={i++} {...e} class="btn btn-warning" style={{width:'120px' , fontSize:'23px' , float:'right' , marginTop:'13px' , marginLeft:'200px'}} 
-                            onClick={() => {goUserPage(window.location.href = "http://localhost:3000/mypage?userNo="+e?.profile?.userNo)}}>방문하기</button>
-                        </div>)}
-                   </div>                
+                   <div className="scrollBar" style={{overflow:'scroll' , height:'733px'}}>
+                        {myfollowerList?.map(e => <div style={{marginTop:'10px'}}>
+                            <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
+                            <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
+                                <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
+                                onClick={() => {goUserPage(window.location.href = "http://localhost:3000/mypage?userNo="+e?.profile?.userNo)}}>방문하기</button>
+                                </div>
+                        </div>)}  
+                   </div>
+                                 
                 </div>
              </div>
              </div>

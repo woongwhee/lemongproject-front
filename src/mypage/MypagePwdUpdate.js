@@ -143,7 +143,7 @@ function MyPagePwdCheck(){
                         onChange={(e) => {onChangeRePwd(e);}} style={{borderRadius:'0'}}/>
                         <b><p style={{fontSize:'18px' , fontFamily:'SourceSansPro-Light'}} className={rePwdColor}>{rePwdError}</p></b>
                     </div>
-                <button type="button" class="btn btn-primary" style={{borderRadius:'0' , marginTop:'-71px' , marginLeft:'644px'}} onClick={submitUpPwd}>변경</button>
+                <button type="button" class="btn btn-primary" style={{borderRadius:'100px' , marginTop:'-71px' , marginLeft:'644px'}} onClick={submitUpPwd}>변경</button>
             </form>
         </div>
     );

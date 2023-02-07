@@ -283,8 +283,8 @@ function MyPageUpdate(){
                         {showCheckNick()}
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="button" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'0' , width:'70px' , marginLeft:'-30px'}} onClick={() => {MyPageNickCheck(); submitCheckNick();}}>체크</button>&nbsp;
-                    <button type="button" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'0' , width:'70px'}} onClick={submitUpNickName}>변경</button>
+                    <button type="button" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'100px' , width:'70px' , marginLeft:'-30px'}} onClick={() => {MyPageNickCheck(); submitCheckNick();}}>체크</button>&nbsp;
+                    <button type="button" className="nickCheckBtn" class="btn btn-primary" style={{borderRadius:'100px' , width:'70px'}} onClick={submitUpNickName}>변경</button>
 
                     <br/><br/><br/>
                         <MyPagePwdCheck/>
