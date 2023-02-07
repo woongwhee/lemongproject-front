@@ -22,12 +22,12 @@ root.render(
     <Provider store={store}>
     <Routes>
         <Route path="/" element={<LoginProvider><App/></LoginProvider>} />
-      <Route path="join" element={<Join />} />
-      <Route path="findPwd" element={<FindPwd />} />
-      <Route path="kakao" element={<KakaoLogin />} />
-      <Route path="setNick" element={<SetNick />} />
-      <Route path='naverBtn' element={<NaverLoginBtn />} />
-      <Route path='naver' element={<NaverLogin />} />
+          <Route path="join" element={<Join />} />
+          <Route path="findPwd" element={<FindPwd />} />
+          <Route path="kakao" element={<KakaoLogin />} />
+          <Route path="setNick" element={<SetNick />} />
+          <Route path='naverBtn' element={<NaverLoginBtn />} />
+          <Route path='naver' element={<NaverLogin />} />
     </Routes>
     </Provider>
   </BrowserRouter>
