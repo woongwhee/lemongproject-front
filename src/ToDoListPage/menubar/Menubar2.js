@@ -4,15 +4,25 @@ import FeedList from "./FeedList";
 import ChallengeList from "./ChallengeList";
 import TemplateView from "./TemplateView";
 import TodoView3 from "../todolist3/TodoView";
+import { useSelector } from "react-redux";
+import * as PropTypes from "prop-types";
+import ChallengeRoomCreate from "../../challengeChat/challengeRoomCreate";
 
 import { connect } from 'react-redux';
 import { other, todo } from "../../reducer/page";
 
+function Mypage(props) {
+  return null;
+}
+
+Mypage.propTypes = {children: PropTypes.node};
 const menuList = {
   0: <TodoView3 />,
   1: <FeedList />,
   2: <ChallengeList />,
-  3: <TemplateView />
+  3: <TemplateView />,
+  4:<ChallengeRoomCreate />
+
 }
 
 
@@ -39,38 +49,39 @@ class Menubar2 extends Component{
       <div className="menubar-box">
         <div className="menuBar">
           <ul className="tabs">
-            {pickTodo ? 
-            <>
+            {pickTodo ?
+                (
+                    <>
             <li className="active" >TodoList</li>
             <li className="" onClick={() => {this.changeMenu(1); other();}}>Feed</li>
             <li className="" onClick={() => {this.changeMenu(2); other();}}>Challenge</li>
             <li className="" onClick={() => {this.changeMenu(3); other();}}>Template</li>
-            </>
-            : 
+            </>)
+            :(
             <>
-            <li className={`${this.state.menu === 0? 'active': ''}`} onClick={() => this.changeMenu(0)}>TodoList</li>
+            <li className={`${this.state.menu === 0? 'active': ''}`} onClick={() => {this.changeMenu(0)}}>TodoList</li>
             <li className={`${this.state.menu === 1? 'active': ''}`} onClick={() => {this.changeMenu(1); other();}}>Feed</li>
             <li className={`${this.state.menu === 2? 'active': ''}`} onClick={() => {this.changeMenu(2); other();}}>Challenge</li>
             <li className={`${this.state.menu === 3? 'active': ''}`} onClick={() => {this.changeMenu(3); other();}}>Template</li>
-            </>
-            }
+            <li className={`${this.state.menu === 4? 'active': ''}`} onClick={() => {this.changeMenu(4); other();}}>채팅</li>
+            </>)}
           </ul>
         </div>
-        {pickTodo ? 
+        {pickTodo ?
         <div className="contentArea">
           {menuList[0]}
-        </div> 
+        </div>
         :
         <div className="contentArea">
           {menuList[this.state.menu]}
         </div>
-       } 
+       }
       </div>
     )
   }
 }
 
-//mapStateToProps함수를 이용해 state props값을 가져온다.
+{/*//mapStateToProps함수를 이용해 state props값을 가져온다.*/}
 const mapStateToProps = state => {
   //console.log("메뉴바"+state.page.menuList2);
   return{
@@ -83,5 +94,5 @@ const mapDispatchToProps = (dispatch) => ({
   other: () => dispatch(other()),
 });
 
-//클래스 컴포넌트에서는 useSelector대신 connect로 state값을 가져와야한다.
 export default connect(mapStateToProps, mapDispatchToProps)(Menubar2);
+{/*//클래스 컴포넌트에서는 useSelector대신 connect로 state값을 가져와야한다.*/}
