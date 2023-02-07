@@ -35,7 +35,7 @@ function Login() {
         }
     }
     const loginClick = async (e, p) => {
-        let response = await axios.post('api/p/login',
+        let response = await axios.post('/api/p/login',
             ({
                 'email': e,
                 'userPwd': p
