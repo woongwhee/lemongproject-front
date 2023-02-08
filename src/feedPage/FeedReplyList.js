@@ -1,13 +1,28 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import FeedReplyResultList from "./FeedReplyResultList";
 import Table from 'react-bootstrap/Table';
 
 function FeedReplyList({feedNo}){
     const [ testStr, setTestStr ] = useState([]);
 
+    const [ length, setLength ] = useState(testStr.length);
+
+
     function callback(str) {
         setTestStr(str);
+    }
+
+    // testSTr7개;
+    const replylist = ({reply}) => {
+        return (
+            <div style={{border:"1px solid black"}}>
+                {reply.replyNo}
+                {reply.userNo}
+                {reply.replyContent}
+                {reply.replyAt}
+            </div>
+        );
     }
 
 
@@ -21,12 +36,14 @@ function FeedReplyList({feedNo}){
                 }
             }).then((res) => {
                 // callback(res.data);
-                console.log(res.data.result)
-                setTestStr(res.data.result)
+                console.log(res.data.result[0].replyNo) // [7개]
+                setTestStr(res.data.result) // [7개]
+                setLength(res.data.result.length)
                 // console.log(Json.userNo);
-                console.log("Test" + testStr)
+                // console.log("Test" + testStr)
+
             })
-        }, []
+        }, [length]
     );
     let i=0;
     return(
@@ -42,7 +59,11 @@ function FeedReplyList({feedNo}){
                     </tr>
                 </thead>
             </Table>
-                    {testStr?.map(e=><FeedReplyResultList key={i++} {...e} feedNo={feedNo}/>)}
+            {/*{testStr?.map(e=><FeedReplyResultList key={i++} {...e} feedNo={feedNo}/>)}*/}
+            {testStr?.map(reply=>replylist({reply}) )}
+            {/*{testStr[0].replyNo}*/}
+            {testStr.length}
+            {length}
         </div>
         )
 

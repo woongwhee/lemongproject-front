@@ -77,7 +77,6 @@ function MainPage() {
             <MainMenu></MainMenu>
         </div>
         <div className="outer">
-
             {/* 캘린더 영역 */}
             <div className="outer_date">
                 <Profile/>
