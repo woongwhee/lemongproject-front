@@ -17,6 +17,7 @@ import Modal from 'react-bootstrap/Modal';
 import FeedInsert from "../feedPage/FeedInsert";
 import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
+import { KAKAO_LOGOUT_URL } from '../Member/KakaoLoginData';
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar
 
@@ -26,14 +27,28 @@ import {IconButton} from "@mui/material";
 
 
 function LogoutButton() {
-    const dispatch= useLoginDispatch();
-    const logout=async ()=>{
-        await axios.get("/api/member/logout");
 
+    const dispatch= useLoginDispatch();
+    const logout = async () => {
+        let res = await axios.get("/api/member/logout");
+        if(res.data.code === '3008') {
+            // console.log(res.data)
+            logoutKakao()
+            // console.log("로그아웃 완료")
+        }
         dispatch({
             type:"logout"
         });
     }
+
+
+    const logoutKakao = () => {
+        const kakaoLogout = KAKAO_LOGOUT_URL;
+        document.location.href = kakaoLogout;
+    }
+
+
+
     return (
         <Button onClick={logout}>
             로그아웃
