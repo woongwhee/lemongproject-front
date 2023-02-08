@@ -2,33 +2,33 @@ import React , {useState , useEffect} from "react";
 import { Component } from "react";
 import axios from "axios";
 
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import googleCalendarPlugin from '@fullcalendar/google-calendar';
-
 import mark from './image/mark.png';
 
 import '../mypage/font/font.css';
 
-import MyFeed from "./MyFeed";
-import MyChallenge from "./MyChallenge";
-import MyTemplates from "./MyTemplates";
-import Mymenu from "./Mymenu";
 import MyFollowCount from "./MyFollowerCount";
 import AcceptFollowCount from "./AcceptFollowCount";
 import AcceptFollowingCount from "./AcceptFollowingCount";
 import MyFollowingCount from "./MyFollowingCount";
-
-import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
-
 // Tab -> 각 카테고리(피드 , 챌린지 , 템플릿)별 페이지 보여주기.
-// import {TabContent , TabPane , Nav , NavItem , NavLink} from "reactstrap";
 
 // 마이페이지 css
 import './MyPage.css';
 import MyFollowApplication from "./MyFollowApplication";
-import { useLoginState } from "../Member/LoginContext";
+import {useLoginState} from "../Member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
+
+function MyFeed() {
+    return null;
+}
+
+function MyChallenge() {
+    return null;
+}
+
+function MyTemplates() {
+    return null;
+}
 
 function MyPage() {
     
@@ -41,9 +41,9 @@ function MyPage() {
      
      const queryString = window.location.search;
      const params = new URLSearchParams(queryString);
-
-     const userNos = useSelector((state) => state.userNo.selectUserNo);
-     console.log(userNos + " 제발 통과됨")
+    const userNos=1;
+     // const userNos = useSelector((state) => state.userNo.selectUserNo);
+     // console.log(userNos + " 제발 통과됨")
     //  const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
  
      function callback(data){

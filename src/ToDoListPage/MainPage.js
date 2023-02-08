@@ -18,8 +18,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
 import Menubar4 from "./menubar/Menubar4";
 import Menubar2 from "./menubar/Menubar2";
+import Menubar3 from "./menubar/Menubar3";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
-import { useLoginDispatch } from "../Member/LoginContext";
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar
 
@@ -91,7 +91,8 @@ function MainPage() {
                 <br/><br/>
                 <Calendar/>
             </div>
-          <Menubar2/>
+          {/*<Menubar2/>*/}
+          <Menubar3/>
             {/*<Menubar4/>*/}
         </div>
     </>

@@ -49,8 +49,7 @@ const Menubar4 = (props) => {
                 <button onClick={() => changeMenu(MENU_MY_PROFILE)}>응애</button>
             </div>
             <div className="contentArea">
-                {
-                }
+                {getContent(menu.index)}
             </div>
         </div>
     )
