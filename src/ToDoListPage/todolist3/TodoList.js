@@ -17,35 +17,51 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
   //const chTodos = chList[0].todoList;
   //console.log(chTodos);
   let arr = [];
+  
   const onDragStart = () => {
-    todoList.map(todo => arr.push(todo.todoNo));
-    console.log("추가 전"+arr);
+    // const todoNos = todoList.map(todo => todo.todoNo);
+    // console.log("뽑았으"+todoNos);
+    // arr.push(todoNos);
+    // console.log("첫"+ arr);
+    //todoList.map(todo => arr.push(todo.todoNo));
   }
   
   const onDragEnd = (res) => {
-    //console.log(res);
     if (!res.destination) return;
     
     const dndTodoList = [...todoList];
     const [reorderedItem] = dndTodoList.splice(res.source.index, 1);
     dndTodoList.splice(res.destination.index, 0, reorderedItem);
-    setTodoList(dndTodoList);
-    //console.log(dndTodoList);
+    //setTodoList(dndTodoList);
+    console.log(dndTodoList);
 
-    dndTodoList.map(todo => arr.push(todo.todoNo));
-    //arr.push(dndTodoList);
-    console.log("추가 후"+arr);
+    // const dndTodoNos = dndTodoList.map(todo => todo.todoNo);
+    // arr.push(dndTodoNos);
 
-    axios.post('api/todo/dndTodo', {
-      originArr : arr[0],
-      changeArr : arr[1],
-    }).then(function(res){
-      //setTodoList(dndTodoList);
-      console.log(res.data);
-      console.log("최종"+arr);
+    //dndTodoList.map(todo => arr.push(todo.todoNo));
+    //console.log("추가 후"+arr);
+
+    // axios.post('api/todo/dndTodo', {
+    //   originArr : arr[0],
+    //   changeArr : arr[1],
+    // }).then(function(){
+    //   setTodoList(dndTodoList);
+    //   console.log("최종"+arr);
+    //   console.log("dnd 완료");
+    //   arr = [];
+    // }).catch(function(){
+    //   console.log("dnd 실패")
+    // })
+
+    axios.get('api/todo/dndTodos', ({
+      dndTodoList : dndTodoList
+    })).then(function(){
+      setTodoList(dndTodoList);
+      console.log("dnd"+dndTodoList);
       console.log("dnd 완료");
     }).catch(function(){
-      console.log("dnd 실패")
+      console.log("dnd 실패");
+      console.log(dndTodoList);
     })
     
   }

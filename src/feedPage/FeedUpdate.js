@@ -149,7 +149,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                             style={{width:"300px", height:"300px"}}
                             draggable={true}
                         />
-                        <span>{getPhotoNoList[i]}  :::  {[i]}</span>
+                        <div>{getPhotoNoList[i]}  :::  {[i]}</div>
                     </div>
                 );
             }
