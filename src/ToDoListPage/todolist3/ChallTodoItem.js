@@ -45,7 +45,7 @@ const Text = styled.div`
     `}
 `;
 
-function ChallTodoItem({todo, onToggle}) {
+function ChallTodoItem({chTodo, onToggleCh}) {
 
   const dispatch = useDispatch();
 
@@ -53,15 +53,17 @@ function ChallTodoItem({todo, onToggle}) {
     dispatch({type : 'MOVE' });
   }
 
+ //console.log("chTodo: "+chTodo.todoList);
+
   return (
     <TodoItemBlock>
         {/* 완료상태 */}
-        <CheckCircle clear={todo.clear} onClick={()=>{onToggle(todo.todoNo); moveMark();}}>
-            {todo.clear && <MdDone /> }
-        </CheckCircle>
+        {/* <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
+            {chTodo.clear && <MdDone /> }
+        </CheckCircle> */}
 
         {/* 내용 */}
-        <Text clear={todo.clear}>{todo.todoContent}</Text>
+        <Text clear={chTodo.clear}>{chTodo.todoContent}</Text>
     </TodoItemBlock>
   );
 }

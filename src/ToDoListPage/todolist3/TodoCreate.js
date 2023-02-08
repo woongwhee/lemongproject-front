@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import axios from 'axios';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -95,14 +95,17 @@ function TodoCreate({insertTodo}) {
     setInputValue(event.target.value);
   } 
 
-  //로그인 userno정보 
-  let userNo = sessionStorage.getItem("userNo");
+  const dispatch = useDispatch();
+
+  function moveMark(){
+    dispatch({type : 'MOVE' });
+  }
 
   return (
     <>
       {open && (
         <InsertFormPositioner>
-          <InsertForm onSubmit={(e)=>{e.preventDefault(); insertTodo(inputValue, setInputValue, open, setOpen, todoDate);}}>
+          <InsertForm onSubmit={(e)=>{e.preventDefault(); insertTodo(inputValue, setInputValue, open, setOpen, todoDate); moveMark();}}>
             <Input type="text" value={inputValue} onChange={onCreate} autoFocus/>
             {/* <button onClick={()=>{insertTodo(inputValue, setInputValue, todoDate)} } >add</button> */}
           </InsertForm>
