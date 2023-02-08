@@ -19,13 +19,13 @@ function KakaoLogin() {
             params:{code:code}
         }).then((res) => {
             if(res.data.code === '2000') { // 로그인
-                sessionStorage.setItem("userNo", res.data.result.userNo)
-                document.location.href = "/findPwd";
+                console.log(res.data.result)
+                document.location.href = "/";
             } else { // 닉네임 설정
                 console.log('닉네임 설정하기');
                 console.log(res.data.result);
                 console.log(res.data.result.userNo);
-                sessionStorage.setItem("userNo", res.data.result.userNo);
+                // sessionStorage.setItem("userNo", res.data.result.userNo);
                 document.location.href="/setNick";
             }
         })
