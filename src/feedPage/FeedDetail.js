@@ -1,59 +1,39 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
-import FeedReplyList from "./FeedReplyList";
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
+import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
-import Table from "react-bootstrap/Table";
-import FeedReplyResultList from "./FeedReplyResultList";
-import Carousel from "react-bootstrap/Carousel";
-import FeedLoading from "./FeedLoading";
-import Feed from "./Feed1";
-import FeedDetailPhoto from "./FeedDetailPhoto";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import './FeedDetail.css'
+import Modal from 'react-bootstrap/Modal';
 import FeedReplyInsert from "./FeedReplyInsert";
+import IconButton from "@mui/material/IconButton";
+import InfoIcon from '@mui/icons-material/Info';
+import FeedDelete from "./FeedDelete";
+import FeedDetailView from "./FeedDetailView";
 
 function FeedDetail(props) {
+    let Feed = props.Feed;
 
-    const [ testStr, setTestStr ] = useState();
+    const [show, setShow] = useState(false);
 
-    const Feed = props.Feed;
-
-    function callback(str) {
-        setTestStr(str);
-    }
-
-    useEffect(()=>{axios({
-        url:'/api/feed/detailFeed',
-        params:{feedNo:Feed.feedNo}
-    }).then((res)=>{
-        console.log(res.data)
-        callback(res.data)
-        setLoading(false);
-    })
-    }, [])
-    const [loading, setLoading] = useState(true);
-    let i=0;
     return (
         <>
-            <div className="container">
-                <div className="photoArea">
-                    {loading ? <FeedLoading/> : testStr?.map(e => <FeedDetailPhoto key={i++} {...e} />)}
-                </div>
-                <div className="detailRight">
-                <div className="contentArea" style={{border:"1px solid blue"}}>
-                    피드내용
-                    {Feed}
-                </div>
-                <FeedReplyInsert Feed={Feed}></FeedReplyInsert>
-                </div>
-            </div>
+            <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
+                <InfoIcon /> 디테일
+            </IconButton>
+            <Modal
+                show={show}
+                onHide={() => setShow(false)}
+                dialogClassName="modal-90w"
+                aria-labelledby="example-custom-modal-styling-title"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="example-custom-modal-styling-title">
+                        디테일
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {/*<FeedReplyInsert feedNo={feedNo}/>*/}
+                    <FeedDetailView Feed={Feed}></FeedDetailView>
+                </Modal.Body>
+            </Modal>
         </>
-
-
     );
 }
 

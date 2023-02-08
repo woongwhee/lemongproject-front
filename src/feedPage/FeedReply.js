@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FeedReplyInsert from "./FeedReplyInsert";
@@ -6,16 +6,25 @@ import "./FeedReply.css"
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FeedDelete from "./FeedDelete";
-import FeedDetail from "./FeedDetail";
+import FeedDetailView from "./FeedDetailView";
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import axios from "axios";
 
 function FeedReply({feedNo}) {
     // let feedNo = props.feedNo;
 
     const [show, setShow] = useState(false);
+    useEffect(()=>{
+        axios.post('api/feed/countReply',{
+            feedNo:feedNo
+        }).then(function (res){
+            console.log(res.data);
+        })
+    },[])
     return (
         <>
             <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
-                <FavoriteIcon />댓글 {feedNo}
+                <ChatBubbleOutlineIcon />댓글
             </IconButton>
             <Modal
                 show={show}
@@ -30,7 +39,7 @@ function FeedReply({feedNo}) {
                 </Modal.Header>
                     <Modal.Body>
                         <FeedReplyInsert feedNo={feedNo}/>
-                        {/*<FeedDetail Feed={Feed}></FeedDetail>*/}
+                        {/*<FeedDetailView Feed={Feed}></FeedDetailView>*/}
                     </Modal.Body>
             </Modal>
         </>

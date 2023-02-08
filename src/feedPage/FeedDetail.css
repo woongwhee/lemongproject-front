@@ -1,7 +1,7 @@
 .container{
     display: flex;
     border: 1px solid red;
-    height: 700px;
+    height: 800px;
 }
 .Area{
     width: 100%;

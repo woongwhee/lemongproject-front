@@ -22,43 +22,59 @@ function FeedReplyInsert(props) {
     function callback(str) {
         setTestStr(str);
     }
+
     const deleteReply = async (replyNo, feedNo) => {
         await axios.post('api/feed/deleteReply',
             {
-                feedNo:feedNo,
-                replyNo:replyNo
+                replyNo:replyNo,
+                feedNo:feedNo
             }).then(function (res){
             console.log("삭제 성공")
             // alert("삭제완료")
-            window.location.reload("/main");
+            getReplyList();
         })
     }
 
     // testSTr7개;
-    const replylist = ({reply2}) => {
-        return (
-            <div>
-                {/*{reply.replyNo}*/}
-                {/*{reply.userNo}*/}
-                {/*{reply.replyContent}*/}
-                {/*{reply.replyAt}*/}
-                {/*{reply.nickName}*/}
-                <ListGroup.Item>
-                    <div style={{float:"left"}}><Avatar src="/broken-image.jpg" /></div>
-                    <div style={{marginLeft:"80px"}}>
-                    {reply2.nickName} : {reply2.replyContent}
-                        <div style={{float:"right"}}>
-                            {/*<Button onClick={()=>{deleteReply(reply2.replyNo,feedNo)}}/>삭제*/}
+    // const replyList = ({reply}) => {
+    //     return (
+    //         <div>
+    //             <ListGroup.Item>
+    //                 <div style={{float:"left"}}><Avatar src="/broken-image.jpg" /></div>
+    //                 <div style={{marginLeft:"80px"}}>
+    //                 {reply.nickName} : {reply.replyContent}
+    //                     <div style={{float:"right"}}>
+    //                         {/*<Button onClick={()=>{deleteReply(reply2.replyNo,feedNo)}}/>삭제*/}
+    //                     </div>
+    //                 <br/>
+    //                 {reply.replyAt}
+    //                 </div>
+    //             </ListGroup.Item>
+    //         </div>
+    //     );
+    // }
+    const replyList2 = () =>{
+        const result = [];
+        for(let i =0; i<testStr.length; i++){
+            result.push((
+                <div key={i}>
+                    <ListGroup.Item>
+                        <div style={{float:"left"}}>
+                            <Avatar src="/broken-image.jpg" />
                         </div>
-                    <br/>
-                    {reply2.replyAt}
-
-                    </div>
-
-                </ListGroup.Item>
-
-            </div>
-        );
+                        <div style={{marginLeft:"80px"}}>
+                            {testStr[i].nickName} : {testStr[i].replyContent}
+                            <div style={{float:"right"}}>
+                                <CloseButton onClick={()=>{deleteReply(testStr[i].replyNo,feedNo)}}/>삭제
+                            </div>
+                            <br/>
+                            {testStr[i].replyAt}
+                        </div>
+                    </ListGroup.Item>
+                </div>
+            ))
+        }
+        return result;
     }
 
     useEffect(
@@ -71,15 +87,15 @@ function FeedReplyInsert(props) {
                 }
             }).then((res) => {
                 // callback(res.data);
-                // console.log(res.data.result[0].replyNo) // [7개]
+                console.log(res.data.result) // [7개]
                 setTestStr(res.data.result) // [7개]
                 // console.log(Json.userNo);
                 // console.log("Test" + testStr)
-
+                // console.log("Test" + testStr[0].);
             })
         }, []
     );
-    const replyList=()=>{
+    const getReplyList=()=>{
         axios({
             url: '/api/feed/listReply',
             method: 'GET',
@@ -88,10 +104,9 @@ function FeedReplyInsert(props) {
             }
         }).then((res) => {
             // callback(res.data);
-            console.log(res.data.result[0].replyNo) // [7개]
+            // console.log(res.data.result) // [7개]
             setTestStr(res.data.result) // [7개]
             // console.log(Json.userNo);
-            // console.log("Test" + testStr)
 
         })
     }
@@ -117,7 +132,8 @@ function FeedReplyInsert(props) {
         <div>
             {/*<FeedReplyList feedNo={feedNo} />*/}
             <ListGroup variant="flush">
-                {testStr?.map(reply=>replylist({reply}))}
+                {/*{testStr?.map(reply=>replyList({reply}))}*/}
+                {replyList2()}
             </ListGroup>
         </div>
 
@@ -144,7 +160,6 @@ function FeedReplyInsert(props) {
                     aria-describedby="inputGroup-sizing-default"
                     onChange={(e)=> {SetReplyContent(e.target.value);}}
                     value={replyContent}
-
                 />
             </InputGroup>
 
@@ -152,7 +167,7 @@ function FeedReplyInsert(props) {
             <Button style={{marginTop:"40px", float:"right"}}
                     onClick={() =>{
                         replyInsert();
-                        replyList();
+                        getReplyList();
                     }}
         >댓글쓰기</Button>
         </>

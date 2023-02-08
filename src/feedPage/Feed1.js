@@ -22,7 +22,7 @@ import TreeItem from "@mui/lab/TreeItem";
 import TreeView from '@mui/lab/TreeView';
 import FeedReply from "./FeedReply";
 import "./Feed.css"
-import FeedLike from "./FeedLike";
+import FeedDetail from "./FeedDetail";
 
 
 const ExpandMore = styled((props) => {
@@ -96,10 +96,10 @@ export default function RecipeReviewCard(props) {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                {Feed.feedNo}
-                {/*<FeedLike Feed={Feed}></FeedLike>*/}
+                {/*{Feed.feedNo}*/}
+                {/*<FeedDetail Feed={Feed}></FeedDetail>*/}
                 <FeedReply feedNo={Feed.feedNo}></FeedReply>
-
+                <FeedDetail Feed={Feed}></FeedDetail>
                 <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}
