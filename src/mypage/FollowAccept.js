@@ -89,7 +89,7 @@ function FollowAccept(){
             <br></br>
             <form onSubmit={handleSubmit}>
                 {followerList?.map(e => <div className="sUserList">
-                    <img key={i++} {...e} src={saveFilePath+e?.photo?.changeName} style={{width:'50px' , height:'50px', borderRadius:'50%' , backgroundColor:'gray' , float:'left' , marginTop:'10px'}}></img> <span name="followNick" key={i++} {...e} onChange={followNickHandle}><b>{e?.profile?.nickName}</b></span>
+                    <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'50px' , height:'50px', borderRadius:'50%' , backgroundColor:'gray' , float:'left' , marginTop:'10px'}}></img> <span name="followNick" key={i++} {...e} onChange={followNickHandle}><b>{e?.profile?.nickName}</b></span>
                     님이 팔로우를 신청하였습니다.
                     <p key={i++} {...e} style={{float:'left' , marginTop:'-17px' , marginLeft:'150px' , position:'fixed'}}><b>{moment(e?.followAt).format('YYYY-MM-DD')}</b></p>
                     <CiCircleCheck type="submit" onClick={followOkHandle} style={{fontSize:'35px' , marginLeft:'10px' , marginTop:'17px'}}>o</CiCircleCheck>

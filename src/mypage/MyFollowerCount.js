@@ -4,22 +4,26 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
+import './MyPage.css';
+
+import { useLoginState } from "../Member/LoginContext";
 
 function MyFollowCount(){
 
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
+    // const queryString = window.location.search;
+    // const params = new URLSearchParams(queryString);
 
-    const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+    // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     // 팔로우 당하는사람(팔로워)
-    const follower = sessionStorage.getItem("userNo");
+    const follower = profile?.userNo;
 
     // 팔로우 하는사람(팔로잉)
-    const followerIng = sessionStorage.getItem("userNo");
-
-    // 스프링에있는 폴더에서 이미지 불러오기위한 경로
-    let saveFilePath = "http://localhost:8081/api/images/";
+    const followerIng = profile?.userNo;
 
     // (로그인을 한 유저)입장에서 다른 유저에게 팔로우를 신청할 경우
     // 상대방이 수락을 하던말던 나의 팔로워에 카운트가 올라가야함.
@@ -74,18 +78,21 @@ function MyFollowCount(){
             
              <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" style={{margin:'auto' , marginTop:'50px'}}>
-                <div class="modal-content" style={{width:'600px' , height:'800px' , borderRadius:'0'}}>
+                <div class="modal-content" style={{width:'400px' , height:'700px' , borderRadius:'0'}}>
                    <div class="modal-header">
-                        <h5>MyFollower</h5>
+                        <h5 style={{fontFamily:'SourceSansPro-Light' , fontSize:'25px'}}><b>MyFollower</b></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                    </div>
-                   <div class="modal-footer">
-                        {myfollowerList?.map(e => <div>
-                            <img key={i++} {...e} src={saveFilePath+e?.photo?.changeName} style={{width:'70px' , height:'70px', borderRadius:'50%' , backgroundColor:'gray' }}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'30px'}}>{e?.profile?.nickName}</span>
-                            <button type="button" key={i++} {...e} class="btn btn-warning" style={{width:'120px' , fontSize:'23px' , float:'right' , marginTop:'13px' , marginLeft:'200px'}} 
-                            onClick={() => {goUserPage(window.location.href = "http://localhost:3000/mypage?userNo="+e?.profile?.userNo)}}>방문하기</button>
-                        </div>)}
-                   </div>                
+                   <div className="scrollBar" style={{overflow:'scroll' , height:'733px'}}>
+                        {myfollowerList?.map(e => <div style={{marginTop:'10px'}}>
+                            <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
+                            <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
+                                <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
+                                onClick={() => {goUserPage(window.location.href = "http://localhost:3000/mypage?userNo="+e?.profile?.userNo)}}>방문하기</button>
+                                </div>
+                        </div>)}  
+                   </div>
+                                 
                 </div>
              </div>
              </div>

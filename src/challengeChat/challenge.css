@@ -1,7 +1,8 @@
 .outer_all{
     border: 1px solid black;
-    width: 1463px;
+    width: 973px;
     height: 1226px;
+    margin-left: -3px;
 }
 .outer_1{
     border: 1px solid blue;
