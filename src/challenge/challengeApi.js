@@ -7,8 +7,8 @@ export const joinMulti=async ()=>{
 
 }
 
-export const startSingle=async (startDate,templateNo,option)=>{
-    const payload={startDate,templateNo,option};
+export const startSingle=async ({startDate,templateNo,option,challengeTitle})=>{
+    const payload={startDate,templateNo,option,challengeTitle};
     const res=await axios.post(SINGLE_START,payload)
     return  codeHandler(res);
 }

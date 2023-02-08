@@ -27,6 +27,7 @@ export const updateUnSave = async (name, value) => () => axios.post(UNSAVE_UPDAT
 export const resetUnSave = () => axios.put(UNSAVE_RESET).then(res => codeHandler(res))
 
 //delete
-export const deleteTodo = (todoNo) => axios.delete(`${UNSAVE_TODO_DELETE}/${todoNo}`).then(res=>codeHandler(res))
-export const deleteReview = (reviewNo) => axios.delete(`${REVIEW_DELETE}/${reviewNo}`).then(res=>codeHandler(res))
-export const deleteTemplate = (templateNo) => axios.delete(`${TEMPLATE_DELETE}/${templateNo}`).then(res=>codeHandler(res))
+export const todoDelete = (todoNo) => axios.delete(`${UNSAVE_TODO_DELETE}/${todoNo}`).then(res=>codeHandler(res))
+
+export const reviewDelete = (reviewNo) => axios.delete(`${REVIEW_DELETE}/${reviewNo}`).then(res=>codeHandler(res))
+export const templateDelete = (templateNo) => axios.delete(`${TEMPLATE_DELETE}/${templateNo}`).then(res=>codeHandler(res))

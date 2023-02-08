@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import Modal from "react-modal";
 import {Checkbox} from "@mui/material";
 import {startMulti, startSingle} from "../../challenge/challengeApi";
 import moment from "moment";
 import {isEmpty} from "../../util/typeUtile";
+import {ModalBody, Modal, ModalFooter, ModalHeader} from "reactstrap";
 
-const StartSingleModal = ({isOpen, toggle, templateNo}) => {
+const StartMultiModal = ({isOpen, toggle, templateNo}) => {
 
     const now_utc = Date.now() // 지금 날짜를 밀리초로
     const initOption = [1, 1, 1, 1, 1, 1, 1, 0];
@@ -48,23 +48,41 @@ const StartSingleModal = ({isOpen, toggle, templateNo}) => {
         let {name, value} = e.target;
         if (name === "startDate") {
             value = new moment(value).format('YYMMDD');
-            const newInputs = {...inputs, [name]: value};
-            setInputs(newInputs);
         }
+        const newInputs = {...inputs, [name]: value};
+        setInputs(newInputs);
     }
     return (
         <Modal isOpen={isOpen} toggle={toggle}>
-            {option.map((item, i) => {
-                return (<><Checkbox type="checkbox" key={"sc+i"} checked={item} onClick={() => {
-                    optionToggle(i)
-                }} id={"sc" + i}/><label htmlFor={"sc" + i}>{optionInfo[i]}</label> </>)
-            })}
-            <input type="date" name="startDate" min={today} onChange={changeValue}></input>
-            <input type="text" name="challengeTitle" onChange={changeValue}></input>
-            <input type="text" name="challengeInfo" onChange={changeValue}></input>
-            <button onClick={start}>시작하기</button>
+            {/*<div className="modal-content">*/}
+            <ModalHeader toggle={toggle}>같이하기</ModalHeader>
+            <ModalBody>
+
+                <div>
+                    {option.map((item, i) => {
+                        return (<><Checkbox type="checkbox" key={"sc+i"} checked={item} onClick={() => {
+                            optionToggle(i)
+                        }} id={"sc" + i}/><label htmlFor={"sc" + i}>{optionInfo[i]}</label> </>)
+                    })}
+                </div>
+                <div>
+                    <label for="mtDate">시작일</label><input id="mtDate" type="date" name="startDate" min={today}
+                                                          onChange={changeValue}></input>
+                </div>
+                <div>
+                    <label for="mtTitle">제목</label><input id="mtTitle" input type="text" name="challengeTitle"
+                                                          onChange={changeValue}></input>
+                </div>
+                <div>
+                    <label for="mtInfo">내용</label><input id="mtInfo" type="text" name="challengeInfo"
+                                                         onChange={changeValue}></input>
+                </div>
+            </ModalBody>
+            <ModalFooter>
+                <button onClick={start}>시작하기</button>
+            </ModalFooter>
         </Modal>
     );
 
 }
-export default StartSingleModal;
+export default StartMultiModal;

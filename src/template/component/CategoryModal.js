@@ -5,12 +5,10 @@ import {templateCategory} from "../templateApi";
 import {isEmpty} from "../../util/typeUtile";
 import Loading from "./Loading";
 import TemplateList from "./TemplateList";
-import {ModalHeader} from "reactstrap";
-import {ModalBody} from "react-bootstrap";
-import Modal from "react-modal";
+import {ModalBody, ModalHeader, Modal} from "reactstrap";
 import apiHoc from "../../util/apiHoc";
 
-const CategoryModal = ({isOpen, toggle, list}) => {
+const CategoryModal = ({isOpen, toggle, result}) => {
         const dispatch = useTemplateDispatch();
         const changeCategory = (categoryNo) => {
             dispatch({
@@ -21,12 +19,12 @@ const CategoryModal = ({isOpen, toggle, list}) => {
             <Modal ariaHideApp={false}
                    contentLabel="Selected Option" size="sm" fullscreen={false} isOpen={isOpen} toggle={toggle}>
                 <ModalHeader> 카테고리 선택</ModalHeader>
-                <button onClick={toggle}>영단기</button>
+                <button onClick={toggle}>닷기</button>
                 <ModalBody>
                     {
-                        list?.map(category => {
+                        result?.map(category => {
                             return (
-                                <button className="category-select" onClick={() => {
+                                <button className="category-select" key={category.categoryNo} onClick={() => {
                                     changeCategory(category.categoryNo)
                                 }}>
                                     <img src={category.imagePath} alt={category.categoryNo}/>

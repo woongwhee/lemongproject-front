@@ -6,7 +6,7 @@ const TemplateCard = ({template}) => {
     const {templateNo,range,title,todoCount,clearCount,playCount,category,create}=template;
     const {categoryNo,categoryName,imagePath}=category;
     const {photo,nickName,profileComment}=create;
-    const{photoNo,originName,changeName,filePath}=photo;
+    // const{photoNo,originName,changeName,filePath}=photo;
    const dispatch=useTemplateDispatch();
 
     const ViewDetail= ()=>{
@@ -15,6 +15,7 @@ const TemplateCard = ({template}) => {
     console.log(template);
     return (
         <div onClick={ViewDetail} className="Template-Card">
+
             <div className="Card-Img">
             <img src={imagePath} alt={categoryName} />
             </div>
