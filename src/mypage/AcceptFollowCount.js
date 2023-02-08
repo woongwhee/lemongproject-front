@@ -3,12 +3,18 @@ import axios from "axios";
 
 import './MyPage.css';
 
+import { useLoginState } from "../Member/LoginContext";
+
 function AcceptFollowCount(){
 
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
-    const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+    // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     // 팔로우 당하는사람(팔로워)
     const follower = params.get("userNo");

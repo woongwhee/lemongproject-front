@@ -9,7 +9,6 @@ import Calendar from './calendar/Calendar';
 //메뉴바 컴포넌트
 import Menubar2 from "./menubar/Menubar2";
 
-import {useLoginDispatch} from "../Member/LoginContext";
 import axios from "axios";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from '@mui/material/Button';
@@ -17,6 +16,8 @@ import Modal from 'react-bootstrap/Modal';
 import FeedInsert from "../feedPage/FeedInsert";
 import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
+import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
+import { useLoginDispatch } from "../Member/LoginContext";
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar
 
@@ -27,6 +28,7 @@ import {IconButton} from "@mui/material";
 
 function LogoutButton() {
     const dispatch= useLoginDispatch();
+
     const logout=async ()=>{
         await axios.get("/api/member/logout");
 
@@ -63,6 +65,9 @@ function MainMenu(){
             <LogoutButton></LogoutButton>
 <br/>
             <FeedInsert></FeedInsert>
+            
+            <br/>
+            <ChallengeChatRoom/>
         </Offcanvas.Body>
     </Offcanvas></>
     )

@@ -16,7 +16,7 @@ const ProFileData = (props): JSX.Element => {
 
     const fileList: File[] = []; // 업로드한 파일들을 저장하는 배열
 
-    const onSaveFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onSaveFiles = (e) => {
         const uploadFiles = Array.prototype.slice.call(e.target.files); // 파일선택창에서 선택한 파일들
 
         uploadFiles.forEach((uploadFile) => {

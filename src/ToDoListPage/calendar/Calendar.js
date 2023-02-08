@@ -52,12 +52,9 @@ function Calendar2() {
     calTodo();
   },[moveMark])
 
-
   //챌린지 투두 캘린더에 마크 표시
   const [chMark, setChMark] = useState([]);
   //챌린지 삭제,완료시 캘린더 마크 변동
-
-
 
   return (
     <div>

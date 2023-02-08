@@ -8,7 +8,6 @@ import {createStore} from "redux";
 import Join from './Member/Join';
 import FindPwd from './Member/FindPwd';
 import KakaoLogin from './Member/KakaoLogin';
-// import reducer from "./ToDoListPage/reducer";
 import {LoginProvider} from "./Member/LoginContext";
 import SetNick from './Member/SetNick';
 import NaverLogin from './Member/NaverLogin';
@@ -31,13 +30,16 @@ root.render(
     <Provider store={store}>
     <Routes>
         <Route path="/" element={<LoginProvider><App/></LoginProvider>} />
-      <Route path="join" element={<Join />} />
-      <Route path="findPwd" element={<FindPwd />} />
-      <Route path="kakao" element={<KakaoLogin />} />
-      <Route path="setNick" element={<SetNick />} />
-      <Route path='naverBtn' element={<NaverLoginBtn />} />
-      <Route path='naver' element={<NaverLogin />} />
-      <Route path="FeedInsert" element={<FeedInsert />}/>
+        <Route path="join" element={<Join />} />
+        <Route path="findPwd" element={<FindPwd />} />
+        <Route path="kakao" element={<KakaoLogin />} />
+        <Route path="setNick" element={<SetNick />} />
+        <Route path='naverBtn' element={<NaverLoginBtn />} />
+        <Route path='naver' element={<NaverLogin />} />
+        <Route path="FeedInsert" element={<FeedInsert />}/>
+        <Route path="mypage" element={<MyPage />}/>
+        <Route path="MypageUpdate" element={<MyPageUpdate />}/>
+        <Route path="ChallengeRoomCreate" element={<ChallengeRoomCreate />}/>
     </Routes>
     </Provider>
   </BrowserRouter>

@@ -3,25 +3,43 @@ import axios from "axios";
 
 import './MyPage.css';
 
+import { useLoginState } from "../Member/LoginContext";
+import {useDispatch, useSelector} from 'react-redux';
+
+
 function MyFollowingCount(){
 
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
-    const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+    // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     // 팔로우 당하는사람(팔로워)
-    const follower = sessionStorage.getItem("userNo");
+    const follower = profile?.userNo;
 
     // 팔로우 하는사람(팔로잉)
-    const followerIng = sessionStorage.getItem("userNo");
+    const followerIng = profile?.userNo;
 
     // 스프링에있는 폴더에서 이미지 불러오기위한 경로
-    let saveFilePath = "http://localhost:8081/api/images/";
+    // let saveFilePath = "http://localhost:8081/api/images/";
 
     // 팔로우 신청을 받은 사용자 입장에서 
     // 나의 팔로우 수락여부에 상관없이 팔로잉이 플러스되어야함.
     const [MyFollowingCount , setMyFollowingCount] = useState();
+
+    // 프로필 클릭 시 해당하는 userNo 뽑아오기.
+    const dispatch = useDispatch();
+
+    const selectUserNo = e => {
+        console.log(e + "[통과확인] === success"); // 값 뽑히는거 확인됨.
+        dispatch(
+            {type : 'SELECTUSERNO' , payload : {selectUserNo : e}} ,
+        )
+    };
 
     useEffect(
         () => {
@@ -57,9 +75,10 @@ function MyFollowingCount(){
         })
     }
 
-    function goUserPage(){
-        console.log("이동 성공");
-    }
+    // function goUserPage(){
+    //     console.log("이동 성공");
+    //     console.log(selectUserNo() + "통과됨");
+    // }
    
     let i = 0;
 
@@ -80,8 +99,10 @@ function MyFollowingCount(){
                         {myfollowingList?.map(e => <div style={{marginTop:'10px'}}>
                             <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
                             <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
-                                <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
-                                onClick={() => {goUserPage(window.location.href = "http://localhost:3000/mypage?userNo="+e?.profile?.userNo)}}>방문하기</button>
+                                <button type="button" 
+                                key={i++} {...e} 
+                                 class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
+                                onClick={() => {selectUserNo(e?.profile?.userNo);}}>방문하기</button>
                         </div>
                         </div>)}
                    </div>                

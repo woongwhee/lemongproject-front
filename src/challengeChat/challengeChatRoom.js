@@ -6,6 +6,7 @@ import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiSquarePl
 import {Nav} from 'react-bootstrap';
 import MySearch from "../mypage/MySearch";
 import MyAlert from "../mypage/MyAlert";
+import { useLoginState } from "../Member/LoginContext";
 
 function ChallengeChatRoom(props){
 
@@ -13,7 +14,9 @@ function ChallengeChatRoom(props){
     let{challengeData}=props;
 
     // 사용할 변수들 셋팅
-    const userNo = sessionStorage.getItem("userNo"); // 로그인한 사용자 userNo
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
     const challengeNo = 3000; // 테스트 챌린지 번호 3000
     const challengeTitle = challengeData?.challengeTitle; // 챌린지 번호에 해당하는 챌린지 제목
     const templateNo = challengeData?.templateNo; // 가져온 템플릿 번호

@@ -6,21 +6,24 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 import './MyPage.css';
 
+import { useLoginState } from "../Member/LoginContext";
+
 function MyFollowCount(){
 
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
+    // const queryString = window.location.search;
+    // const params = new URLSearchParams(queryString);
 
-    const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+    // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     // 팔로우 당하는사람(팔로워)
-    const follower = sessionStorage.getItem("userNo");
+    const follower = profile?.userNo;
 
     // 팔로우 하는사람(팔로잉)
-    const followerIng = sessionStorage.getItem("userNo");
-
-    // 스프링에있는 폴더에서 이미지 불러오기위한 경로
-    let saveFilePath = "http://localhost:8081/api/images/";
+    const followerIng = profile?.userNo;
 
     // (로그인을 한 유저)입장에서 다른 유저에게 팔로우를 신청할 경우
     // 상대방이 수락을 하던말던 나의 팔로워에 카운트가 올라가야함.

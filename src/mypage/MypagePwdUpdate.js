@@ -11,7 +11,7 @@ rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4
 function MyPagePwdCheck(){
 
      // 비밀번호 체크
-     const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+     const onChangePassword = useCallback((e) => {
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[@#$%^&*()_])(?=.*[0-9]).{8,15}$/
         const passwordCurrent = e.target.value
         setUserPwd(passwordCurrent)
@@ -28,7 +28,7 @@ function MyPagePwdCheck(){
     }, [])
 
     // 비밀번호 일치 체크
-    const onChangeRePwd = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeRePwd = useCallback((e) => {
         const passwordReCurrent = e.target.value
         setReUserPwd(passwordReCurrent)
 
