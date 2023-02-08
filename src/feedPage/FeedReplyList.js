@@ -9,6 +9,8 @@ function FeedReplyList({feedNo}){
     function callback(str) {
         setTestStr(str);
     }
+
+
     useEffect(
         () => {
             axios({
@@ -18,12 +20,15 @@ function FeedReplyList({feedNo}){
                     feedNo:feedNo
                 }
             }).then((res) => {
-                callback(res.data);
-                console.log(res.data);
-                console.log(testStr)
+                // callback(res.data);
+                console.log(res.data.result)
+                setTestStr(res.data.result)
+                // console.log(Json.userNo);
+                console.log("Test" + testStr)
             })
         }, []
-    );let i=0;
+    );
+    let i=0;
     return(
         <div>
             <Table striped>
@@ -36,11 +41,8 @@ function FeedReplyList({feedNo}){
                     <th>댓글삭제</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {testStr?.map(e=><FeedReplyResultList key={i++} {...e} feedNo={feedNo}/>)}
-                </tbody>
             </Table>
-
+                    {testStr?.map(e=><FeedReplyResultList key={i++} {...e} feedNo={feedNo}/>)}
         </div>
         )
 
