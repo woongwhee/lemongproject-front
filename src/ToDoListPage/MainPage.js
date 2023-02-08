@@ -7,7 +7,6 @@ import Profile from "./profile/Profile";
 //캘린더 Api 컴포넌트
 import Calendar from './calendar/Calendar';
 //메뉴바 컴포넌트
-import Menubar2 from "./menubar/Menubar2";
 
 import {useLoginDispatch} from "../Member/LoginContext";
 import axios from "axios";
@@ -17,6 +16,8 @@ import Modal from 'react-bootstrap/Modal';
 import FeedInsert from "../feedPage/FeedInsert";
 import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
+import Menubar4 from "./menubar/Menubar4";
+import Menubar2 from "./menubar/Menubar2";
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar
 
@@ -85,6 +86,7 @@ function MainPage() {
                 <Calendar/>
             </div>
           <Menubar2/>
+            {/*<Menubar4/>*/}
         </div>
     </>
             );

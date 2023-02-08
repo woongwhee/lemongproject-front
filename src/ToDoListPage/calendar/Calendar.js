@@ -28,7 +28,8 @@ function Calendar2() {
   const selectDay = e => {
     dispatch(
       { type : 'SELECTDAY' , payload : {selectDay : e}},
-    )
+    );
+    dispatch({type:'menu'})
   };
 
   //데일리 투두 캘린더에 마크 표시

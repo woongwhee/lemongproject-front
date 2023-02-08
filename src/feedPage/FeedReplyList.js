@@ -7,7 +7,6 @@ function FeedReplyList(props){
     const [ testStr, setTestStr ] = useState();
 
     const feedNo = props.feedNo;
-
     function callback(str) {
         setTestStr(str);
     }
