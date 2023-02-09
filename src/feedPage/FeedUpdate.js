@@ -150,7 +150,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                             style={{width:"300px", height:"300px"}}
                             draggable={true}
                         />
-                        <span>{i+1} 번째 사진</span>
+                        <span>{getPhotoNoList[i]}  :::  {[i]}</span>
                     </div>
                 );
             }
