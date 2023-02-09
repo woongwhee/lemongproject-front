@@ -18,6 +18,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 import { useLoginDispatch } from "../Member/LoginContext";
+import MyMenuBar from "./menubar/MyMenuBar";
+
+import { useLoginState } from "../Member/LoginContext";
+
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar
 
@@ -67,7 +71,9 @@ function MainMenu(){
             <FeedInsert></FeedInsert>
             
             <br/>
-            <ChallengeChatRoom/>
+            <div style={{marginTop:'-500px'}}>
+                <ChallengeChatRoom/>
+            </div>
         </Offcanvas.Body>
     </Offcanvas></>
     )
@@ -76,10 +82,16 @@ function MainMenu(){
 function MainPage() {
     // Apikey를 환경변수를 이용해 숨기기.
     const apiKey = process.env.REACT_APP_CAL_API_KEY;
+
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
+
     return(
         <>
         <div>
-            <MainMenu></MainMenu>
+            {/* <MainMenu></MainMenu> */}
+            <MyMenuBar profile={profile}/>
         </div>
         <div className="outer">
 

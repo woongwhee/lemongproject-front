@@ -4,12 +4,17 @@ import { Component } from "react";
 import './MyPage.css';
 import './MyPageUpdate.css';
 
+// 모달
+import Modal from 'react-bootstrap/Modal';
+import {ModalBody, ModalFooter} from "react-bootstrap";
+
 // 부트스트랩
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import MyPageProfile from "./MyPageProfile";
 import MyPagePwdCheck from "./MypagePwdUpdate";
 import MyDelete from "./MyDelete";
+import MyMenuBar from "../ToDoListPage/menubar/MyMenuBar";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 
 import { BsFillBrushFill , BsCheckLg } from "react-icons/bs";
@@ -18,9 +23,16 @@ import { confirmAlert } from "react-confirm-alert";
 // import "react-confirm-alert/src/react-confirm-alert.css";
 import './react-confirm-alert.css';
 
+import { useLoginState } from "../Member/LoginContext";
+import {useDispatch, useSelector} from 'react-redux';
+
 function MyPageUpdate(){
 
-    const userNo = sessionStorage.getItem("userNo");
+    // const userNo = sessionStorage.getItem("userNo");
+
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     // 현재 주소에 떠있는 userNo를 가져와서 그 userNo에 해당하는 값을 사용하겠다.
     const queryString = window.location.search;
@@ -35,12 +47,14 @@ function MyPageUpdate(){
      function callback(data){
          setMyProfile(data);
      }
+
+     const userNos = useSelector((state) => state.userNo.selectUserNo);
  
      useEffect(
          () => {
              axios.get("/api/member/selectMyProfile" , {
                  params:{
-                     userNo : userNo1 ,
+                     userNo : userNos ,
                  }
              }).then(function(res){
                  console.log("데이터 전송 성공");
@@ -51,7 +65,7 @@ function MyPageUpdate(){
              }).catch(function(){
                  console.log("데이터 전송 실패");
              });
-         } , []
+         } , [userNos]
      );
 
      // 마이페이지 닉네임 체크 
@@ -151,7 +165,7 @@ function MyPageUpdate(){
         axios.get("/api/member/updateMyNick" , {
             params:{
                 updateNick : mynickCheck.checkValue ,
-                userNo : userNo ,
+                userNo : userNos ,
             }
         }).then(function(res){
             console.log(res + "데이터 전송 성공");
@@ -162,7 +176,7 @@ function MyPageUpdate(){
                 buttons: [
                   {
                     label: "Yes" ,
-                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
                   }
                 ]
               })
@@ -197,7 +211,7 @@ function MyPageUpdate(){
         axios.get("/api/member/updateMyContent" , {
             params:{
                 updateCont : updateContent.updateCont ,
-                userNo : userNo ,
+                userNo : userNos ,
             }
         }).then(function(res){
             console.log(res + "데이터 전송 성공");
@@ -208,7 +222,7 @@ function MyPageUpdate(){
                 buttons: [
                   {
                     label: "Yes" ,
-                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
                   }
                 ]
               })
@@ -255,8 +269,8 @@ function MyPageUpdate(){
 
     return(
         <div>
-            <ChallengeChatRoom/>
-            <form className="outer" style={{position:'absolute'}}>
+            <MyMenuBar myprofile={myprofile}></MyMenuBar>
+            <form className="outer_my" style={{position:'absolute'}}>
 
                 <MyPageProfile myprofile={myprofile}/>    
                 <div className="outer_myContent">

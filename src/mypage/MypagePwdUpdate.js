@@ -4,6 +4,8 @@ import axios from "axios";
 import { confirmAlert } from "react-confirm-alert";
 import './react-confirm-alert.css';
 
+import {useDispatch, useSelector} from 'react-redux';
+
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
 rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"></link>
@@ -58,7 +60,8 @@ function MyPagePwdCheck(){
     const [isPwd, setIsPwd] = useState(false);
     const [isRePwd, setIsRePwd] = useState(false);
 
-    const userNo = sessionStorage.getItem("userNo");
+    // const userNo = sessionStorage.getItem("userNo");
+    const userNos = useSelector((state) => state.userNo.selectUserNo);
 
     const btnCheck = () => {
         if(userPwd === reUserPwd){
@@ -76,7 +79,7 @@ function MyPagePwdCheck(){
                     buttons: [
                       {
                         label: "Yes" ,
-                        onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+                        onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
                       }
                     ]
                   })
@@ -90,7 +93,7 @@ function MyPagePwdCheck(){
                     buttons: [
                       {
                         label: "Yes" ,
-                        onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+                        onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
                       }
                     ]
                   })

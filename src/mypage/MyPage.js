@@ -107,7 +107,7 @@ function MyPage() {
     return(
         <div>
             {/* <ChallengeChatRoom /> */}
-            <div style={{position:'absolute'}}>
+            <div style={{position:'absolute' , marginLeft:'-180px' , marginTop:'-7px'}}>
             <div className="outer_my" style={{position:'absolute'}}>
                 
                 <div className="outer_prof">

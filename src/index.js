@@ -38,11 +38,10 @@ root.render(
         <Route path='naver' element={<NaverLogin />} />
         <Route path="FeedInsert" element={<FeedInsert />}/>
         <Route path="mypage" element={<MyPage />}/>
-        <Route path="MypageUpdate" element={<MyPageUpdate />}/>
+        <Route path="MypageUpdate" element={<LoginProvider><MyPageUpdate /></LoginProvider>}/>
         <Route path="ChallengeRoomCreate" element={<ChallengeRoomCreate />}/>
     </Routes>
     </Provider>
   </BrowserRouter>
-
 
 );

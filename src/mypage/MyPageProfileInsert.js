@@ -10,9 +10,18 @@ import { width } from 'dom7';
 
 import { TiTick } from "react-icons/ti";
 
+import { useLoginState } from "../Member/LoginContext"; 
+import {useDispatch, useSelector} from 'react-redux';
+
 const ProFileData = (props): JSX.Element => {
 
     let{userNo}=props;
+
+    const userNos = useSelector((state) => state.userNo.selectUserNo);
+
+    let {profile}=useLoginState();
+    console.log(profile);
+    // const userNos = profile?.userNo; // 로그인한 사용자 userNo
 
     const fileList: File[] = []; // 업로드한 파일들을 저장하는 배열
 
@@ -30,14 +39,14 @@ const ProFileData = (props): JSX.Element => {
         fileList.forEach((file) => {
             // 파일 데이터 저장
             formData.append('file', file);
-            formData.append('userNo' , userNo);
+            formData.append('userNo' , userNos);
             console.log(file); // 데이터 잘 들어감.
             console.log(formData);
         });
 
 
         axios.post('/api/member/insertUserProfile', 
-            formData , {headers: {
+            formData, {headers: {
             "Content-Type": "multipart/form-data",
         }}).then(function(){
             confirmAlert({
@@ -46,7 +55,7 @@ const ProFileData = (props): JSX.Element => {
                 buttons: [
                   {
                     label: "Yes" ,
-                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
                   }
                 ]
               })
@@ -60,7 +69,7 @@ const ProFileData = (props): JSX.Element => {
                 buttons: [
                   {
                     label: "Yes" ,
-                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
                   }
                 ]
               })

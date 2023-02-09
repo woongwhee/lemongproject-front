@@ -9,6 +9,7 @@ import SendIcon from '@mui/icons-material/Send';
 import ButtonR from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiSquarePlus} from "react-icons/ci";
 
 function FeedInsert() {
 
@@ -41,9 +42,12 @@ function FeedInsert() {
     return (
         <div className="feed-insert-body">
             <br/><br/>
-            <ButtonR className="me-2 mb-2" onClick={() => setShow(true)}>
-                피드 게시물 작성
-            </ButtonR>
+            {/* 피드 게시물 작성 */}
+            <CiSquarePlus style={{fontSize:'40px'}} id="feedInsertBtn" className="me-2 mb-2" onClick={() => setShow(true)}>
+                {/* <ButtonR className="me-2 mb-2" onClick={() => setShow(true)}>
+                    피드 게시물 작성
+                </ButtonR> */}
+            </CiSquarePlus>
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
@@ -98,7 +102,7 @@ function FeedInsert() {
                                         window.location.reload();
                                     }).catch(function (res) {
                                         checkContent(res.data.Java);
-                                        console.log('실패함' + userNo, content, res.data.Java)
+                                        console.log('실패함' + userNo, content, res.data.Java);
                                     })
                                 }}
                     >전송</Button>

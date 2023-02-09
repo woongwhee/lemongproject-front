@@ -7,6 +7,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import './MyPage.css';
 
 import { useLoginState } from "../Member/LoginContext";
+import {useDispatch, useSelector} from 'react-redux';
 
 function MyFollowCount(){
 
@@ -19,11 +20,20 @@ function MyFollowCount(){
     console.log(profile);
     const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
+    const dispatch = useDispatch();
+
+    const selectUserNo = e => {
+        console.log(e + "[통과확인] === success"); // 값 뽑히는거 확인됨.
+        dispatch(
+            {type : 'SELECTUSERNO' , payload : {selectUserNo : e}} ,
+        )
+    };
+
     // 팔로우 당하는사람(팔로워)
     const follower = profile?.userNo;
 
     // 팔로우 하는사람(팔로잉)
-    const followerIng = profile?.userNo;
+    const followerIng = userNo;
 
     // (로그인을 한 유저)입장에서 다른 유저에게 팔로우를 신청할 경우
     // 상대방이 수락을 하던말던 나의 팔로워에 카운트가 올라가야함.
@@ -39,6 +49,7 @@ function MyFollowCount(){
                 console.log(res + "데이터 전송 성공");
                 const data = res.data.result;
                 console.log(data);
+                console.log(userNo + "통 과 됨")
                 setMyFollow(data);
             }).catch(function(){
                 console.log("데이터 전송 실패");
@@ -63,10 +74,6 @@ function MyFollowCount(){
             console.log("데이터 전송 실패");
         })
     }
-
-    function goUserPage(){
-        console.log("이동 성공");
-    }
    
     let i = 0;
 
@@ -88,7 +95,7 @@ function MyFollowCount(){
                             <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
                             <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
                                 <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
-                                onClick={() => {goUserPage(window.location.href = "http://localhost:3000/mypage?userNo="+e?.profile?.userNo)}}>방문하기</button>
+                                onClick={() => {selectUserNo(e?.profile?.userNo);}}>방문하기</button>
                                 </div>
                         </div>)}  
                    </div>

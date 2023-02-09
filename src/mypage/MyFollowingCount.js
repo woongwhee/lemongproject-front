@@ -12,6 +12,8 @@ function MyFollowingCount(){
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
+    const userNos = useSelector((state) => state.userNo.selectUserNo);
+
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
     let {profile}=useLoginState();
@@ -19,7 +21,7 @@ function MyFollowingCount(){
     const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     // 팔로우 당하는사람(팔로워)
-    const follower = profile?.userNo;
+    const follower = userNos
 
     // 팔로우 하는사람(팔로잉)
     const followerIng = profile?.userNo;
@@ -45,7 +47,7 @@ function MyFollowingCount(){
         () => {
             axios.get("/api/follow/MyFollowingCount" , {
                 params : {
-                    follower : follower , 
+                    follower : userNos , 
                 }
             }).then(function(res){
                 console.log(res+"데이터 전송 성공");
@@ -54,7 +56,8 @@ function MyFollowingCount(){
             }).catch(function(){
                 console.log("데이터 전송 실패");
             })
-        } , []
+
+        } , [userNos]
     )
 
     // 나의 팔로워 리스트 띄우기.
@@ -63,7 +66,7 @@ function MyFollowingCount(){
     function ShowMyFollowing(){
         axios.get("/api/follow/selectMyFollowingList" , {
             params:{
-                follower : follower,
+                follower : userNos,
             }
         }).then(function(res){
             console.log(res+"데이터 전송 성공");
@@ -75,10 +78,10 @@ function MyFollowingCount(){
         })
     }
 
-    // function goUserPage(){
-    //     console.log("이동 성공");
-    //     console.log(selectUserNo() + "통과됨");
-    // }
+    useEffect(() => {;
+        ShowMyFollowing();
+        console.log(userNos + "===여기도 통과됨")
+      },[userNos])
    
     let i = 0;
 

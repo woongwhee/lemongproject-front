@@ -8,6 +8,8 @@ import MySearch from "../mypage/MySearch";
 import MyAlert from "../mypage/MyAlert";
 import { useLoginState } from "../Member/LoginContext";
 
+import { Link } from "react-router-dom";
+
 function ChallengeChatRoom(props){
 
     // challengeChatRoom에서 넘겨받은 챌린지 정보들
@@ -36,7 +38,7 @@ function ChallengeChatRoom(props){
     }
 
     function MovePage(){
-        window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+        // <Link to="/MypageUpdate">MypageUpdate</Link>
     }
 
     function MoveMainPage(){
@@ -61,9 +63,11 @@ function ChallengeChatRoom(props){
                         </a>
                         <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
                             <li class="nav-item">
-                                <a id="hbtn" href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home" onClick={MovePage}>
+                            <Link to="/MypageUpdate">
+                                {/* <a id="hbtn" href="/MypageUpdate" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home" onClick={MovePage}> */}
                                     <CiUser class="bi-house fs-1" style={{color:'black' , width:'30px' , marginLeft:'-5px'}}></CiUser>
-                                </a>
+                                {/* </a> */}
+                            </Link>
                             </li>
                             <li>
                                 <a id="hbtn" onClick={() => setClickBtns(!clickBtns)} href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
