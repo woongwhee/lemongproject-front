@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
-import Feed from "./Feed";
+import Feed from "./Feed1";
 import FeedLoading from "./FeedLoading";
 
 
@@ -33,11 +33,10 @@ function FeedBody(){
     );
     let i=0;
     return(
-        <div className="App">
-            <header className="App-header">
-                {loading ? <FeedLoading/> : testStr?.map(e=><Feed key={i++} {...e} />)}
-
-            </header>
+        <div>
+            <div style={{overflow:"scroll", height:"800px"}}>
+            {loading ? <FeedLoading/> : testStr?.map(e=><Feed key={i++} {...e} />)}
+            </div>
         </div>
     );
 }

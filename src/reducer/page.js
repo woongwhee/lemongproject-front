@@ -1,7 +1,3 @@
-import TodoList from "../ToDoListPage/todolist3/TodoList";
-import ChallengeList from "../ToDoListPage/menubar/ChallengeList";
-import FeedList from "../ToDoListPage/menubar/FeedList";
-import TemplateView from "../ToDoListPage/menubar/TemplateView";
 
 // Action types
 export const OTHER = 'page/OTHER';

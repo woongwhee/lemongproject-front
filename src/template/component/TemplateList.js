@@ -6,8 +6,8 @@ import CategoryButton from "./CategoryButton";
 import apiHoc from "../../util/apiHoc";
 
 
-const TemplateList = ({result}) => {
-    let templateList=result;
+const TemplateList = (props) => {
+    let templateList=props.result;
     return (
         <div className="outer_Temp">
             <div className="template-list">

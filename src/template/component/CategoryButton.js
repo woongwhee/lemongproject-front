@@ -6,7 +6,7 @@ import Modal from "react-modal";
 import CategoryModal from "./CategoryModal";
 import {isEmpty} from "../../util/typeUtile";
 
-const CategoryButton = () => {
+const CategoryButton = (props) => {
     const state=useAsync(templateCategory);
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -19,9 +19,8 @@ const CategoryButton = () => {
                 <img src="/LemongImg/template/search.png" />
             </button>
             {
-            <CategoryModal statuses={state.statuses} isOpen={modal} toggle={toggle} list={state.result} />
+            <CategoryModal state={state} isOpen={modal} toggle={toggle}/>
             }
-
             </>
     );
 };

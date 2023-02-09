@@ -3,9 +3,11 @@
 }
 .feed-insert-body{
     height: 620px;
+    width: 100%;
     border-radius: 6px;
-    border: 2px solid black;
+    /*border: 10px solid black;*/
 }
+/*style={{marginLeft:"100px", width:"60%"}}*/
 
 .feed-insert-button{
     float: right;

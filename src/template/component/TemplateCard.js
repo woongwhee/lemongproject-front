@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, CardImg, CardText, CardTitle} from "reactstrap";
-import {useTemplateDispatch, useTemplateState} from "../TemplateContext";
+import {useTemplateDispatch} from "../TemplateContext";
 
 const TemplateCard = ({template}) => {
     const {templateNo,range,title,todoCount,clearCount,playCount,category,create}=template;
@@ -15,6 +15,7 @@ const TemplateCard = ({template}) => {
     console.log(template);
     return (
         <div onClick={ViewDetail} className="Template-Card">
+
             <div className="Card-Img">
             <img src={imagePath} alt={categoryName} />
             </div>

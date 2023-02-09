@@ -11,13 +11,13 @@ const TemplateListView = () => {
     // const {list} = useTemplateState()
     // const dispatch = useTemplateDispatch();
     const {categoryNo,page} = useTemplateState()
-    console.log(useTemplateState())
+    // console.log(useTemplateState())
     const state = useAsync(templateList,[page,categoryNo]);
     // const containTemplate = (list) => {
     //     dispatch({type: 'ADDLIST', list: list})
     // }
     return(
-            <TemplateList stateus={state.status} result={state.result}/>
+            <TemplateList state={state}/>
     )
 
 
