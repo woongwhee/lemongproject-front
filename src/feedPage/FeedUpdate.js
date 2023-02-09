@@ -42,7 +42,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
         // e.stopPropagation();
         console.log('끝' + t);
         arr.push(t);
-        console.log(arr)
+        console.log("끝 번호 추가 arr"+arr)
     }
     const changeValue = () =>{
         axios.post('api/feed/changeValue',{

@@ -18,12 +18,12 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
   //console.log(chTodos);
   let arr = [];
   
-  const onDragStart = () => {
-    // const todoNos = todoList.map(todo => todo.todoNo);
-    // console.log("뽑았으"+todoNos);
-    // arr.push(todoNos);
-    // console.log("첫"+ arr);
-    //todoList.map(todo => arr.push(todo.todoNo));
+  
+  const onDragStart = (res) => {
+    //const originArr = todoList.map(todo => todo.todoNo);
+    arr.push(res.draggableId); //선택한 투두 no
+    //console.log(todoList);
+    console.log("시작한 곳"+res.draggableId);
   }
   
   const onDragEnd = (res) => {
@@ -32,37 +32,37 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
     const dndTodoList = [...todoList];
     const [reorderedItem] = dndTodoList.splice(res.source.index, 1);
     dndTodoList.splice(res.destination.index, 0, reorderedItem);
-    //setTodoList(dndTodoList);
+
+    //const changeArr = dndTodoList.map(todo => todo.todoNo);
+
+    console.log("시작 인덱스"+res.source.index);
+    console.log("도착 인덱스"+res.destination.index);
+    console.log(res);
+    console.log(res.source);
+    console.log(res.destination);
     console.log(dndTodoList);
 
-    // const dndTodoNos = dndTodoList.map(todo => todo.todoNo);
-    // arr.push(dndTodoNos);
+    const originValue = res.source.index;
+    const changeValue = res.destination.index;
 
-    //dndTodoList.map(todo => arr.push(todo.todoNo));
-    //console.log("추가 후"+arr);
+    dndTodoList.map((todo,res)=>{
+      if(todo.todoNo=== res.destination){
+        todo.value = changeValue;
+      }
+    })
+    
+    setTodoList(dndTodoList);
+    console.log("수정후"+dndTodoList);
 
-    // axios.post('api/todo/dndTodo', {
-    //   originArr : arr[0],
-    //   changeArr : arr[1],
-    // }).then(function(){
-    //   setTodoList(dndTodoList);
-    //   console.log("최종"+arr);
-    //   console.log("dnd 완료");
-    //   arr = [];
-    // }).catch(function(){
-    //   console.log("dnd 실패")
-    // })
-
-    axios.get('api/todo/dndTodos', ({
-      dndTodoList : dndTodoList
-    })).then(function(){
-      setTodoList(dndTodoList);
-      console.log("dnd"+dndTodoList);
+    axios.get('api/todo/dndTodo', {
+      params : { dndTodoNo : res.draggableId }
+    }).then(function(){
+      console.log("최종"+arr);
       console.log("dnd 완료");
     }).catch(function(){
-      console.log("dnd 실패");
-      console.log(dndTodoList);
+      console.log("dnd 실패")
     })
+
     
   }
 
@@ -74,7 +74,7 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
         {provided => (
           <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}>
             {todoList && todoList.map((todo, index) =>(
-              <Draggable draggableId={String(todo.todoNo)} index={index} key={todo.todoNo}>
+              <Draggable draggableId={String(todo.todoNo)} index={todo.value} key={index} >
                 {provided => (
                   <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                   <TodoItem
