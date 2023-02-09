@@ -94,7 +94,6 @@ function MainPage() {
             <MyMenuBar profile={profile}/>
         </div>
         <div className="outer">
-
             {/* 캘린더 영역 */}
             <div className="outer_date">
                 <Profile/>

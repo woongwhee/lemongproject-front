@@ -14,6 +14,7 @@ function FeedBody(){
     // 변수 초기화
     function callback(str) {
         setTestStr(str);
+
     }
     const [loading, setLoading] = useState(true);
 
@@ -27,6 +28,7 @@ function FeedBody(){
                 // console.log(res.data.result)
                 callback(res.data.result);
                 // console.log(res.data.code);
+                // console.log("teststr" + testStr)
                 setLoading(false);
             })
         }, []

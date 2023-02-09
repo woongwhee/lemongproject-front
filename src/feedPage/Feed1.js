@@ -22,6 +22,7 @@ import TreeItem from "@mui/lab/TreeItem";
 import TreeView from '@mui/lab/TreeView';
 import FeedReply from "./FeedReply";
 import "./Feed.css"
+import FeedDetail from "./FeedDetail";
 
 
 const ExpandMore = styled((props) => {
@@ -40,6 +41,7 @@ export default function RecipeReviewCard(props) {
 
     let filePathList=filePath.split(",");
     let photoNoList=photoNo.split(",");
+
     const [Feed,setFeed]=useState({userNo,feedNo,feedContent,feedAt,filePathList,photoNoList,nickName})
 
     const [expanded, setExpanded] = React.useState(false);
@@ -52,7 +54,7 @@ export default function RecipeReviewCard(props) {
 
     return (
         <div className="feed-container">
-        <Card sx={{ maxWidth: 400,minWidth:400 ,border:"1px solid gray"}}>
+        <Card sx={{ maxWidth: 500 ,minWidth : 500 ,border:"1px solid gray"}}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -94,9 +96,10 @@ export default function RecipeReviewCard(props) {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-
+                {/*{Feed.feedNo}*/}
+                {/*<FeedDetail Feed={Feed}></FeedDetail>*/}
                 <FeedReply feedNo={Feed.feedNo}></FeedReply>
-
+                <FeedDetail Feed={Feed}></FeedDetail>
                 <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}

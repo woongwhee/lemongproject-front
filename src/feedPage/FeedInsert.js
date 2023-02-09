@@ -56,7 +56,7 @@ function FeedInsert() {
                     <Modal.Title>FeedInsert</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div style={{marginBottom:"20px", border:"1px solid blue"}}>
+                    <div className="feed-photo-insert">
                         <FeedPictureInsert setInsertPhotoNo={setInsertPhotoNo}></FeedPictureInsert>
                     </div>
 

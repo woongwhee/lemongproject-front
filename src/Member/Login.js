@@ -39,8 +39,7 @@ function Login() {
             {
                 'email': e,
                 'userPwd': p
-            }
-        )
+            })
         if (response.data.code === '2000') {
             alert("로그인에 성공하였습니다.")
             loginSuccess(response.data.result);

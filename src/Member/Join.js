@@ -58,8 +58,8 @@ function Join() {
     // 닉네임 중복체크
     const checkNick = async(nickName) => {
         let response = await axios.post('api/p/join/chNick',
-            ({'nickName':nickName})
-        )
+            {'nickName':nickName}
+        ).then(function (res){console.log(res.data)})
         if(response.data.code === '2000') {
             // alert("사용가능")
             setNickError("사용 가능한 닉네임입니다.")
@@ -70,6 +70,7 @@ function Join() {
             setNickError("중복된 닉네임입니다.")
             setErrorColor("chAlarm noAlarm")
             setIsNickBtn(false);
+
         } 
     }
 

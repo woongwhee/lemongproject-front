@@ -1,16 +1,30 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import FeedReplyResultList from "./FeedReplyResultList";
 import Table from 'react-bootstrap/Table';
 
-function FeedReplyList(props){
-    const [ testStr, setTestStr ] = useState();
+function FeedReplyList({feedNo}){
+    const [ testStr, setTestStr ] = useState([]);
 
-    const feedNo = props.feedNo;
+    const [ length, setLength ] = useState(testStr.length);
+
 
     function callback(str) {
         setTestStr(str);
     }
+
+    // testSTr7개;
+    const replylist = ({reply}) => {
+        return (
+            <div style={{border:"1px solid black"}}>
+                {reply.replyNo}
+                {reply.userNo}
+                {reply.replyContent}
+                {reply.replyAt}
+            </div>
+        );
+    }
+
 
     useEffect(
         () => {
@@ -21,14 +35,17 @@ function FeedReplyList(props){
                     feedNo:feedNo
                 }
             }).then((res) => {
-                callback(res.data.result);
-                console.log(res.data.result);
+                // callback(res.data);
+                console.log(res.data.result[0].replyNo) // [7개]
+                setTestStr(res.data.result) // [7개]
+                setLength(res.data.result.length)
+                // console.log(Json.userNo);
+                // console.log("Test" + testStr)
+
             })
-        }, []
+        }, [length]
     );
-
     let i=0;
-
     return(
         <div>
             <Table striped>
@@ -41,10 +58,12 @@ function FeedReplyList(props){
                     <th>댓글삭제</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {testStr?.map(e=><FeedReplyResultList key={i++} {...e} feedNo={feedNo}/>)}
-                </tbody>
             </Table>
+            {/*{testStr?.map(e=><FeedReplyResultList key={i++} {...e} feedNo={feedNo}/>)}*/}
+            {testStr?.map(reply=>replylist({reply}) )}
+            {/*{testStr[0].replyNo}*/}
+            {testStr.length}
+            {length}
         </div>
         )
 
