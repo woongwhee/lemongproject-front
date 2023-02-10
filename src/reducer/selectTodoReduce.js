@@ -4,8 +4,8 @@ const initialState = {
     value: 3,
   };
 
-export default function selectTodoReduce(state = initialState, action) {
-    if(action.type === 'VIEW'){
+export default function MoveMark(state = initialState, action) {
+    if(action.type === 'MOVE'){
         return initialState;
     }
 }

@@ -1,35 +1,28 @@
+import axios from 'axios';
 import { useEffect } from 'react';
-import { Client_Id, Naver_CallBack_URL } from './NaverData';
+import {useLoginDispatch} from "./LoginContext";
+
 
 
 function NaverLoginBtn() {
 
 
-    const { naver } = window;
-    const NAVER_CLIENT_ID = Client_Id;
-    const NAVER_CALLBACK_URL = Naver_CallBack_URL;
+    useEffect( () => {
+        userAccessToken()
+    }, [])
 
 
-    const initializeNaverLogin = () => {
-        const nLogin = new naver.LoginWithNaverId({
-            clientId: NAVER_CLIENT_ID,
-            callbackUrl: NAVER_CALLBACK_URL,
-            isPopup: false,
-            loginButton: { color: 'green', type: 1, height: '47' },
-        });
-        nLogin.init();
-
-        // 프론트에서 회원정보를 가지고 올 경우?
-        // 이 내부에서 작성하면 된다.
-        nLogin.getLoginStatus(async function(status) {
-            if(status) {
-                const userId = nLogin.user.getEmail()
-                const userName = nLogin.user.getName()
-                console.log(userId)
-                console.log(userName)
+    const loginDispatch = useLoginDispatch();
+    const loginSuccess = (result) => {
+        loginDispatch({
+            type: 'login',
+            payload: {
+                isLogin: true,
+                profile: result,
+                socialType:"NAVER"
             }
         })
-    };
+    }
 
 
     const userAccessToken = () => {
@@ -38,34 +31,33 @@ function NaverLoginBtn() {
 
     const getToken = () => {
         const token = window.location.href.split("=")[1].split('&')[0]
-        console.log(token)
-        sessionStorage.setItem('access_Token', token)
-        
+        // sessionStorage.setItem('access_Token', token)
+        axios({
+            url:'api/p/naverLogin',
+            method:'GET',
+            params:{accessToken:token}
+        }) .then((res) => {
+            if(res.data.code === '2000') {
+                console.log('성공')
+                console.log(res.data.result)
+                document.location.href = '/';
+            } else {
+                console.log('닉네임 설정하기')
+                // sessionStorage.setItem("userNo", res.data.result.userNo);
+                document.location.href="/setNick";
+            }
+        })
+        .catch(function() {
+            console.log("실패")
+        })
     }
 
 
-    const handleNaverClick = () => {
-        const naverLoginButton = document.getElementById("naverIdLogin_loginButton");
-        if(naverLoginButton) naverLoginButton.click();
-    }
-
-
-    useEffect( () => {
-        initializeNaverLogin()
-        userAccessToken()
-    }, [])
 
 
 
     return(
-        <div>
-            <div id="naverIdLogin" style={{display: "none"}}></div> 
-            <div>
-                <img className='social' src='LemongImg/SocialImg/NaverLogin.png' alt='lemongLogo' 
-                    onClick={handleNaverClick} />
-            </div>
-            {/* id 값이 naverIdLogin인 div가 반드시 있어야 한다. */}
-        </div>
+        <div></div>
     )
 
 }

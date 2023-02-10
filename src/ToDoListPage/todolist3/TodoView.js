@@ -25,11 +25,13 @@ const GlobalStyle = createGlobalStyle`
 
 function TodoView3(){
   //선택한 투두리스트 날짜 
-  const selectDay = useSelector((state)=> state.selectDay);
+  const selectDay = useSelector((state)=> state.date.selectDay);
   const todoDate = new moment(selectDay).format('YYMMDD');
 
   //입력 내용 리스트 배열로 저장
-  const [todoList, setTodoList] = useState([])
+  const [todoList, setTodoList] = useState([]);
+
+  const [chTodoList , setChTodoList] = useState([]);
 
   //투두리스트 가져오기(get요청)
   //비동기처리를 해야하므로 async/await 구문을 통해서 처리합니다.
@@ -58,11 +60,12 @@ function TodoView3(){
   const insertTodo = async(inputValue, setInputValue, open, setOpen, todoDate) => {
     await axios.post('api/todo/insertTodo',
       ({ 
-        'userNo' : 1,
-        'todoContent' : inputValue,
-        'clear' : false,
-        'value' : 1,
-        'todoDate' :  todoDate
+        userNo : 1,
+        todoContent : inputValue,
+        clear : false,
+        value : 0,
+        todoDate :  todoDate,
+        todoNo : 0
       })
     ).then(function(res){
       console.log('작성 성공');
@@ -73,6 +76,7 @@ function TodoView3(){
           todoContent : inputValue,
           clear : false,
           todoNo : res.data.todoNo,
+          value : res.data.value,
         }
       ])
       setInputValue('');
@@ -131,35 +135,40 @@ function TodoView3(){
 
   //내일로 미루기
   const onDelay = async(todoNo) => {
-  axios.get('api/todo/delayTodo', ({
-    params: {todoNo : todoNo}
+    axios.get('api/todo/delayTodo', ({
+      params: {todoNo : todoNo}
     })
-  ).then(function(res){
-    //setTodoList(res.data);
-    setTodoList(todoList.map((todo) =>({
-      ...todo,
-    })));
-    console.log("미루기 완료");
-  }).catch(function(){
-    console.log("미루기 실패")
-  })
-}
-// hide : todo.todoNo === todoNo ? !hide : hide
+    ).then(function(res){
+      // setTodoList(todoList.map((todo) =>({
+      //   ...todo
+      // })));
+      setTodoList(todoList.filter(todo => todo.todoNo !== todoNo));
+      console.log("미루기 완료");
+    }).catch(function(){
+      console.log("미루기 실패")
+    })
+  }
 
 
 
   return (
-    <TodoProvider>
+    <>
       <TodoTemplate>
         {/* <p onClick={click}>dd</p> */}
         <GlobalStyle />
-        {/*<TodoDate /> /!*todo날짜 컴포넌트*!/*/}
-        <TodoList todoList={todoList} onDel={onDel} onToggle={onToggle} onUpdate={onUpdate} onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
+        <TodoDate /> {/*todo날짜 컴포넌트*/}
+        <TodoList
+         todoList={todoList}
+         setTodoList={setTodoList}
+         onDel={onDel}
+         onToggle={onToggle}
+         onUpdate={onUpdate}
+         onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
         <TodoCreate insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}
       </TodoTemplate>
-    </TodoProvider>
+    </>
   );
 }
 
  
-export default TodoView3;
+export default React.memo(TodoView3);
