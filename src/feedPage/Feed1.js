@@ -76,7 +76,6 @@ export default function RecipeReviewCard(props) {
                         <FeedDelete Feed={Feed}/>
                         <FeedUpdate Feed={Feed}/>
                         </TreeItem>
-
                     </TreeView>
                 }
                 title={Feed.nickName}

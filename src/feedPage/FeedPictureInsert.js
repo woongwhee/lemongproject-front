@@ -109,7 +109,7 @@ function FeedPictureInsert(props) {
                             <img
                                 src={photoFilePathList[i]}
                                 alt="없는사진"
-                                style={{height:"300px"}}
+                                style={{height:"300px",width:"100%"}}
                             />
                     </div>
                             {i+1} 번째 사진
@@ -202,11 +202,13 @@ function FeedPictureInsert(props) {
                 Upload
                 <input hidden type="file" accept="image/*" onChange={onChange}/>
             </Button>
+            <hr/>
             <div>
                 <Rendering/>
                 <div style={{clear:"both"}}></div>
                 {/*{photoNoList}*/}
             </div>
+            <hr/>
         </div>
     );
 }

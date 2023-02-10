@@ -12,15 +12,17 @@ import axios from "axios";
 
 function FeedReply({feedNo}) {
     // let feedNo = props.feedNo;
-
     const [show, setShow] = useState(false);
-    useEffect(()=>{
-        axios.post('api/feed/countReply',{
-            feedNo:feedNo
-        }).then(function (res){
-            console.log(res.data);
-        })
-    },[])
+    const [replyCount, setReplyCount] = useState(false);
+
+    // useEffect(()=>{
+    //     axios.post('api/feed/countReply',{
+    //         feedNo:feedNo
+    //     }).then(function (res){
+    //         console.log(res.data);
+    //     })
+    // },[])
+
     return (
         <>
             <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
@@ -29,7 +31,7 @@ function FeedReply({feedNo}) {
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
-                dialogClassName="modal-90w"
+                dialogClassName="modal-70w"
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <Modal.Header closeButton>
@@ -38,7 +40,7 @@ function FeedReply({feedNo}) {
                     </Modal.Title>
                 </Modal.Header>
                     <Modal.Body>
-                        <FeedReplyInsert feedNo={feedNo}/>
+                        <FeedReplyInsert feedNo={feedNo} setReplyCount={setReplyCount}/>
                         {/*<FeedDetailView Feed={Feed}></FeedDetailView>*/}
                     </Modal.Body>
             </Modal>
