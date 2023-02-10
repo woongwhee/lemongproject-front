@@ -11,8 +11,8 @@ import KakaoLogin from './Member/KakaoLogin';
 // import reducer from "./ToDoListPage/reducer";
 import {LoginProvider} from "./Member/LoginContext";
 import SetNick from './Member/SetNick';
-import NaverLogin from './Member/NaverLogin';
 import NaverLoginBtn from './Member/NaverLoginBtn';
+import NewPwd from './Member/NewPwd';
 import 'bootstrap/dist/css/bootstrap.css';
 import reducer from "./reducer";
 
@@ -22,13 +22,13 @@ root.render(
     <BrowserRouter>
     <Provider store={store}>
     <Routes>
-        <Route path="/" element={<LoginProvider><App/></LoginProvider>} />
+      <Route path="/" element={<LoginProvider><App/></LoginProvider>} />
       <Route path="join" element={<Join />} />
       <Route path="findPwd" element={<FindPwd />} />
       <Route path="kakao" element={<KakaoLogin />} />
       <Route path="setNick" element={<SetNick />} />
       <Route path='naver' element={<NaverLoginBtn />} />
-      <Route path='naverTest' element={<NaverLogin />} />
+      <Route path='newPwd' element={<NewPwd />} />
     </Routes>
     </Provider>
   </BrowserRouter>
