@@ -7,6 +7,8 @@ import Avatar from "@mui/material/Avatar";
 function FeedDetailView(props) {
     const Feed = props.Feed;
 
+    const [replyCount, setReplyCount] = useState()
+
     let i=0;
     return (
         <>
@@ -20,14 +22,20 @@ function FeedDetailView(props) {
                 </div>
                 <div className="detailRight">
                     <div className="contentArea" style={{border:"1px solid blue"}}>
-                        <div style={{marginLeft:"5%", marginTop:"5%"}}><h3>{Feed.feedContent}</h3></div>
-                        좋아요 댓글수
+                        <div style={{marginLeft:"2%", marginTop:"2%", border:"1px solid red", height:"50%"}}>
+                            <h3>{Feed.feedContent}</h3>
+                        </div>
+                        <div style={{border:"1px solid black", height:"30%",width:"50%" ,float:"left"}}>
+                            좋아요
+                        </div>
+                        <div style={{height:"30%"}}>
+                            댓글수 : {replyCount}
+                        </div>
+                        <span style={{clear:"both"}}></span>
                     </div>
                     <div className="replyArea" style={{overflow:"scroll"}}>
-                        <FeedReplyInsert feedNo={Feed.feedNo}></FeedReplyInsert>
+                        <FeedReplyInsert feedNo={Feed.feedNo} setReplyCount={setReplyCount}></FeedReplyInsert>
                     </div>
-
-
                 </div>
             </div>
         </>

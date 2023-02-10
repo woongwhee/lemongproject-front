@@ -11,13 +11,17 @@ import { deepOrange } from '@mui/material/colors';
 import CloseButton from "react-bootstrap/CloseButton";
 function FeedReplyInsert(props) {
 
-    const [id, SetId] = useState();
+    const feedNo = props.feedNo
 
-    const [replyContent, SetReplyContent] = useState();
+    const [id, SetId] = useState(); // ID
 
-    let feedNo = props.feedNo;
+    const [replyContent, SetReplyContent] = useState(); // CONTENT
+
+    const [replyCount, setReplyCount] = useState(0) // REPLY CONTENT
 
     const [ testStr, setTestStr ] = useState([]);
+
+    props.setReplyCount(replyCount);
 
     function callback(str) {
         setTestStr(str);
@@ -53,6 +57,7 @@ function FeedReplyInsert(props) {
     //         </div>
     //     );
     // }
+
     const replyList2 = () =>{
         const result = [];
         for(let i =0; i<testStr.length; i++){
@@ -86,15 +91,38 @@ function FeedReplyInsert(props) {
                     feedNo:feedNo
                 }
             }).then((res) => {
-                // callback(res.data);
-                console.log(res.data.result) // [7개]
+                // console.log(res.data.result) // [7개]
                 setTestStr(res.data.result) // [7개]
-                // console.log(Json.userNo);
-                // console.log("Test" + testStr)
-                // console.log("Test" + testStr[0].);
             })
         }, []
     );
+    useEffect(
+        () => {
+            axios({
+                url: '/api/feed/countReply',
+                method: 'GET',
+                params:{
+                    feedNo:feedNo
+                }
+            }).then((res) => {
+                console.log(res.data) // [7개]
+                setReplyCount(res.data)
+            })
+        }, []
+    );
+    const getReplyCount=()=>{
+        axios({
+            url: '/api/feed/countReply',
+            method: 'GET',
+            params:{
+                feedNo:feedNo
+            }
+        }).then((res) => {
+            console.log(res.data) // [7개]
+            setReplyCount(res.data)
+        })
+    }
+
     const getReplyList=()=>{
         axios({
             url: '/api/feed/listReply',
@@ -136,7 +164,7 @@ function FeedReplyInsert(props) {
                 {replyList2()}
             </ListGroup>
         </div>
-
+        <div>
             <InputGroup className="mb-2" style={{marginTop:"30px"}}>
                 <InputGroup.Text id="inputGroup-sizing-default" placeholder="숫자만입력">
                     아이디
@@ -148,9 +176,6 @@ function FeedReplyInsert(props) {
                     value={id}
                 />
             </InputGroup>
-
-            {/*<div style={{marginTop:"30px"}}>피드번호 : {Feed.feedNo}</div>*/}
-
             <InputGroup className="mb-2" style={{marginTop:"30px"}}>
                 <InputGroup.Text id="inputGroup-sizing-default">
                     댓글내용
@@ -162,12 +187,13 @@ function FeedReplyInsert(props) {
                     value={replyContent}
                 />
             </InputGroup>
-
+        </div>
 
             <Button style={{marginTop:"40px", float:"right"}}
                     onClick={() =>{
                         replyInsert();
                         getReplyList();
+                        getReplyCount();
                     }}
         >댓글쓰기</Button>
         </>
