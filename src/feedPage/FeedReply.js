@@ -10,7 +10,7 @@ import FeedDetailView from "./FeedDetailView";
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import axios from "axios";
 
-function FeedReply({feedNo}) {
+function FeedReply({Feed}) {
     // let feedNo = props.feedNo;
     const [show, setShow] = useState(false);
     const [replyCount, setReplyCount] = useState(false);
@@ -40,7 +40,7 @@ function FeedReply({feedNo}) {
                     </Modal.Title>
                 </Modal.Header>
                     <Modal.Body>
-                        <FeedReplyInsert feedNo={feedNo} setReplyCount={setReplyCount}/>
+                        <FeedReplyInsert Feed={Feed} setReplyCount={setReplyCount}/>
                         {/*<FeedDetailView Feed={Feed}></FeedDetailView>*/}
                     </Modal.Body>
             </Modal>

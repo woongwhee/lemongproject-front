@@ -11,7 +11,9 @@ import { deepOrange } from '@mui/material/colors';
 import CloseButton from "react-bootstrap/CloseButton";
 function FeedReplyInsert(props) {
 
-    const feedNo = props.feedNo
+    // const feedNo = props.feedNo
+    // const loginUserNo = props.loginUserNo;
+    const feedNo = props.Feed.feedNo;
 
     const [id, SetId] = useState(); // ID
 
@@ -82,6 +84,7 @@ function FeedReplyInsert(props) {
         return result;
     }
 
+    // 댓글 가져오기 
     useEffect(
         () => {
             axios({
@@ -96,6 +99,23 @@ function FeedReplyInsert(props) {
             })
         }, []
     );
+    const getReplyList=()=>{
+        axios({
+            url: '/api/feed/listReply',
+            method: 'GET',
+            params:{
+                feedNo:feedNo
+            }
+        }).then((res) => {
+            // callback(res.data);
+            // console.log(res.data.result) // [7개]
+            setTestStr(res.data.result) // [7개]
+            // console.log(Json.userNo);
+
+        })
+    }
+
+    // 댓글 수
     useEffect(
         () => {
             axios({
@@ -122,26 +142,11 @@ function FeedReplyInsert(props) {
             setReplyCount(res.data)
         })
     }
-
-    const getReplyList=()=>{
-        axios({
-            url: '/api/feed/listReply',
-            method: 'GET',
-            params:{
-                feedNo:feedNo
-            }
-        }).then((res) => {
-            // callback(res.data);
-            // console.log(res.data.result) // [7개]
-            setTestStr(res.data.result) // [7개]
-            // console.log(Json.userNo);
-
-        })
-    }
-
+    
+    // 댓글 쓰기
     const replyInsert=()=>{
         axios.post('api/feed/insertReply',{
-            userNo:id,
+            userNo:props.Feed.loginUserNo,
             feedNo:feedNo,
             replyContent:replyContent
         }).then(function (res){
@@ -157,28 +162,27 @@ function FeedReplyInsert(props) {
     let i = 0;
     return (
         <>
-        <div>
-            {/*<FeedReplyList feedNo={feedNo} />*/}
+    <div>
+        <div style={{overflow:"scroll", height:"700px"}}>
             <ListGroup variant="flush">
-                {/*{testStr?.map(reply=>replyList({reply}))}*/}
                 {replyList2()}
             </ListGroup>
         </div>
         <div>
-            <InputGroup className="mb-2" style={{marginTop:"30px"}}>
-                <InputGroup.Text id="inputGroup-sizing-default" placeholder="숫자만입력">
-                    아이디
-                </InputGroup.Text>
-                <Form.Control
-                    aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default"
-                    onChange={(e)=> {SetId(e.target.value);}}
-                    value={id}
-                />
-            </InputGroup>
+            {/*<InputGroup className="mb-2" style={{marginTop:"30px"}}>*/}
+            {/*    <InputGroup.Text id="inputGroup-sizing-default" placeholder="숫자만입력">*/}
+            {/*        아이디*/}
+            {/*    </InputGroup.Text>*/}
+            {/*    <Form.Control*/}
+            {/*        aria-label="Default"*/}
+            {/*        aria-describedby="inputGroup-sizing-default"*/}
+            {/*        onChange={(e)=> {SetId(e.target.value);}}*/}
+            {/*        value={id}*/}
+            {/*    />*/}
+            {/*</InputGroup>*/}
             <InputGroup className="mb-2" style={{marginTop:"30px"}}>
                 <InputGroup.Text id="inputGroup-sizing-default">
-                    댓글내용
+                    {props.Feed.nickName}
                 </InputGroup.Text>
                 <Form.Control
                     aria-label="Default"
@@ -188,7 +192,6 @@ function FeedReplyInsert(props) {
                 />
             </InputGroup>
         </div>
-
             <Button style={{marginTop:"40px", float:"right"}}
                     onClick={() =>{
                         replyInsert();
@@ -196,8 +199,9 @@ function FeedReplyInsert(props) {
                         getReplyCount();
                     }}
         >댓글쓰기</Button>
-        </>
-
+    </div>
+        <div style={{clear:"both"}}></div>
+    </>
 
     );
 }
