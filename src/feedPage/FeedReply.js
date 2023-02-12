@@ -15,18 +15,11 @@ function FeedReply({Feed}) {
     const [show, setShow] = useState(false);
     const [replyCount, setReplyCount] = useState(false);
 
-    // useEffect(()=>{
-    //     axios.post('api/feed/countReply',{
-    //         feedNo:feedNo
-    //     }).then(function (res){
-    //         console.log(res.data);
-    //     })
-    // },[])
 
     return (
         <>
             <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
-                <ChatBubbleOutlineIcon />댓글
+                <ChatBubbleOutlineIcon />
             </IconButton>
             <Modal
                 show={show}
@@ -41,7 +34,6 @@ function FeedReply({Feed}) {
                 </Modal.Header>
                     <Modal.Body>
                         <FeedReplyInsert Feed={Feed} setReplyCount={setReplyCount}/>
-                        {/*<FeedDetailView Feed={Feed}></FeedDetailView>*/}
                     </Modal.Body>
             </Modal>
         </>

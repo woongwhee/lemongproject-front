@@ -5,11 +5,11 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
+
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {useEffect, useReducer, useState} from "react";
 import FeedDelete from "./FeedDelete";
@@ -22,6 +22,9 @@ import FeedReply from "./FeedReply";
 import "./Feed.css"
 import FeedDetail from "./FeedDetail";
 import axios from "axios";
+import FeedHeart from "./FeedHeart";
+import FeedLoading from "./FeedLoading";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
 
@@ -35,6 +38,7 @@ const ExpandMore = styled((props) => {
         duration: theme.transitions.duration.shortest,
     }),
 }));
+
 
 export default function RecipeReviewCard(props) {
     let{userNo,feedNo,feedContent,feedAt,filePath,photoNo,nickName,loginUserNo}=props;
@@ -56,14 +60,15 @@ export default function RecipeReviewCard(props) {
 
     const updateDeleteButton = () => {
         if(userNo===loginUserNo){
-            return(<TreeView
+            return(
+                <TreeView
                 aria-label="disabled items"
                 defaultCollapseIcon={<ExpandMoreIcon />}
                 defaultExpandIcon={<ChevronRightIcon />}
                 disabledItemsFocusable={focusDisabledItems}
                 multiSelect
             >
-                <TreeItem nodeId="1" label="변경하기">
+                <TreeItem nodeId="1" label='설정'>
                     <FeedDelete Feed={Feed}/>
                     <FeedUpdate Feed={Feed}/>
                 </TreeItem>
@@ -73,20 +78,16 @@ export default function RecipeReviewCard(props) {
     const [profilePath, setProfilePath] = useState();
 
     const proFile = (userNo) => {
-
         axios.post('api/feed/feedProfile',{
             userNo:userNo
         }).then(function (res){
             // console.log(res.data.FILEPATH);
             setProfilePath(res.data.FILEPATH)
         })
-
         return(
             <Avatar alt="Remy Sharp" src={profilePath} />
         )
     }
-
-
 
     return (
         <div className="feed-container">
@@ -121,11 +122,12 @@ export default function RecipeReviewCard(props) {
                 // alt="Paella dish"
             >
                 <FeedPhoto filePathList={Feed.filePathList}></FeedPhoto>
+
             </CardMedia>
 
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    {loginUserNo} {Feed.feedContent}
+                    <h3>{Feed.feedContent}</h3>
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -133,14 +135,7 @@ export default function RecipeReviewCard(props) {
                 {/*<FeedDetail Feed={Feed}></FeedDetail>*/}
                 <FeedReply Feed={Feed}></FeedReply>
                 <FeedDetail Feed={Feed}></FeedDetail>
-                <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                >
-                    <ExpandMoreIcon />
-                </ExpandMore>
+                <FeedHeart Feed={Feed}></FeedHeart>
             </CardActions>
             {/*<Collapse in={expanded} timeout="auto" unmountOnExit>*/}
             {/*    <CardContent>*/}

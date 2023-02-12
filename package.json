@@ -9,6 +9,7 @@
     "@fullcalendar/google-calendar": "^6.0.3",
     "@fullcalendar/react": "^6.0.4",
     "@mui/icons-material": "^5.11.0",
+    "@mui/joy": "^5.0.0-alpha.66",
     "@mui/lab": "^5.0.0-alpha.118",
     "@mui/material": "^5.11.7",
     "@mui/material-next": "^6.0.0-alpha.73",

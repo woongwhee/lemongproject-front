@@ -72,16 +72,6 @@ function FeedInsert() {
                             sx={{width: "100%", height: "400px", marginTop: "50px"}}
                         />
                     </Paper>
-                    <TextField
-                        id="standard-multiline-flexible"
-                        label="아이디 입력"
-                        multiline
-                        maxRows={4}
-                        variant="standard"
-                        onChange={(e) => {
-                            SetUserNo(e.target.value);
-                        }}
-                    />
                     <br/>
                     <Button style={{float:"right"}}
                             disabled={disable}

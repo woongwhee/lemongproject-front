@@ -84,6 +84,9 @@ export default function BasicTabs() {
             <TabPanel value={value} index={3}>
                 <TemplateView/>
             </TabPanel>
+            <TabPanel value={value} index={4}>
+                <Test1></Test1>
+            </TabPanel>
 
 
             {/*<div className="menubar-box">*/}

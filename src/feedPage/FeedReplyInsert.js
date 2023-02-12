@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import axios from "axios";
 import FeedReplyList from "./FeedReplyList";
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -9,15 +9,15 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
 import CloseButton from "react-bootstrap/CloseButton";
+import {TextField} from "@mui/material";
+import Box from "@mui/material/Box";
 function FeedReplyInsert(props) {
 
-    // const feedNo = props.feedNo
-    // const loginUserNo = props.loginUserNo;
+    const Feed = props.Feed;
+
     const feedNo = props.Feed.feedNo;
 
-    const [id, SetId] = useState(); // ID
-
-    const [replyContent, SetReplyContent] = useState(); // CONTENT
+    const [replyContent, SetReplyContent] = useState(''); // CONTENT
 
     const [replyCount, setReplyCount] = useState(0) // REPLY CONTENT
 
@@ -36,28 +36,31 @@ function FeedReplyInsert(props) {
                 feedNo:feedNo
             }).then(function (res){
             console.log("삭제 성공")
-            // alert("삭제완료")
             getReplyList();
         })
     }
+    
+    const deleteReplyButton = (replyNo, feedNo, userNo) =>{
+        if(Feed.loginUserNo === userNo){
+            return(
+                <CloseButton onClick={()=>{deleteReply(replyNo,feedNo)}}/>
+            )
+        }else{
+            return(<p></p>)
+        }
+    }
 
-    // testSTr7개;
-    // const replyList = ({reply}) => {
-    //     return (
-    //         <div>
-    //             <ListGroup.Item>
-    //                 <div style={{float:"left"}}><Avatar src="/broken-image.jpg" /></div>
-    //                 <div style={{marginLeft:"80px"}}>
-    //                 {reply.nickName} : {reply.replyContent}
-    //                     <div style={{float:"right"}}>
-    //                         {/*<Button onClick={()=>{deleteReply(reply2.replyNo,feedNo)}}/>삭제*/}
-    //                     </div>
-    //                 <br/>
-    //                 {reply.replyAt}
-    //                 </div>
-    //             </ListGroup.Item>
-    //         </div>
-    //     );
+    // const [profilePath, setProfilePath] = useState();
+    // const proFile = (userNo) => {
+    //     axios.post('api/feed/feedProfile',{
+    //         userNo:userNo
+    //     }).then(function (res){
+    //         // console.log(res.data.FILEPATH);
+    //         setProfilePath(res.data.FILEPATH)
+    //     })
+    //     return(
+    //         <Avatar alt="Remy Sharp" src={profilePath} />
+    //     )
     // }
 
     const replyList2 = () =>{
@@ -67,12 +70,12 @@ function FeedReplyInsert(props) {
                 <div key={i}>
                     <ListGroup.Item>
                         <div style={{float:"left"}}>
-                            <Avatar src="/broken-image.jpg" />
+                            <Avatar alt="Remy Sharp" src={testStr[i].filePath} />
                         </div>
                         <div style={{marginLeft:"80px"}}>
                             {testStr[i].nickName} : {testStr[i].replyContent}
                             <div style={{float:"right"}}>
-                                <CloseButton onClick={()=>{deleteReply(testStr[i].replyNo,feedNo)}}/>삭제
+                                {deleteReplyButton(testStr[i].replyNo,feedNo,testStr[i].userNo)}
                             </div>
                             <br/>
                             {testStr[i].replyAt}
@@ -94,10 +97,9 @@ function FeedReplyInsert(props) {
                     feedNo:feedNo
                 }
             }).then((res) => {
-                // console.log(res.data.result) // [7개]
                 setTestStr(res.data.result) // [7개]
             })
-        }, []
+        }
     );
     const getReplyList=()=>{
         axios({
@@ -125,7 +127,7 @@ function FeedReplyInsert(props) {
                     feedNo:feedNo
                 }
             }).then((res) => {
-                console.log(res.data) // [7개]
+                // console.log(res.data) // [7개]
                 setReplyCount(res.data)
             })
         }, []
@@ -150,12 +152,10 @@ function FeedReplyInsert(props) {
             feedNo:feedNo,
             replyContent:replyContent
         }).then(function (res){
-            console.log(res.data)
-            SetId('');
             SetReplyContent('');
             // window.location.reload("/main");
         }).catch(function (){
-            console.log('실패함 '+id,replyContent);
+            console.log('실패함');
         })
     }
 
@@ -180,17 +180,26 @@ function FeedReplyInsert(props) {
             {/*        value={id}*/}
             {/*    />*/}
             {/*</InputGroup>*/}
-            <InputGroup className="mb-2" style={{marginTop:"30px"}}>
-                <InputGroup.Text id="inputGroup-sizing-default">
-                    {props.Feed.nickName}
-                </InputGroup.Text>
-                <Form.Control
-                    aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default"
-                    onChange={(e)=> {SetReplyContent(e.target.value);}}
-                    value={replyContent}
-                />
-            </InputGroup>
+            {/*<InputGroup className="mb-2" style={{marginTop:"30px"}}>*/}
+            {/*    <InputGroup.Text id="inputGroup-sizing-default">*/}
+            {/*        {props.Feed.loginUserNo}*/}
+            {/*    </InputGroup.Text>*/}
+            {/*    <Form.Control*/}
+            {/*        aria-label="Default"*/}
+            {/*        aria-describedby="inputGroup-sizing-default"*/}
+            {/*        onChange={(e)=> {SetReplyContent(e.target.value);}}*/}
+            {/*        value={replyContent}*/}
+            {/*    />*/}
+            {/*</InputGroup>*/}
+            <Box
+                sx={{
+                    height: 30
+                }}
+            />
+            <TextField fullWidth label="댓글입력" id="fullWidth"
+                       onChange={(e)=> {SetReplyContent(e.target.value);}}
+                       value={replyContent}
+            />
         </div>
             <Button style={{marginTop:"40px", float:"right"}}
                     onClick={() =>{
