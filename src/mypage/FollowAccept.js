@@ -3,7 +3,7 @@ import { Component } from "react";
 import axios from "axios";
 
 import { CiCircleCheck } from "react-icons/ci";
-
+import { useLoginState } from "../Member/LoginContext"
 import './MyPage.css';
 import moment from 'moment';
 import 'moment/locale/ko';
@@ -13,7 +13,11 @@ function FollowAccept(){
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
-    const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+    // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     // 나한테 온 팔로우신청 목록들.
     const [followerList , setFollowerList] = useState();
@@ -40,7 +44,7 @@ function FollowAccept(){
     useEffect(
         () => {
             axios.get("/api/follow/MyfollowerList" , {
-                params:{follower : follower}
+                params:{follower : userNo}
             }).then(function(res){
                 console.log("데이터 전송 성공");
                 console.log(res.data.result);

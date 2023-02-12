@@ -27,7 +27,7 @@ function page (state=initialState, action){
             return  {menuList2 : false};
         case '3' :
             return  {menuList2 : false};
-        case '3' :
+        case '4' :
             return  {menuList2 : false};
         default : 
             return state;

@@ -19,6 +19,7 @@ import {IconButton} from "@mui/material";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 import { useLoginDispatch } from "../Member/LoginContext";
 import MyMenuBar from "./menubar/MyMenuBar";
+import MainMenuBar from "./menubar/MainMenuBar";
 
 import { useLoginState } from "../Member/LoginContext";
 
@@ -91,7 +92,7 @@ function MainPage() {
         <>
         <div>
             {/* <MainMenu></MainMenu> */}
-            <MyMenuBar profile={profile}/>
+            <MainMenuBar profile={profile}/>
         </div>
         <div className="outer">
             {/* 캘린더 영역 */}

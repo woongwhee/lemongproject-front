@@ -1,8 +1,14 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import {createGlobalStyle} from 'styled-components';
 import axios from "axios";
+// import ChallengeRoomCreate from './challengeRoomCreate';
+import {useDispatch, useSelector} from 'react-redux';
 
-const Chat = () => {
+const Chat = (props) => {
+
+    let{chatRoomNo}=props;
+
+    const userNos = useSelector((state) => state.userNo.selectUserNo);
 
     // 소켓통신으로 보낸 챌린지 참여하는 유저의 
     // 이름 , 메세지 , 보낸시간(날짜포함) 저장
@@ -40,6 +46,14 @@ const Chat = () => {
         }
     }
 
+    // function GoChat(){
+    //     // if(chatRoomNo === detailChallenges.chatRoomNo){
+    //     //     return<div style={{float:'right'}}>{msgBox}</div>
+    //     // }
+    //     console.log(chatRoomNo)
+
+    // }
+
     useEffect(() => {
         if(socketData !== undefined) {
             const tempData = chatt.concat(socketData);
@@ -63,7 +77,7 @@ const Chat = () => {
 
     // 소켓 통신으로 스프링 백앤드 서버로 데이터 넘겨주기(JSON형태로 변경해서)
     const webSocketLogin = useCallback(() => {
-        ws.current = new WebSocket("ws://localhost:8081/api/socket/chatt");
+        ws.current = new WebSocket("ws://localhost:8081/api/socket/chatt/"+chatRoomNo);
 
         ws.current.onmessage = (message) => {
             const dataSet = JSON.parse(message.data);
@@ -73,7 +87,7 @@ const Chat = () => {
 
     const send = useCallback(() => {
         if(!chkLog) {
-            if(name === "") {
+            if(userNos === "") {
                 alert("이름을 입력하세요.");
                 document.getElementById("name").focus();
                 return;
@@ -84,9 +98,9 @@ const Chat = () => {
 
         if(msg !== ''){
             const data = {
-                name,
+                userNos,
                 msg,
-                challengeNo,
+                chatRoomNo,
                 date: new Date().toLocaleString(),
             };  //전송 데이터(JSON)
 
@@ -112,7 +126,7 @@ const Chat = () => {
 
     return (
         <>
-            {/* <GlobalStyle/> */}
+            {/* <ChallengeRoomCreate/> */}
             <div id="chat-wrap">
                 <div id='chatt'>
                     <h1 id="title">WebSocket Chatting</h1>
@@ -126,12 +140,12 @@ const Chat = () => {
                         placeholder='이름을 입력하세요.' 
                         type='text' 
                         id='name' 
-                        value={name} 
+                        value={userNos} 
                         onChange={(event => setName(event.target.value))} style={{width:'200px' , height:'35px'}}/>
                     <div id='sendZone'>
                         <textarea id='msg' value={msg} onChange={onText}
                             onKeyDown={(ev) => {if(ev.keyCode === 13){send();}}} style={{width:'406px' , float:'left'}}></textarea>
-                        <input type='button' value='전송' id='btnSend' onClick={send} style={{width:'77px' , height:'55px'}}/>
+                        <input type='button' value='전송' id='btnSend' onClick={send} style={{width:'76px' , height:'55px'}}/>
                     </div>
                 </div>
             </div>

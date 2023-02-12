@@ -89,10 +89,10 @@ function MyFollowingCount(){
         <div className="followCount" style={{marginTop:'-54px'}}>
             <span data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={ShowMyFollowing}><p style={{fontSize:'27px' , marginLeft : '255px' , marginTop:'-137px' , fontFamily:'Quicksand-Regular'}}><b>{MyFollowingCount?.count}</b></p></span>
             <div className="App">
-            <div class="container p-5">
+            <div class="containers p-5">
             
-             <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-             <div class="modal-dialog" style={{margin:'auto' , marginTop:'50px'}}>
+             <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog" data-backdrop="static">
+             <div class="modal-dialog" style={{margin:'auto' , marginTop:'50px'}} role="document">
                 <div class="modal-content" style={{width:'400px' , height:'700px' , borderRadius:'0'}}>
                    <div class="modal-header">
                    <h5 style={{fontFamily:'SourceSansPro-Light' , fontSize:'25px'}}><b>MyFollowing</b></h5>

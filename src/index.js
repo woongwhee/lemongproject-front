@@ -17,6 +17,7 @@ import reducer from "./reducer";
 
 import {MyPage} from './mypage/MyPage';
 import MyPageUpdate from './mypage/MyPageUpdate';
+import Chat from './challengeChat/testChating';
 
 import ChallengeRoomCreate from './challengeChat/challengeRoomCreate';
 import ChallengeChatRoom from './challengeChat/challengeChatRoom';
@@ -39,7 +40,7 @@ root.render(
         <Route path="FeedInsert" element={<FeedInsert />}/>
         <Route path="mypage" element={<MyPage />}/>
         <Route path="MypageUpdate" element={<LoginProvider><MyPageUpdate /></LoginProvider>}/>
-        <Route path="ChallengeRoomCreate" element={<ChallengeRoomCreate />}/>
+        <Route path="ChallengeRoomCreate" element={<LoginProvider><ChallengeRoomCreate /></LoginProvider>}/>
     </Routes>
     </Provider>
   </BrowserRouter>
