@@ -55,7 +55,7 @@ function MyFollowingCount(props){
         () => {
             axios.get("/api/follow/MyFollowingCount" , {
                 params : {
-                    follower : userNos != null ? userNos : userNo , 
+                    follower : userNos , 
                 }
             }).then(function(res){
                 console.log(res+"데이터 전송 성공");
@@ -65,7 +65,7 @@ function MyFollowingCount(props){
                 console.log("데이터 전송 실패");
             })
 
-        } , [userNos != null ? userNos : userNo]
+        } , [userNos]
     )
 
     // 나의 팔로워 리스트 띄우기.
