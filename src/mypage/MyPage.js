@@ -29,6 +29,7 @@ import './MyPage.css';
 import MyFollowApplication from "./MyFollowApplication";
 import { useLoginState } from "../Member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
+import UserNo from "../reducer/userNo";
 
 function MyPage() {
     
@@ -42,7 +43,11 @@ function MyPage() {
      const queryString = window.location.search;
      const params = new URLSearchParams(queryString);
 
+    //  const userNo = profile?.userNo;
+
      const userNos = useSelector((state) => state.userNo.selectUserNo);
+     
+
      console.log(userNos + " 제발 통과됨")
     //  const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
  
@@ -53,7 +58,7 @@ function MyPage() {
     const selectUser = () => {
         axios.get("/api/member/selectMyProfile" , {
             params:{
-                userNo : userNos ,
+                userNo : userNos != null ? userNos : userNo ,
             }
         }).then(function(res){
             console.log("데이터 전송 성공");
@@ -70,7 +75,7 @@ function MyPage() {
      useEffect(() => {
         selectUser();
         console.log(userNos + "===여기도 통과됨")
-      },[userNos])
+      },[userNos != null ? userNos : userNo])
 
      let saveFilePath = "http://localhost:8081/api/images/";
 
@@ -89,18 +94,18 @@ function MyPage() {
 
     // 세션의 user_no와 파람의 user_no를 비교하여 해당하는 팔로워 보여주기.
     function followerComparison(){
-        if(userNo === userNos){
-            return <MyFollowCount/>
+        if(userNo === profile?.userNo){
+            return <MyFollowCount userNos={userNos}/>
         }else{
-            return <AcceptFollowCount/>
+            return <AcceptFollowCount userNos={userNos}/>
         }
     }
 
     function followingComparison(){
-        if(userNo === userNos){
-            return <MyFollowingCount/>
+        if(userNo === profile?.userNo){
+            return <MyFollowingCount userNos={userNos}/>
         }else{
-            return <AcceptFollowingCount/>
+            return <AcceptFollowingCount userNos={userNos}/>
         }
     }
  
@@ -150,6 +155,7 @@ function MyPage() {
                     </div> */}
                     {/* {menuClick === true ? <Mymenu myprofile={myprofile}/> : null} */}
                 {/* </div> */}
+                    {/* <UserNo profile={profile}/> */}
             </div>
             </div>
         </div>

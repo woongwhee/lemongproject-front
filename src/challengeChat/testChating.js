@@ -3,11 +3,14 @@ import {createGlobalStyle} from 'styled-components';
 import axios from "axios";
 // import ChallengeRoomCreate from './challengeRoomCreate';
 import {useDispatch, useSelector} from 'react-redux';
-
+import { useLoginState } from "../Member/LoginContext";
 const Chat = (props) => {
 
     let{chatRoomNo}=props;
-
+    let {profile}=useLoginState;
+    console.log(profile);
+    // console.log(userNo)
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
     const userNos = useSelector((state) => state.userNo.selectUserNo);
 
     // 소켓통신으로 보낸 챌린지 참여하는 유저의 
@@ -27,7 +30,7 @@ const Chat = (props) => {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
-    const userNo = sessionStorage.getItem("userNo");
+    // const userNo = sessionStorage.getItem("userNo");
     const paramNo = params.get("userNo") ;
 
     // 받은 데이터들 map돌려서 하나하나 빼서 쓰기                            

@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
     date, 
     mark,
     page,
-    userNo ,
+    userNo,
 });
   
 export default rootReducer;

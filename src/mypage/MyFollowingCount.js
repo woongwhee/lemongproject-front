@@ -7,7 +7,10 @@ import { useLoginState } from "../Member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
 
-function MyFollowingCount(){
+function MyFollowingCount(props){
+    let{profile}=props;
+
+    console.log(profile);
 
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
@@ -16,15 +19,18 @@ function MyFollowingCount(){
 
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
-    let {profile}=useLoginState();
-    console.log(profile);
-    const userNo = profile?.userNo; // 로그인한 사용자 userNo
+    // let {profile}=useLoginState();
+    // console.log(profile);
+    // const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     // 팔로우 당하는사람(팔로워)
     const follower = userNos
 
     // 팔로우 하는사람(팔로잉)
     const followerIng = profile?.userNo;
+
+    const userNo = profile?.userNo;
+    console.log(userNo + "통과된다진짜")
 
     // 스프링에있는 폴더에서 이미지 불러오기위한 경로
     // let saveFilePath = "http://localhost:8081/api/images/";
@@ -43,11 +49,13 @@ function MyFollowingCount(){
         )
     };
 
+    console.log(userNos != null ? userNos : userNo)
+
     useEffect(
         () => {
             axios.get("/api/follow/MyFollowingCount" , {
                 params : {
-                    follower : userNos , 
+                    follower : userNos != null ? userNos : userNo , 
                 }
             }).then(function(res){
                 console.log(res+"데이터 전송 성공");
@@ -57,7 +65,7 @@ function MyFollowingCount(){
                 console.log("데이터 전송 실패");
             })
 
-        } , [userNos]
+        } , [userNos != null ? userNos : userNo]
     )
 
     // 나의 팔로워 리스트 띄우기.
