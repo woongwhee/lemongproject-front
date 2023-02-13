@@ -15,12 +15,12 @@ import NaverLoginBtn from './Member/NaverLoginBtn';
 import 'bootstrap/dist/css/bootstrap.css';
 import reducer from "./reducer";
 
-import {MyPage} from './mypage/MyPage';
-import MyPageUpdate from './mypage/MyPageUpdate';
-import Chat from './challengeChat/testChating';
-
-import ChallengeRoomCreate from './challengeChat/challengeRoomCreate';
-import ChallengeChatRoom from './challengeChat/challengeChatRoom';
+// import {MyPage} from './mypage/MyPage';
+// import MyPageUpdate from './mypage/MyPageUpdate';
+// import Chat from './challengeChat/testChating';
+//
+// import ChallengeRoomCreate from './challengeChat/challengeRoomCreate';
+// import ChallengeChatRoom from './challengeChat/challengeChatRoom';
 import FeedInsert from './feedPage/FeedInsert';
 
 
@@ -38,9 +38,9 @@ root.render(
         <Route path='naverBtn' element={<NaverLoginBtn />} />
         <Route path='naver' element={<NaverLogin />} />
         <Route path="FeedInsert" element={<FeedInsert />}/>
-        <Route path="mypage" element={<MyPage />}/>
-        <Route path="MypageUpdate" element={<LoginProvider><MyPageUpdate /></LoginProvider>}/>
-        <Route path="ChallengeRoomCreate" element={<LoginProvider><ChallengeRoomCreate /></LoginProvider>}/>
+        {/*<Route path="mypage" element={<MyPage />}/>*/}
+        {/*<Route path="MypageUpdate" element={<LoginProvider><MyPageUpdate /></LoginProvider>}/>*/}
+        {/*<Route path="ChallengeRoomCreate" element={<LoginProvider><ChallengeRoomCreate /></LoginProvider>}/>*/}
     </Routes>
     </Provider>
   </BrowserRouter>

@@ -18,18 +18,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 import { useLoginDispatch } from "../Member/LoginContext";
-import MyMenuBar from "./menubar/MyMenuBar";
-import MainMenuBar from "./menubar/MainMenuBar";
 
 import { useLoginState } from "../Member/LoginContext";
-
-//캘린더 라이브러리 추가 해주기
-//npm install react-calendar
-
-//리액트 두투라이브러리 추가
-// npx create-react-app react-todolist
-// npm i react-icons styled-components
-
 
 function LogoutButton() {
     const dispatch= useLoginDispatch();
@@ -91,8 +81,8 @@ function MainPage() {
     return(
         <>
         <div>
-            {/* <MainMenu></MainMenu> */}
-            <MainMenuBar profile={profile}/>
+             <MainMenu></MainMenu>
+            {/*<MainMenuBar profile={profile}/>*/}
         </div>
         <div className="outer">
             {/* 캘린더 영역 */}
