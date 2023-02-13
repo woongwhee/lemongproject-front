@@ -2,14 +2,14 @@ import { combineReducers } from "redux";
 import date from './date';
 import mark from './mark';
 import page from "./page";
-// import userNo from "./userNo";
+import userNo from "./userNo";
 
 
 const rootReducer = combineReducers({
     date, 
     mark,
     page,
-    // userNo
+    userNo,
 });
   
 export default rootReducer;

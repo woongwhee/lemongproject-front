@@ -7,7 +7,9 @@ import {useLoginState} from "./Member/LoginContext";
 function App() {
     let {isLogin} = useLoginState();
     return (
-        <>{isLogin ? <MainPage/> : <Login isLogin={isLogin}/>}</>
+        <>
+            {isLogin ? <MainPage/> : <Login isLogin={isLogin}/>}
+        </>
         // <MainPage/>
     )
 

@@ -16,8 +16,9 @@ function MyFollowCount(){
 
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
-    let {profile}=useLoginState();
+    let {profile}=useLoginState;
     console.log(profile);
+    // console.log(userNo)
     const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     const dispatch = useDispatch();
@@ -29,32 +30,36 @@ function MyFollowCount(){
         )
     };
 
+    const userNos = useSelector((state) => state.userNo.selectUserNo);
+
     // 팔로우 당하는사람(팔로워)
-    const follower = profile?.userNo;
+    const follower = userNos;
 
     // 팔로우 하는사람(팔로잉)
-    const followerIng = userNo;
+    const followerIng = userNos;
 
     // (로그인을 한 유저)입장에서 다른 유저에게 팔로우를 신청할 경우
     // 상대방이 수락을 하던말던 나의 팔로워에 카운트가 올라가야함.
     const [myfollow , setMyFollow] = useState();
+    
+    console.log(userNos + "통과 제발 되라 제발요.")
 
     useEffect(
         () => {
             axios.get("/api/follow/MyFollowCount" , {
                 params:{
-                    followerIng : followerIng ,
+                    followerIng : userNos != null ? userNos : userNo  ,
                 }
             }).then(function(res){
                 console.log(res + "데이터 전송 성공");
                 const data = res.data.result;
                 console.log(data);
-                console.log(userNo + "통 과 됨")
+                console.log(userNos + "통 과 됨")
                 setMyFollow(data);
             }).catch(function(){
                 console.log("데이터 전송 실패");
             });
-        },[]
+        },[userNos != null ? userNos : userNo]
     )
 
     // 나의 팔로워 리스트 띄우기.

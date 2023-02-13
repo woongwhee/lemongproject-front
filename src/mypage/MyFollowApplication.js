@@ -8,8 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import { ImUserPlus } from "react-icons/im";
+import {useDispatch, useSelector} from 'react-redux';
 
 function MyFollowApplication(){
+
+    const userNos = useSelector((state) => state.userNo.selectUserNo);
 
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);

@@ -5,13 +5,10 @@ import { useState } from "react";
 function SetNick() {
 
     const [nickName, setNickName] = useState();
-    
     const [nickError, setNickError] = useState();
-
     const [isNickBtn, setIsNickBtn] = useState();
 
     const isJoin = isNickBtn;
-
 
 
     // 닉네임 중복체크
@@ -42,6 +39,7 @@ function SetNick() {
         )
         if(response.data.code === '2000') {
             alert("어서오세요. 여러분의 꿈을 응원합니다. :)")
+            sessionStorage.clear();
             document.location.href = "/"; // 회원가입 성공 시 로그인 페이지로
         } else {
             alert.log('회원가입 실패');
