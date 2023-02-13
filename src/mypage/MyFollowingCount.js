@@ -94,7 +94,7 @@ function MyFollowingCount(props){
     let i = 0;
 
     return(
-        <div className="followCount" style={{marginTop:'-54px'}}>
+        <div className="followCount" style={{marginTop:'-54px' , posi}}>
             <span data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={ShowMyFollowing}><p style={{fontSize:'27px' , marginLeft : '255px' , marginTop:'-137px' , fontFamily:'Quicksand-Regular'}}><b>{MyFollowingCount?.count}</b></p></span>
             <div className="App">
             <div class="containers p-5">
