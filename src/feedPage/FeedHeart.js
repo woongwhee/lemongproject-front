@@ -81,6 +81,7 @@ function FeedHeart(props) {
             setHeartCount(res.data)
         }).catch(function (res){console.log("실패")})
     })
+
     const reCountHeart = () =>{
         axios.post("api/feed/heartCount",{
             refNo:Feed.feedNo

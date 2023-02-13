@@ -25,9 +25,8 @@ function FeedReplyInsert(props) {
 
     props.setReplyCount(replyCount);
 
-    function callback(str) {
-        setTestStr(str);
-    }
+
+
 
     const deleteReply = async (replyNo, feedNo) => {
         await axios.post('api/feed/deleteReply',
@@ -50,18 +49,19 @@ function FeedReplyInsert(props) {
         }
     }
 
-    // const [profilePath, setProfilePath] = useState();
-    // const proFile = (userNo) => {
-    //     axios.post('api/feed/feedProfile',{
-    //         userNo:userNo
-    //     }).then(function (res){
-    //         // console.log(res.data.FILEPATH);
-    //         setProfilePath(res.data.FILEPATH)
-    //     })
-    //     return(
-    //         <Avatar alt="Remy Sharp" src={profilePath} />
-    //     )
-    // }
+    const [profilePath, setProfilePath] = useState();
+    const proFile = (userNo) => {
+        axios.post('api/feed/feedProfile',{
+            userNo:replyUserNo
+        }).then(function (res){
+            // console.log(res.data.FILEPATH);
+            setProfilePath(res.data.FILEPATH)
+        })
+        return(
+            <Avatar alt="Remy Sharp" src={profilePath} />
+        )
+    }
+    const replyUserNo = [];
 
     const replyList2 = () =>{
         const result = [];
@@ -69,13 +69,15 @@ function FeedReplyInsert(props) {
             result.push((
                 <div key={i}>
                     <ListGroup.Item>
-                        <div style={{float:"left"}}>
-                            <Avatar alt="Remy Sharp" src={testStr[i].filePath} />
-                        </div>
-                        <div style={{marginLeft:"80px"}}>
+                        {/*<div style={{float:"left"}}>*/}
+                        {/*    /!*{proFile(testStr[i].userNo)}*!/*/}
+                        {/*    /!*{replyUserNo.push(testStr[i].userNo)} <br/>*!/*/}
+                        {/*    /!*{proFile(testStr[i].userNo)}*!/*/}
+                        {/*</div>*/}
+                        <div style={{marginLeft:"10px"}}>
                             {testStr[i].nickName} : {testStr[i].replyContent}
                             <div style={{float:"right"}}>
-                                {deleteReplyButton(testStr[i].replyNo,feedNo,testStr[i].userNo)}
+                                {deleteReplyButton(testStr[i].replyNo, feedNo, testStr[i].userNo)}
                             </div>
                             <br/>
                             {testStr[i].replyAt}
@@ -97,6 +99,7 @@ function FeedReplyInsert(props) {
                     feedNo:feedNo
                 }
             }).then((res) => {
+                console.log(res.data.result)
                 setTestStr(res.data.result) // [7개]
             })
         },[]
@@ -148,7 +151,7 @@ function FeedReplyInsert(props) {
     // 댓글 쓰기
     const replyInsert=()=>{
         axios.post('api/feed/insertReply',{
-            userNo:props.Feed.loginUserNo,
+            userNo:Feed.loginUserNo,
             feedNo:feedNo,
             replyContent:replyContent
         }).then(function (res){

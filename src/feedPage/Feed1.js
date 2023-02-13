@@ -77,16 +77,18 @@ export default function RecipeReviewCard(props) {
     }
     const [profilePath, setProfilePath] = useState();
 
-    const proFile = (userNo) => {
-        axios.post('api/feed/feedProfile',{
-            userNo:userNo
-        }).then(function (res){
-            // console.log(res.data.FILEPATH);
-            setProfilePath(res.data.FILEPATH)
-        })
-        return(
-            <Avatar alt="Remy Sharp" src={profilePath} />
-        )
+    const Profile = (userNo) => {
+
+            axios.post('api/feed/feedProfile',{
+                userNo:userNo
+            }).then(function (res){
+                // console.log(res.data.FILEPATH);
+                setProfilePath(res.data.FILEPATH)
+            })
+            return(
+                <Avatar alt="Remy Sharp" src={profilePath} />
+            )
+
     }
 
     return (
@@ -94,7 +96,7 @@ export default function RecipeReviewCard(props) {
         <Card sx={{ maxWidth: 500 ,minWidth : 500 ,border:"1px solid gray"}}>
             <CardHeader
                 avatar={
-                    proFile(userNo)
+                    Profile(userNo)
                 }
                 action={
                     // <TreeView
