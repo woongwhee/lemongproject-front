@@ -51,8 +51,10 @@ function LogoutButton() {
         let res = await axios.get("/api/member/byeUser")
         if(res.data.code === '2000') {
             console.log("무언가 됐음")
+            alert("탈퇴가 완료되었습니다. 목표가 이루어졌길!")
+            document.location.href = "/";
         } else {
-            console.log("1")
+            console.log("000")
         }
     }
 
