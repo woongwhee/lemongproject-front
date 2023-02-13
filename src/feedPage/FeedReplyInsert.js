@@ -49,18 +49,18 @@ function FeedReplyInsert(props) {
         }
     }
 
-    const [profilePath, setProfilePath] = useState();
-    const proFile = (userNo) => {
-        axios.post('api/feed/feedProfile',{
-            userNo:replyUserNo
-        }).then(function (res){
-            // console.log(res.data.FILEPATH);
-            setProfilePath(res.data.FILEPATH)
-        })
-        return(
-            <Avatar alt="Remy Sharp" src={profilePath} />
-        )
-    }
+    // const [profilePath, setProfilePath] = useState();
+    // const proFile = (userNo) => {
+    //     axios.post('api/feed/feedProfile',{
+    //         userNo:replyUserNo
+    //     }).then(function (res){
+    //         // console.log(res.data.FILEPATH);
+    //         setProfilePath(res.data.FILEPATH)
+    //     })
+    //     return(
+    //         <Avatar alt="Remy Sharp" src={profilePath} />
+    //     )
+    // }
     const replyUserNo = [];
 
     const replyList2 = () =>{
