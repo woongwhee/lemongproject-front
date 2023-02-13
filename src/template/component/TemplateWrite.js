@@ -5,66 +5,97 @@ import {isEmpty} from "../../util/typeUtile";
 import {Button} from "reactstrap";
 import TemplateTodoInput from "./TemplateTodoInput";
 import TemplateInput from "./TemplateInput";
+import "../style/TemplateWrite.css"
+import {useTemplateDispatch} from "../TemplateContext";
 
 const TemplateWrite = ({result}) => {
-    console.log(result);
-    let {templateTitle, categoryNo, templateContent, range} = result;
-    const [templateNo, setTemplateNo] = useState(result.templateNo);
-    const [list, setList] = useState(result.todoList == null ? [] : result.todoList);
-    const [inputValue, setInput] = useState({templateTitle, categoryNo, templateContent, range});
+    let {title, categoryNo, content, range, todoList} = result;
+    let templateNo = result.templateNo;
+    let todoCount = todoList==null?0:todoList.length;
+    let dispatch=useTemplateDispatch();
+    let dayArr = new Array(range);
+    if (todoList != null && todoList.length > 0) {
+        for (let i = 0; i < todoList.length; i++) {
+            dayArr[todoList[i].day] = new Array();
+            dayArr[todoList[i].day].push({content: todoList[i].content})
+        }
+    }
+    const [days, setDays] = useState(dayArr);
+    const [inputValue, setInput] = useState({title, categoryNo, content, range});
     const updateInputValue = async (e) => {
-        let {name, value} = e.target;
+        const {name, value} = e.target;
         if (inputValue[name] == value) {
             return;
         }
-        result = await updateUnSave(name, value);
+        const result = await updateUnSave(templateNo, name, value);
+        console.log(result);
         if (result < 1) {
             return;
         }
-        if (name == 'range' && range > value) {
-            setList((list.filter(e => e.day > Range)))
+        if (name == 'range') {
+            if (range > value) {
+                const newDays = dayArr.slice(0, value);
+                setDays(newDays);
+            } else {
+                const newDays = [...dayArr];
+                newDays.length = value;
+                setDays(newDays);
+            }
+
         }
-        let newInput = {...inputValue, [name]: value}
+        const newInput = {...inputValue, [name]: value}
         setInput(newInput)
-        alert("작성완료");
     }
 
     const upload = async (e) => {
-        if (isEmpty(templateTitle) || isEmpty(templateContent) || list.length == 0 || categoryNo == 0) {
+        if (isEmpty(title) || isEmpty(content) || todoCount == 0 || categoryNo == 0) {
             alert("모든내용을 입력해주세요");
             return
         }
         result = await upLoadUnSave();
         if (result > 0) {
             alert("작성완료");
+            dispatch({type:""})
+        }
+
+    }
+    const insertTodo = async (dayList, contentList) => {
+        result = await todoInsert(dayList, contentList, templateNo);
+        todoCount=todoCount+dayList.length*contentList.length
+        let newDays=[...days];
+        for (let i = 0; i < dayList.length; i++) {
+            for (let j = 0; j < contentList.length; j++) {
+                dayArr[todoList[i].day].push({content: todoList[i].content})
+            }
         }
     }
-    const insertTodo = async (dayList, todoContent) => {
-        result = await todoInsert(dayList, todoContent, templateNo);
-    }
-    const deleteTodo = async (todoNo) => {
+    const deleteTodo = async (todoNo, day) => {
         result = await todoDelete(todoNo);
         if (result > 0) {
-            setList((list.filter(e => e.todoNo != todoNo)))
+            let newDays = days[day].filter(e => e.todoNo != todoNo)
+            setDays(newDays);
         }
     }
     const reset = async (e) => {
         const result = await resetUnSave();
-        let {templateTitle, categoryNo, templateContent, templateNo, range} = result;
-        setTemplateNo(templateNo);
-        setInput({templateTitle, categoryNo, templateContent, range});
-        setList([]);
+        let {title, categoryNo, content, range} = result;
+        templateNo = result.templateNo;
+        setInput({title, categoryNo, content, range});
+        setDays(new Array(range));
     }
+
     return (
-        <>
-            <button>
-                리셋
-            </button>
-            <Button onClick={upload}>저장</Button>
-            <TemplateInput inputValue={inputValue} uploadInputValue={updateInputValue}/>
+        <div className={"template-write"}>
+            <div className="btnBox">
+                <Button onClick={reset}>
+                    리셋
+                </Button>
+                <Button onClick={upload}>저장</Button>
+            </div>
+            <TemplateInput inputValue={inputValue} updateInputValue={updateInputValue}/>
             <TemplateTodoInput range={inputValue.range} insertTodo={insertTodo} deleteTodo={deleteTodo}
-                               list={list}></TemplateTodoInput>
-        </>
+                               days={days}></TemplateTodoInput>
+        </div>
     );
 };
 

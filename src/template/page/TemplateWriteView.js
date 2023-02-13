@@ -1,6 +1,6 @@
 import React from 'react';
 import {useAsync} from "react-async-hook";
-import {loadUnSave, templateList} from "../templateApi";
+import {loadUnSave} from "../templateApi";
 import TemplateWrite from "../component/TemplateWrite";
 
 const TemplateWriteView = () => {

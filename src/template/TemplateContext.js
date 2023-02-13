@@ -9,11 +9,15 @@ function templateReducer(state, action) {
     switch (action.type) {
         case 'DETAIL':
             return {index:1,templateNo:action.templateNo,list: state.list};
-        case 'ADDLIST' :
+        case 'ADD_LIST' :
             state.list=state.list.concat(action.list)
             return state;
+        case 'LIST' :
+            return initialParam;
         case 'CATEGORY' :
-            return {...initialParam,categoryNo: action.categoryNo}
+            return {...state,categoryNo: action.categoryNo}
+        case 'ADD_CATEGORY' :
+            return {...state,categories: action.categories}
         case 'WRITE':
             return {...state,index:2};
         default:

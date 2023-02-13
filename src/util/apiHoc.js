@@ -4,11 +4,8 @@ import {isEmpty} from "./typeUtile";
 
 
 const apiHoc = (Comp) => props => {
-    console.log("이거들어옴?",props);
     let state = props.state;
-    console.log("웨안뒘?",state);
     if (isEmpty(state.status)) {
-        console.log("empty")
         return <Comp {...props}></Comp>
     }
     switch (state.status) {

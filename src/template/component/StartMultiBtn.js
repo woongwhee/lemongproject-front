@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {Button} from "@mui/material";
 import StartSingleModal from "./StartSingleModal";
 import StartMultiModal from "./StartMultiModal";
+import {Button} from "reactstrap";
 
 const StartMultiBtn = ({templateNo}) => {
     const [modal, setModal] = useState(false);
@@ -11,7 +11,7 @@ const StartMultiBtn = ({templateNo}) => {
     }
     return (
         <>
-            <Button onClick={toggle}>
+            <Button onClick={toggle} color={"info"} size={"sm"}>
                 같이하기
             </Button>
             <StartMultiModal isOpen={modal} toggle={toggle} templateNo={templateNo}/>

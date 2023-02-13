@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useAsync} from "react-async-hook";
 import {useTemplateDispatch, useTemplateState} from "../TemplateContext";
 import {templateCategory} from "../templateApi";
@@ -15,6 +15,12 @@ const CategoryModal = ({isOpen, toggle, result}) => {
                 type: "CATEGORY", categoryNo: categoryNo
             })
         }
+
+        useEffect(() => {
+            console.log(result);
+                dispatch({type: "ADD_CATEGORY", categories: result})
+            }
+            , [])
         return (
             <Modal ariaHideApp={false}
                    contentLabel="Selected Option" size="sm" fullscreen={false} isOpen={isOpen} toggle={toggle}>

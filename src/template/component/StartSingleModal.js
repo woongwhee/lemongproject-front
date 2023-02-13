@@ -55,7 +55,6 @@ const StartSingleModal = ({isOpen, toggle, templateNo}) => {
             {/*<div className="modal-content">*/}
             <ModalHeader toggle={toggle}>혼자하기</ModalHeader>
             <ModalBody>
-
                 <div>
                     {option.map((item, i) => {
                         return (<><Checkbox type="checkbox" key={"sc+i"} checked={item} onClick={() => {
@@ -68,7 +67,7 @@ const StartSingleModal = ({isOpen, toggle, templateNo}) => {
                                                           onChange={changeValue}></input>
                 </div>
                 <div>
-                    <label htmlFor="stTitle">제목!</label><input id="stTitle" type="text" name="challengeTitle"
+                    <label htmlFor="stTitle">제목</label><input id="stTitle" type="text" name="challengeTitle"
                                                               onChange={changeValue}></input>
                 </div>
             </ModalBody>

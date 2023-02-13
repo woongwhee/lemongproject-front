@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Calendar from 'react-calendar';
-//import 'react-calendar/dist/Calendar.css';
+import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import moment from 'moment/moment';
 import {useDispatch, useSelector} from 'react-redux';
@@ -9,17 +9,6 @@ import {todo} from '../../reducer/page';
 import {codeHandler} from "../../util/apiUtil";
 import TitleContent from "./TitleContent";
 import {isEmpty} from "../../util/typeUtile";
-
-
-//캘린더 라이브러리 추가 해주기
-//npm install react-calendar
-//npm install moment --save
-
-//redux 추가
-//npm install react-redux
-
-//useQuery설치
-//npm install react-query
 
 function Calendar2() {
 

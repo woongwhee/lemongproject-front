@@ -12,7 +12,6 @@ const TemplateCard = ({template}) => {
     const ViewDetail= ()=>{
        dispatch({type:"DETAIL",templateNo:templateNo})
    }
-    console.log(template);
     return (
         <div onClick={ViewDetail} className="Template-Card">
 
