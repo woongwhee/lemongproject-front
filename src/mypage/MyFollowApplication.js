@@ -7,6 +7,8 @@ import MyFollowDelete from "./MyFollowDelete";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
+import { ImUserPlus } from "react-icons/im";
+
 function MyFollowApplication(){
 
     const queryString = window.location.search;
@@ -39,7 +41,7 @@ function MyFollowApplication(){
         if(params.get("userNo") !== sessionStorage.getItem("userNo")){
             return (
                 <>
-                <button style={{marginLeft:'350px'}} onClick={followGo}>팔로우 신청</button>
+                <button class="btn btn-primary" style={{marginLeft:'215px' , fontSize:'13px', marginTop:'-325px' , borderRadius:'100px' , width:'100px'}} onClick={followGo}>팔로우 신청</button>
                 <MyFollowDelete/>
                 </>
             )

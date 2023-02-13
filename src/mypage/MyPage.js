@@ -27,8 +27,14 @@ import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 // 마이페이지 css
 import './MyPage.css';
 import MyFollowApplication from "./MyFollowApplication";
+import { useLoginState } from "../Member/LoginContext";
+import {useDispatch, useSelector} from 'react-redux';
 
 function MyPage() {
+    
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
      // photo테이블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
      const [myprofile , setMyProfile] = useState();
@@ -36,29 +42,35 @@ function MyPage() {
      const queryString = window.location.search;
      const params = new URLSearchParams(queryString);
 
-     const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+     const userNos = useSelector((state) => state.userNo.selectUserNo);
+     console.log(userNos + " 제발 통과됨")
+    //  const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
  
      function callback(data){
          setMyProfile(data);
      }
+
+    const selectUser = () => {
+        axios.get("/api/member/selectMyProfile" , {
+            params:{
+                userNo : userNos ,
+            }
+        }).then(function(res){
+            console.log("데이터 전송 성공");
+            const data = res.data.result;
+            console.log(data);
+            callback(data);
+            
+        }).catch(function(){
+            console.log("데이터 전송 실패");
+        });
+    }
  
-     useEffect(
-         () => {
-             axios.get("/api/member/selectMyProfile" , {
-                 params:{
-                     userNo : userNo ,
-                 }
-             }).then(function(res){
-                 console.log("데이터 전송 성공");
-                 const data = res.data.result;
-                 console.log(data);
-                 callback(data);
-                 
-             }).catch(function(){
-                 console.log("데이터 전송 실패");
-             });
-         } , []
-     );
+
+     useEffect(() => {
+        selectUser();
+        console.log(userNos + "===여기도 통과됨")
+      },[userNos])
 
      let saveFilePath = "http://localhost:8081/api/images/";
 
@@ -77,7 +89,7 @@ function MyPage() {
 
     // 세션의 user_no와 파람의 user_no를 비교하여 해당하는 팔로워 보여주기.
     function followerComparison(){
-        if(params.get("userNo") === sessionStorage.getItem("userNo")){
+        if(userNo === userNos){
             return <MyFollowCount/>
         }else{
             return <AcceptFollowCount/>
@@ -85,7 +97,7 @@ function MyPage() {
     }
 
     function followingComparison(){
-        if(params.get("userNo") === sessionStorage.getItem("userNo")){
+        if(userNo === userNos){
             return <MyFollowingCount/>
         }else{
             return <AcceptFollowingCount/>
@@ -94,39 +106,21 @@ function MyPage() {
  
     return(
         <div>
-            <ChallengeChatRoom />
-            <div style={{position:'absolute'}}>
-            <div className="outer" style={{position:'absolute'}}>
-                <div className="outer_date">
-                    {/* <img src={dateLogo}/> */}
-                    <br/><br/><br/><br/><br/><br/>
-
-                    {/* 구글 API로 구글 캘린더 사용 */}
-                    <FullCalendar 
-                        plugins={[dayGridPlugin, googleCalendarPlugin]}
-                        initialView="dayGridMonth"
-                        googleCalendarApiKey={apiKey}
-                        events={{
-                        googleCalendarId: 'sung755666@gmail.com',
-                        }}
-                        eventDisplay={'block'}
-                        eventTextColor={'#FFF'}
-                        eventColor={'#F2921D'}
-                        height={'660px'}
-                        Toolbar
-                    />
-                </div>
-                <div className="outer_pro">
-                    <div className="outer_MyPro">
-                        <div className="outer_proimg">
-                            <img src={saveFilePath+myprofile?.photo?.changeName} style={{marginLeft:'7px' , marginTop:'0px'}} className="profileImg"></img>
+            {/* <ChallengeChatRoom /> */}
+            <div style={{position:'absolute' , marginLeft:'-180px' , marginTop:'-7px'}}>
+            <div className="outer_my" style={{position:'absolute'}}>
+                
+                <div className="outer_prof">
+                    <div className="outer_MyProf">
+                        <div className="outer_proimgf">
+                            <img src={myprofile?.photo?.filePath+myprofile?.photo?.changeName} style={{marginLeft:'7px' , marginTop:'0px'}} className="profileImg"></img>
                         </div>
-                        <div className="outer_id">
-                            <p className="nickFont" style={{marginTop:'7px'}}><b>{myprofile?.nickName}</b><img src={mark} style={{width:'25px' , height:'25px' , marginLeft:'7px' , marginTop:'-5px'}}/></p>
+                        <div className="outer_idf">
+                            <p className="nickFontf" style={{marginTop:'7px'}}><b>{myprofile?.nickName}</b><img src={mark} style={{width:'25px' , height:'25px' , marginLeft:'7px' , marginTop:'-5px'}}/></p>
                         </div>
                         <br/>
-                        <div className="outer_fall">
-                            <div className="followsize">
+                        <div className="outer_fallf">
+                            <div className="followsizef">
                                 <p style={{fontSize:'23px' , fontFamily:'NanumGothic-Regular'}}>게시글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     팔로잉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팔로워</p>
@@ -134,16 +128,16 @@ function MyPage() {
                                     {followingComparison()}
                             </div>
                         </div>
-                        <div className="outer_content">
+                        <div className="outer_contentf">
                             <p style={{fontFamily:'NanumGothic-Regular' , fontSize:'17px'}}>{myprofile?.profileComment}</p>
                             <MyFollowApplication/>
                             
                         </div>
                     </div>
-                    <div className="outer_btn">
-                        <button className="myBtn" onClick={() => changeTab("Feed")}>Feed</button>
-                        <button className="myBtn" onClick={() => changeTab("Challenge")}>Challenge</button>
-                        <button className="myBtn" onClick={() => changeTab("Template")}>Template</button>
+                    <div className="outer_btnf">
+                        <button className="myBtnf" onClick={() => changeTab("Feed")}>Feed</button>
+                        <button className="myBtnf" onClick={() => changeTab("Challenge")}>Challenge</button>
+                        <button className="myBtnf" onClick={() => changeTab("Template")}>Template</button>
                     </div>
                         {tab === "Feed" ? <MyFeed/> : null}
                         {tab === "Challenge" ? <MyChallenge/> : null}
