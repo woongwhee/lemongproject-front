@@ -47,12 +47,28 @@ function LogoutButton() {
         document.location.href = kakaoLogout;
     }
 
+    const byeUser = async () => {
+        let res = await axios.get("/api/member/byeUser")
+        if(res.data.code === '2000') {
+            console.log("무언가 됐음")
+        } else {
+            console.log("1")
+        }
+    }
+
 
 
     return (
+        <>
         <Button onClick={logout}>
             로그아웃
         </Button>
+        <br></br>
+        <Button onClick={byeUser}>
+            회원탈퇴(테스팅)
+        </Button>
+        
+        </>
 
     );
 }
