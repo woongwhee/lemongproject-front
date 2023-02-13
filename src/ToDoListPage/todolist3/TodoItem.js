@@ -1,15 +1,26 @@
 import React , {useState, useEffect} from 'react';
-import styled, { css } from 'styled-components';
+import styledr, { css } from 'styled-components';
 import { MdDone, MdDelete, MdCreate, MdOutlineCreate, MdClear } from 'react-icons/md';
+import { FaRegLemon, FaLemon } from 'react-icons/fa';
 import { GiOrangeSlice }  from "react-icons/gi";
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import moveMark  from '../../reducer/mark';
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import TreeView from '@mui/lab/TreeView';
+import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem';
+import Typography from '@mui/material/Typography';
+import Label from '@mui/icons-material/Label';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { BsThreeDots } from 'react-icons/bs'
 
-const Remove = styled.div`
+const Remove = styledr.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   color: #dee2e6;
   font-size: 24px;
   cursor: pointer;
@@ -19,10 +30,10 @@ const Remove = styled.div`
   // display: none;
 `;
 
-const Update = styled.div`
+const Update = styledr.div`
 display: flex;
 align-items: center;
-justify-content: center;
+justify-content: left;
 color: #dee2e6;
 font-size: 24px;
 cursor: pointer;
@@ -33,10 +44,10 @@ cursor: pointer;
   //display: none;
 `;
 
-const Delay = styled.div`
+const Delay = styledr.div`
 display: flex;
 align-items: center;
-justify-content: center;
+justify-content: left;
 color: #dee2e6;
 font-size: 24px;
 cursor: pointer;
@@ -47,50 +58,145 @@ cursor: pointer;
   //display: none;
 `;
 
-const TodoItemBlock = styled.div`
+const TodoItemBlock = styledr.div`
   display: flex;
-  align-items: center;
+  //align-items: center;
+  margin : center;
   padding-top: 12px;
   padding-bottom: 12px;
   //border: 3px solid orange;
-  &:hover {
-    ${Remove} {
-      display: initial;
-    }
+  width : 480px;
+  // &:hover {
+  //   ${Remove} {
+  //     display: initial;
+  //   }
   }
 `;
 
-const CheckCircle = styled.div`
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-  border: 1px solid #ced4da;
+const CheckCircle = styledr.div`
+  width: 35px;
+  height: 35px;
+  color : #ced4da;
+  border-radius: 11px;
+  //border: 1px solid #ced4da;
+
+  //background에 그라데이션 넣기
+  //background: linear-gradient(to top, yellow, lightGreen);
+
+  //border에 그라데이션 넣기
+  border: 3px solid transparent;
+  background-image: linear-gradient(#fff, #fff), linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+
   font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 20px;
   cursor: pointer;
-  //border: 3px solid purple;
+  &:hover{
+    transform : scale(1.1);
+  }
   ${todo =>
     todo.clear &&
     css`
-      border: 1px solid #38d9a9;
-      color: #38d9a9;
+      border: 1px solid #FFEE4E;
+      color: 	#FFEE4E;
+      width : 45px;
+      height: 45px;
     `}
 `;
 
-const Text = styled.div`
+const Text = styledr.div`
   flex: 1;
-  font-size: 21px;
+  font-size: 19px;
   color: #495057;
-  //border: 3px solid pink;
+  margin-top : 5px;
+ // border: 3px solid pink;
   ${todo =>
     todo.clear &&
     css`
       color: #ced4da;
+      text-decoration: line-through;
     `}
 `;
+
+const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  [`& .${treeItemClasses.content}`]: {
+    color: theme.palette.text.secondary,
+    //borderTopRightRadius: theme.spacing(2),
+    //borderBottomRightRadius: theme.spacing(2),
+    paddingRight: theme.spacing(0),
+    paddingLeft: theme.spacing(6),
+    fontWeight: theme.typography.fontWeightMedium,
+    '&.Mui-expanded': {
+       fontWeight: theme.typography.fontWeightRegular,
+    },
+    '&:hover': {
+        backgroundColor: theme.palette.action.selected,
+    },
+    '&.Mui-selected': {
+       //backgroundColor: `var(--tree-view-bg-color, ${theme.palette.action.selected})`,
+      backgroundColor: `var(--tree-view-bg-color, white)`,
+      //color: 'var(--tree-view-color)',
+    },
+    [`& .${treeItemClasses.label}`]: {
+      // fontWeight: 'inherit',
+       color: 'white',
+    },
+  },
+  [`& .${treeItemClasses.group}`]: {
+    marginLeft: 0,
+    [`& .${treeItemClasses.content}`]: {
+      //paddingLeft: theme.spacing(1),
+    },
+  },
+}));
+
+function StyledTreeItem(props) {
+  const {
+    bgColor,
+    color,
+    labelIcon: LabelIcon,
+    labelInfo,
+    labelText,
+    ...other
+  } = props;
+
+  return (
+    <StyledTreeItemRoot
+      label={
+        <Box sx={{ display: 'flex', alignItems: 'center', p: 0, pr: 0 }}>
+          <Box component={LabelIcon} color="inherit" sx={{ mr:0 }} />
+          <Typography variant="body1" sx={{ fontWeight: 'inherit', flexGrow: 1 }}>
+            {labelText}
+          </Typography>
+          <Typography variant="caption" color="inherit">
+            {labelInfo}
+          </Typography>
+        </Box>
+      }
+      style={{
+        '--tree-view-color': color,
+        '--tree-view-bg-color': bgColor,
+      }}
+      {...other}
+    />
+  );
+}
+
+StyledTreeItem.propTypes = {
+  bgColor: PropTypes.string,
+  color: PropTypes.string,
+  labelIcon: PropTypes.elementType.isRequired,
+  labelInfo: PropTypes.string,
+  labelText: PropTypes.string.isRequired,
+};
+
+
+
 
 function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
 
@@ -125,7 +231,7 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
     <TodoItemBlock>
       {/* 완료 */}
       <CheckCircle clear={todo.clear} onClick={()=>{onToggle(todo.todoNo); moveMark();}}>
-        {todo.clear && <MdDone /> }
+        { todo.clear ? <FaLemon/> : <FaRegLemon/>}
       </CheckCircle>
 
       {/* 내용 */}
@@ -150,15 +256,33 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
           </>
         ) : (
           <> {/* 일반적으로 투두 생성시 나오는 버튼들 */}
-          <Delay>
-            <GiOrangeSlice onClick={()=>{onDelay(todo.todoNo); moveMark();}} /> {/* 내일로 미루기 */}
-          </Delay>
-          <Update>
-            <MdOutlineCreate onClick={onClickEdite}/> {/* 수정하기 버튼 */}
-          </Update>
-          <Remove >
-            <MdClear onClick={()=>{onDel(todo.todoNo); moveMark();}}/> {/* 삭제버튼 */}
-          </Remove>
+          <TreeView
+            aria-label="gmail"
+            //defaultExpanded={['3']}
+            defaultCollapseIcon={<BsThreeDots />}
+            defaultExpandIcon={<BsThreeDots />}
+            //defaultEndIcon={<div style={{ width: 20, margin: 'right' }} />}
+            sx={{ border: '1px solid pink' }}
+          >
+          <StyledTreeItem nodeId="1" labelText="" labelIcon={Delay}
+          sx={{backgroundColor: 'white', overflow: 'visible'}}
+          >
+
+            <Delay>
+              <GiOrangeSlice onClick={()=>{onDelay(todo.todoNo); moveMark();}}/> {/* 내일로 미루기 */}
+              <h6>미루기</h6>
+            </Delay>
+            <Update>
+              <MdOutlineCreate onClick={onClickEdite}/> {/* 수정하기 버튼 */}
+              <h6>수정</h6>
+            </Update>
+            <Remove >
+              <MdClear onClick={()=>{onDel(todo.todoNo); moveMark();}}/> {/* 삭제버튼 */}
+              <h6>삭제</h6>
+            </Remove>
+
+          </StyledTreeItem>
+          </TreeView>
           </>
         )
       ) : null} {/* 완료된 투두일 경우 수정 버튼이 뜨지 않게 한다. */}

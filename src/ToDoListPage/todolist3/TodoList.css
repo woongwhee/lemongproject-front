@@ -1,0 +1,11 @@
+.TodoListBlock::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+.TodoListBlock::-webkit-scrollbar-thumb {
+height: 30%; /* 스크롤바의 길이 */
+background: white; /* 스크롤바의 색상 */
+
+border-radius: 10px;
+}
+

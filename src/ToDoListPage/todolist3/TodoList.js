@@ -4,15 +4,29 @@ import TodoItem from './TodoItem';
 import ChallTodoItem from './ChallTodoItem';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import axios from 'axios';
+import './TodoList.css';
 
 const TodoListBlock = styled.div`
   flex: 1;
-  padding: 20px 32px;
+  padding: 20px 17px;
   padding-bottom: 48px;
   overflow-y: auto;
 `;
 
+
+
 function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onDelay}) {
+  console.log(chList);
+  //console.log(todoList);
+  //const copyChList = [...chList];
+  //console.log(copyChList[0]);
+
+  //const [ch] = copyChList.map(todo => todo.todoList);
+  //console.log(ch);
+
+  //console.log(chList[0].todoList);
+  // const [todoListArr] = chList[0].todoList;
+  // console.log(todoListArr);
   
   const onDragEnd = (res) => {
     if (!res.destination) return;
@@ -36,11 +50,12 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
 
   return ( 
     <>
-    <p>Daily Todo-List</p>
+    {todoList === null ? <p>Daily Todo-List</p> : ""}
+    
     <DragDropContext onDragEnd={onDragEnd} >
       <Droppable droppableId="drop-area">
         {provided => (
-          <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}>
+          <TodoListBlock {...provided.droppableProps} ref={provided.innerRef} >
             {todoList && todoList.map((todo, index) =>(
               <Draggable draggableId={String(todo.todoNo)} index={index} key={index} >
                 {provided => (
@@ -60,6 +75,8 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
               ))}
               {provided.placeholder} 
 
+              
+              {chList === null ? <p>챌린지예용</p> : ""}
               {chList && chList.map(chTodos => (
                 chTodos.todoList.map(chTodo => 
                   <ChallTodoItem
@@ -68,8 +85,6 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
                   />
                 )
               ))}
-            
-
           </TodoListBlock>
         )}
         

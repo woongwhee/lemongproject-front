@@ -35,24 +35,27 @@ function Calendar2() {
     };
 
     //데일리 투두 캘린더에 마크 표시
-    const [mark, setMark] = useState([]);//챌린지 투두 캘린더에 마크 표시
+    const [mark, setMark] = useState([]);
+    //챌린지 투두 캘린더에 마크 표시
     const [chMark, setChMark] = useState([]);
+    //공휴일 표시
     const [holidayMark, setHdMark] = useState([]);
+
     // 투두 변동 시 캘린더 마크 변동
     const moveMark = useSelector(state => state.mark);
     const [month, setMonth] = useState(new moment(new Date()).format("MM"));//챌린지 투두 캘린더에 마크 표시
 
     //투두리스트가 존재하는 날짜 가져오기
-    const calTodo = () => {
-        axios.get("/api/todo/calTodo", {
-            params: {userNo: 1},
-        }).then(function (res) {
-            setMark(res.data);
-            //console.log("캘린더 데이터"+res.data);
-        }).catch(function () {
-            console.log("오류 발생")
-        })
-    }
+    // const calTodo = () => {
+    //     axios.get("/api/todo/calTodo", {
+    //         params: {userNo: 1},
+    //     }).then(function (res) {
+    //         setMark(res.data);
+    //         //console.log("캘린더 데이터"+res.data);
+    //     }).catch(function () {
+    //         console.log("오류 발생")
+    //     })
+    // }
 
     useEffect(() => {
         loadMark();
@@ -61,16 +64,17 @@ function Calendar2() {
 
 
     //챌린지 삭제,완료시 캘린더 마크 변동
-    const calChTodo = () => {
-        axios.get("/api/chTodo/calChTodo"
-        ).then(function (res) {
-            setChMark(res.data);
-            //console.log("캘린더 데이터"+res.data);
-        }).catch(function (res) {
-            console.log("오류 발생")
-            console.log(res.data);
-        })
-    }
+    // const calChTodo = () => {
+    //     axios.get("/api/chTodo/calChTodo"
+    //     ).then(function (res) {
+    //         setChMark(res.data);
+    //         //console.log("캘린더 데이터"+res.data);
+    //     }).catch(function (res) {
+    //         console.log("오류 발생")
+    //         console.log(res.data);
+    //     })
+    // }
+
     const loadMark = async () => {
         let month = new moment(new Date).format("YYMMDD");
         const res = await axios.get(`/api/todo/getMonth/${month}`);
@@ -78,7 +82,9 @@ function Calendar2() {
         setChMark(challengeDayList);
         setMark(todoDayList);
         setHdMark(holidayList);
+        //console.log(res.data.result.todoDayList);
     }
+
     const onViewChange = async ({activeStartDate}) => {
         let month = new moment(activeStartDate).format("YYMMDD");
         setMonth(activeStartDate.getMonth());
@@ -98,13 +104,12 @@ function Calendar2() {
                 formatDay={(locale, date) => moment(date).format("DD")} //달력날짜에 '일' 삭제
                 tileContent={(e) => {
                     let date=e.date;
-                    if(date.getMonth()!=month||isEmpty(mark)&&isEmpty(chMark)&&isEmpty(holidayMark)){
+                    if(date.getMonth() != month || isEmpty(mark) && isEmpty(chMark) && isEmpty(holidayMark)){
                         return (<></>)
                     }
                     return(<TitleContent chMark={chMark} Mark={mark} hdMark={holidayMark} day={date.getDate()}/>)
 
                 }}
-
                 onActiveStartDateChange={onViewChange}
                 onClickDay={() => dispatch(todo())}
             />

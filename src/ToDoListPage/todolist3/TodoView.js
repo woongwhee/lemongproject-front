@@ -67,13 +67,13 @@ function TodoView3(){
       //console.log(todoDate);
       const res = await axios.get(`/api/todo/daily/${todoDate}`)
       let result=codeHandler(res);
+      //console.log(result);
       setTodoList(result.normalList);
       setChList(result.challengeList);
-      console.log(res.data.result.normalList);
-      //console.log(result.challengeList[0].todoList);
+      //console.log(todoList);
       //console.log(chList);
-      //console.log(chList.todoList);
-    } catch(res){
+    } catch(result){
+      setTodoList(result.data);
       console.log("전송 실패")
     }
   }

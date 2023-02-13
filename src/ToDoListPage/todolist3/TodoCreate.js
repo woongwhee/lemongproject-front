@@ -6,12 +6,12 @@ import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
 
 const CircleButton = styled.button`
-  background: #38d9a9;
+  background: #FFEE4E;
   &:hover {
-    background: #63e6be;
+    background: #6B00A9;
   }
   &:active {
-    background: #20c997;
+    background: #7433D0;
   }
 
   z-index: 5;
