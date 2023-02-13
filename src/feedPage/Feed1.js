@@ -127,7 +127,7 @@ export default function RecipeReviewCard(props) {
 
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    <h3>{Feed.feedContent}</h3>
+                    {loginUserNo} <br/> <h3>{Feed.feedContent}</h3>
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

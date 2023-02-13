@@ -99,7 +99,7 @@ function FeedReplyInsert(props) {
             }).then((res) => {
                 setTestStr(res.data.result) // [7개]
             })
-        }
+        },[]
     );
     const getReplyList=()=>{
         axios({
