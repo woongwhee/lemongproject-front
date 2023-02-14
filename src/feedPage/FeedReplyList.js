@@ -1,13 +1,12 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import FeedReplyResultList from "./FeedReplyResultList";
 import Table from 'react-bootstrap/Table';
 
-function FeedReplyList({feedNo}){
+function FeedReplyList(props){
     const [ testStr, setTestStr ] = useState([]);
-
-    const [ length, setLength ] = useState(testStr.length);
-
+    const [length,setLength]=useState();
+    const feedNo = props.feedNo;
 
     function callback(str) {
         setTestStr(str);
@@ -45,7 +44,9 @@ function FeedReplyList({feedNo}){
             })
         }, [length]
     );
+
     let i=0;
+
     return(
         <div>
             <Table striped>
@@ -62,7 +63,7 @@ function FeedReplyList({feedNo}){
             {/*{testStr?.map(e=><FeedReplyResultList key={i++} {...e} feedNo={feedNo}/>)}*/}
             {testStr?.map(reply=>replylist({reply}) )}
             {/*{testStr[0].replyNo}*/}
-            {testStr.length}
+            {testStr?.length}
             {length}
         </div>
         )

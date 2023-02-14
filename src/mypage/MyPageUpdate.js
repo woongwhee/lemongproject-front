@@ -78,9 +78,7 @@ function MyPageUpdate(){
 
      // 검색한 닉네임 저장
      const CheckValHandle = (event) => {
-
         const {name , value} = event.target;
-
         setMyNickCheck({
             ...mynickCheck , 
             [name]:value,

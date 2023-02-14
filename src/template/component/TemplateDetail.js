@@ -15,10 +15,7 @@ const TemplateDetail = (state) => {
             <StartSingleBtn templateNo={templateNo}/>
             <StartMultiBtn templateNo={templateNo}/>
             {clear&&<img className={"clear-img"} src={CLEAR_MARK} alt="templateClear"/>}
-            <table>
-                <tr><td></td><td></td></tr>
-            </table>
-
+            <div className={"template-header"}>{title}</div>
             {templateNo}
             {title}
             {content}

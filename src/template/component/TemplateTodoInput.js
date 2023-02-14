@@ -85,6 +85,8 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo}) {
     }
     const onModalClose = async () => {
         let result = await insertTodo(dayList, contentList);
+
+
         setDayList([]);
         setContentList([]);
     }
@@ -128,7 +130,7 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo}) {
             <TodoWriter isOpen={modal} dayList={dayList} contentList={contentList} addContent={addContent}
                         removeContent={removeContent} toggle={modalToggle} onClosed={onModalClose}></TodoWriter>
             {singleModal && <TodoSingleWriter isOpen={singleModal} day={dayList[0]} toggle={singleModalToggle}
-                                              onClosed={onModalClose}></TodoSingleWriter>}
+                                              onClosed={onModalClose} deleteTodo={deleteTodo}></TodoSingleWriter>}
         </>
     )
 }

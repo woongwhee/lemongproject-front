@@ -17,11 +17,14 @@ function Calendar2() {
 
     //date타입으로 그대로 전달
     //날짜 클릭시 dispatch로 변경 값이 전달된다.
-    const selectDay = e => {
-        dispatch(
-            {type: 'SELECTDAY', payload: {selectDay: e}},
-        )
-    };
+  //date타입으로 그대로 전달
+  //날짜 클릭시 dispatch로 변경 값이 전달된다.
+  const selectDay = e => {
+    dispatch(
+      { type : 'SELECTDAY' , payload : {selectDay : e}},
+    );
+    dispatch({type:'menu'})
+  };
 
     //데일리 투두 캘린더에 마크 표시
     const [mark, setMark] = useState([]);//챌린지 투두 캘린더에 마크 표시

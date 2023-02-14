@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
-import Feed from "./Feed1";
+import Feed from "./Feed";
 import FeedLoading from "./FeedLoading";
 
 
@@ -25,10 +25,7 @@ function FeedBody(){
                 url: '/api/feed/main',
                 method: 'GET'
             }).then((res) => {
-                // console.log(res.data.result)
                 callback(res.data.result);
-                // console.log(res.data.code);
-                // console.log("teststr" + testStr)
                 setLoading(false);
             })
         }, []
@@ -37,7 +34,7 @@ function FeedBody(){
     return(
         <div>
             <div style={{overflow:"scroll", height:"800px"}}>
-            {loading ? <FeedLoading/> : testStr?.map(e=><Feed key={i++} {...e} />)}
+            {/*{loading ? <FeedLoading/> : testStr?.map(e=><Feed key={i++} {...e} />)}*/}
             </div>
         </div>
     );

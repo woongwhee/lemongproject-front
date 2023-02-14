@@ -11,8 +11,8 @@ import {useTemplateDispatch} from "../TemplateContext";
 const TemplateWrite = ({result}) => {
     let {title, categoryNo, content, range, todoList} = result;
     let templateNo = result.templateNo;
-    let todoCount = todoList==null?0:todoList.length;
-    let dispatch=useTemplateDispatch();
+    let todoCount = todoList == null ? 0 : todoList.length;
+    let dispatch = useTemplateDispatch();
     let dayArr = new Array(range);
     if (todoList != null && todoList.length > 0) {
         for (let i = 0; i < todoList.length; i++) {
@@ -55,19 +55,24 @@ const TemplateWrite = ({result}) => {
         result = await upLoadUnSave();
         if (result > 0) {
             alert("작성완료");
-            dispatch({type:""})
+            dispatch({type: "DETAIL", templateNo})
         }
 
     }
     const insertTodo = async (dayList, contentList) => {
         result = await todoInsert(dayList, contentList, templateNo);
-        todoCount=todoCount+dayList.length*contentList.length
-        let newDays=[...days];
+        todoCount = todoCount + dayList.length * contentList.length
+        let newDays = [...days];
         for (let i = 0; i < dayList.length; i++) {
             for (let j = 0; j < contentList.length; j++) {
-                dayArr[todoList[i].day].push({content: todoList[i].content})
+                if (isEmpty(newDays[dayList[i]])) {
+                    newDays[dayList[i]] = [{content: contentList[j]}];
+                } else {
+                    newDays[dayList[i]].push({content: contentList[j]})
+                }
             }
         }
+        setDays(newDays);
     }
     const deleteTodo = async (todoNo, day) => {
         result = await todoDelete(todoNo);

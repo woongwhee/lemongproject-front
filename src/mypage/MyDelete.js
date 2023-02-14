@@ -2,10 +2,7 @@ import React , {useState , useEffect} from "react";
 import { Component } from "react";
 import axios from "axios";
 
-import Logo from './image/레몽 로고.png';
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+// import Logo from './LemongImg/CommonImg/레몽 로고.png';
 
 function MyDelete(){
 
@@ -58,7 +55,7 @@ function MyDelete(){
                    <div class="modal-body">
                    <form>
                       <div class="mb-3">
-                        <img src={Logo} style={{width:'500px' , marginLeft:'200px'}}></img>
+                        <img src="/LemongImg/CommonImg/LemongLogo.png" style={{width:'500px' , marginLeft:'200px'}}></img>
                         <br/><br/><br/>
                          <label for="exampleInputEmail1" class="form-label">Password</label>
                          <input type="password" class="form-control" name="passwordCheck1" onChange={handleInput}/>

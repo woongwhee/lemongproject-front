@@ -6,9 +6,8 @@ import './MainPage.css';
 import Profile from "./profile/Profile";
 //캘린더 Api 컴포넌트
 import Calendar from './calendar/Calendar';
-//메뉴바 컴포넌트
-import Menubar2 from "./menubar/Menubar2";
 
+import {useLoginDispatch} from "../Member/LoginContext";
 import axios from "axios";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from '@mui/material/Button';
@@ -17,16 +16,13 @@ import FeedInsert from "../feedPage/FeedInsert";
 import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
-import { useLoginDispatch } from "../Member/LoginContext";
-
+import Menubar4 from "./menubar/Menubar4"
 import { useLoginState } from "../Member/LoginContext";
 
 function LogoutButton() {
     const dispatch= useLoginDispatch();
-
     const logout=async ()=>{
         await axios.get("/api/member/logout");
-
         dispatch({
             type:"logout"
         });
@@ -35,7 +31,6 @@ function LogoutButton() {
         <Button onClick={logout}>
             로그아웃
         </Button>
-
     );
 }
 
@@ -60,7 +55,7 @@ function MainMenu(){
             <LogoutButton></LogoutButton>
 <br/>
             <FeedInsert></FeedInsert>
-            
+
             <br/>
             <div style={{marginTop:'-500px'}}>
                 <ChallengeChatRoom/>
@@ -91,7 +86,9 @@ function MainPage() {
                 <br/><br/>
                 <Calendar/>
             </div>
-          <Menubar2/>
+          {/*<Menubar2/>*/}
+          {/*<Menubar3/>*/}
+            <Menubar4/>
         </div>
     </>
             );
