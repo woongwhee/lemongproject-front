@@ -7,12 +7,26 @@ import MyFollowDelete from "./MyFollowDelete";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
-function MyFollowApplication(){
+import { ImUserPlus } from "react-icons/im";
+import {useDispatch, useSelector} from 'react-redux';
+
+function MyFollowApplication(props){
+
+    let{userNo}=props;
+
+    const userNos = useSelector((state) => state.userNo.selectUserNo);
+
+    const myNo = userNos == null ? userNo : userNos
+
+    console.log(userNo + " 값 확인중 ")
+    console.log(userNos + " 값 확인중 ")
 
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
-    const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+   
+
+    // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
     // 팔로우 당하는사람(팔로워)
     const follower = params.get("userNo");
@@ -36,10 +50,10 @@ function MyFollowApplication(){
     }
 
     function showBtn(){
-        if(params.get("userNo") !== sessionStorage.getItem("userNo")){
+        if(userNo !== myNo){
             return (
                 <>
-                <button style={{marginLeft:'350px'}} onClick={followGo}>팔로우 신청</button>
+                <button class="btn btn-primary" style={{marginLeft:'215px' , fontSize:'13px', marginTop:'-325px' , borderRadius:'100px' , width:'100px'}} onClick={followGo}>팔로우 신청</button>
                 <MyFollowDelete/>
                 </>
             )

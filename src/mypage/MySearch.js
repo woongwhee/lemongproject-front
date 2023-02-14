@@ -62,7 +62,7 @@ function MySearch(props){
 
     let i = 0;
     return(
-        <div id="serchOuter" style={{width:'20%' , marginLeft:'-15px' , height:'1000px' , marginTop:'-16px' , position:'absolute'}}>
+        <div id="serchOuter" style={{width:'92%' , marginLeft:'0px' , height:'960px' , marginTop:'-16px' , position:'absolute'}}>
         {/* // <div className="outer_req1"> */}
             <form id="searchForm" name="searchForm" onSubmit={handleSubmit}> 
                 <div className="outer_searchBtn">
