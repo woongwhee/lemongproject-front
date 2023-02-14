@@ -17,6 +17,10 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { BsThreeDots } from 'react-icons/bs'
 
+//애니메이션 라이브러리
+//npm install animate.css --save
+import 'animate.css';
+
 const Remove = styledr.div`
   display: flex;
   align-items: center;
@@ -53,7 +57,7 @@ font-size: 24px;
 cursor: pointer;
 //background-color: skyblue;
   &:hover {
-    color: #f7ff03;
+    color: #FFEE4E;
   }
   //display: none;
 `;
@@ -65,29 +69,33 @@ const TodoItemBlock = styledr.div`
   padding-top: 12px;
   padding-bottom: 12px;
   //border: 3px solid orange;
-  width : 480px;
+  width : 470px;
   // &:hover {
   //   ${Remove} {
   //     display: initial;
   //   }
+  }
+  &:hover{
+    transform : scale(1.02);
   }
 `;
 
 const CheckCircle = styledr.div`
   width: 35px;
   height: 35px;
-  color : #ced4da;
-  border-radius: 11px;
-  //border: 1px solid #ced4da;
-
+  color : #9795f0;
+  //text-fill-color : transparent;
+  //background-clip: text;
+ 
   //background에 그라데이션 넣기
-  //background: linear-gradient(to top, yellow, lightGreen);
+  //background: linear-gradient(to top, #9795f0 0%, #fbc8d4 100%);
 
   //border에 그라데이션 넣기
-  border: 3px solid transparent;
-  background-image: linear-gradient(#fff, #fff), linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
+  border-radius: 11px;
+  border: 2.5px solid transparent;
+  background-image: linear-gradient(#fff, #fff),linear-gradient(to top, #9795f0 0%, #fbc8d4 100%);
+  background-origin: border-box; //배경위치 시작지점 : 
+  background-clip: content-box, border-box; //배경이미지를 잘라낼 위치
 
   font-size: 24px;
   display: flex;
@@ -96,21 +104,24 @@ const CheckCircle = styledr.div`
   margin-right: 20px;
   cursor: pointer;
   &:hover{
-    transform : scale(1.1);
+    transform : scale(1.05);
   }
   ${todo =>
     todo.clear &&
     css`
-      border: 1px solid #FFEE4E;
+      border: 2.5px solid #FFEE4E;
       color: 	#FFEE4E;
-      width : 45px;
-      height: 45px;
-    `}
+      width : 35px;
+      height: 35px;
+      animation : fadeIn;
+      animation-duration: 1s;
+    ` }
+
 `;
 
 const Text = styledr.div`
   flex: 1;
-  font-size: 19px;
+  font-size: 18px;
   color: #495057;
   margin-top : 5px;
  // border: 3px solid pink;
@@ -138,8 +149,8 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
         backgroundColor: theme.palette.action.selected,
     },
     '&.Mui-selected': {
-       //backgroundColor: `var(--tree-view-bg-color, ${theme.palette.action.selected})`,
-      backgroundColor: `var(--tree-view-bg-color, white)`,
+       backgroundColor: `var(--tree-view-bg-color, ${theme.palette.action.selected})`,
+      //backgroundColor: `var(--tree-view-bg-color, #FFEE4E)`,
       //color: 'var(--tree-view-color)',
     },
     [`& .${treeItemClasses.label}`]: {
@@ -228,10 +239,10 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
   }
 
   return (
-    <TodoItemBlock>
+    <TodoItemBlock className='animate__animated animate__fadeIn' >
       {/* 완료 */}
-      <CheckCircle clear={todo.clear} onClick={()=>{onToggle(todo.todoNo); moveMark();}}>
-        { todo.clear ? <FaLemon/> : <FaRegLemon/>}
+      <CheckCircle clear={todo.clear} onClick={()=>{onToggle(todo.todoNo); moveMark();}} >
+        { todo.clear ? <FaLemon /> : <FaRegLemon />}
       </CheckCircle>
 
       {/* 내용 */}
@@ -262,23 +273,23 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
             defaultCollapseIcon={<BsThreeDots />}
             defaultExpandIcon={<BsThreeDots />}
             //defaultEndIcon={<div style={{ width: 20, margin: 'right' }} />}
-            sx={{ border: '1px solid pink' }}
+            // sx={{ border: '1px solid pink' }}
           >
           <StyledTreeItem nodeId="1" labelText="" labelIcon={Delay}
           sx={{backgroundColor: 'white', overflow: 'visible'}}
           >
 
             <Delay>
-              <GiOrangeSlice onClick={()=>{onDelay(todo.todoNo); moveMark();}}/> {/* 내일로 미루기 */}
-              <h6>미루기</h6>
+              <GiOrangeSlice onClick={()=>{onDelay(todo.todoNo); moveMark();}} /> {/* 내일로 미루기 */}
+              <p style={{fontSize: '12.7px', margin: 'auto'} }>미루기</p>
             </Delay>
             <Update>
               <MdOutlineCreate onClick={onClickEdite}/> {/* 수정하기 버튼 */}
-              <h6>수정</h6>
+              <p style={{fontSize: '12.8px', margin: 'auto'}}>수정</p>
             </Update>
             <Remove >
               <MdClear onClick={()=>{onDel(todo.todoNo); moveMark();}}/> {/* 삭제버튼 */}
-              <h6>삭제</h6>
+              <p style={{fontSize: '12.8px', margin: 'auto'}}>삭제</p>
             </Remove>
 
           </StyledTreeItem>

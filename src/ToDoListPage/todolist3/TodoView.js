@@ -35,6 +35,8 @@ function TodoView3(){
 
   //챌린지 투두리스트
   const [chList , setChList] = useState([]);
+  const [chListName, setChListName] = useState();
+  const [chTodo, setChTodo] = useState([]);
   //const [chTodo, setChTodo] = useState([chList.map(chTodos => chTodos.todoList.map(chTodo))]);
   //chList && chList.map(chLists => chLists.todoList.map(chTodo => console.log(chTodo)));
   //console.log(chTodos);
@@ -70,10 +72,11 @@ function TodoView3(){
       //console.log(result);
       setTodoList(result.normalList);
       setChList(result.challengeList);
-      //console.log(todoList);
-      //console.log(chList);
+      //setChListName(chList.map(chTodos => chTodos.challengeName));
+      console.log(result);
     } catch(result){
       setTodoList(result.data);
+      setChList(result.data);
       console.log("전송 실패")
     }
   }
@@ -151,20 +154,20 @@ function TodoView3(){
   }
 
   //챌린지 투두 완료
-  // const onToggleCh = async(todoNo) => {
-  //   axios.get('/api/chTodo/clearChTodo', {
-  //     params : {todoNo : todoNo}
-  //   }).then(function(res){
-  //     setChList(chList.map(chLists => 
-  //       chLists.todoList.map(chTodo =>
-  //         chTodo.todoNo === todoNo ? { ...chTodo, clear: !chTodo.clear } : chTodo
-  //     )));
-  //     console.log(chTodo);
-  //     console.log("변경 완료!");
-  //   }).catch(function(){
-  //     console.log("변경 실패!");
-  //   })
-  // }
+  const onToggleCh = async(todoNo) => {
+    axios.get('/api/chTodo/clearChTodo', {
+      params : {todoNo : todoNo}
+    }).then(function(res){
+      setChList(chList.map(chTodos => 
+        chTodos.todoList.map(chTodo =>
+          chTodo.todoNo === todoNo ? { ...chList, clear: !chTodo.clear } : chList
+      )));
+      //console.log(chTodo);
+      console.log("챌린지 완료 성공!");
+    }).catch(function(){
+      console.log("챌린지 완료 실패!");
+    })
+  }
 
   //투두 수정   
   const onUpdate = async(todoNo, editeTodo, setEdite) => {
@@ -214,6 +217,7 @@ function TodoView3(){
          chList={chList}
          onDel={onDel} 
          onToggle={onToggle} 
+         onToggleCh={onToggleCh}
          onUpdate={onUpdate} 
          onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
         <TodoCreate insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}

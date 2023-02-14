@@ -2,7 +2,7 @@ import React , { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-
+import 'animate.css';
 
 const TodoItemBlock = styled.div`
   display: flex;
@@ -11,6 +11,9 @@ const TodoItemBlock = styled.div`
   padding-bottom: 12px;
   //border: 3px solid orange;
   }
+
+  animation : fadeIn;
+  animation-duration: 2s;
 `;
 
 const CheckCircle = styled.div`
@@ -35,7 +38,7 @@ const CheckCircle = styled.div`
 
 const Text = styled.div`
   flex: 1;
-  font-size: 21px;
+  font-size: 16px;
   color: #495057;
   //border: 3px solid pink;
   ${todo =>
@@ -53,14 +56,14 @@ function ChallTodoItem({chTodo, onToggleCh}) {
     dispatch({type : 'MOVE' });
   }
 
- //console.log("chTodo: "+chTodo.todoList);
+ //console.log(chTodo);
 
   return (
-    <TodoItemBlock>
+    <TodoItemBlock className='animate__animated animate__fadeIn'>
         {/* 완료상태 */}
-        {/* <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
+        <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
             {chTodo.clear && <MdDone /> }
-        </CheckCircle> */}
+        </CheckCircle>
 
         {/* 내용 */}
         <Text clear={chTodo.clear}>{chTodo.todoContent}</Text>

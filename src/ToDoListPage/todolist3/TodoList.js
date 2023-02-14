@@ -5,23 +5,39 @@ import ChallTodoItem from './ChallTodoItem';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import axios from 'axios';
 import './TodoList.css';
+import 'animate.css';
 
 const TodoListBlock = styled.div`
   flex: 1;
   padding: 20px 17px;
   padding-bottom: 48px;
   overflow-y: auto;
+
+  animation : fadeIn;
+  animation-duration: 1s;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+  }
+`;
+
+const Challenge = styled.div`
+
 `;
 
 
 
-function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onDelay}) {
-  console.log(chList);
+function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, onUpdate, onDelay}) {
+  //console.log(chList);
   //console.log(todoList);
   //const copyChList = [...chList];
   //console.log(copyChList[0]);
 
-  //const [ch] = copyChList.map(todo => todo.todoList);
+  //const ch = copyChList.map(todo => todo.todoList);
   //console.log(ch);
 
   //console.log(chList[0].todoList);
@@ -50,14 +66,13 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
 
   return ( 
     <>
-    {todoList === null ? <p>Daily Todo-List</p> : ""}
-    
     <DragDropContext onDragEnd={onDragEnd} >
       <Droppable droppableId="drop-area">
         {provided => (
-          <TodoListBlock {...provided.droppableProps} ref={provided.innerRef} >
+          <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}  >
+            {/* dailyTodo */}
             {todoList && todoList.map((todo, index) =>(
-              <Draggable draggableId={String(todo.todoNo)} index={index} key={index} >
+              <Draggable draggableId={String(todo.todoNo)} index={index} key={todo.todoNo} >
                 {provided => (
                   <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                   <TodoItem
@@ -68,6 +83,7 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
                     onUpdate={onUpdate}
                     onDelay={onDelay}
                     index={index}
+                    // className='animate__animated animate__fadeIn'
                   />
                   </div>
                 )}
@@ -75,16 +91,15 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
               ))}
               {provided.placeholder} 
 
-              
-              {chList === null ? <p>챌린지예용</p> : ""}
-              {chList && chList.map(chTodos => (
-                chTodos.todoList.map(chTodo => 
-                  <ChallTodoItem
-                  key={chTodo.todoNo}
-                  chTodo={chTodo}
-                  />
-                )
-              ))}
+            {/* challengeTodo */}
+            {chList && chList.map((chTodos, index) => ( 
+              <Challenge chTodos={chTodos} key={index}>
+                <p>{chTodos.challengeName}</p>
+                {chTodos.todoList.map(chTodo => 
+                  <ChallTodoItem key={chTodo.todoNo} chTodo={chTodo} onToggleCh={onToggleCh}/>)}
+              </Challenge>
+            ))}
+
           </TodoListBlock>
         )}
         
