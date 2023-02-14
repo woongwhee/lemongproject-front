@@ -83,7 +83,7 @@ export default function BasicTabs() {
                 <FeedList/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <Test2></Test2>
+                {/*<Test2></Test2>*/}
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <Test1></Test1>

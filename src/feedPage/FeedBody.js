@@ -17,8 +17,9 @@ function FeedBody(){
     }
     const [loading, setLoading] = useState(true);
     const [loginUserNo, setLoginUserNo] = useState(0);
-    let {userNo} =useLoginState().profile;
-    console.log({userNo})
+
+    // let {userNo} =useLoginState().profile;
+    // console.log({userNo})
 
     // 첫 번째 렌더링을 마친 후 실행
     useEffect(
@@ -27,7 +28,7 @@ function FeedBody(){
                 url: '/api/feed/main',
                 method: 'GET'
             }).then((res) => {
-                console.log(res.data.result)
+                console.log(res.data.result.length)
                 callback(res.data.result);
                 // console.log(res.data.code);
                 // console.log("teststr" + testStr)
