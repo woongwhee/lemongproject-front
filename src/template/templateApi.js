@@ -14,9 +14,9 @@ import {codeHandler} from "../util/apiUtil";
 
 //get
 export const templateList = (page = 0, categoryNo = 0) => axios.get(`${TEMPLATE_LIST}/${page}/${categoryNo}`).then(res => codeHandler(res))
-export const templateDetail = (templateNo) => axios.get(`${TEMPLATE_DETAIL}/${templateNo}`).then(res => codeHandler(res))
+export const templateDetail = (templateNo,day) => axios.get(`${TEMPLATE_DETAIL}/${templateNo}`).then(res => codeHandler(res))
 export const templateCategory = () => axios.get(`${TEMPLATE_CATEGORY}`).then(res => codeHandler(res))
-export const todoDetail = (templateNo) => axios.get(`${TODO_DETAIL}/${templateNo}`).then(res => codeHandler(res))
+export const todoDetail = (templateNo,day) => axios.get(`${TODO_DETAIL}/${templateNo}/${day}`).then(res => codeHandler(res))
 export const loadUnSave = () => axios.get(UNSAVE_LOAD).then(res => codeHandler(res))
 //post
 export const todoInsert = async (dayList, contentList, templateNo) => axios.post(UNSAVE_TODO_INSERT, {

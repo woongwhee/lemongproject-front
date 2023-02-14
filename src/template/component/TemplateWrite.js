@@ -85,7 +85,7 @@ const TemplateWrite = ({result}) => {
         const result = await resetUnSave();
         let {title, categoryNo, content, range} = result;
         templateNo = result.templateNo;
-        setInput({title, categoryNo, content, range});
+        setInput({title:null, categoryNo:null, content: null, range});
         setDays(new Array(range));
     }
 
@@ -99,7 +99,7 @@ const TemplateWrite = ({result}) => {
             </div>
             <TemplateInput inputValue={inputValue} updateInputValue={updateInputValue}/>
             <TemplateTodoInput range={inputValue.range} insertTodo={insertTodo} deleteTodo={deleteTodo}
-                               days={days}></TemplateTodoInput>
+                               days={days} templateNo={templateNo}></TemplateTodoInput>
         </div>
     );
 };

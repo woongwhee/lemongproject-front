@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Modal, ModalBody, ModalHeader} from "reactstrap";
-import TodoWriter from "./TodoWriter";
 import TodoDay from "./TodoDay";
-import TodoSingleWriter from "./TodoSingleWriter";
+import TodoWriter from "./TodoWriter";
 
-function TemplateTodoInput({range, days, insertTodo, deleteTodo}) {
+function TemplateTodoInput({range, days, insertTodo, deleteTodo, templateNo}) {
     const [modal, setModal] = useState(false);
     const [singleModal, setSingleModal] = useState(false);
     const [dayList, setDayList] = useState([]);
@@ -23,13 +22,13 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo}) {
         const newList = contentList.slice(index, 1);
         setContentList(newList);
     }
-    const SetSelectedDay = () => {
+    const setSelectedDay = async () => {
         let selected = document.querySelectorAll(".onSelect");
         let newDayList = [];
         for (let i = 0; i < selected.length; i++) {
             newDayList.push(selected[i].dataset.day);
         }
-        setDayList(newDayList);
+        await setDayList(newDayList);
         return newDayList.length;
     }
 
@@ -84,25 +83,29 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo}) {
         todoInput.removeEventListener("mousemove", mouseMove);
     }
     const onModalClose = async () => {
+        console.log("sfdsdfds", contentList);
+        if (contentList.length == 0) {
+            return;
+        }
         let result = await insertTodo(dayList, contentList);
-
-
         setDayList([]);
         setContentList([]);
     }
     const singleModalToggle = () => {
-        setModal(!modal)
+        setSingleModal(!modal);
     }
-    const mouseUp = async (e)=> {
-        let selected=SetSelectedDay();
+    const mouseUp = async (e) => {
+        let selected = await setSelectedDay();
         mode = false;
-        if(selected==0){
+        if (selected == 0) {
             return;
+        } else {
+            modalToggle();
         }
         for (let i = 0; i < dayElements.length; i++) {
             dayElements[i].classList.remove("onSelect")
         }
-        modalToggle();
+
     }
     useEffect(() => {
         addMouseEvent()
@@ -127,10 +130,11 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo}) {
             <div className="templatetodo-input">
                 {Days()}
             </div>
-            <TodoWriter isOpen={modal} dayList={dayList} contentList={contentList} addContent={addContent}
-                        removeContent={removeContent} toggle={modalToggle} onClosed={onModalClose}></TodoWriter>
-            {singleModal && <TodoSingleWriter isOpen={singleModal} day={dayList[0]} toggle={singleModalToggle}
-                                              onClosed={onModalClose} deleteTodo={deleteTodo}></TodoSingleWriter>}
+            {/*<TodoWriter isOpen={modal} dayList={dayList} contentList={contentList} addContent={addContent}*/}
+            {/*            removeContent={removeContent} toggle={modalToggle} onClosed={onModalClose}></TodoWriter>*/}
+            <TodoWriter isOpen={modal} templateNo={templateNo} dayList={dayList} contentList={contentList} addContent={addContent}
+                         removeContent={removeContent} toggle={modalToggle} onClosed={onModalClose}></TodoWriter>
+            {/*<TodoWriter isOpen={singleModal} templateNo={templateNo} dayList={dayList} toggle={singleModalToggle} onClosed={onModalClose} deleteTodo={deleteTodo}></TodoWriter>*/}
         </>
     )
 }

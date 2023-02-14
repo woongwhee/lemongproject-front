@@ -9,6 +9,7 @@ import {todo} from '../../reducer/page';
 import {codeHandler} from "../../util/apiUtil";
 import TitleContent from "./TitleContent";
 import {isEmpty} from "../../util/typeUtile";
+import userNo from "../../reducer/userNo";
 
 function Calendar2() {
 
@@ -48,7 +49,7 @@ function Calendar2() {
 
     useEffect(() => {
         loadMark();
-    }, [moveMark])
+    }, [])
 
 
 
@@ -65,6 +66,7 @@ function Calendar2() {
     }
     const loadMark = async () => {
         let month = new moment(new Date).format("YYMMDD");
+        console.log("month",month);
         const res = await axios.get(`/api/todo/getMonth/${month}`);
         let {challengeDayList, holidayList, todoDayList} = codeHandler(res);
         setChMark(challengeDayList);
@@ -90,7 +92,7 @@ function Calendar2() {
                 formatDay={(locale, date) => moment(date).format("DD")} //달력날짜에 '일' 삭제
                 tileContent={(e) => {
                     let date=e.date;
-                    if(date.getMonth()!=month||isEmpty(mark)&&isEmpty(chMark)&&isEmpty(holidayMark)){
+                    if(date.getMonth()+1 !=month||isEmpty(mark)&&isEmpty(chMark)&&isEmpty(holidayMark)){
                         return (<></>)
                     }
                     return(<TitleContent chMark={chMark} Mark={mark} hdMark={holidayMark} day={date.getDate()}/>)
