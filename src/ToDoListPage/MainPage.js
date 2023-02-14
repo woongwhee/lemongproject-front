@@ -9,15 +9,12 @@ import Calendar from './calendar/Calendar';
 //메뉴바 컴포넌트
 import Menubar2 from "./menubar/Menubar2";
 
-import {useLoginDispatch} from "../Member/LoginContext";
-import axios from "axios";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from '@mui/material/Button';
 import Modal from 'react-bootstrap/Modal';
 import FeedInsert from "../feedPage/FeedInsert";
 import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
-import { KAKAO_LOGOUT_URL } from '../Member/KakaoLoginData';
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 import MyMenuBar from "./menubar/MyMenuBar";
 import MainMenuBar from "./menubar/MainMenuBar";
@@ -34,43 +31,10 @@ import { useLoginState } from "../Member/LoginContext";
 
 function LogoutButton() {
 
-    const dispatch= useLoginDispatch();
-    const logout = async () => {
-        let res = await axios.get("/api/member/logout");
-        if(res.data.code === '3008') {
-            // console.log(res.data)
-            logoutKakao()
-            // console.log("로그아웃 완료")
-        }
-        dispatch({
-            type:"logout"
-        });
-    }
-
-    const logoutKakao = () => {
-        const kakaoLogout = KAKAO_LOGOUT_URL;
-        document.location.href = kakaoLogout;
-    }
-
-
-    // !!!!!!!!!!!! 내용 마이페이지로 옮기기 !!!!!!!!!!!
-    // const byeUser = async () => {
-    //     let res = await axios.get("/api/member/byeUser")
-    //     if(res.data.code === '2000') {
-    //         console.log("무언가 됐음")
-    //         alert("탈퇴가 완료되었습니다. 목표가 이루어졌길!")
-    //         document.location.href = "/";
-    //     } else {
-    //         console.log("000")
-    //     }
-    // }
-
-
 
     return (
-        <Button onClick={logout}>
-            로그아웃
-        </Button>
+        <>
+        </>
 
     );
 }

@@ -7,11 +7,9 @@ import {IconButton} from "@mui/material";
 import FeedInsert from "../../feedPage/FeedInsert";
 import MySearch from "../../mypage/MySearch";
 import Challenge from "../../challengeChat/challenge";
-
+import { KAKAO_LOGOUT_URL } from '../../Member/KakaoLoginData';
 import {useLoginState} from "../../Member/LoginContext";
-
 import { useLoginDispatch } from "../../Member/LoginContext";
-
 import axios from "axios";
 import {useDispatch, useSelector} from 'react-redux';
 import '../../mypage/MyPage.css';
@@ -31,15 +29,34 @@ function MainMenuBar(props){
     console.log(profile);
     const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
+    // const dispatch= useLoginDispatch();
+    
+    // function logout(){
+    //     axios.get("/api/member/logout");
+    
+    //     dispatch({
+    //         type:"logout"
+    //     });
+    // }
+
     const dispatch= useLoginDispatch();
-    
-    function logout(){
-        axios.get("/api/member/logout");
-    
+    const logout = async () => {
+        let res = await axios.get("/api/member/logout");
+        if(res.data.code === '3008') {
+            console.log(res.data)
+            logoutKakao()
+            console.log("로그아웃 완료")
+        }
         dispatch({
             type:"logout"
         });
     }
+
+    const logoutKakao = () => {
+        const kakaoLogout = KAKAO_LOGOUT_URL;
+        document.location.href = kakaoLogout;
+    }
+
     
     
     // const Myprofile=useLoginState().profile;

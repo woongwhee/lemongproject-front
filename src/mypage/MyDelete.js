@@ -34,11 +34,25 @@ function MyDelete(){
         });
     };
 
-    const DeleteUser = () => {
-        const deleteUser = axios.get("/api/member/deleteUser").then(function(){
-            alert("변경 완료");
-        });
+    // const DeleteUser = () => {
+    //     const deleteUser = axios.get("/api/member/deleteUser").then(function(){
+    //         alert("변경 완료");
+    //     });
+    // }
+
+    const DeleteUser = async () => {
+        let res = await axios.get("/api/member/deleteUser")
+        if(res.data.code === '2000') {
+            console.log("무언가 됐음")
+            alert("탈퇴가 완료되었습니다. 여러분의 꿈을 응원합니다!")
+            document.location.href = "/";
+        } else {
+            console.log("000")
+            alert("회원탈퇴에 실패하였습니다.")
+        }
     }
+
+
 
     return (
         <div className="App">
