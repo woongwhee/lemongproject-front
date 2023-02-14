@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import axios from "axios";
 import FeedReplyList from "./FeedReplyList";
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -9,19 +9,25 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
 import CloseButton from "react-bootstrap/CloseButton";
+import {TextField} from "@mui/material";
+import Box from "@mui/material/Box";
+import {useLoginState} from "../Member/LoginContext";
 function FeedReplyInsert(props) {
 
-    const [id, SetId] = useState();
+    const Feed = props.Feed;
 
-    const [replyContent, SetReplyContent] = useState();
+    const feedNo = props.Feed.feedNo;
 
-    let feedNo = props.feedNo;
+    const [replyContent, SetReplyContent] = useState(''); // CONTENT
+
+    const [replyCount, setReplyCount] = useState(0) // REPLY CONTENT
 
     const [ testStr, setTestStr ] = useState([]);
 
-    function callback(str) {
-        setTestStr(str);
-    }
+    props.setReplyCount(replyCount);
+
+
+
 
     const deleteReply = async (replyNo, feedNo) => {
         await axios.post('api/feed/deleteReply',
@@ -30,42 +36,49 @@ function FeedReplyInsert(props) {
                 feedNo:feedNo
             }).then(function (res){
             console.log("삭제 성공")
-            // alert("삭제완료")
             getReplyList();
         })
     }
+    let {userNo} =useLoginState().profile;
+    const deleteReplyButton = (replyNo, feedNo, replyUserNo) =>{
+        if(userNo === replyUserNo){
+            return(
+                <CloseButton onClick={()=>{deleteReply(replyNo,feedNo)}}/>
+            )
+        }else{
+            return(<p></p>)
+        }
+    }
 
-    // testSTr7개;
-    // const replyList = ({reply}) => {
-    //     return (
-    //         <div>
-    //             <ListGroup.Item>
-    //                 <div style={{float:"left"}}><Avatar src="/broken-image.jpg" /></div>
-    //                 <div style={{marginLeft:"80px"}}>
-    //                 {reply.nickName} : {reply.replyContent}
-    //                     <div style={{float:"right"}}>
-    //                         {/*<Button onClick={()=>{deleteReply(reply2.replyNo,feedNo)}}/>삭제*/}
-    //                     </div>
-    //                 <br/>
-    //                 {reply.replyAt}
-    //                 </div>
-    //             </ListGroup.Item>
-    //         </div>
-    //     );
+    // const [profilePath, setProfilePath] = useState();
+    // const proFile = (userNo) => {
+    //     axios.post('api/feed/feedProfile',{
+    //         userNo:replyUserNo
+    //     }).then(function (res){
+    //         // console.log(res.data.FILEPATH);
+    //         setProfilePath(res.data.FILEPATH)
+    //     })
+    //     return(
+    //         <Avatar alt="Remy Sharp" src={profilePath} />
+    //     )
     // }
+    const replyUserNo = [];
+
     const replyList2 = () =>{
         const result = [];
         for(let i =0; i<testStr.length; i++){
             result.push((
                 <div key={i}>
                     <ListGroup.Item>
-                        <div style={{float:"left"}}>
-                            <Avatar src="/broken-image.jpg" />
-                        </div>
-                        <div style={{marginLeft:"80px"}}>
+                        {/*<div style={{float:"left"}}>*/}
+                        {/*    /!*{proFile(testStr[i].userNo)}*!/*/}
+                        {/*    /!*{replyUserNo.push(testStr[i].userNo)} <br/>*!/*/}
+                        {/*    /!*{proFile(testStr[i].userNo)}*!/*/}
+                        {/*</div>*/}
+                        <div style={{marginLeft:"10px"}}>
                             {testStr[i].nickName} : {testStr[i].replyContent}
                             <div style={{float:"right"}}>
-                                <CloseButton onClick={()=>{deleteReply(testStr[i].replyNo,feedNo)}}/>삭제
+                                {deleteReplyButton(testStr[i].replyNo, feedNo, testStr[i].userNo)}
                             </div>
                             <br/>
                             {testStr[i].replyAt}
@@ -77,6 +90,7 @@ function FeedReplyInsert(props) {
         return result;
     }
 
+    // 댓글 가져오기 
     useEffect(
         () => {
             axios({
@@ -86,14 +100,10 @@ function FeedReplyInsert(props) {
                     feedNo:feedNo
                 }
             }).then((res) => {
-                // callback(res.data);
-                console.log(res.data.result) // [7개]
+                console.log(res.data.result)
                 setTestStr(res.data.result) // [7개]
-                // console.log(Json.userNo);
-                // console.log("Test" + testStr)
-                // console.log("Test" + testStr[0].);
             })
-        }, []
+        },[]
     );
     const getReplyList=()=>{
         axios({
@@ -104,74 +114,106 @@ function FeedReplyInsert(props) {
             }
         }).then((res) => {
             // callback(res.data);
-            // console.log(res.data.result) // [7개]
+            console.log(res.data.result) // [7개]
             setTestStr(res.data.result) // [7개]
             // console.log(Json.userNo);
 
         })
     }
 
+    // 댓글 수
+    useEffect(
+        () => {
+            axios({
+                url: '/api/feed/countReply',
+                method: 'GET',
+                params:{
+                    feedNo:feedNo
+                }
+            }).then((res) => {
+                // console.log(res.data) // [7개]
+                setReplyCount(res.data)
+            })
+        }, []
+    );
+    const getReplyCount=()=>{
+        axios({
+            url: '/api/feed/countReply',
+            method: 'GET',
+            params:{
+                feedNo:feedNo
+            }
+        }).then((res) => {
+            console.log(res.data) // [7개]
+            setReplyCount(res.data)
+        })
+    }
+    
+    // 댓글 쓰기
     const replyInsert=()=>{
         axios.post('api/feed/insertReply',{
-            userNo:id,
             feedNo:feedNo,
             replyContent:replyContent
         }).then(function (res){
-            console.log(res.data)
-            SetId('');
             SetReplyContent('');
             // window.location.reload("/main");
         }).catch(function (){
-            console.log('실패함 '+id,replyContent);
+            console.log('실패함');
         })
     }
 
     let i = 0;
     return (
         <>
-        <div>
-            {/*<FeedReplyList feedNo={feedNo} />*/}
+    <div>
+        <div style={{overflow:"scroll", height:"700px"}}>
             <ListGroup variant="flush">
-                {/*{testStr?.map(reply=>replyList({reply}))}*/}
                 {replyList2()}
             </ListGroup>
         </div>
-
-            <InputGroup className="mb-2" style={{marginTop:"30px"}}>
-                <InputGroup.Text id="inputGroup-sizing-default" placeholder="숫자만입력">
-                    아이디
-                </InputGroup.Text>
-                <Form.Control
-                    aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default"
-                    onChange={(e)=> {SetId(e.target.value);}}
-                    value={id}
-                />
-            </InputGroup>
-
-            {/*<div style={{marginTop:"30px"}}>피드번호 : {Feed.feedNo}</div>*/}
-
-            <InputGroup className="mb-2" style={{marginTop:"30px"}}>
-                <InputGroup.Text id="inputGroup-sizing-default">
-                    댓글내용
-                </InputGroup.Text>
-                <Form.Control
-                    aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default"
-                    onChange={(e)=> {SetReplyContent(e.target.value);}}
-                    value={replyContent}
-                />
-            </InputGroup>
-
-
+        <div>
+            {/*<InputGroup className="mb-2" style={{marginTop:"30px"}}>*/}
+            {/*    <InputGroup.Text id="inputGroup-sizing-default" placeholder="숫자만입력">*/}
+            {/*        아이디*/}
+            {/*    </InputGroup.Text>*/}
+            {/*    <Form.Control*/}
+            {/*        aria-label="Default"*/}
+            {/*        aria-describedby="inputGroup-sizing-default"*/}
+            {/*        onChange={(e)=> {SetId(e.target.value);}}*/}
+            {/*        value={id}*/}
+            {/*    />*/}
+            {/*</InputGroup>*/}
+            {/*<InputGroup className="mb-2" style={{marginTop:"30px"}}>*/}
+            {/*    <InputGroup.Text id="inputGroup-sizing-default">*/}
+            {/*        {props.Feed.loginUserNo}*/}
+            {/*    </InputGroup.Text>*/}
+            {/*    <Form.Control*/}
+            {/*        aria-label="Default"*/}
+            {/*        aria-describedby="inputGroup-sizing-default"*/}
+            {/*        onChange={(e)=> {SetReplyContent(e.target.value);}}*/}
+            {/*        value={replyContent}*/}
+            {/*    />*/}
+            {/*</InputGroup>*/}
+            <Box
+                sx={{
+                    height: 30
+                }}
+            />
+            <TextField fullWidth label="댓글입력" id="fullWidth"
+                       onChange={(e)=> {SetReplyContent(e.target.value);}}
+                       value={replyContent}
+            />
+        </div>
             <Button style={{marginTop:"40px", float:"right"}}
                     onClick={() =>{
                         replyInsert();
                         getReplyList();
+                        getReplyCount();
                     }}
         >댓글쓰기</Button>
-        </>
-
+    </div>
+        <div style={{clear:"both"}}></div>
+    </>
 
     );
 }

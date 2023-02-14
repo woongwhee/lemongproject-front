@@ -1,41 +1,69 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TreeView from '@mui/lab/TreeView';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import TreeItem from '@mui/lab/TreeItem';
+import { useState, useEffect, useRef, useCallback } from "react";
+import axios from "axios";
 
+const RandomCat = () => {
 
-export default function DisabledTreeItems() {
-    const [focusDisabledItems, setFocusDisabledItems] = React.useState(false);
+    const [list, setList] = useState([]);
+    const [page, setPage] = useState(1);
+    const [load, setLoad] = useState(1);
+    const preventRef = useRef(true);
+    const obsRef = useRef(null);
 
-    return (
-        <Box sx={{ height: 270, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}>
-            <TreeView
-                aria-label="disabled items"
-                defaultCollapseIcon={<ExpandMoreIcon />}
-                defaultExpandIcon={<ChevronRightIcon />}
-                disabledItemsFocusable={focusDisabledItems}
-                multiSelect
-            >
-                <TreeItem nodeId="1" label="One">
-                    <TreeItem nodeId="2" label="Two" />
-                    <TreeItem nodeId="3" label="Three" />
-                    <TreeItem nodeId="4" label="Four" />
-                </TreeItem>
-                <TreeItem nodeId="5" label="Five">
-                    <TreeItem nodeId="6" label="Six" />
-                </TreeItem>
-                <TreeItem nodeId="7" label="Seven">
-                    <TreeItem nodeId="8" label="Eight" />
-                    <TreeItem nodeId="9" label="Nine">
-                        <TreeItem nodeId="10" label="Ten">
-                            <TreeItem nodeId="11" label="Eleven" />
-                            <TreeItem nodeId="12" label="Twelve" />
-                        </TreeItem>
-                    </TreeItem>
-                </TreeItem>
-            </TreeView>
-        </Box>
-    );
+    useEffect(()=> {
+        getDog();
+        const observer = new IntersectionObserver(obsHandler, { threshold : 0.5 });
+        if(obsRef.current) observer.observe(obsRef.current);
+        return () => { observer.disconnect(); }
+    }, [])
+
+    useEffect(()=> {
+        getDog();
+    }, [page])
+
+    const obsHandler = ((entries) => {
+        const target = entries[0];
+        if(target.isIntersecting && preventRef.current){
+            preventRef.current = false;
+            setPage(prev => prev+1 );
+        }
+    })
+
+    const getDog = useCallback(async() => { //글 불러오기
+        console.log('고양이 사진 불러오기');
+        setLoad(true); //로딩 시작
+        const res = await axios({method : 'GET', url : `https://api.thecatapi.com/v1/images/search`});
+        console.log(res.data);
+        if(res.data){
+            setList(prev=> [...prev, {...res.data[0]} ]); //리스트 추가
+            preventRef.current = true;
+        }else{
+            console.log(res); //에러
+        }
+        setLoad(false); //로딩 종료
+    }, [page]);
+
+    return(
+        <>
+            <div className="wrap min-h-[100vh]" style={{height:"500px",overflow:"scroll"}}>
+                {
+                    list &&
+                    <>
+                        {
+                            list.map((li)=>
+                                <img key={li.id} className="opacity-100 mx-auto mb-6" src={li.url} alt={li.dke} width={'500px'} height={'300px'} />
+                            )
+                        }
+                    </>
+
+                }
+                {
+                    load &&
+                    <div className="py-3 bg-blue-500 text-center">로딩 중</div>
+                }
+                <div ref={obsRef} className="py-3 bg-red-500 text-white text-center">옵저버 Element</div>
+            </div>
+        </>
+    )
 }
+
+export default RandomCat

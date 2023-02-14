@@ -82,9 +82,9 @@ function MainPage() {
         <div className="outer">
             {/* 캘린더 영역 */}
             <div className="outer_date">
-                <Profile/>
-                <br/><br/>
-                <Calendar/>
+                {/*<Profile/>*/}
+                {/*<br/><br/>*/}
+                {/*<Calendar/>*/}
             </div>
           {/*<Menubar2/>*/}
           {/*<Menubar3/>*/}

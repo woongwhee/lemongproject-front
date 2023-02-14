@@ -10,26 +10,21 @@ import FeedDetailView from "./FeedDetailView";
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import axios from "axios";
 
-function FeedReply({feedNo}) {
+function FeedReply({Feed}) {
     // let feedNo = props.feedNo;
-
     const [show, setShow] = useState(false);
-    useEffect(()=>{
-        axios.post('api/feed/countReply',{
-            feedNo:feedNo
-        }).then(function (res){
-            console.log(res.data);
-        })
-    },[])
+    const [replyCount, setReplyCount] = useState(false);
+
+
     return (
         <>
             <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
-                <ChatBubbleOutlineIcon />댓글
+                <ChatBubbleOutlineIcon />
             </IconButton>
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
-                dialogClassName="modal-90w"
+                dialogClassName="modal-70w"
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <Modal.Header closeButton>
@@ -38,8 +33,7 @@ function FeedReply({feedNo}) {
                     </Modal.Title>
                 </Modal.Header>
                     <Modal.Body>
-                        <FeedReplyInsert feedNo={feedNo}/>
-                        {/*<FeedDetailView Feed={Feed}></FeedDetailView>*/}
+                        <FeedReplyInsert Feed={Feed} setReplyCount={setReplyCount}/>
                     </Modal.Body>
             </Modal>
         </>
