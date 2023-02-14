@@ -14,6 +14,7 @@ import TemplateList from "../../template/component/TemplateList";
 import TemplateListView from "../../template/page/TemplateListView";
 import Test1 from "../../feedPage/Test1";
 import Test from "../../feedPage/test"
+import Test2 from "../../feedPage/test2";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -82,7 +83,7 @@ export default function BasicTabs() {
                 <FeedList/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <TemplateView/>
+                <Test2></Test2>
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <Test1></Test1>

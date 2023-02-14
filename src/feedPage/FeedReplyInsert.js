@@ -11,6 +11,7 @@ import { deepOrange } from '@mui/material/colors';
 import CloseButton from "react-bootstrap/CloseButton";
 import {TextField} from "@mui/material";
 import Box from "@mui/material/Box";
+import {useLoginState} from "../Member/LoginContext";
 function FeedReplyInsert(props) {
 
     const Feed = props.Feed;
@@ -38,9 +39,9 @@ function FeedReplyInsert(props) {
             getReplyList();
         })
     }
-    
-    const deleteReplyButton = (replyNo, feedNo, userNo) =>{
-        if(Feed.loginUserNo === userNo){
+    let {userNo} =useLoginState().profile;
+    const deleteReplyButton = (replyNo, feedNo, replyUserNo) =>{
+        if(userNo === replyUserNo){
             return(
                 <CloseButton onClick={()=>{deleteReply(replyNo,feedNo)}}/>
             )
@@ -113,7 +114,7 @@ function FeedReplyInsert(props) {
             }
         }).then((res) => {
             // callback(res.data);
-            // console.log(res.data.result) // [7개]
+            console.log(res.data.result) // [7개]
             setTestStr(res.data.result) // [7개]
             // console.log(Json.userNo);
 
@@ -151,7 +152,6 @@ function FeedReplyInsert(props) {
     // 댓글 쓰기
     const replyInsert=()=>{
         axios.post('api/feed/insertReply',{
-            userNo:Feed.loginUserNo,
             feedNo:feedNo,
             replyContent:replyContent
         }).then(function (res){

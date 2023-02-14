@@ -40,7 +40,6 @@ function FeedDetailView(props) {
         )
     }
 
-    let i=0;
     return (
         <>
             {/*<div className="container"*/}
