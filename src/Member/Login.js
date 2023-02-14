@@ -6,18 +6,15 @@ import './Join.css';
 import { KAKAO_AUTH_URL } from './KakaoLoginData';
 import { Client_Id, Naver_CallBack_URL } from './NaverData';
 import {useLoginDispatch} from "./LoginContext";
-import profile from "../ToDoListPage/profile/Profile";
+// import profile from "../ToDoListPage/profile/Profile";
 import {useAsync} from "react-async-hook";
-
-
-
+import userNo from '../reducer/userNo';
 
 function Login() {
 
     useEffect( () => {
         initializeNaverLogin()
     }, [])
-
 
 
     const [email, setEmail] = useState();
@@ -51,10 +48,12 @@ function Login() {
         )
         if (response.data.code === '2000') {
             alert("로그인에 성공하였습니다.")
-            console.log(response.data.result)
+            console.log(response.data.result);
+
             loginSuccess(response.data.result);
         } else {
             console.log('실패!')
+            console.log(error)
             setNoLoginMs("잘못된 회원 정보입니다. 다시 입력해주세요.")
             setNoLoginCol("chAlarm noAlarm")
         }
@@ -142,6 +141,7 @@ function Login() {
                         비밀번호 찾기
                     </Link>
                 </div>
+
             </div>
 
         </div>

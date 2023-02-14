@@ -1,44 +1,44 @@
 .outer_proUpdate{
-    border: 1px solid turquoise;
+    /* border: 1px solid turquoise; */
     width: 27%;
     height: 100%;
     margin-left: 70px;
     float: left;
 }
 .outer_myProUpdate{
-    border: 1px solid tomato;
+    /* border: 1px solid tomato; */
     width: 100%;
     height: 30%;
     margin-top: 120px;
 }
 .outer_proUpBtn{
-    border: 1px solid steelblue;
+    /* border: 1px solid steelblue; */
     width: 100%;
     height: 6%;
 }
 .outer_mypId{
-    border: 1px solid sienna;
+    /* border: 1px solid sienna; */
     width: 100%;
     height: 6%;
 }
 .outer_myFall{
-    border: 1px solid seagreen;
+    /* border: 1px solid seagreen; */
     width: 100%;
     height: 5%;
 }
 .outer_myName{
-    border: 1px solid yellowgreen;
+    /* border: 1px solid yellowgreen; */
     width: 100%;
     height: 5%;
     margin-top: 100px;
 }
 .outer_myEmail{
-    border: 1px solid sienna;
+    /* border: 1px solid sienna; */
     width: 100%;
     height: 5%;
 }
 .outer_myPhone{
-    border: 1px solid royalblue;
+    /* border: 1px solid royalblue; */
     width: 100%;
     height: 5%;
 }
@@ -47,7 +47,7 @@
     width: 50%;
     height: 100%;
     float: right;
-    margin-right: 200px;
+    margin-right: 150px;
     box-sizing: border-box;
 }
 .myBtnSp{
@@ -57,26 +57,26 @@
 }
 .outer_myNickUpdate{
     border: 1px solid seagreen;
-    width: 27%;
+    width: 30%;
     height: 4%;
     margin-left: 70px;
     float: left;
 }
 .outer_myNickUpdateCheck{
-    border: 1px solid seagreen;
-    width: 27%;
+    /* border: 1px solid seagreen; */
+    width: 30%;
     height: 4%;
-    margin-left: 30px;
+    margin-left: 15px;
     float: left;
 }
 .outer_passChange{
-    border: 1px solid rosybrown;
+    /* border: 1px solid rosybrown; */
     width: 85%;
     height: 4%;
     margin-left: 70px;
 }
 .outer_passCheck{
-    border: 1px solid violet;
+    /* border: 1px solid violet; */
     width: 85%;
     height: 4%;
     margin-left: 70px;
@@ -86,7 +86,23 @@
     width: 85%;
     height: 17%;
     margin-left: 70px;
+    margin-top: -23px;
 }
-.nickCheckBtn{
-    width: ;
+#proFile{
+    visibility: hidden;
 }
+.button {
+    display: flex;
+    justify-content: center;
+}
+label {
+    cursor: pointer;
+    font-size: 1em;
+}
+#pbtn:hover{
+    letter-spacing: 10px;
+    transform: scale(1.3);
+    cursor: pointer;
+    transition: all 0.5s;
+}
+

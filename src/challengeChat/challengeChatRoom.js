@@ -2,10 +2,13 @@ import React , {useState , useEffect} from "react";
 import axios from "axios";
 import './challenge.css';
 
-import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiCirclePlus} from "react-icons/ci";
+import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiSquarePlus} from "react-icons/ci";
 import {Nav} from 'react-bootstrap';
 import MySearch from "../mypage/MySearch";
 import MyAlert from "../mypage/MyAlert";
+import { useLoginState } from "../Member/LoginContext";
+
+import { Link } from "react-router-dom";
 
 function ChallengeChatRoom(props){
 
@@ -13,7 +16,9 @@ function ChallengeChatRoom(props){
     let{challengeData}=props;
 
     // 사용할 변수들 셋팅
-    const userNo = sessionStorage.getItem("userNo"); // 로그인한 사용자 userNo
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
     const challengeNo = 3000; // 테스트 챌린지 번호 3000
     const challengeTitle = challengeData?.challengeTitle; // 챌린지 번호에 해당하는 챌린지 제목
     const templateNo = challengeData?.templateNo; // 가져온 템플릿 번호
@@ -33,7 +38,7 @@ function ChallengeChatRoom(props){
     }
 
     function MovePage(){
-        window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+        // <Link to="/MypageUpdate">MypageUpdate</Link>
     }
 
     function MoveMainPage(){
@@ -42,6 +47,10 @@ function ChallengeChatRoom(props){
 
     function challengePage(){
         window.location.href = "http://localhost:3000/ChallengeRoomCreate";
+    }
+
+    function feedInsertPage(){
+        window.location.href = "http://localhost:3000/FeedInsert?userNo="+userNo; 
     }
 
     return(
@@ -54,9 +63,11 @@ function ChallengeChatRoom(props){
                         </a>
                         <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
                             <li class="nav-item">
-                                <a id="hbtn" href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home" onClick={MovePage}>
+                            <Link to="/MypageUpdate">
+                                {/* <a id="hbtn" href="/MypageUpdate" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home" onClick={MovePage}> */}
                                     <CiUser class="bi-house fs-1" style={{color:'black' , width:'30px' , marginLeft:'-5px'}}></CiUser>
-                                </a>
+                                {/* </a> */}
+                            </Link>
                             </li>
                             <li>
                                 <a id="hbtn" onClick={() => setClickBtns(!clickBtns)} href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
@@ -78,9 +89,9 @@ function ChallengeChatRoom(props){
                                 </a>
                             </li>
                             <li>
-                                <a id="hbtn" href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+                                <a id="hbtn" onClick={feedInsertPage} href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
                                     {/* <i class="bi-people fs-1"></i> */}
-                                    <CiCirclePlus class="bi-house fs-1" style={{color:'black' , width:'30px' , marginLeft:'-5px'}}></CiCirclePlus>
+                                    <CiSquarePlus class="bi-house fs-1" style={{color:'black' , width:'30px' , marginLeft:'-5px'}}></CiSquarePlus>
                                 </a>
                             </li>
                             <li>

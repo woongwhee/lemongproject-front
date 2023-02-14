@@ -14,7 +14,7 @@ function MyAlert(props){
         //         <p>알림 결과들</p>
         //         <FollowAccept myprofile={myprofile}/>
         // </div>
-        <div id="alerthOuter" style={{width:'20%' , marginLeft:'-15px' , height:'1000px' , marginTop:'-16px' , position:'absolute'}}>
+        <div id="alerthOuter" style={{width:'92%' , marginLeft:'0px' , height:'960px' , marginTop:'-16px' , position:'absolute'}}>
             <FollowAccept myprofile={myprofile}/>
         </div>
     )

@@ -2,10 +2,16 @@ import React , {useState , useEffect} from "react";
 import axios from "axios";
 
 
-function Challenge(){
+function Challenge(props){
+
+    let{userNo}=props;
+
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+    // const userNo = params.get("userNo"); // 로그인한 사용자 userNo
 
     function challengePage(){
-        window.location.href = "http://localhost:3000/ChallengeRoomCreate";
+        window.location.href = "http://localhost:3000/ChallengeRoomCreate?userNo="+userNo
     }
 
     return(

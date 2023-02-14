@@ -18,6 +18,12 @@ import FeedInsert from "../feedPage/FeedInsert";
 import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
 import { KAKAO_LOGOUT_URL } from '../Member/KakaoLoginData';
+import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
+import MyMenuBar from "./menubar/MyMenuBar";
+import MainMenuBar from "./menubar/MainMenuBar";
+import { useLoginState } from "../Member/LoginContext";
+
+
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar
 
@@ -41,36 +47,30 @@ function LogoutButton() {
         });
     }
 
-
     const logoutKakao = () => {
         const kakaoLogout = KAKAO_LOGOUT_URL;
         document.location.href = kakaoLogout;
     }
 
-    const byeUser = async () => {
-        let res = await axios.get("/api/member/byeUser")
-        if(res.data.code === '2000') {
-            console.log("무언가 됐음")
-            alert("탈퇴가 완료되었습니다. 목표가 이루어졌길!")
-            document.location.href = "/";
-        } else {
-            console.log("000")
-        }
-    }
+
+    // !!!!!!!!!!!! 내용 마이페이지로 옮기기 !!!!!!!!!!!
+    // const byeUser = async () => {
+    //     let res = await axios.get("/api/member/byeUser")
+    //     if(res.data.code === '2000') {
+    //         console.log("무언가 됐음")
+    //         alert("탈퇴가 완료되었습니다. 목표가 이루어졌길!")
+    //         document.location.href = "/";
+    //     } else {
+    //         console.log("000")
+    //     }
+    // }
 
 
 
     return (
-        <>
         <Button onClick={logout}>
             로그아웃
         </Button>
-        <br></br>
-        <Button onClick={byeUser}>
-            회원탈퇴(테스팅)
-        </Button>
-        
-        </>
 
     );
 }
@@ -96,6 +96,11 @@ function MainMenu(){
             <LogoutButton></LogoutButton>
 <br/>
             <FeedInsert></FeedInsert>
+
+            <br/>
+            <div style={{marginTop:'-500px'}}>
+                <ChallengeChatRoom/>
+            </div>
         </Offcanvas.Body>
     </Offcanvas></>
     )
@@ -104,13 +109,18 @@ function MainMenu(){
 function MainPage() {
     // Apikey를 환경변수를 이용해 숨기기.
     const apiKey = process.env.REACT_APP_CAL_API_KEY;
+
+    let {profile}=useLoginState();
+    console.log(profile);
+    const userNo = profile?.userNo; // 로그인한 사용자 userNo
+
     return(
         <>
         <div>
-            <MainMenu></MainMenu>
+            {/* <MainMenu></MainMenu> */}
+            <MainMenuBar profile={profile}/>
         </div>
         <div className="outer">
-
             {/* 캘린더 영역 */}
             <div className="outer_date">
                 <Profile/>
