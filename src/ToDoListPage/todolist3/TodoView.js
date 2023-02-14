@@ -157,7 +157,7 @@ function TodoView3(){
   const onToggleCh = async(todoNo) => {
     axios.get('/api/chTodo/clearChTodo', {
       params : {todoNo : todoNo}
-    }).then(function(res){
+    }).then(function(){
       setChList(chList.map(chTodos => 
         chTodos.todoList.map(chTodo =>
           chTodo.todoNo === todoNo ? { ...chList, clear: !chTodo.clear } : chList
@@ -215,6 +215,7 @@ function TodoView3(){
          todoList={todoList}
          setTodoList={setTodoList}
          chList={chList}
+         chTodo={chTodo}
          onDel={onDel} 
          onToggle={onToggle} 
          onToggleCh={onToggleCh}

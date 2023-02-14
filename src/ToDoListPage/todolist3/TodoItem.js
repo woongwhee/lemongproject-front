@@ -81,23 +81,28 @@ const TodoItemBlock = styledr.div`
 `;
 
 const CheckCircle = styledr.div`
-  width: 35px;
-  height: 35px;
-  color : #9795f0;
+  width: 32px;
+  height: 32px;
+  color : #FFEE4E;
   //text-fill-color : transparent;
   //background-clip: text;
  
   //background에 그라데이션 넣기
-  //background: linear-gradient(to top, #9795f0 0%, #fbc8d4 100%);
+ // background: linear-gradient(to top, #9795f0 0%, #fbc8d4 100%);
 
   //border에 그라데이션 넣기
-  border-radius: 11px;
+  border-radius: 16px;
   border: 2.5px solid transparent;
-  background-image: linear-gradient(#fff, #fff),linear-gradient(to top, #9795f0 0%, #fbc8d4 100%);
+  // background-image: linear-gradient(#fff, #fff), linear-gradient(to top, #9795f0 0%, #fbc8d4 100%); 파스텔
+  // background-image: linear-gradient(#fff, #fff), linear-gradient(to top, #7028e4 0%, #e5b2ca 100%); //좀더 쨍
+  //background-image: linear-gradient(#fff, #fff), linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); //파랑 -> 보라
+  //background-image: linear-gradient(#fff, #fff), linear-gradient(0deg, rgba(195, 255, 0, 0.45), rgba(0, 64, 255, 0.98));
+  //background-image: linear-gradient(#fff, #fff), linear-gradient(45deg, rgb(255, 247, 0), rgba(47, 0, 255, 0.89));    
+  background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, rgba(230, 255, 0, 0.85), rgba(0, 149, 255, 0.46));
   background-origin: border-box; //배경위치 시작지점 : 
   background-clip: content-box, border-box; //배경이미지를 잘라낼 위치
 
-  font-size: 24px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,12 +114,19 @@ const CheckCircle = styledr.div`
   ${todo =>
     todo.clear &&
     css`
-      border: 2.5px solid #FFEE4E;
+      //border: 2.5px solid #FFEE4E;
       color: 	#FFEE4E;
-      width : 35px;
-      height: 35px;
+      width : 32px;
+      height: 32px;
+      font-size: 18px;
       animation : fadeIn;
       animation-duration: 1s;
+
+      border-radius: 16px;
+      border: 2.5px solid transparent;
+      background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, rgba(230, 255, 0, 0.85), rgba(0, 149, 255, 0.46));
+      background-origin: border-box; //배경위치 시작지점 : 
+      background-clip: content-box, border-box; //배경이미지를 잘라낼 위치
     ` }
 
 `;
@@ -148,10 +160,12 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
     '&:hover': {
         backgroundColor: theme.palette.action.selected,
     },
-    '&.Mui-selected': {
-       backgroundColor: `var(--tree-view-bg-color, ${theme.palette.action.selected})`,
-      //backgroundColor: `var(--tree-view-bg-color, #FFEE4E)`,
-      //color: 'var(--tree-view-color)',
+    '&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused': {
+      //backgroundColor: `var(--tree-view-bg-color, ${theme.palette.action.selected})`,
+      backgroundColor: 'transparent',
+    },
+    '&.Mui-disabled' : {
+      backgroundColor: 'transparent',
     },
     [`& .${treeItemClasses.label}`]: {
       // fontWeight: 'inherit',
@@ -279,16 +293,16 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
           sx={{backgroundColor: 'white', overflow: 'visible'}}
           >
 
-            <Delay>
-              <GiOrangeSlice onClick={()=>{onDelay(todo.todoNo); moveMark();}} /> {/* 내일로 미루기 */}
+            <Delay onClick={()=>{onDelay(todo.todoNo); moveMark();}}>
+              <GiOrangeSlice  /> {/* 내일로 미루기 */}
               <p style={{fontSize: '12.7px', margin: 'auto'} }>미루기</p>
             </Delay>
-            <Update>
-              <MdOutlineCreate onClick={onClickEdite}/> {/* 수정하기 버튼 */}
+            <Update onClick={onClickEdite}>
+              <MdOutlineCreate/> {/* 수정하기 버튼 */}
               <p style={{fontSize: '12.8px', margin: 'auto'}}>수정</p>
             </Update>
-            <Remove >
-              <MdClear onClick={()=>{onDel(todo.todoNo); moveMark();}}/> {/* 삭제버튼 */}
+            <Remove onClick={()=>{onDel(todo.todoNo); moveMark();}}>
+              <MdClear/> {/* 삭제버튼 */}
               <p style={{fontSize: '12.8px', margin: 'auto'}}>삭제</p>
             </Remove>
 
@@ -296,7 +310,9 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
           </TreeView>
           </>
         )
-      ) : null} {/* 완료된 투두일 경우 수정 버튼이 뜨지 않게 한다. */}
+      ) : <Remove onClick={()=>{onDel(todo.todoNo); moveMark();}}>
+            <MdClear/> {/* 삭제버튼 */}
+          </Remove>} {/* 완료된 투두일 경우 수정 버튼이 뜨지 않게 한다. */}
 
       {/* 삭제버튼   */}
       {/* {edite ? 

@@ -2,6 +2,7 @@ import React , { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
+import { FaRegLemon, FaLemon } from 'react-icons/fa';
 import 'animate.css';
 
 const TodoItemBlock = styled.div`
@@ -9,7 +10,8 @@ const TodoItemBlock = styled.div`
   align-items: center;
   padding-top: 12px;
   padding-bottom: 12px;
-  //border: 3px solid orange;
+  &:hover{
+    transform : scale(1.02);
   }
 
   animation : fadeIn;
@@ -19,20 +21,33 @@ const TodoItemBlock = styled.div`
 const CheckCircle = styled.div`
   width: 32px;
   height: 32px;
+  color : #9795f0;
+
   border-radius: 16px;
-  border: 1px solid #ced4da;
-  font-size: 24px;
+  border: 2.5px solid transparent;
+  background-image: linear-gradient(#fff, #fff), linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-origin: border-box; //배경위치 시작지점 : 
+  background-clip: content-box, border-box; //배경이미지를 잘라낼 위치
+
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 20px;
+  margin-right: 18px;
   cursor: pointer;
-  //border: 3px solid purple;
+  &:hover{
+    transform : scale(1.05);
+  }
   ${todo =>
     todo.clear &&
     css`
-      border: 1px solid #38d9a9;
-      color: #38d9a9;
+      border-radius: 16px;
+      border: 2.5px solid transparent;
+      background-image: linear-gradient(#fff, #fff), linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+      background-origin: border-box; //배경위치 시작지점 : 
+      background-clip: content-box, border-box; //배경이미지를 잘라낼 위치
+      color: #B360DF;
+      font-size: 18px;
     `}
 `;
 
@@ -40,7 +55,6 @@ const Text = styled.div`
   flex: 1;
   font-size: 16px;
   color: #495057;
-  //border: 3px solid pink;
   ${todo =>
     todo.clear &&
     css`
@@ -62,7 +76,7 @@ function ChallTodoItem({chTodo, onToggleCh}) {
     <TodoItemBlock className='animate__animated animate__fadeIn'>
         {/* 완료상태 */}
         <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
-            {chTodo.clear && <MdDone /> }
+            {chTodo.clear ? <FaLemon /> : <FaRegLemon /> }
         </CheckCircle>
 
         {/* 내용 */}
