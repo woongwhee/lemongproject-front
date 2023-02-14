@@ -9,17 +9,17 @@ import './MyPage.css';
 import { useLoginState } from "../Member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
-function MyFollowCount(){
+function MyFollowCount(props){
 
     // const queryString = window.location.search;
     // const params = new URLSearchParams(queryString);
 
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
-    let {profile}=useLoginState;
-    console.log(profile);
+    let {userNo}=props;
+    // console.log(profile);
     // console.log(userNo)
-    const userNo = profile?.userNo; // 로그인한 사용자 userNo
+    // const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     const dispatch = useDispatch();
 
@@ -48,7 +48,7 @@ function MyFollowCount(){
         () => {
             axios.get("/api/follow/MyFollowCount" , {
                 params:{
-                    followerIng : userNos != null ? userNos : userNo  ,
+                    followerIng : userNos == null ? userNo : userNos  ,
                 }
             }).then(function(res){
                 console.log(res + "데이터 전송 성공");
@@ -59,7 +59,7 @@ function MyFollowCount(){
             }).catch(function(){
                 console.log("데이터 전송 실패");
             });
-        },[userNos != null ? userNos : userNo]
+        },[userNos == null ? userNo : userNos]
     )
 
     // 나의 팔로워 리스트 띄우기.
@@ -68,7 +68,7 @@ function MyFollowCount(){
     function ShowMyFollower(){
         axios.get("/api/follow/selectMyFollowerList" , {
             params:{
-                followerIng : followerIng,
+                followerIng : userNos == null ? userNo : userNos,
             }
         }).then(function(res){
             console.log(res+"데이터 전송 성공");

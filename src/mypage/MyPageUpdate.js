@@ -32,11 +32,12 @@ function MyPageUpdate(){
 
     let {profile}=useLoginState();
     console.log(profile);
-    const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
-    // 현재 주소에 떠있는 userNo를 가져와서 그 userNo에 해당하는 값을 사용하겠다.
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
+    const userNo = params.get("userNo"); // 로그인한 사용자 userNo
+
+    // 현재 주소에 떠있는 userNo를 가져와서 그 userNo에 해당하는 값을 사용하겠다.
 
     // const userNo1 = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
     const userNo1 = sessionStorage.getItem("userNo");
@@ -54,7 +55,7 @@ function MyPageUpdate(){
          () => {
              axios.get("/api/member/selectMyProfile" , {
                  params:{
-                     userNo : userNos ,
+                     userNo : userNo ,
                  }
              }).then(function(res){
                  console.log("데이터 전송 성공");
@@ -65,7 +66,7 @@ function MyPageUpdate(){
              }).catch(function(){
                  console.log("데이터 전송 실패");
              });
-         } , [userNos]
+         } , []
      );
 
      // 마이페이지 닉네임 체크 
@@ -165,7 +166,7 @@ function MyPageUpdate(){
         axios.get("/api/member/updateMyNick" , {
             params:{
                 updateNick : mynickCheck.checkValue ,
-                userNo : userNos ,
+                userNo : userNo ,
             }
         }).then(function(res){
             console.log(res + "데이터 전송 성공");
@@ -176,7 +177,7 @@ function MyPageUpdate(){
                 buttons: [
                   {
                     label: "Yes" ,
-                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
                   }
                 ]
               })
@@ -211,7 +212,7 @@ function MyPageUpdate(){
         axios.get("/api/member/updateMyContent" , {
             params:{
                 updateCont : updateContent.updateCont ,
-                userNo : userNos ,
+                userNo : userNo ,
             }
         }).then(function(res){
             console.log(res + "데이터 전송 성공");
@@ -222,7 +223,7 @@ function MyPageUpdate(){
                 buttons: [
                   {
                     label: "Yes" ,
-                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
                   }
                 ]
               })

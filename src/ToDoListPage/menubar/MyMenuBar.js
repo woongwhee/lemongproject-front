@@ -23,7 +23,11 @@ import MyAlert from "../../mypage/MyAlert";
 function MyMenuBar(props){
     
     let{myprofile}=props;
-    // let{profile}=props;
+    // let{profile}=props
+    
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+    const userNo = params.get("userNo"); // 로그인한 사용자 userNo;
 
     const dispatch= useLoginDispatch();
     
@@ -50,7 +54,7 @@ function MyMenuBar(props){
 
     // 회원정보 수정 페이지로 이동하는 함수
     function goUser(){
-        window.location.href = "http://localhost:3000/MypageUpdate";
+        window.location.href = "http://localhost:3000/MypageUpdate?userNo="+userNo;
     }
 
     let [tab, setTab] = useState(0);

@@ -10,8 +10,10 @@ import { MyPage } from "../../mypage/MyPage";
 
 import { useLoginState } from "../../Member/LoginContext"; 
 
-//const selectTodo = useSelector(state => state.value);
-
+let {profile}=useLoginState;
+console.log(profile);
+// console.log(userNo)
+const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
 const menuList = {
   0: <TodoView3 />,

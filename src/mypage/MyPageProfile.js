@@ -16,13 +16,14 @@ function MyPageProfile(props){
 
     let {profile}=useLoginState();
     console.log(profile);
-    const userNo = profile?.userNo; // 로그인한 사용자 userNo
+    // const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     let{myprofile}=props;
 
     // 현재 주소에 떠있는 userNo를 가져와서 그 userNo에 해당하는 값을 사용하겠다.
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
+    const userNo = params.get("userNo"); // 로그인한 사용자 userNo
 
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
@@ -41,7 +42,7 @@ function MyPageProfile(props){
         () => {
         axios.get("/api/member/selectMember" ,{
             params:{
-                userNo : userNos ,
+                userNo : userNo ,
             }
         }).then(function(res){
             console.log("데이터 전송 성공");
@@ -51,7 +52,7 @@ function MyPageProfile(props){
         }).catch(function(){
             console.log("데이터 전송 실패"); 
         });
-        } , [userNos]
+        } , []
     )
     
     // 팔로우 당하는사람(팔로워)
@@ -67,7 +68,7 @@ function MyPageProfile(props){
         () => {
             axios.get("/api/follow/MyFollowCount" , {
                 params:{
-                    followerIng : userNos ,
+                    followerIng : userNo ,
                 }
             }).then(function(res){
                 console.log(res + "데이터 전송 성공");
@@ -77,7 +78,7 @@ function MyPageProfile(props){
             }).catch(function(){
                 console.log("데이터 전송 실패");
             });
-        },[userNos]
+        },[]
     )
 
     // 팔로잉
@@ -87,7 +88,7 @@ function MyPageProfile(props){
         () => {
             axios.get("/api/follow/MyFollowingCount" , {
                 params : {
-                    follower : userNos , 
+                    follower : userNo , 
                 }
             }).then(function(res){
                 console.log(res+"데이터 전송 성공");
@@ -96,7 +97,7 @@ function MyPageProfile(props){
             }).catch(function(){
                 console.log("데이터 전송 실패");
             })
-        } , [userNos]
+        } , []
     )
 
     return(

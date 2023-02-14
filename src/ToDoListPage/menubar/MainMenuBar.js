@@ -56,7 +56,7 @@ function MainMenuBar(props){
 
     // 회원정보 수정 페이지로 이동하는 함수
     function goUser(){
-        window.location.href = "http://localhost:3000/MypageUpdate";
+        window.location.href = "http://localhost:3000/MypageUpdate?userNo="+profile?.userNo;
     }
 
     let [tab, setTab] = useState(0);
@@ -69,7 +69,7 @@ function MainMenuBar(props){
         }else if(props.tab === 2) {
             return <div>
                 <div><FeedInsert></FeedInsert></div>
-                <div><Challenge/></div>
+                <div><Challenge userNo={userNo}/></div>
             </div>
         }else if(props.tab === 3) {
             return <div></div>

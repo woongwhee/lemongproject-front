@@ -8,9 +8,9 @@ import {useDispatch, useSelector} from 'react-redux';
 
 
 function MyFollowingCount(props){
-    let{profile}=props;
+    let{userNo}=props;
 
-    console.log(profile);
+    console.log(userNo);
 
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
@@ -27,10 +27,10 @@ function MyFollowingCount(props){
     const follower = userNos
 
     // 팔로우 하는사람(팔로잉)
-    const followerIng = profile?.userNo;
+    // const followerIng = profile?.userNo;
 
-    const userNo = profile?.userNo;
-    console.log(userNo + "통과된다진짜")
+    // const userNo = profile?.userNo;
+    // console.log(userNo + "통과된다진짜")
 
     // 스프링에있는 폴더에서 이미지 불러오기위한 경로
     // let saveFilePath = "http://localhost:8081/api/images/";
@@ -49,13 +49,13 @@ function MyFollowingCount(props){
         )
     };
 
-    console.log(userNos != null ? userNos : userNo)
+    console.log(userNos == null ? userNo : userNos)
 
     useEffect(
         () => {
             axios.get("/api/follow/MyFollowingCount" , {
                 params : {
-                    follower : userNos , 
+                    follower : userNos == null ? userNo : userNos, 
                 }
             }).then(function(res){
                 console.log(res+"데이터 전송 성공");
@@ -65,7 +65,7 @@ function MyFollowingCount(props){
                 console.log("데이터 전송 실패");
             })
 
-        } , [userNos]
+        } , [userNos == null ? userNo : userNos]
     )
 
     // 나의 팔로워 리스트 띄우기.
@@ -74,7 +74,7 @@ function MyFollowingCount(props){
     function ShowMyFollowing(){
         axios.get("/api/follow/selectMyFollowingList" , {
             params:{
-                follower : userNos,
+                follower : userNos == null ? userNo : userNos,
             }
         }).then(function(res){
             console.log(res+"데이터 전송 성공");
@@ -88,13 +88,13 @@ function MyFollowingCount(props){
 
     useEffect(() => {;
         ShowMyFollowing();
-        console.log(userNos + "===여기도 통과됨")
-      },[userNos])
+        console.log(userNo + "===여기도 통과됨")
+      },[])
    
     let i = 0;
 
     return(
-        <div className="followCount" style={{marginTop:'-54px' , posi}}>
+        <div className="followCount" style={{marginTop:'-54px'}}>
             <span data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={ShowMyFollowing}><p style={{fontSize:'27px' , marginLeft : '255px' , marginTop:'-137px' , fontFamily:'Quicksand-Regular'}}><b>{MyFollowingCount?.count}</b></p></span>
             <div className="App">
             <div class="containers p-5">
@@ -108,11 +108,11 @@ function MyFollowingCount(props){
                    </div>
                    <div className="scrollBar" style={{overflow:'scroll' , height:'733px'}}>
                         {myfollowingList?.map(e => <div style={{marginTop:'10px'}}>
-                            <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
+                            <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', float:'left' , borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , float:'left' , fontFamily:'NanumGothic-Regular' , marginLeft:'20px' , marginTop:'10px'}}>{e?.profile?.nickName}</span>
                             <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
                                 <button type="button" 
                                 key={i++} {...e} 
-                                 class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
+                                 class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed' , marginTop:'10px'}} 
                                 onClick={() => {selectUserNo(e?.profile?.userNo);}}>방문하기</button>
                         </div>
                         </div>)}

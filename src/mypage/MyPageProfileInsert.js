@@ -15,12 +15,17 @@ import {useDispatch, useSelector} from 'react-redux';
 
 const ProFileData = (props): JSX.Element => {
 
-    let{userNo}=props;
+    // let{userNo}=props;
 
     const userNos = useSelector((state) => state.userNo.selectUserNo);
 
     let {profile}=useLoginState();
     console.log(profile);
+
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+    const userNo = params.get("userNo"); // 로그인한 사용자 userNo
+
     // const userNos = profile?.userNo; // 로그인한 사용자 userNo
 
     const fileList: File[] = []; // 업로드한 파일들을 저장하는 배열
@@ -39,7 +44,7 @@ const ProFileData = (props): JSX.Element => {
         fileList.forEach((file) => {
             // 파일 데이터 저장
             formData.append('file', file);
-            formData.append('userNo' , userNos);
+            formData.append('userNo' , userNo);
             console.log(file); // 데이터 잘 들어감.
             console.log(formData);
         });
@@ -55,7 +60,7 @@ const ProFileData = (props): JSX.Element => {
                 buttons: [
                   {
                     label: "Yes" ,
-                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
                   }
                 ]
               })
@@ -69,7 +74,7 @@ const ProFileData = (props): JSX.Element => {
                 buttons: [
                   {
                     label: "Yes" ,
-                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
+                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
                   }
                 ]
               })
