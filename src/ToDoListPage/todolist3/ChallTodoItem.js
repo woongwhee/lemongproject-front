@@ -19,18 +19,23 @@ const TodoItemBlock = styled.div`
 `;
 
 const CheckCircle = styled.div`
+  box-sizing : border-box;
   width: 32px;
   height: 32px;
-  color : #9795f0;
-  //color : #B360DF;
+  //color : #9795f0;
+  //color: #B360DF;
+  color : #FFEE4E;
 
-  border-radius: 16px;
-  border: 2.5px solid transparent;
+  border-radius: 20px;
+  border: 3px solid transparent;
   background-image: linear-gradient(#fff, #fff), linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-  background-origin: border-box; //배경위치 시작지점 : 
-  background-clip: content-box, border-box; //배경이미지를 잘라낼 위치
+  background-origin: border-box;  
+  background-clip: content-box, border-box; 
 
-  font-size: 20px;
+  // border: 2.5px solid linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  // background : linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,12 +47,17 @@ const CheckCircle = styled.div`
   ${chTodo =>
     chTodo.clear &&
     css`
-      border-radius: 16px;
-      border: 2.5px solid transparent;
-      background-image: linear-gradient(#fff, #fff), linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-      background-origin: border-box; //배경위치 시작지점 : 
-      background-clip: content-box, border-box; //배경이미지를 잘라낼 위치
-      color: #B360DF;
+      width: 36px;
+      height: 36px;
+      margin-left : -3px;
+
+      border : 2.5px solid white;
+      //border: 2.5px solid linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+      background : linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+
+      //color: #B360DF;
+      color : #FFEE4E;
+      color : #FDFD36;
       font-size: 18px;
     `}
 `;
@@ -83,7 +93,8 @@ function ChallTodoItem({chTodo, onToggleCh}) {
     <TodoItemBlock className='animate__animated animate__fadeIn'>
         {/* 완료상태 */}
         <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
-          {chTodo.clear ? <FaLemon /> : <FaRegLemon /> }
+          {/* {chTodo.clear ? <FaLemon /> : <FaRegLemon /> } */}
+          <FaLemon /> 
         </CheckCircle>
 
         {/* 내용 */}

@@ -92,7 +92,7 @@ const CheckCircle = styledr.div`
 
   //border에 그라데이션 넣기
   border-radius: 16px;
-  border: 2.5px solid transparent;
+  border: 3px solid transparent;
   // background-image: linear-gradient(#fff, #fff), linear-gradient(to top, #9795f0 0%, #fbc8d4 100%); 파스텔
   // background-image: linear-gradient(#fff, #fff), linear-gradient(to top, #7028e4 0%, #e5b2ca 100%); //좀더 쨍
   //background-image: linear-gradient(#fff, #fff), linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%); //파랑 -> 보라
@@ -116,18 +116,26 @@ const CheckCircle = styledr.div`
     css`
       //border: 2.5px solid #FFEE4E;
       color: 	#FFEE4E;
-      width : 32px;
-      height: 32px;
+      color : #FDFD36;
+      width : 36px;
+      height: 36px;
       font-size: 18px;
       animation : fadeIn;
       animation-duration: 1s;
+      margin-left : -3px;
 
-      border-radius: 16px;
-      border: 2.5px solid transparent;
-      background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, rgba(230, 255, 0, 0.85), rgba(0, 149, 255, 0.46));
+      border-radius: 20px;
+      //border: 2.5px solid transparent;
+      //background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, rgba(230, 255, 0, 0.85), rgba(0, 149, 255, 0.46));
       background-origin: border-box; //배경위치 시작지점 : 
       background-clip: content-box, border-box; //배경이미지를 잘라낼 위치
-    ` }
+      
+      //border: 2.5px solid pink;
+      //border: 2.5px solid linear-gradient(90deg, rgba(230, 255, 0, 0.85), rgba(0, 149, 255, 0.46));
+      background-image: linear-gradient(90deg, rgba(230, 255, 0, 0.85), rgba(0, 149, 255, 0.46));
+      //background: linear-gradient(90deg, rgba(230, 255, 0, 0.85), rgba(0, 149, 255, 0.46));
+
+      ` }
 
 `;
 
@@ -254,7 +262,8 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
     <TodoItemBlock className='animate__animated animate__fadeIn' >
       {/* 완료 */}
       <CheckCircle clear={todo.clear} onClick={()=>{onToggle(todo.todoNo); moveMark();}} >
-        { todo.clear ? <FaLemon /> : <FaRegLemon />}
+        {/* { todo.clear ? <FaLemon /> : <FaRegLemon />} */}
+        <FaLemon />
       </CheckCircle>
 
       {/* 내용 */}
