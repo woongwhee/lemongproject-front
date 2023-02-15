@@ -6,12 +6,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TodoView3 from "../todolist3/TodoView";
 import FeedList from "./FeedList";
-import ChallengeList from "./ChallengeList";
-import TemplateView from "./TemplateView";
-import {Component} from "react";
-import TemplateCard from "../../template/component/TemplateCard";
-import TemplateList from "../../template/component/TemplateList";
-import TemplateListView from "../../template/page/TemplateListView";
 import Test1 from "../../feedPage/Test1";
 import Test from "../../feedPage/test"
 import Test2 from "../../feedPage/test2";
@@ -69,7 +63,7 @@ export default function BasicTabs() {
                     <Tab label="Todo-List" {...a11yProps(0)} />
                     <Tab label="ChallengeList" {...a11yProps(1)} />
                     <Tab label="Feed" {...a11yProps(2)} />
-                    <Tab label="Template" {...a11yProps(3)} />
+                    <Tab label="Test2" {...a11yProps(3)} />
                     <Tab label="test" {...a11yProps(4)} />
                 </Tabs>
             </Box>
@@ -83,7 +77,7 @@ export default function BasicTabs() {
                 <FeedList/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                {/*<Test2></Test2>*/}
+                <Test2></Test2>
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <Test1></Test1>

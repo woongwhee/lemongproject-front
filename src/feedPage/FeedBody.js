@@ -28,14 +28,14 @@ function FeedBody(){
                 url: '/api/feed/main',
                 method: 'GET'
             }).then((res) => {
-                console.log(res.data.result.length)
+                console.log(res.data.result)
                 callback(res.data.result);
-                // console.log(res.data.code);
-                // console.log("teststr" + testStr)
                 setLoading(false);
             }).catch(console.log("실패"))
         }, []
     );
+
+
     useEffect(
         () => {
             axios({
