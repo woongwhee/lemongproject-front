@@ -213,85 +213,204 @@
     //     }
     //     setlist(page);
     // }
+//
+// import React, {useCallback, useEffect, useRef, useState} from 'react';
+// import axios from "axios";
+// import {useInView} from "react-intersection-observer";
+// import Feed from "./Feed1";
+//
+// function Test2(props) {
+//
+//     const [items, setItems] = useState([])
+//     const [page, setPage] = useState(1)
+//     const [loading, setLoading] = useState(false)
+//
+//     const [ref, inView] = useInView()
+//
+//     // const [loginUserNo, setLoginUserNo] = useState(0);
+//     // useEffect(
+//     //     () => {
+//     //         axios({
+//     //             url: '/api/feed/loginFeedUserNo',
+//     //             method: 'POST'
+//     //         }).then((res) => {
+//     //             // console.log(res.data)
+//     //             setLoginUserNo(res.data)
+//     //         })
+//     //     }, []
+//     // );
+//
+//     const getItems = useCallback(async () => {
+//         setLoading(true)
+//         await axios.get("api/feed/main").then(
+//             (res) => {
+//             // console.log(res.data.result)
+//             setItems(res.data.result)
+//         })
+//         setLoading(false)
+//     }, [page])
+//
+//
+//     useEffect(() => {
+//         getItems()
+//     }, [getItems])
+//
+//     useEffect(() => {
+//         // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+//         if (inView && !loading) {
+//             console.log("마지막")
+//             setPage(prevState => prevState + 1)
+//         }
+//     }, [inView, loading])
+//
+//     const allList = () => {
+//         let result = [];
+//         for (let i = 0; i<items.length; i++){
+//             result.push(
+//                 <>
+//                 <div style={{border:"1px solid black", width:"200px", height:"400px"}}>{items[i].feedNo}</div>
+//                 {/*<Feed Feed={items[i]} loginUserNo={loginUserNo}></Feed>*/}
+//                 </>
+//             )
+//         }
+//         return result;
+//     }
+//
+//
+//
+// let i = 0;
+//     return (
+//     <>
+//         <div style={{overflow:"scroll", height:"800px"}}>
+//             {/*{items?.map((e)=><Feed key={i++} {...e} loginUserNo={loginUserNo}/>)}*/}
+//             {allList()}
+//             <div style={{ height: "100px", backgroundColor: "red" }} ref={ref}>
+//                 target
+//             </div>
+//         </div>
+//
+//
+//     </>
+//     );
+// }
+//
+// export default Test2;
 
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {useInView} from "react-intersection-observer";
-import Feed from "./Feed1";
+import styled from "styled-components";
+function App() {
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(10);
 
-function Test2(props) {
 
-    const [items, setItems] = useState([])
-    const [page, setPage] = useState(1)
-    const [loading, setLoading] = useState(false)
-
-    const [ref, inView] = useInView()
-
-    // const [loginUserNo, setLoginUserNo] = useState(0);
-    // useEffect(
-    //     () => {
-    //         axios({
-    //             url: '/api/feed/loginFeedUserNo',
-    //             method: 'POST'
-    //         }).then((res) => {
-    //             // console.log(res.data)
-    //             setLoginUserNo(res.data)
-    //         })
-    //     }, []
-    // );
-
-    const getItems = useCallback(async () => {
-        setLoading(true)
-        await axios.get("api/feed/main").then(
-            (res) => {
-            // console.log(res.data.result)
-            setItems(res.data.result)
-        })
-        setLoading(false)
-    }, [page])
-
+    const Posts = ({ posts, loading }) => {
+        return (
+            <>
+                {loading && <div> loading... </div>}
+                <ul>
+                    {posts.map((post) => (
+                        <li key={post.id}>{post.title}</li>
+                    ))}
+                </ul>
+            </>
+        );
+    };
 
     useEffect(() => {
-        getItems()
-    }, [getItems])
+        const fetchData = async () => {
+            setLoading(true);
+            const response = await axios.get(
+                "https://jsonplaceholder.typicode.com/posts"
+            );
+            setPosts(response.data);
+            setLoading(false);
+        };
+        fetchData();
+    }, []);
 
-    useEffect(() => {
-        // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
-        if (inView && !loading) {
-            console.log("마지막")
-            setPage(prevState => prevState + 1)
+    const indexOfLast = currentPage * postsPerPage;
+    const indexOfFirst = indexOfLast - postsPerPage;
+    const currentPosts = (posts) => {
+        let currentPosts = 0;
+        currentPosts = posts.slice(indexOfFirst, indexOfLast);
+        return currentPosts;
+    };
+
+    const PageUl = styled.ul`
+  float: left;
+  list-style: none;
+  text-align: center;
+  border-radius: 3px;
+  color: white;
+  padding: 1px;
+  border-top: 3px solid #186ead;
+  border-bottom: 3px solid #186ead;
+  background-color: rgba(0, 0, 0, 0.4);
+`;
+
+    const PageLi = styled.li`
+  display: inline-block;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 5px;
+  border-radius: 5px;
+  width: 25px;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #263a6c;
+  }
+  &:focus::after {
+    color: white;
+    background-color: #263a6c;
+  }
+`;
+
+    const PageSpan = styled.span`
+  &:hover::after,
+  &:focus::after {
+    border-radius: 100%;
+    color: white;
+    background-color: #263a6c;
+  }
+`;
+
+    const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+            pageNumbers.push(i);
         }
-    }, [inView, loading])
-
-    const allList = () => {
-        let result = [];
-        for (let i = 0; i<items.length; i++){
-            result.push(
-                <>
-                <div style={{border:"1px solid black", width:"200px", height:"400px"}}>{items[i].feedNo}</div>
-                {/*<Feed Feed={items[i]} loginUserNo={loginUserNo}></Feed>*/}
-                </>
-            )
-        }
-        return result;
-    }
-
-
-
-let i = 0;
-    return (
-    <>
-        <div style={{overflow:"scroll", height:"800px"}}>
-            {/*{items?.map((e)=><Feed key={i++} {...e} loginUserNo={loginUserNo}/>)}*/}
-            {allList()}
-            <div style={{ height: "100px", backgroundColor: "red" }} ref={ref}>
-                target
+        return (
+            <div>
+                <nav>
+                    <PageUl className="pagination">
+                        {pageNumbers.map((number) => (
+                            <PageLi key={number} className="page-item">
+                                <PageSpan onClick={() => paginate(number)} className="page-link">
+                                    {number}
+                                </PageSpan>
+                            </PageLi>
+                        ))}
+                    </PageUl>
+                </nav>
             </div>
+        );
+    };
+
+    return(
+        <div className="App">
+            <Posts posts={currentPosts(posts)} loading={loading}></Posts>
+            <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={posts.length}
+                paginate={setCurrentPage}
+            ></Pagination>
         </div>
-
-
-    </>
-    );
+    )
 }
 
-export default Test2;
+export default App;
