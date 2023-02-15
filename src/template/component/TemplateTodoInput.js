@@ -10,6 +10,7 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo, templateNo}) {
     const [contentList, setContentList] = useState([]);
     let startX;
     let startY;
+    let topPoint=0;
     let mode = false;
     const modalToggle = () => {
         setModal(!modal)
@@ -41,7 +42,7 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo, templateNo}) {
         startX = e.clientX;
         startY = e.clientY;
         for (let i = 0; i < dayElements.length; i++) {
-            if (dotSelect(dayElements[i], startX, startY)) {
+            if (dotSelect(dayElements[i], startX, startY,topPoint)) {
                 dayElements[i].classList.add("onSelect")
             } else {
                 dayElements[i].classList.remove("onSelect")
@@ -63,21 +64,28 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo, templateNo}) {
             y2: Math.max(startY, endY)
         }
         for (let i = 0; i < dayElements.length; i++) {
-            if (rangeSelect(dayElements[i], rec1)) {
+            if (rangeSelect(dayElements[i], rec1,topPoint)) {
                 dayElements[i].classList.add("onSelect")
             } else {
                 dayElements[i].classList.remove("onSelect")
             }
         }
     }
+
+    const changeTopValue=()=>{
+        topPoint=document.querySelector("#templatetodo-input").scrollTop;
+        console.log(topPoint);
+    }
+
     const addMouseEvent = () => {
-        let todoInput = document.querySelector(".templatetodo-input");
+        let todoInput = document.querySelector("#templatetodo-input");
         todoInput.addEventListener("mousedown", mouseDown);
         todoInput.addEventListener("mousemove", mouseMove);
         todoInput.addEventListener("mouseup", mouseUp);
+        todoInput.addEventListener("scroll", changeTopValue);
     }
     const removeMouseEvent = () => {
-        let todoInput = document.querySelector(".templatetodo-input");
+        let todoInput = document.querySelector("#templatetodo-input");
         todoInput.removeEventListener("mousedown", mouseDown);
         todoInput.removeEventListener("mouseup", mouseUp);
         todoInput.removeEventListener("mousemove", mouseMove);
@@ -127,7 +135,7 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo, templateNo}) {
     }
     return (
         <>
-            <div className="templatetodo-input">
+            <div id="templatetodo-input">
                 {Days()}
             </div>
             {/*<TodoWriter isOpen={modal} dayList={dayList} contentList={contentList} addContent={addContent}*/}
@@ -147,10 +155,10 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo, templateNo}) {
  *
  *
  */
-const rangeSelect = (el, rec1) => {
+const rangeSelect = (el, rec1,top) => {
     let rec2 = {
-        y1: el.offsetTop,
-        y2: el.offsetTop + el.offsetHeight,
+        y1: el.offsetTop-top,
+        y2: el.offsetTop + el.offsetHeight-top,
         x1: el.offsetLeft,
         x2: el.offsetLeft + el.offsetWidth
     };
@@ -160,13 +168,14 @@ const rangeSelect = (el, rec1) => {
         return true;
     }
 }
-const dotSelect = (el, x, y) => {
+const dotSelect = (el, x, y,top) => {
     let rec = {
-        y1: el.offsetTop,
-        y2: el.offsetTop + el.offsetHeight,
+        y1: el.offsetTop-top,
+        y2: el.offsetTop + el.offsetHeight-top,
         x1: el.offsetLeft,
         x2: el.offsetLeft + el.offsetWidth
     };
+    console.log(x,y,rec.y1,rec.y2,rec.y1+top,rec.y2+top);
     if (rec.x1 > x || rec.x2 < x || rec.y1 > y || rec.y2 < y) {
         return false;
     } else {

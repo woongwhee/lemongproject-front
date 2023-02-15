@@ -9,9 +9,6 @@ function templateReducer(state, action) {
     switch (action.type) {
         case 'DETAIL':
             return {index:1,templateNo:action.templateNo,list: state.list};
-        case 'ADD_LIST' :
-            state.list=state.list.concat(action.list)
-            return state;
         case 'LIST' :
             return initialParam;
         case 'CATEGORY' :
@@ -29,9 +26,7 @@ function templateReducer(state, action) {
 const initialParam = {
     index: 0,
     templateNo: null,
-    categoryNo:0,
-    page:0,
-    list:[]
+    categoryNo:0
 };
 
 export function TemplateProvider({ children }) {

@@ -14,13 +14,13 @@
 }
 .outer_Temp{
     border: 1px solid green;
-/*    width: 95%;*/
-/*    height: 100%;*/
-/*    margin: 5px;*/
-/*    float: left;*/
-/*    !*margin-top: 0px;*!*/
-/*    position: relative;*/
-/*    !*overflow: scroll;*!*/
+    width: 100%;
+    height: 100%;
+    margin: 5px;
+    float: left;
+    /*margin-top: 0px;*/
+    position: relative;
+    /*overflow: scroll;*/
 }
 .outer_pro{
     border: 1px solid blue;

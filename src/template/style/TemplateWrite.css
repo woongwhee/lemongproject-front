@@ -8,7 +8,7 @@
     display: flex;
 
 }
-.template-input{
+#template-input{
     display: grid;
     padding: 20px;
     height: 23%;
@@ -22,11 +22,11 @@
 .tpdiv2 { grid-area: 1 / 2 / 2 / 3; }
 .tpdiv3 { grid-area: 2 / 1 / 3 / 2; }
 .tpdiv4 { grid-area: 2 / 2 / 3 / 3; }
-.template-input input,.template-input select{
+#template-input input,#template-input select{
     margin:5px;
     align-content: center;
 }
-.templatetodo-input {
+#templatetodo-input {
     height: 70%;
     width: 95%;
     display: grid;

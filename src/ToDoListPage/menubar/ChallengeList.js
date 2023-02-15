@@ -2,7 +2,7 @@ import React from 'react'
 
 function ChallengeList() {
   return (
-    <div>ChallengeList</div>
+    <div></div>
   )
 }
 

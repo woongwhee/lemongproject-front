@@ -10,9 +10,7 @@ const CategoryButton = (props) => {
     const state=useAsync(templateCategory);
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
-    const selectCategory=(categoryNo)=>{
-        setModal(!modal);
-    }
+
 
     return (<>
             <button type="button" className="Category-Button" onClick={toggle} >

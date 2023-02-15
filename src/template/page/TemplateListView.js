@@ -6,8 +6,9 @@ import {isEmpty} from "../../util/typeUtile";
 import TemplateList from "../component/TemplateList";
 import '../style/TemplateList.css'
 const TemplateListView = () => {
-    const {categoryNo,page} = useTemplateState()
-    const state = useAsync(templateList,[page,categoryNo]);
+    const {categoryNo} = useTemplateState()
+    const state = useAsync(templateList,[0,categoryNo]);
+
     return(
             <TemplateList state={state}/>
     )

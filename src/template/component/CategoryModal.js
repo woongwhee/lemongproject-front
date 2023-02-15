@@ -14,10 +14,9 @@ const CategoryModal = ({isOpen, toggle, result}) => {
             dispatch({
                 type: "CATEGORY", categoryNo: categoryNo
             })
+            toggle();
         }
-
         useEffect(() => {
-            console.log(result);
                 dispatch({type: "ADD_CATEGORY", categories: result})
             }
             , [])
@@ -30,7 +29,7 @@ const CategoryModal = ({isOpen, toggle, result}) => {
                     {
                         result?.map(category => {
                             return (
-                                <button className="category-select" key={category.categoryNo} onClick={() => {
+                                <button className="category-select"  onClick={() => {
                                     changeCategory(category.categoryNo)
                                 }}>
                                     <img src={category.imagePath} alt={category.categoryNo}/>

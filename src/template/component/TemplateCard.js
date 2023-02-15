@@ -6,7 +6,6 @@ const TemplateCard = ({template}) => {
     const {templateNo,range,title,todoCount,clearCount,playCount,category,create}=template;
     const {categoryNo,categoryName,imagePath}=category;
     const {photo,nickName,profileComment}=create;
-    // const{photoNo,originName,changeName,filePath}=photo;
    const dispatch=useTemplateDispatch();
 
     const ViewDetail= ()=>{
@@ -25,7 +24,7 @@ const TemplateCard = ({template}) => {
                 참여중:{playCount}<br/>완료:{clearCount}
             </div>
             <div className="">
-
+                만든놈 {nickName}
             </div>
         </div>
     );
