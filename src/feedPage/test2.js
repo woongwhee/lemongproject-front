@@ -218,35 +218,38 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import {useInView} from "react-intersection-observer";
 import Feed from "./Feed1";
-import FeedLoading from "./FeedLoading";
 
 function Test2(props) {
 
     const [items, setItems] = useState([])
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false)
+
     const [ref, inView] = useInView()
 
-    const [loginUserNo, setLoginUserNo] = useState(0);
-    useEffect(
-        () => {
-            axios({
-                url: '/api/feed/loginFeedUserNo',
-                method: 'POST'
-            }).then((res) => {
-                // console.log(res.data)
-                setLoginUserNo(res.data)
-            })
-        }, []
-    );
+    // const [loginUserNo, setLoginUserNo] = useState(0);
+    // useEffect(
+    //     () => {
+    //         axios({
+    //             url: '/api/feed/loginFeedUserNo',
+    //             method: 'POST'
+    //         }).then((res) => {
+    //             // console.log(res.data)
+    //             setLoginUserNo(res.data)
+    //         })
+    //     }, []
+    // );
 
     const getItems = useCallback(async () => {
         setLoading(true)
-        await axios.get("api/feed/main").then((res) => {
+        await axios.get("api/feed/main").then(
+            (res) => {
+            // console.log(res.data.result)
             setItems(res.data.result)
         })
         setLoading(false)
     }, [page])
+
 
     useEffect(() => {
         getItems()
@@ -264,9 +267,10 @@ function Test2(props) {
         let result = [];
         for (let i = 0; i<items.length; i++){
             result.push(
-                <div style={{height:"1000px"}}>
-                    {/*<Feed key={i} loginUserNo={loginUserNo} Feed={items[i]}/>*/}
-                 </div>
+                <>
+                <div style={{border:"1px solid black", width:"200px", height:"400px"}}>{items[i].feedNo}</div>
+                {/*<Feed Feed={items[i]} loginUserNo={loginUserNo}></Feed>*/}
+                </>
             )
         }
         return result;
@@ -278,7 +282,8 @@ let i = 0;
     return (
     <>
         <div style={{overflow:"scroll", height:"800px"}}>
-            {items?.map((e)=><Feed key={i++} {...e} loginUserNo={loginUserNo}/>)}
+            {/*{items?.map((e)=><Feed key={i++} {...e} loginUserNo={loginUserNo}/>)}*/}
+            {allList()}
             <div style={{ height: "100px", backgroundColor: "red" }} ref={ref}>
                 target
             </div>
