@@ -65,7 +65,7 @@ const Text = styled.div`
 
 function ChallTodoItem({chTodo, onToggleCh}) {
 
-  const [chTodo2, setTog] = useState(true);
+  //const [chTodo2, setTog] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -73,17 +73,17 @@ function ChallTodoItem({chTodo, onToggleCh}) {
     dispatch({type : 'MOVE' });
   }
 
-    const onChangeToggle = () => {
-    setTog(!chTodo2);
-  }
+  // const onChangeToggle = () => {
+  //   setTog(!chTodo2);
+  // }
 
- //console.log(chTodo);
+  //console.log(chTodo);
 
   return (
     <TodoItemBlock className='animate__animated animate__fadeIn'>
         {/* 완료상태 */}
-        <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); onChangeToggle(); moveMark();}}>
-            {chTodo.clear ? <FaLemon /> : <FaRegLemon /> }
+        <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
+          {chTodo.clear ? <FaLemon /> : <FaRegLemon /> }
         </CheckCircle>
 
         {/* 내용 */}

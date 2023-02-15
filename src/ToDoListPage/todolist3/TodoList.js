@@ -34,17 +34,9 @@ const Challenge = styled.div`
 
 
 function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, onUpdate, onDelay}) {
-  //console.log(chList);
-  //console.log(todoList);
-  //const copyChList = [...chList];
-  //console.log(copyChList[0]);
-
-  //const ch = copyChList.map(todo => todo.todoList);
-  //console.log(ch);
-
-  //console.log(chList[0].todoList);
-  // const [todoListArr] = chList[0].todoList;
-  // console.log(todoListArr);
+  const onDragStart = () => {
+    console.log(todoList);
+  }
   
   const onDragEnd = (res) => {
     if (!res.destination) return;
@@ -68,10 +60,10 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
 
   return ( 
     <>
-    <DragDropContext onDragEnd={onDragEnd} >
+    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
       <Droppable droppableId="drop-area">
         {provided => (
-          <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}  >
+          <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}>
             {/* dailyTodo */}
             {todoList && todoList.map((todo, index) =>(
               <Draggable draggableId={String(todo.todoNo)} index={index} key={todo.todoNo} >
@@ -85,7 +77,6 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
                     onUpdate={onUpdate}
                     onDelay={onDelay}
                     index={index}
-                    // className='animate__animated animate__fadeIn'
                   />
                   </div>
                 )}
@@ -98,8 +89,9 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
               <Challenge chTodos={chTodos} key={index}>
                 <p style={{marginBottom : 0, fontSize : 18, fontWeight : 'bold'}}>{chTodos.challengeName}</p>
                 
-                {chTodos && chTodos.todoList.map(chTodo => 
-                  <ChallTodoItem key={chTodo.todoNo} chTodo={chTodo} onToggleCh={onToggleCh}/>)}
+                {chTodos.todoList.map(chTodo => 
+                  <ChallTodoItem key={chTodo.todoNo} chTodo={chTodo} onToggleCh={onToggleCh}/>
+                )}
               </Challenge>
             ))}
 
@@ -108,38 +100,6 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
         
       </Droppable>
     </DragDropContext>
-
-
-
-    {/* <TodoListBlock>
-      <p>Daily Todo-List</p>
-      {todoList && todoList.map(todo =>(
-      <TodoItem
-        key={todo.todoNo}
-        todo={todo}
-        onDel={onDel}
-        onToggle={onToggle}
-        onUpdate={onUpdate}
-        onDelay={onDelay}
-      />
-      ))}
-    </TodoListBlock> */}
-
-    {/* <TodoListBlock>
-    {chList && <p>Challenge Todo-List</p>}
-    {chList && chList.map(chTodos => (
-      chTodos.todoList.map(chTodo => 
-        <>
-        <ChallTodoItem
-        key={chTodo.todoNo}
-        chTodo={chTodo}
-        onToggle={onToggle}
-        />
-        </>
-      )
-    ))}
-    </TodoListBlock> */}
-
 
     </>
   );

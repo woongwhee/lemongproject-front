@@ -221,8 +221,6 @@ StyledTreeItem.propTypes = {
 };
 
 
-
-
 function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
 
   const dispatch = useDispatch();
@@ -289,24 +287,23 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
             //defaultEndIcon={<div style={{ width: 20, margin: 'right' }} />}
             // sx={{ border: '1px solid pink' }}
           >
-          <StyledTreeItem nodeId="1" labelText="" labelIcon={Delay}
-          sx={{backgroundColor: 'white', overflow: 'visible'}}
-          >
+            <StyledTreeItem nodeId="1" labelText="" labelIcon={Delay}
+            sx={{backgroundColor: 'white', overflow: 'visible'}}>
 
-            <Delay onClick={()=>{onDelay(todo.todoNo); moveMark();}}>
-              <GiOrangeSlice  /> {/* 내일로 미루기 */}
-              <p style={{fontSize: '12.7px', margin: 'auto'} }>미루기</p>
-            </Delay>
-            <Update onClick={onClickEdite}>
-              <MdOutlineCreate/> {/* 수정하기 버튼 */}
-              <p style={{fontSize: '12.8px', margin: 'auto'}}>수정</p>
-            </Update>
-            <Remove onClick={()=>{onDel(todo.todoNo); moveMark();}}>
-              <MdClear/> {/* 삭제버튼 */}
-              <p style={{fontSize: '12.8px', margin: 'auto'}}>삭제</p>
-            </Remove>
+              <Delay onClick={()=>{onDelay(todo.todoNo); moveMark();}}>
+                <GiOrangeSlice  /> {/* 내일로 미루기 */}
+                <p style={{fontSize: '12.7px', margin: 'auto'} }>미루기</p>
+              </Delay>
+              <Update onClick={onClickEdite}>
+                <MdOutlineCreate/> {/* 수정하기 버튼 */}
+                <p style={{fontSize: '12.8px', margin: 'auto'}}>수정</p>
+              </Update>
+              <Remove onClick={()=>{onDel(todo.todoNo); moveMark();}}>
+                <MdClear/> {/* 삭제버튼 */}
+                <p style={{fontSize: '12.8px', margin: 'auto'}}>삭제</p>
+              </Remove>
 
-          </StyledTreeItem>
+            </StyledTreeItem>
           </TreeView>
           </>
         )
@@ -314,15 +311,6 @@ function TodoItem({todo, onDel, onToggle, onUpdate, onDelay}) {
             <MdClear/> {/* 삭제버튼 */}
           </Remove>} {/* 완료된 투두일 경우 수정 버튼이 뜨지 않게 한다. */}
 
-      {/* 삭제버튼   */}
-      {/* {edite ? 
-        //수정시에는 삭제버튼이 보이지 않게
-        null : (
-          <Remove >
-            <MdClear onClick={()=>onDel(todo.todoNo)} />
-          </Remove>
-        )
-      }  */}
     </TodoItemBlock>
   );
 }
