@@ -22,6 +22,7 @@ const CheckCircle = styled.div`
   width: 32px;
   height: 32px;
   color : #9795f0;
+  //color : #B360DF;
 
   border-radius: 16px;
   border: 2.5px solid transparent;
@@ -38,8 +39,8 @@ const CheckCircle = styled.div`
   &:hover{
     transform : scale(1.05);
   }
-  ${todo =>
-    todo.clear &&
+  ${chTodo =>
+    chTodo.clear &&
     css`
       border-radius: 16px;
       border: 2.5px solid transparent;
@@ -64,10 +65,16 @@ const Text = styled.div`
 
 function ChallTodoItem({chTodo, onToggleCh}) {
 
+  const [chTodo2, setTog] = useState(true);
+
   const dispatch = useDispatch();
 
   function moveMark(){
     dispatch({type : 'MOVE' });
+  }
+
+    const onChangeToggle = () => {
+    setTog(!chTodo2);
   }
 
  //console.log(chTodo);
@@ -75,7 +82,7 @@ function ChallTodoItem({chTodo, onToggleCh}) {
   return (
     <TodoItemBlock className='animate__animated animate__fadeIn'>
         {/* 완료상태 */}
-        <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); moveMark();}}>
+        <CheckCircle clear={chTodo.clear} onClick={()=>{onToggleCh(chTodo.todoNo); onChangeToggle(); moveMark();}}>
             {chTodo.clear ? <FaLemon /> : <FaRegLemon /> }
         </CheckCircle>
 

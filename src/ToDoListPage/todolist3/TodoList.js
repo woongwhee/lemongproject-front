@@ -33,7 +33,7 @@ const Challenge = styled.div`
 
 
 
-function TodoList({todoList, setTodoList, chList, chTodo, onDel, onToggle, onToggleCh, onUpdate, onDelay}) {
+function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, onUpdate, onDelay}) {
   //console.log(chList);
   //console.log(todoList);
   //const copyChList = [...chList];
@@ -96,9 +96,9 @@ function TodoList({todoList, setTodoList, chList, chTodo, onDel, onToggle, onTog
             {/* challengeTodo */}
             {chList && chList.map((chTodos, index) => ( 
               <Challenge chTodos={chTodos} key={index}>
-                { chTodos.todoList !== 0 && <p style={{marginBottom : 0, fontSize : 18, fontWeight : 'bold'}}>{chTodos.challengeName}</p>}
+                <p style={{marginBottom : 0, fontSize : 18, fontWeight : 'bold'}}>{chTodos.challengeName}</p>
                 
-                {chTodos.todoList.map(chTodo => 
+                {chTodos && chTodos.todoList.map(chTodo => 
                   <ChallTodoItem key={chTodo.todoNo} chTodo={chTodo} onToggleCh={onToggleCh}/>)}
               </Challenge>
             ))}

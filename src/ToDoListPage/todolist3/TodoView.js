@@ -35,8 +35,8 @@ function TodoView3(){
 
   //챌린지 투두리스트
   const [chList , setChList] = useState([]);
-  const [chListName, setChListName] = useState();
-  const [chTodo, setChTodo] = useState([]);
+  const [chTodos, setChTodos] = useState([]);
+
   //const [chTodo, setChTodo] = useState([chList.map(chTodos => chTodos.todoList.map(chTodo))]);
   //chList && chList.map(chLists => chLists.todoList.map(chTodo => console.log(chTodo)));
   //console.log(chTodos);
@@ -72,8 +72,8 @@ function TodoView3(){
       //console.log(result);
       setTodoList(result.normalList);
       setChList(result.challengeList);
-      //setChListName(chList.map(chTodos => chTodos.challengeName));
-      console.log(result);
+      console.log(result.challengeList);
+      //console.log(chList);
     } catch(result){
       setTodoList(result.data);
       setChList(result.data);
@@ -143,7 +143,7 @@ function TodoView3(){
     axios.get('/api/todo/clearTodo', {
       params : {todoNo : todoNo}
     }).then(function(res){
-      setTodoList(res.data);
+      //setTodoList(res.data);
       setTodoList(todoList.map(todo =>
         todo.todoNo === todoNo ? { ...todo, clear: !todo.clear } : todo
       ));
@@ -155,15 +155,39 @@ function TodoView3(){
 
   //챌린지 투두 완료
   const onToggleCh = async(todoNo) => {
-    axios.get('/api/chTodo/clearChTodo', {
+    axios.get('/api/challenge/clearTodo', {
       params : {todoNo : todoNo}
-    }).then(function(){
-      setChList(chList.map(chTodos => 
-        chTodos.todoList.map(chTodo =>
-          chTodo.todoNo === todoNo ? { ...chList, clear: !chTodo.clear } : chList
-      )));
-      //console.log(chTodo);
-      console.log("챌린지 완료 성공!");
+    }).then(function(res){
+      let result=codeHandler(res);
+      // if(result>0){
+        let newList=chList.map((e)=>{if(e.todoNo==todoNo){e.clear=!e.clear} return e;})
+        
+        setChList(newList);
+      // }
+      
+      // console.log(res.data.result);
+      // console.log(chList);
+      
+      // // setChList(chList && chList.map(chTodos =>
+      // //   chTodos.todoList && chTodos.todoList.map(
+      // //     chTodo => chTodo.todoNo === todoNo ? { ...chTodo, clear : !chTodo.clear } : chTodo
+      // // )));
+      // //let arr = [];
+
+      // for(let i =0; i<chList.length; i++){
+      //   let todoList = chList[i].todoList
+      //   for(let chTodos of todoList){
+      //     //let temp = chTodos;
+      //     if(chTodos.todoNo === todoNo ){
+      //       chTodos.clear = !chTodos.clear;
+      //       //temp = {...chTodos, clear : !chTodos.clear};
+      //     }
+      //     //arr.push(temp);
+      //   }  
+      // }
+      // setChList(chList);
+       console.log("챌린지 완료 성공!");
+      // console.log(chList);
     }).catch(function(){
       console.log("챌린지 완료 실패!");
     })
@@ -215,7 +239,7 @@ function TodoView3(){
          todoList={todoList}
          setTodoList={setTodoList}
          chList={chList}
-         chTodo={chTodo}
+         chTodos={chTodos}
          onDel={onDel} 
          onToggle={onToggle} 
          onToggleCh={onToggleCh}
