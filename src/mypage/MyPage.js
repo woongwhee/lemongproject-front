@@ -27,7 +27,7 @@ import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 // 마이페이지 css
 import './MyPage.css';
 import MyFollowApplication from "./MyFollowApplication";
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 import UserNo from "../reducer/userNo";
 

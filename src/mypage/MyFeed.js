@@ -12,7 +12,7 @@
 // import "slick-carousel/slick/slick-theme.css";
 // import styled, { css } from 'styled-components'
 //
-// import { useLoginState } from "../Member/LoginContext";
+// import { useLoginState } from "../member/LoginContext";
 // import { autoBatchEnhancer } from "@reduxjs/toolkit";
 // import {useDispatch, useSelector} from 'react-redux';
 //
@@ -162,7 +162,7 @@
 
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {useLoginState} from "../Member/LoginContext";
+import {useLoginState} from "../member/LoginContext";
 import {useSelector} from "react-redux";
 
 function MyFeed(props) {

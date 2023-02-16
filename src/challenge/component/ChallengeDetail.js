@@ -2,7 +2,7 @@ import React from 'react';
 import apiHoc from "../../util/apiHoc";
 import {Button} from "reactstrap";
 import {cancelMulti, joinMulti} from "../challengeApi";
-import {useLoginState} from "../../Member/LoginContext";
+import {useLoginState} from "../../member/LoginContext";
 
 const ChallengeDetail = ({result}) => {
     const {challengeNo, challengeTitle, challengeInfo, startDate, LocalDate, endDate,readyUsers,todoPreview} = result;

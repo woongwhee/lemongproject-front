@@ -14,7 +14,7 @@ import axios from "axios";
 import MyPageProfile from "./MyPageProfile";
 import MyPagePwdCheck from "./MypagePwdUpdate";
 import MyDelete from "./MyDelete";
-import MyMenuBar from "../ToDoListPage/menubar/MyMenuBar";
+import MyMenuBar from "../todo/menubar/MyMenuBar";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 
 import { BsFillBrushFill , BsCheckLg } from "react-icons/bs";
@@ -23,7 +23,7 @@ import { confirmAlert } from "react-confirm-alert";
 // import "react-confirm-alert/src/react-confirm-alert.css";
 import './react-confirm-alert.css';
 
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
 function MyPageUpdate(){

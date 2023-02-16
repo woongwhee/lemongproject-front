@@ -6,7 +6,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 import './MyPage.css';
 
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
 function MyFollowCount(props){

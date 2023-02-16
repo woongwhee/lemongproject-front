@@ -3,7 +3,7 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import axios from "axios";
 
 import {useDispatch, useSelector} from 'react-redux';
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 
 import {createGlobalStyle} from 'styled-components';
 // import reset from 'styled-reset';
