@@ -101,7 +101,7 @@ function FeedDetailView(props) {
                                         maxWidth: "100%",
                                         maxHeight: "100%",
                                         minWidth: "100%",
-                                        minHeight: "100%"}}><FeedDetailPhoto filePathList={Feed.filePathList}></FeedDetailPhoto></div>{Feed.feedNo}
+                                        minHeight: "100%"}}><FeedDetailPhoto filePathList={Feed.filePathList}></FeedDetailPhoto></div>
                                 </Item>
                             </Grid>
                             <Grid xs={4}>
