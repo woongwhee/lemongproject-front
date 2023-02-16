@@ -30,7 +30,7 @@ function menu(state=initialState, action) {
     case "FEED":
       return {index: 1};
     case "CHALLENGE":
-      return {index: 2};
+      return {index: 2,menuParam: action.challengeNo};
     case "TEMPLATE":
       return {index:3};
     case "MY_PROFILE":

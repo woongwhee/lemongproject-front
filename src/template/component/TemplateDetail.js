@@ -4,6 +4,7 @@ import apiHoc from "../../util/apiHoc";
 import StartSingleBtn from "./StartSingleBtn";
 import StartMultiBtn from "./StartMultiBtn";
 import {CLEAR_MARK} from "../../ImagePath";
+import ChallengeReadyCard from "../../challenge/component/ChallengeReadyCard";
 
 const TemplateDetail = (state) => {
     const template=state.result;
@@ -16,10 +17,14 @@ const TemplateDetail = (state) => {
             <StartMultiBtn templateNo={templateNo}/>
             {clear&&<img className={"clear-img"} src={CLEAR_MARK} alt="templateClear"/>}
             <div className={"template-header"}>{title}</div>
-            {templateNo}
             {title}
             {content}
             {clear&&<img src="/LemongImg/category/letter-v.png"/>}
+            <div className="challenge-list"><h3>모집중</h3>
+                {challengeList.map(challenge=><ChallengeReadyCard challenge={challenge}/>)}
+
+            </div>
+
         </>
     );
 };

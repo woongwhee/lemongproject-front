@@ -1,8 +1,13 @@
 import React from 'react'
+import {ChallengeProvider} from "../../challenge/ChallengeContext";
+import ChallengeSwitcher from "../../challenge/ChallengeSwitcher";
 
 function ChallengeList() {
   return (
-    <div></div>
+
+    <ChallengeProvider>
+      <ChallengeSwitcher/>
+    </ChallengeProvider>
   )
 }
 

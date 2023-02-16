@@ -16,7 +16,7 @@ const apiHoc = (Comp) => props => {
         case 'error':
         default:
             return (
-                <>error</>
+                <h1>error</h1>
             )
 
     }

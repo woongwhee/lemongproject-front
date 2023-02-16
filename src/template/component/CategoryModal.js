@@ -27,11 +27,11 @@ const CategoryModal = ({isOpen, toggle, result}) => {
                 <button onClick={toggle}>닷기</button>
                 <ModalBody>
                     {
-                        result?.map(category => {
+                        result?.map((category,index) => {
                             return (
                                 <button className="category-select"  onClick={() => {
                                     changeCategory(category.categoryNo)
-                                }}>
+                                }} key={index}>
                                     <img src={category.imagePath} alt={category.categoryNo}/>
                                     <p>{category.categoryName}</p>
                                 </button>

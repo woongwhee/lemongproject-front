@@ -16,12 +16,10 @@ const TemplateList = ({result}) => {
     const [page, setPage] = useState(0);
     const maxPage = useRef(-1);
     const target = useRef(null);
-    const options = {
-        threshold: 1.0,
-    };
     const loadPage = async () => {
-        console.log(isLanding.current, "???")
-        if (isLanding.current == true) return;
+        if (isLanding.current == true) {
+            return;
+        }
         isLanding.current = true;
         if (maxPage.current == -1) {
             maxPage.current = await templateMaxPage(categoryNo);
@@ -31,7 +29,6 @@ const TemplateList = ({result}) => {
         setTemplates(newList);
         isLanding.current = false;
     };
-    const observer = new IntersectionObserver(loadPage, options);
 
     const handleObserver = useCallback((entries) => {
         const target = entries[0];
@@ -59,8 +56,8 @@ const TemplateList = ({result}) => {
     return (
         <div className="outer_Temp">
             <div id="template-list">
-                {templates.map(template => <TemplateCard key={template.templateNo} template={template}/>)}
-                <div ref={target} className={"target"} style={{color: "red", height: "10px"}}>흐음</div>
+                {templates.map((template, index) => <TemplateCard template={template} key={index}/>)}
+                <div ref={target} className={"target"} style={{color: "red", height: "10px"}}></div>
             </div>
             <WriteButton/>
             <CategoryButton/>

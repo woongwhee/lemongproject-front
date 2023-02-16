@@ -3,7 +3,7 @@ import {Card, CardBody, CardHeader, CardImg, CardText, CardTitle} from "reactstr
 import {useTemplateDispatch} from "../TemplateContext";
 
 const TemplateCard = ({template}) => {
-    const {templateNo,range,title,todoCount,clearCount,playCount,category,create}=template;
+    const {templateNo,range,title,todoCount,clearCount,playCount,category,create,clear}=template;
     const {categoryNo,categoryName,imagePath}=category;
     const {photo,nickName,profileComment}=create;
    const dispatch=useTemplateDispatch();
@@ -13,7 +13,6 @@ const TemplateCard = ({template}) => {
    }
     return (
         <div onClick={ViewDetail} className="Template-Card">
-
             <div className="Card-Img">
             <img src={imagePath} alt={categoryName} />
             </div>
@@ -24,7 +23,7 @@ const TemplateCard = ({template}) => {
                 참여중:{playCount}<br/>완료:{clearCount}
             </div>
             <div className="">
-                만든놈 {nickName}
+                만든사람 : {nickName}
             </div>
         </div>
     );

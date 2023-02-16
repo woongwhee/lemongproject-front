@@ -61,7 +61,7 @@ const StartSingleModal = ({isOpen, toggle, templateNo}) => {
             <ModalBody>
                 <div>
                     {option.map((item, i) => {
-                        return (<><Checkbox type="checkbox" key={"sc+i"} checked={item} onClick={() => {
+                        return (<><Checkbox type="checkbox" key={i} checked={item} onClick={() => {
                             optionToggle(i)
                         }} id={"sc" + i}/><label htmlFor={"sc" + i}>{optionInfo[i]}</label> </>)
                     })}
