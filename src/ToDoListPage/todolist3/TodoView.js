@@ -100,7 +100,7 @@ function TodoView3(){
       })
     ).then(function(res){
       console.log('작성 성공');
-      console.log(res.data.result);
+      //console.log(res.data.result);
       setTodoList([
         ...todoList,
         {

@@ -107,7 +107,6 @@ function TodoCreate({insertTodo}) {
         <InsertFormPositioner>
           <InsertForm onSubmit={(e)=>{e.preventDefault(); insertTodo(inputValue, setInputValue, open, setOpen, todoDate); moveMark();}}>
             <Input type="text" value={inputValue} onChange={onCreate} autoFocus/>
-            {/* <button onClick={()=>{insertTodo(inputValue, setInputValue, todoDate)} } >add</button> */}
           </InsertForm>
         </InsertFormPositioner>
       )}
