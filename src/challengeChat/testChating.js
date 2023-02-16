@@ -6,12 +6,22 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useLoginState } from "../Member/LoginContext";
 const Chat = (props) => {
 
-    let{chatRoomNo}=props;
+    let{chatData}=props;
+    console.log(chatData);
+
+    let chatRoomNo = chatData[0];
+    console.log(chatRoomNo);
+
+    let userNo = chatData[1];
+    console.log(userNo);
+    // let{chatRoomNo}=props;
+    // let{userNo}=props1;
     let {profile}=useLoginState;
     console.log(profile);
+    // console.log(userNo);
     // console.log(userNo)
-    const userNo = profile?.userNo; // 로그인한 사용자 userNo
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
+    // const userNo = profile?.userNo; // 로그인한 사용자 userNo
+    // const userNos = useSelector((state) => state.userNo.selectUserNo);
 
     // 소켓통신으로 보낸 챌린지 참여하는 유저의 
     // 이름 , 메세지 , 보낸시간(날짜포함) 저장
@@ -29,20 +39,19 @@ const Chat = (props) => {
     // 현재 주소에 떠있는 userNo를 가져와서 그 userNo에 해당하는 값을 사용하겠다.
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
-
-    // const userNo = sessionStorage.getItem("userNo");
-    const paramNo = params.get("userNo") ;
+    const userNos = params.get("userNo"); // 로그인한 사용자 userNo
+    console.log(userNos);
 
     // 받은 데이터들 map돌려서 하나하나 빼서 쓰기                            
     const msgBox = chatt.map((item, idx) => (
         <div key={idx} className={item.name === name ? 'me' : 'other'}>
-            <span><b>{item.name}</b></span> [ {item.date} ]<br/>
+            <span><b>{userNos}</b></span> [ {item.date} ]<br/>
             <span>{item.msg}</span>
         </div>
     ));
 
     function showChat(){
-        if(userNo === paramNo){
+        if(userNo === userNos){
             return<div style={{float:'right'}}>{msgBox}</div>
         }else{
             return<div style={{float:'left'}}>{msgBox}</div>

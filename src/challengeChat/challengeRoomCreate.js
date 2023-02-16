@@ -27,11 +27,17 @@ function ChallengeRoomCreate(){
     // 나중에 로그인 한 사용자가 참여하고 있는 challNo로 변경.
     const challNo = 3000;
 
+    // 현재 주소에 떠있는 userNo를 가져와서 그 userNo에 해당하는 값을 사용하겠다.
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+    const userNo = params.get("userNo"); // 로그인한 사용자 userNo
+
     let {profile}=useLoginState();
     console.log(profile);
-    const userNo = profile?.userNo; // 로그인한 사용자 userNo
+    console.log(userNo);
+    // const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
+    // const userNos = useSelector((state) => state.userNo.selectUserNo);
 
     // CHALLENGE_NO에 해당하는 정보를 가져오기.
     const [challengeData , setChallengeData] = useState();
@@ -57,9 +63,15 @@ function ChallengeRoomCreate(){
             })
         } , []
     )
-    console.log(challGo)
-    console.log(chatRoomNo)
-   
+    console.log(challGo);
+    console.log(chatRoomNo);
+    console.log(userNo);
+
+    const chatData = [];
+    chatData.push(chatRoomNo);
+    chatData.push(userNo);
+
+    console.log(chatData);
 
     function ChallengeDetail(e){
         console.log(e + "통과되는거 확인");
@@ -85,7 +97,7 @@ function ChallengeRoomCreate(){
         axios.get("/api/challenge/challengeGo" , {
             params:{
                 challNo : e ,
-                userNo : userNos ,
+                userNo : userNo ,
             }
         }).then(function(res){
             console.log(res.data.result + "데이터 전송 성공");
@@ -154,7 +166,7 @@ function ChallengeRoomCreate(){
                                 <div className="outer_2">
                                     {/* <ChallengeChatRoom challengeData={challengeData}/> */}
                                     {/* <Chat/> */}
-                                    {showChatRoom === true ? <Chat chatRoomNo={chatRoomNo} /> : null}
+                                    {showChatRoom === true ? <Chat chatData={chatData}/> : null}
                                 </div>
                             </div>
                          </div>

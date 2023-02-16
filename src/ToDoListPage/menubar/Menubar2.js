@@ -4,9 +4,14 @@ import FeedList from "./FeedList";
 import ChallengeList from "./ChallengeList";
 import TemplateView from "./TemplateView";
 import TodoView3 from "../todolist3/TodoView";
+import { useSelector } from "react-redux";
+// import Menubar3 from "./Menubar3";
+import { MyPage } from "../../mypage/MyPage";
 
-import { connect } from 'react-redux';
-import { other, todo } from "../../reducer/page";
+import { useLoginState } from "../../Member/LoginContext"; 
+
+//const selectTodo = useSelector(state => state.value);
+
 
 const menuList = {
   0: <TodoView3 />,
@@ -17,11 +22,12 @@ const menuList = {
 
 
 class Menubar2 extends Component{
+  
   constructor(props) {
-    super(props);
-    
+    super();
+
     this.state = {
-      menu: 0,
+      menu: 4,
     };
   }
 
@@ -29,24 +35,20 @@ class Menubar2 extends Component{
     this.setState({menu : menuIndex});
   }
 
-
   render(){
-    const pickTodo = this.props.menuList2;
-    //console.log("pick me:"+ pickTodo);
-    const {other} = this.props;
-
     return(
+        // <Menubar3></Menubar3>
       <div className="menubar-box">
         <div className="menuBar">
           <ul className="tabs">
-            {pickTodo ? 
+            {pickTodo ?
             <>
             <li className="active" >TodoList</li>
             <li className="" onClick={() => {this.changeMenu(1); other();}}>Feed</li>
             <li className="" onClick={() => {this.changeMenu(2); other();}}>Challenge</li>
             <li className="" onClick={() => {this.changeMenu(3); other();}}>Template</li>
             </>
-            : 
+            :
             <>
             <li className={`${this.state.menu === 0? 'active': ''}`} onClick={() => this.changeMenu(0)}>TodoList</li>
             <li className={`${this.state.menu === 1? 'active': ''}`} onClick={() => {this.changeMenu(1); other();}}>Feed</li>
@@ -56,15 +58,15 @@ class Menubar2 extends Component{
             }
           </ul>
         </div>
-        {pickTodo ? 
+        {pickTodo ?
         <div className="contentArea">
           {menuList[0]}
-        </div> 
+        </div>
         :
         <div className="contentArea">
           {menuList[this.state.menu]}
         </div>
-       } 
+       }
       </div>
     )
   }

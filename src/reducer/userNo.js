@@ -1,47 +1,38 @@
+
 import axios from "axios";
 
-//리덕스 툴킷
-//npm install @reduxjs/toolkit react-redux
+function userNo (state, action) {
+        // axios.get("/api/member/userData").then(function(res){
+        //     console.log(res.data.result + "데이터 가져오기 성공");
+        //     const data = res.data.result;
+        //     // initialState.myNo.push(data);
+        //     // console.log(initialState.myNo + 'dd');
+        //      console.log(data);
+            //  setMyNo(data);
+            // return data;
+            // console.log("ff" + usr)
+            // usr += data;
+        // })
+        // let usr = 0;
+        // currentState: 현재 state값
+        // action : 어떻게 state값을 바꿀 것인가
 
+        if(state === undefined){
+            // console.log(initialState.myNo[0] + 'dd123132132132132');
+        return {
+            selectUserNo : state ,
+        };
+    }
 
-//const MOVE = 'mark/MOVE';
-
-//export const move = () => ({type : MOVE});
-
-const initialState = {
-    index : 3,
-    menuParam : null
-};
-
-export const MENU_TODOLIST="TODOLIST";
-export const MENU_FEED="FEED";
-export const MENU_CHALLENGE="CHALLENGE";
-export const MENU_TEMPLATE="TEMPLATE";
-export const MENU_MY_PROFILE="MY_PROFILE";
-export const MENU_PROFILE="PROFILE";
-
-
-
-function userNo(state=initialState, action) {
-
-    switch(action.type){
-        case "TODOLIST":
-            return {index: 0};
-        case "FEED":
-            return {index: 1};
-        case "CHALLENGE":
-            return {index: 2};
-        case "TEMPLATE":
-            return {index:3};
-        case "MY_PROFILE":
-            return {index:4,menuParam:0};
-        case "PROFILE":
-            return {index:4,menuParam:action.userNo};
+    switch(action.type) {
+        case 'SELECTUSERNO' :
+            return action.payload;
+        case 'SELECTUSERNO-MY' :
+            return action.payload;
         default :
             return state;
     }
-};
 
-
+}
 
 export default userNo;
