@@ -3,7 +3,10 @@ import axios from "axios";
 
 import './MyPage.css';
 
-import { useLoginState } from "../Member/LoginContext";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
 
@@ -12,8 +15,8 @@ function MyFollowingCount(props){
 
     console.log(userNo);
 
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
+    // const queryString = window.location.search;
+    // const params = new URLSearchParams(queryString);
 
     const userNos = useSelector((state) => state.userNo.selectUserNo);
 
@@ -24,7 +27,7 @@ function MyFollowingCount(props){
     // const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     // 팔로우 당하는사람(팔로워)
-    const follower = userNos
+    const follower = userNos == null ? userNo : userNos;
 
     // 팔로우 하는사람(팔로잉)
     // const followerIng = profile?.userNo;
@@ -71,6 +74,8 @@ function MyFollowingCount(props){
     // 나의 팔로워 리스트 띄우기.
     const [myfollowingList , setMyFollowingList] = useState();
 
+    console.log(myfollowingList)
+
     function ShowMyFollowing(){
         axios.get("/api/follow/selectMyFollowingList" , {
             params:{
@@ -86,10 +91,10 @@ function MyFollowingCount(props){
         })
     }
 
-    useEffect(() => {;
+    useEffect(() => {
         ShowMyFollowing();
         console.log(userNo + "===여기도 통과됨")
-      },[])
+      },[userNos == null ? userNo : userNos])
    
     let i = 0;
 
@@ -108,15 +113,13 @@ function MyFollowingCount(props){
                    </div>
                    <div className="scrollBar" style={{overflow:'scroll' , height:'733px'}}>
                         {myfollowingList?.map(e => <div style={{marginTop:'10px'}}>
-                            <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', float:'left' , borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , float:'left' , fontFamily:'NanumGothic-Regular' , marginLeft:'20px' , marginTop:'10px'}}>{e?.profile?.nickName}</span>
+                            <img key={i++} {...e} src={e?.profile?.photo?.filePath+e?.profile?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
                             <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
-                                <button type="button" 
-                                key={i++} {...e} 
-                                 class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed' , marginTop:'10px'}} 
+                                <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
                                 onClick={() => {selectUserNo(e?.profile?.userNo);}}>방문하기</button>
-                        </div>
-                        </div>)}
-                   </div>                
+                                </div>
+                        </div>)}  
+                   </div>         
                 </div>
              </div>
              </div>

@@ -5,12 +5,14 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import './MyPage.css';
 
-function AcceptFollowingCount(){
+function AcceptFollowingCount(props){
+
+    let{userNo}=props;
 
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
-    const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
+    // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
     // 팔로우 당하는사람(팔로워)
     const follower = params.get("userNo");
@@ -37,7 +39,7 @@ function AcceptFollowingCount(){
         () => {
             axios.get("/api/follow/AcceptFollowingCount" , {
                 params : {
-                    follower : userNos , 
+                    follower : userNos == null ? userNo : userNos , 
                 }
             }).then(function(res){
                 console.log(res+"데이터 전송 성공");
@@ -46,7 +48,7 @@ function AcceptFollowingCount(){
             }).catch(function(){
                 console.log("데이터 전송 실패");
             })
-        } , [userNos]
+        } , [userNos == null ? userNo : userNos]
     )
 
     // 상대방 팔로잉 리스트 띄우기.
@@ -58,7 +60,7 @@ function AcceptFollowingCount(){
     function ShowAcceptFollowing(){
         axios.get("/api/follow/selectAcceptFollowingList" , {
             params:{
-                follower : userNos,
+                follower : userNos == null ? userNo : userNos,
             }
         }).then(function(res){
             console.log(res+"데이터 전송 성공");
@@ -73,7 +75,7 @@ function AcceptFollowingCount(){
     useEffect(() => {
         ShowAcceptFollowing();
         console.log(userNos + "===여기도 통과됨")
-      },[userNos])
+      },[userNos == null ? userNo : userNos])
 
     let i = 0;
 

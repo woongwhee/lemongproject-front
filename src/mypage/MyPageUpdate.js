@@ -14,7 +14,7 @@ import axios from "axios";
 import MyPageProfile from "./MyPageProfile";
 import MyPagePwdCheck from "./MypagePwdUpdate";
 import MyDelete from "./MyDelete";
-import MyMenuBar from "../ToDoListPage/menubar/MyMenuBar";
+import MyMenuBar from "../todo/menubar/MyMenuBar";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 
 import { BsFillBrushFill , BsCheckLg } from "react-icons/bs";
@@ -23,7 +23,7 @@ import { confirmAlert } from "react-confirm-alert";
 // import "react-confirm-alert/src/react-confirm-alert.css";
 import './react-confirm-alert.css';
 
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
 function MyPageUpdate(){
@@ -79,9 +79,7 @@ function MyPageUpdate(){
 
      // 검색한 닉네임 저장
      const CheckValHandle = (event) => {
-
         const {name , value} = event.target;
-
         setMyNickCheck({
             ...mynickCheck , 
             [name]:value,
@@ -277,7 +275,7 @@ function MyPageUpdate(){
                 <div className="outer_myContent">
                     <h1 style={{marginTop: "130px" , marginLeft: "70px" , fontSize: "50px"}}><b>My ProFile</b></h1>
 
-                    <MyDelete/>
+                    <MyDelete myprofile={myprofile}/>
 
                     <hr style={{marginTop: "0px" , inlineSize: "85%" , marginLeft: "70px"}}></hr>
 

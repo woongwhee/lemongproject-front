@@ -24,7 +24,7 @@ function userNo (state, action) {
         };
     }
 
-    switch(action.type) { 
+    switch(action.type) {
         case 'SELECTUSERNO' :
             return action.payload;
         case 'SELECTUSERNO-MY' :
@@ -32,7 +32,7 @@ function userNo (state, action) {
         default :
             return state;
     }
-   
+
 }
 
 export default userNo;

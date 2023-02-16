@@ -5,23 +5,23 @@ import App from './App';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {Provider} from "react-redux";
 import {createStore} from "redux";
-import Join from './Member/Join';
-import FindPwd from './Member/FindPwd';
-import KakaoLogin from './Member/KakaoLogin';
-import {LoginProvider} from "./Member/LoginContext";
-import SetNick from './Member/SetNick';
+import Join from './member/Join';
+import FindPwd from './member/FindPwd';
+import KakaoLogin from './member/KakaoLogin';
+import {LoginProvider} from "./member/LoginContext";
+import SetNick from './member/SetNick';
 
-import NaverLoginBtn from './Member/NaverLoginBtn';
+import NaverLoginBtn from './member/NaverLoginBtn';
 import 'bootstrap/dist/css/bootstrap.css';
 import reducer from "./reducer";
 
-import {MyPage} from './mypage/MyPage';
-import MyPageUpdate from './mypage/MyPageUpdate';
-import Chat from './challengeChat/testChating';
-
-import ChallengeRoomCreate from './challengeChat/challengeRoomCreate';
-import ChallengeChatRoom from './challengeChat/challengeChatRoom';
-import FeedInsert from './feedPage/FeedInsert';
+// import {MyPage} from './mypage/MyPage';
+// import MyPageUpdate from './mypage/MyPageUpdate';
+// import Chat from './challengeChat/testChating';
+//
+// import ChallengeRoomCreate from './challengeChat/challengeRoomCreate';
+// import ChallengeChatRoom from './challengeChat/challengeChatRoom';
+import FeedInsert from './feed/FeedInsert';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -37,11 +37,12 @@ root.render(
         <Route path="setNick" element={<SetNick />} />
         <Route path='naver' element={<NaverLoginBtn />} />
         <Route path="FeedInsert" element={<FeedInsert />}/>
-        <Route path="mypage" element={<MyPage />}/>
-        <Route path="MypageUpdate" element={<LoginProvider><MyPageUpdate /></LoginProvider>}/>
-        <Route path="ChallengeRoomCreate" element={<LoginProvider><ChallengeRoomCreate /></LoginProvider>}/>
+        {/*<Route path="mypage" element={<MyPage />}/>*/}
+        {/*<Route path="MypageUpdate" element={<LoginProvider><MyPageUpdate /></LoginProvider>}/>*/}
+        {/*<Route path="ChallengeRoomCreate" element={<LoginProvider><ChallengeRoomCreate /></LoginProvider>}/>*/}
     </Routes>
     </Provider>
   </BrowserRouter>
+
 
 );

@@ -27,17 +27,17 @@ import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 // 마이페이지 css
 import './MyPage.css';
 import MyFollowApplication from "./MyFollowApplication";
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 import UserNo from "../reducer/userNo";
 
 function MyPage() {
     
     let {profile}=useLoginState();
-    console.log(profile);
+    // console.log(profile);
     const userNo = profile?.userNo; // 로그인한 사용자 userNo
-    console.log(userNo + 'dd?')
-     // photo테이블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
+    // console.log(userNo + 'dd?')
+     // photo테이userNo블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
      const [myprofile , setMyProfile] = useState();
      
      const queryString = window.location.search;
@@ -48,7 +48,7 @@ function MyPage() {
      const userNos = useSelector((state) => state.userNo.selectUserNo);
 
 
-     console.log(userNos + " 제발 통과됨")
+     // console.log(userNos + " 제발 통과됨")
     //  const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
  
      function callback(data){
@@ -145,7 +145,7 @@ function MyPage() {
                         <button className="myBtnf" onClick={() => changeTab("Template")}>Template</button>
                     </div>
                         {tab === "Feed" ? <MyFeed/> : null}
-                        {tab === "Challenge" ? <MyChallenge/> : null}
+                        {tab === "Challenge" ? <MyChallenge userNo={userNo}/> : null}
                         {tab === "Template" ? <MyTemplates/> : null}
                     </div>
                 {/* <div className="outer_menu">

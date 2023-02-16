@@ -11,7 +11,7 @@ const TemplateDetailView = () => {
     const {templateNo}=useTemplateState();
     const state = useAsync(templateDetail, [templateNo]);
     return (
-            <TemplateDetail stateus={state.status} result={state.result} ></TemplateDetail>
+            <TemplateDetail state={state}></TemplateDetail>
     );
 
 };

@@ -13,7 +13,7 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import Chat from "./testChating";
 
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
 function ChallengeRoomCreate(){

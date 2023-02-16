@@ -1,0 +1,34 @@
+.menubar-box{
+    box-sizing: border-box;
+    display: inline-block;
+    /*border: 10px solid pink;*/
+    width: 63%;
+    height: 100%;
+    float: left;
+    /*margin: auto;*/
+}
+.menuBar{
+    /*padding: 1rem; */
+    background: white;
+    width: 100%;
+    height: 13%;
+    margin-bottom: 1rem;
+}
+.contentArea{
+    width: 100%;
+    height: 83%;
+}
+.tabs {
+    height: 13%;
+}
+.tabs li{
+    font-size: 27px;
+    font-weight: bold;
+    display: inline-block;
+    color: #c4c4c4;
+    padding: 1rem;
+}
+.tabs li.active{
+    color: black;
+    height: 100%;
+}

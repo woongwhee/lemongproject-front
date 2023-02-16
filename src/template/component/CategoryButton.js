@@ -6,22 +6,19 @@ import Modal from "react-modal";
 import CategoryModal from "./CategoryModal";
 import {isEmpty} from "../../util/typeUtile";
 
-const CategoryButton = () => {
+const CategoryButton = (props) => {
     const state=useAsync(templateCategory);
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
-    const selectCategory=(categoryNo)=>{
-        setModal(!modal);
-    }
+
 
     return (<>
-            <button type="button" className="Category-Button" onClick={toggle} >
+            <div className="Category-Button" onClick={toggle} >
                 <img src="/LemongImg/template/search.png" />
-            </button>
+            </div>
             {
-            <CategoryModal statuses={state.statuses} isOpen={modal} toggle={toggle} list={state.result} />
+            <CategoryModal state={state} isOpen={modal} toggle={toggle}/>
             }
-
             </>
     );
 };

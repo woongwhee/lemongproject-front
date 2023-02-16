@@ -10,10 +10,10 @@ import { width } from 'dom7';
 
 import { TiTick } from "react-icons/ti";
 
-import { useLoginState } from "../Member/LoginContext"; 
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
-const ProFileData = (props): JSX.Element => {
+const ProFileData = (props)=> {
 
     // let{userNo}=props;
 
@@ -28,7 +28,7 @@ const ProFileData = (props): JSX.Element => {
 
     // const userNos = profile?.userNo; // 로그인한 사용자 userNo
 
-    const fileList: File[] = []; // 업로드한 파일들을 저장하는 배열
+    const fileList = []; // 업로드한 파일들을 저장하는 배열
 
     const onSaveFiles = (e) => {
         const uploadFiles = Array.prototype.slice.call(e.target.files); // 파일선택창에서 선택한 파일들
@@ -103,8 +103,8 @@ const ProFileData = (props): JSX.Element => {
     return (
         <div>
             <input name="proFile" id="proFile" type="file" multiple /* 파일 여러개 선택 가능하게 하기 */ onChange={onSaveFiles} />
-            <div type="button" style={{marginTop:'-230px' , marginLeft:'100px'}}>
-                <label for="proFile" style={{border:'none' , width:'200px' , height:'200px' , borderRadius:'50%'}}>
+            <div id="my_ProfileImg" type="button" style={{marginTop:'-230px' , marginLeft:'100px'}}>
+                <label for="proFile" id="proHover" style={{border:'none' , width:'200px' , height:'200px' , borderRadius:'50%'}}>
                     
                 </label>
             </div>
