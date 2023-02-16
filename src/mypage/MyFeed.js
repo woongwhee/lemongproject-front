@@ -164,15 +164,17 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useLoginState} from "../Member/LoginContext";
 import {useSelector} from "react-redux";
+import FeedDetail from "../feedPage/FeedDetail";
+import Modal from "react-bootstrap/Modal";
+import FeedDetailView from "../feedPage/FeedDetailView";
 
 function MyFeed(props) {
 
     const [myFeedList , setMyFeedList] = useState([]);
-
+    const [show, setShow] = useState(false);
     const userNos = useSelector((state) => state.userNo.selectUserNo);
 
     let {profile}=useLoginState();
-    console.log(profile);
     const userNo = profile?.userNo; // 로그인한 사용자 userNo
 
     useEffect(
@@ -182,28 +184,58 @@ function MyFeed(props) {
                     userNo : userNos != null ? userNos : userNo,
                 }
             }).then(function(res){
-                const data = res.data.result;
-                console.log(data);
-                setMyFeedList(data);
+                console.log(res.data.result);
+                setMyFeedList(res.data.result);
             }).catch(function(){
                 console.log("데이터 전송 실패")
             })
         } , [userNos != null ? userNos : userNo]
     )
+    let eett = []
+    let eeff = []
+    for(let i = 0; i<myFeedList.length; i++){
+        eeff.push(
+            myFeedList[i].filePath.split(",")
+        )
+    }
+    eett = eeff.map( (item) => item[0])
+
     const ofof = () =>{
         const result = []
         for(let i =0; i<myFeedList.length; i++){
             result.push(
-                <div>{myFeedList[i].context}</div>
+                <>
+                    <div style={{border:"3px solid black", float:"left"}}>
+                        <img src={eett[i]} style={{width:"240px", height:"240px"}} onClick={() => {setShow(true)}}/>
+                    </div>
+                </>
             )
         }
         return result
     }
 
     return (
-        <div>
-            {ofof}
+        <>
+        <div style={{marginLeft:"0px", border:"1px solid blue"}}>
+            {ofof()}
         </div>
+        <Modal
+            show={show}
+            onHide={() => setShow(false)}
+            dialogClassName="modal-90w"
+            aria-labelledby="example-custom-modal-styling-title"
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="example-custom-modal-styling-title">
+                    디테일
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {/*<FeedReplyInsert feedNo={feedNo}/>*/}
+                <FeedDetailView Feed={myFeedList}></FeedDetailView>
+            </Modal.Body>
+        </Modal>
+    </>
     );
 }
 
