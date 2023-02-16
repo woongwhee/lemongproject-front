@@ -4,26 +4,37 @@ import TodoItem from './TodoItem';
 import ChallTodoItem from './ChallTodoItem';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import axios from 'axios';
-
+import './TodoList.css';
+import 'animate.css';
+import { isEmpty } from '../../util/typeUtile';
 const TodoListBlock = styled.div`
   flex: 1;
-  padding: 20px 32px;
+  padding: 20px 17px;
   padding-bottom: 48px;
   overflow-y: auto;
+
+  animation : fadeIn;
+  animation-duration: 1s;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+  }
 `;
 
-function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onDelay}) {
+const Challenge = styled.div`
+  //margin-top: -12px;
+  padding-top : 20px;
+  //border : 10px solid pink;
+`;
 
-  //const chTodos = chList[0].todoList;
-  //console.log(chTodos);
-  let arr = [];
-  
+
+function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, onUpdate, onDelay}) {
   const onDragStart = () => {
-    // const todoNos = todoList.map(todo => todo.todoNo);
-    // console.log("뽑았으"+todoNos);
-    // arr.push(todoNos);
-    // console.log("첫"+ arr);
-    //todoList.map(todo => arr.push(todo.todoNo));
+    console.log(todoList);
   }
   
   const onDragEnd = (res) => {
@@ -32,49 +43,31 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
     const dndTodoList = [...todoList];
     const [reorderedItem] = dndTodoList.splice(res.source.index, 1);
     dndTodoList.splice(res.destination.index, 0, reorderedItem);
-    //setTodoList(dndTodoList);
+    setTodoList(dndTodoList);
     console.log(dndTodoList);
 
-    // const dndTodoNos = dndTodoList.map(todo => todo.todoNo);
-    // arr.push(dndTodoNos);
 
-    //dndTodoList.map(todo => arr.push(todo.todoNo));
-    //console.log("추가 후"+arr);
-
-    // axios.post('api/todo/dndTodo', {
-    //   originArr : arr[0],
-    //   changeArr : arr[1],
-    // }).then(function(){
-    //   setTodoList(dndTodoList);
-    //   console.log("최종"+arr);
-    //   console.log("dnd 완료");
-    //   arr = [];
-    // }).catch(function(){
-    //   console.log("dnd 실패")
-    // })
-
-    axios.get('api/todo/dndTodos', ({
-      dndTodoList : dndTodoList
+    axios.post('api/todo/dndTodo', ({
+       dndTodoList : dndTodoList 
     })).then(function(){
-      setTodoList(dndTodoList);
-      console.log("dnd"+dndTodoList);
       console.log("dnd 완료");
     }).catch(function(){
-      console.log("dnd 실패");
-      console.log(dndTodoList);
+      console.log("dnd 실패")
     })
-    
   }
+
+  const [checkTodo] = chList.filter(chTodos => chTodos.challengeName !== null);
+  
 
   return ( 
     <>
-    <p>Daily Todo-List</p>
-    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd} >
+    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
       <Droppable droppableId="drop-area">
         {provided => (
           <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}>
+            {/* dailyTodo */}
             {todoList && todoList.map((todo, index) =>(
-              <Draggable draggableId={String(todo.todoNo)} index={index} key={todo.todoNo}>
+              <Draggable draggableId={String(todo.todoNo)} index={index} key={todo.todoNo} >
                 {provided => (
                   <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                   <TodoItem
@@ -92,15 +85,18 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
               ))}
               {provided.placeholder} 
 
-              {chList && chList.map(chTodos => (
-                chTodos.todoList.map(chTodo => 
-                  <ChallTodoItem
-                  key={chTodo.todoNo}
-                  chTodo={chTodo}
-                  />
-                )
-              ))}
+            {/* challengeTodo */}
             
+            {chList && chList.map((chTodos, index) => ( 
+              <Challenge chTodos={chTodos} key={index}>
+                {!isEmpty(chTodos.todoList) && <p>{chTodos.challengeName}</p>}
+
+                
+                {chTodos.todoList.map(chTodo => 
+                  <ChallTodoItem key={chTodo.todoNo} chTodo={chTodo} onToggleCh={onToggleCh}/>
+                )}
+              </Challenge>
+            ))}
 
           </TodoListBlock>
         )}
@@ -108,41 +104,11 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onUpdate, onD
       </Droppable>
     </DragDropContext>
 
-
-
-    {/* <TodoListBlock>
-      <p>Daily Todo-List</p>
-      {todoList && todoList.map(todo =>(
-      <TodoItem
-        key={todo.todoNo}
-        todo={todo}
-        onDel={onDel}
-        onToggle={onToggle}
-        onUpdate={onUpdate}
-        onDelay={onDelay}
-      />
-      ))}
-    </TodoListBlock> */}
-
-    {/* <TodoListBlock>
-    {chList && <p>Challenge Todo-List</p>}
-    {chList && chList.map(chTodos => (
-      chTodos.todoList.map(chTodo => 
-        <>
-        <ChallTodoItem
-        key={chTodo.todoNo}
-        chTodo={chTodo}
-        onToggle={onToggle}
-        />
-        </>
-      )
-    ))}
-    </TodoListBlock> */}
-
-
     </>
   );
 }
 
 
 export default TodoList;
+
+//style={{marginBottom : 0, fontSize : 18, fontWeight : 'bold'}}

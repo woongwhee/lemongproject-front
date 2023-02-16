@@ -35,10 +35,7 @@ function TodoView3(){
 
   //챌린지 투두리스트
   const [chList , setChList] = useState([]);
-  //const [chTodo, setChTodo] = useState([chList.map(chTodos => chTodos.todoList.map(chTodo))]);
-  //chList && chList.map(chLists => chLists.todoList.map(chTodo => console.log(chTodo)));
-  //console.log(chTodos);
-  //console.log(chList.todoList);
+  const [toggle, setToggle] = useState(false);
 
   //로그인 유저 정보 가져오기
   // let userNo = sessionStorage.getItem("userNo");
@@ -69,11 +66,12 @@ function TodoView3(){
       let result=codeHandler(res);
       setTodoList(result.normalList);
       setChList(result.challengeList);
-      console.log(res.data.result.normalList);
-      //console.log(result.challengeList[0].todoList);
+      //console.log(result.challengeList);
       //console.log(chList);
-      //console.log(chList.todoList);
-    } catch(res){
+      console.log(result.normalList);
+    } catch(result){
+      setTodoList(result.data);
+      setChList(result.data);
       console.log("전송 실패")
     }
   }
@@ -84,8 +82,9 @@ function TodoView3(){
   //[] <- 값을 추가하면 값이 변할 때마다 작업을 실행한다.(ㅜㅜ눙뭉)
   useEffect(() => {
     fetchTodo();
-  },[todoDate])
+  },[todoDate, toggle])
 
+  const no = useRef(1);
 
   //투두 작성 form태그 
   const insertTodo = async(inputValue, setInputValue, open, setOpen, userNo) => {
@@ -98,24 +97,23 @@ function TodoView3(){
         clear : false,
         value : 1,
         todoDate :  todoDate,
-        todoNo : 0
       })
     ).then(function(res){
-      console.log(res+'작성 성공'+"success");
-      setTodoList(res);
+      console.log('작성 성공');
+      console.log(res.data.result);
       setTodoList([
         ...todoList,
         {
           todoContent : inputValue,
           clear : false,
-          todoNo : res.data,
-          value : res.data,
+          todoNo : no.current++,
         }
       ])
       setInputValue('');
       setOpen(!open);
+      console.log(todoList);
     }).catch(function(){
-      console.log( + "데이터 전송 실패")
+      console.log( "작성 실패")
     })
   }
   
@@ -139,8 +137,7 @@ function TodoView3(){
   const onToggle = async(todoNo) => {
     axios.get('/api/todo/clearTodo', {
       params : {todoNo : todoNo}
-    }).then(function(res){
-      setTodoList(res.data);
+    }).then(function(){
       setTodoList(todoList.map(todo =>
         todo.todoNo === todoNo ? { ...todo, clear: !todo.clear } : todo
       ));
@@ -151,20 +148,33 @@ function TodoView3(){
   }
 
   //챌린지 투두 완료
-  // const onToggleCh = async(todoNo) => {
-  //   axios.get('/api/chTodo/clearChTodo', {
-  //     params : {todoNo : todoNo}
-  //   }).then(function(res){
-  //     setChList(chList.map(chLists => 
-  //       chLists.todoList.map(chTodo =>
-  //         chTodo.todoNo === todoNo ? { ...chTodo, clear: !chTodo.clear } : chTodo
-  //     )));
-  //     console.log(chTodo);
-  //     console.log("변경 완료!");
-  //   }).catch(function(){
-  //     console.log("변경 실패!");
-  //   })
-  // }
+  const onToggleCh = async(todoNo) => {
+    axios.get('/api/challenge/clearTodo', {
+      params : {todoNo : todoNo}
+    }).then(function(res){
+      let result = codeHandler(res);
+      //console.log(chList);
+      
+      // setChList(chList && chList.map(chTodos =>
+      //   chTodos.todoList && chTodos.todoList.map(
+      //     chTodo => chTodo.todoNo === todoNo ? { ...chTodo, clear : !chTodo.clear } : chTodo
+      // )));
+
+      for(let i =0; i<chList.length; i++){
+        let todoList = chList[i].todoList
+        for(let chTodos of todoList){
+          if(chTodos.todoNo === todoNo ){
+            chTodos.clear = !chTodos.clear;
+      }}}
+      setChList(chList);
+      setToggle(!toggle);
+
+      console.log("챌린지 완료 성공!");
+      //console.log(chList);
+    }).catch(function(){
+      console.log("챌린지 완료 실패!");
+    })
+  }
 
   //투두 수정   
   const onUpdate = async(todoNo, editeTodo, setEdite) => {
@@ -189,10 +199,7 @@ function TodoView3(){
     axios.get('api/todo/delayTodo', ({
       params: {todoNo : todoNo}
     })
-    ).then(function(res){
-      // setTodoList(todoList.map((todo) =>({
-      //   ...todo
-      // })));
+    ).then(function(){
       setTodoList(todoList.filter(todo => todo.todoNo !== todoNo));
       console.log("미루기 완료");
     }).catch(function(){
@@ -214,6 +221,7 @@ function TodoView3(){
          chList={chList}
          onDel={onDel} 
          onToggle={onToggle} 
+         onToggleCh={onToggleCh}
          onUpdate={onUpdate} 
          onDelay={onDelay}/> {/*todo목록 컴포넌트*/}
         <TodoCreate insertTodo={insertTodo}/> {/*todo생성 컴포넌트*/}
