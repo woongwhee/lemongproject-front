@@ -82,7 +82,7 @@ function FeedBody(){
         <div>
             <div style={{overflow:"scroll", height:"800px"}}>
                 {feedList?.map((e)=><Feed key={i++} {...e} loginUserNo={userNo}/>)}
-                <div ref={target} style={{border:"1px solid red"}}></div>
+                <div ref={target}></div>
 
             </div>
         </div>
