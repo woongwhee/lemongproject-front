@@ -6,7 +6,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import axios from 'axios';
 import './TodoList.css';
 import 'animate.css';
-
+import { isEmpty } from '../../util/typeUtile';
 const TodoListBlock = styled.div`
   flex: 1;
   padding: 20px 17px;
@@ -32,7 +32,6 @@ const Challenge = styled.div`
 `;
 
 
-
 function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, onUpdate, onDelay}) {
   const onDragStart = () => {
     console.log(todoList);
@@ -55,8 +54,10 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
     }).catch(function(){
       console.log("dnd 실패")
     })
-    
   }
+
+  const [checkTodo] = chList.filter(chTodos => chTodos.challengeName !== null);
+  
 
   return ( 
     <>
@@ -85,9 +86,11 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
               {provided.placeholder} 
 
             {/* challengeTodo */}
+            
             {chList && chList.map((chTodos, index) => ( 
               <Challenge chTodos={chTodos} key={index}>
-                <p style={{marginBottom : 0, fontSize : 18, fontWeight : 'bold'}}>{chTodos.challengeName}</p>
+                {!isEmpty(chTodos.todoList) && <p>{chTodos.challengeName}</p>}
+
                 
                 {chTodos.todoList.map(chTodo => 
                   <ChallTodoItem key={chTodo.todoNo} chTodo={chTodo} onToggleCh={onToggleCh}/>
@@ -107,3 +110,5 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
 
 
 export default TodoList;
+
+//style={{marginBottom : 0, fontSize : 18, fontWeight : 'bold'}}

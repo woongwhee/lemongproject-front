@@ -87,7 +87,8 @@ function Calendar2() {
 
     const onViewChange = async ({activeStartDate}) => {
         let month = new moment(activeStartDate).format("YYMMDD");
-        setMonth(activeStartDate.getMonth());
+        console.log("먼쓰",activeStartDate.getMonth())
+        setMonth(activeStartDate.getMonth()+1);
         const res = await axios.get(`/api/todo/getMonth/${month}`);
         let {challengeDayList, holidayList, todoDayList} = codeHandler(res);
         setChMark(challengeDayList);
@@ -104,7 +105,8 @@ function Calendar2() {
                 formatDay={(locale, date) => moment(date).format("DD")} //달력날짜에 '일' 삭제
                 tileContent={(e) => {
                     let date=e.date;
-                    if(date.getMonth() != month || isEmpty(mark) && isEmpty(chMark) && isEmpty(holidayMark)){
+                    
+                    if(date.getMonth()+1 != month || isEmpty(mark) && isEmpty(chMark) && isEmpty(holidayMark)){
                         return (<></>)
                     }
                     return(<TitleContent chMark={chMark} Mark={mark} hdMark={holidayMark} day={date.getDate()}/>)
