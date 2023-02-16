@@ -332,8 +332,8 @@ function App() {
         fetchData();
     }, []);
 
-    const indexOfLast = currentPage * postsPerPage;
-    const indexOfFirst = indexOfLast - postsPerPage;
+    const indexOfLast = currentPage * postsPerPage;  //  1 * 10 마지막 인덱스
+    const indexOfFirst = indexOfLast - postsPerPage; // 10 - 10 처음 인덱스
     const currentPosts = (posts) => {
         let currentPosts = 0;
         currentPosts = posts.slice(indexOfFirst, indexOfLast);
@@ -378,7 +378,7 @@ function App() {
     background-color: #263a6c;
   }
 `;
-
+//                          나눌숫자 10      총게시물갯수
     const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
