@@ -29,10 +29,10 @@ function MyFollowApplication(props){
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
     // 팔로우 당하는사람(팔로워)
-    const follower = params.get("userNo");
+    const follower = myNo;
 
     // 팔로우 하는사람(팔로잉)
-    const followerIng = sessionStorage.getItem("userNo");
+    const followerIng = userNo;
 
     // 버튼 클릭시 보낸사람(sessiong.user_No) -> 받는사람(params.userNo)에게 팔로워 신청 보내기.
     function followGo(){

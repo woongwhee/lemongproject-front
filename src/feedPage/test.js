@@ -6,17 +6,12 @@ import FeedLoading from "./FeedLoading";
 function FeedBody(){
     // 요청받은 정보를 담아줄 변수 선언
     const [ testStr, setTestStr] = useState([]);
-    //         ''        data
-    //         data
-    // const testStr = String data(hello world)
-    //                 JSON, 객체 상관이없다!
-    // 변수 초기화
     function callback(str) {
         setTestStr(str);
-
     }
     const [loading, setLoading] = useState(true);
     const [loginUserNo, setLoginUserNo] = useState(0);
+
 
 
     const [list, setList] = useState([]);
@@ -39,10 +34,6 @@ function FeedBody(){
             callback(res.data.result)
             console.log(res.data.result)
             setLoading(false);
-                //
-                // if(res.data.result.end){
-              //     endRef.current = true;
-                // }
         });
         for(let i = 0; i<testStr.length; i++){
             setList(prev=> [...prev, {...testStr[i]}]); //리스트 추가
@@ -59,6 +50,7 @@ function FeedBody(){
         if(obsRef.current) observer.observe(obsRef.current);
         return () => { observer.disconnect(); }
     }, [])
+
 
     useEffect(()=> {
         getDog();

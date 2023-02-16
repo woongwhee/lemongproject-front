@@ -1,10 +1,10 @@
 .menubar-box{
     box-sizing: border-box;
     display: inline-block;
-    border: 1px solid pink;
-    width: 45%;
+    /*border: 10px solid pink;*/
+    width: 63%;
     height: 100%;
-    /*float: left;*/
+    float: left;
     /*margin: auto;*/
 }
 .menuBar{
@@ -30,4 +30,5 @@
 }
 .tabs li.active{
     color: black;
+    height: 100%;
 }

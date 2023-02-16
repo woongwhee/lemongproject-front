@@ -10,10 +10,10 @@ function MyFollowDelete(){
 
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
+    // 팔로우 당하는사람(팔로워)
 
     const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
-    // 팔로우 당하는사람(팔로워)
     const follower = params.get("userNo");
 
     // 팔로우 하는사람(팔로잉)

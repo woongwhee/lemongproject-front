@@ -103,8 +103,8 @@ const ProFileData = (props): JSX.Element => {
     return (
         <div>
             <input name="proFile" id="proFile" type="file" multiple /* 파일 여러개 선택 가능하게 하기 */ onChange={onSaveFiles} />
-            <div type="button" style={{marginTop:'-230px' , marginLeft:'100px'}}>
-                <label for="proFile" style={{border:'none' , width:'200px' , height:'200px' , borderRadius:'50%'}}>
+            <div id="my_ProfileImg" type="button" style={{marginTop:'-230px' , marginLeft:'100px'}}>
+                <label for="proFile" id="proHover" style={{border:'none' , width:'200px' , height:'200px' , borderRadius:'50%'}}>
                     
                 </label>
             </div>

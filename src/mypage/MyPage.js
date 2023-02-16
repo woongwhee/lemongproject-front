@@ -37,7 +37,7 @@ function MyPage() {
     console.log(profile);
     const userNo = profile?.userNo; // 로그인한 사용자 userNo
     console.log(userNo + 'dd?')
-     // photo테이블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
+     // photo테이userNo블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
      const [myprofile , setMyProfile] = useState();
      
      const queryString = window.location.search;
@@ -145,7 +145,7 @@ function MyPage() {
                         <button className="myBtnf" onClick={() => changeTab("Template")}>Template</button>
                     </div>
                         {tab === "Feed" ? <MyFeed/> : null}
-                        {tab === "Challenge" ? <MyChallenge/> : null}
+                        {tab === "Challenge" ? <MyChallenge userNo={userNo}/> : null}
                         {tab === "Template" ? <MyTemplates/> : null}
                     </div>
                 {/* <div className="outer_menu">
