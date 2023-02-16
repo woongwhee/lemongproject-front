@@ -3,6 +3,7 @@ import Login from './Member/Login';
 import MainPage from "./ToDoListPage/MainPage";
 import {useLoginState} from "./Member/LoginContext";
 import FeedLoading from "./feedPage/FeedLoading";
+import TitleInfo from "./Member/TitleInfo";
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
             {/*{isLogin ? setLoading(false) : <Login isLogin={isLogin}/>}*/}
             {/*{loading ? setLoading(false) : isLogin ? <MainPage/> : <Login isLogin={isLogin}/>}*/}
             {/*{loading ? <FeedLoading/>*/}
+            <TitleInfo />
+            {/*  메인페이지 화면 테스팅용임!  */}
         </>
         // <MainPage/>
     )
