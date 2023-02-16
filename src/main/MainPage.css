@@ -1,3 +1,4 @@
+
 .outer{
     border: 1px solid black;
     width: 100%;
@@ -149,4 +150,10 @@
     margin-top: -160px;
     box-sizing: border-box;
     background-color: cornsilk;
+}
+.header{
+    height: 5vh;
+}
+.header img{
+    height:100%;
 }

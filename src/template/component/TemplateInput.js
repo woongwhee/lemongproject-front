@@ -1,5 +1,4 @@
 import React from 'react';
-import CategoryOptions from "./CategoryOptions";
 import {useAsync} from "react-async-hook";
 import {templateCategory} from "../templateApi";
 import {useTemplateState} from "../TemplateContext";

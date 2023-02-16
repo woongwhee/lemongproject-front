@@ -8,8 +8,6 @@ import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
 
 import axios from "axios";
-import { async } from 'q';
-import TodoItem from './TodoItem';
 import { codeHandler } from '../../util/apiUtil';
 import { useLoginState } from '../../member/LoginContext';
 
