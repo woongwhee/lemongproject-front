@@ -12,7 +12,7 @@ import {Component} from "react";
 import TemplateCard from "../../template/component/TemplateCard";
 import TemplateList from "../../template/component/TemplateList";
 import TemplateListView from "../../template/page/TemplateListView";
-import Test1 from "../../feedPage/Test1";
+import Test1 from "../../feedPage/test4";
 import Test from "../../feedPage/test"
 import Test2 from "../../feedPage/test2";
 
