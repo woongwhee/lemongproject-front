@@ -7,6 +7,8 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import ProFileData from "./MyPageProfileInsert";
 
+import './MyPageUpdate.css';
+
 import { useLoginState } from "../Member/LoginContext"; 
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -105,7 +107,7 @@ function MyPageProfile(props){
             <div className="outer_proUpdate">
                 <div className="outer_myProUpdate" style={{marginTop:'280px'}}>
                     {/* <p>마이페이지 프로필 업데이트</p> */}
-                    <img src={myprofile?.photo?.filePath+myprofile?.photo?.changeName} style={{marginLeft:'100px'}} className="profileImg"></img>
+                    <img id="pro_Img" src={myprofile?.photo?.filePath+myprofile?.photo?.changeName} style={{marginLeft:'100px'}} className="profileImg"></img>
                     
                 </div>
                     <ProFileData userNo={userNo}/>

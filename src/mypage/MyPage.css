@@ -270,6 +270,19 @@
     background-color:transparent;
     outline: none;
 }
+#delete_outer{
+    /* background-color:transparent; */
+    height: 280px;
+    border: 1px solid rgba(144, 142, 144, 0.279);
+    background-color: #ffffff;
+    background-color: rgba(232, 85, 215, 0.048); 
+}
+#delete_outer1{
+    height: 180px;
+    border: 1px solid rgba(144, 142, 144, 0.279);
+    background-color: #ffffff;
+    background-color: rgba(81, 78, 81, 0.095); 
+}
 .nickFont{
     font-size: 30px;
     font-family: 'SourceSansPro-Light';
@@ -300,5 +313,18 @@
     height: 30%; /* 스크롤바의 길이 */
     background: white; /* 스크롤바의 색상 */
     
+    border-radius: 10px;
+}
+.outer_myChallList{
+    border: 1px solid blue;
+    height: 200px;
+}
+.talk::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+.talk::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: white; /* 스크롤바의 색상 */
     border-radius: 10px;
 }

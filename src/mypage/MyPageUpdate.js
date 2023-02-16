@@ -277,7 +277,7 @@ function MyPageUpdate(){
                 <div className="outer_myContent">
                     <h1 style={{marginTop: "130px" , marginLeft: "70px" , fontSize: "50px"}}><b>My ProFile</b></h1>
 
-                    <MyDelete/>
+                    <MyDelete myprofile={myprofile}/>
 
                     <hr style={{marginTop: "0px" , inlineSize: "85%" , marginLeft: "70px"}}></hr>
 

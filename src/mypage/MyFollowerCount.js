@@ -79,6 +79,11 @@ function MyFollowCount(props){
             console.log("데이터 전송 실패");
         })
     }
+
+    useEffect(() => {;
+        ShowMyFollower();
+        console.log(userNo + "===여기도 통과됨")
+      },[userNos == null ? userNo : userNos])
    
     let i = 0;
 
@@ -97,7 +102,7 @@ function MyFollowCount(props){
                    </div>
                    <div className="scrollBar" style={{overflow:'scroll' , height:'733px'}}>
                         {myfollowerList?.map(e => <div style={{marginTop:'10px'}}>
-                            <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
+                            <img key={i++} {...e} src={e?.profile?.photo?.filePath+e?.profile?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
                             <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
                                 <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
                                 onClick={() => {selectUserNo(e?.profile?.userNo);}}>방문하기</button>
