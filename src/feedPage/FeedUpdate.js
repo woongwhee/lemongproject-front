@@ -4,13 +4,22 @@ import Modal from 'react-bootstrap/Modal';
 import {ModalBody, ModalFooter} from "react-bootstrap";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import Buttonr from "react-bootstrap/Button";
-import {Button, IconButton} from "@mui/material";
+
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import CloseButton from "react-bootstrap/CloseButton";
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import TreeItem from "@mui/lab/TreeItem";
 
+import AspectRatio from '@mui/joy/AspectRatio';
+import Box from '@mui/joy/Box';
+import Card from '@mui/joy/Card';
+import CardCover from '@mui/joy/CardCover';
+import IconButton from '@mui/joy/IconButton';
+import Typography from '@mui/joy/Typography';
+import Favorite from '@mui/icons-material/Favorite';
+import CloseButton from "react-bootstrap/CloseButton";
 
+import ButtonR from "react-bootstrap/Button";
+import Button from "@mui/material/Button";
 
 
 function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
@@ -103,13 +112,13 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
             for (let i = 0; i < getFilePathList.length; i++) {
                 result.push(
                     <div key={i}
-                         style={{border:"3px solid black", width:"310px", height:"380px", marginLeft:"10px",textAlign:"center",float:"left"}}
+                         style={{border:"1px solid black", width:"310px", height:"380px", marginLeft:"10px",textAlign:"center",float:"left"}}
                          onDragStart={(e)=>{
                              startClickPhoto(getPhotoNoList[i]);
                              startIndex(getPhotoNoList[i]);
                              startPath(getFilePathList[i]);
                          }}
-                         
+
                          onDragLeave={(event) => dragFunction(event)}
                          // * onDragLeave : 드래그한 대상이 드랍하지 않고 떠나는 경우 이벤트가 발생 합니다.
 
@@ -134,16 +143,20 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                         //  onDragEnd={(event)=>{onDragEnd(event,getPhotoNoList[i],'끝')}}
                         //  onDragOver={(e)=>{onDragOver(e)}}
                     >
+
+
                         <div style={{float:"right"}}>
-                            <CloseButton
+                            <IconButton aria-label="delete">
+                            <DeleteOutlineOutlinedIcon
                                 onClick={()=>{
                                     deletePhotoNoList(getPhotoNoList[i]); // 숫자 숨겨
                                     deletePhotoPathList(getFilePathList[i]); // 위치 숨겨
                                     deleteClick(getPhotoNoList[i]); // 숫자 지운
                                 }}
                             />
+                            </IconButton>
                         </div>
-                        {/*<DragPreviewImage src={getFilePathList[i]}  connect={}/>*/}
+
                         <img
                             src={getFilePathList[i]}
                             alt='사진이없습니다'
@@ -152,6 +165,68 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                         />
                         <span>{getPhotoNoList[i]}  :::  {[i]}</span>
                     </div>
+                        // <Card
+                        //     sx={{
+                        //         width: 300,
+                        //         bgcolor: 'initial',
+                        //         boxShadow: 'none',
+                        //         '--Card-padding': '0px',
+                        //     }}
+                        // >
+                        //     <Box sx={{ position: 'relative' }}>
+                        //         <AspectRatio ratio="4/5">
+                        //             <figure>
+                        //                 <img
+                        //                     src={getFilePathList[i]}
+                        //                     loading="lazy"
+                        //                     alt="Yosemite by Casey Horner"
+                        //                 />
+                        //             </figure>
+                        //         </AspectRatio>
+                        //         <CardCover
+                        //             className="gradient-cover"
+                        //             sx={{
+                        //                 '&:hover, &:focus-within': {
+                        //                     opacity: 1,
+                        //                 },
+                        //                 opacity: 0,
+                        //                 transition: '0.1s ease-in',
+                        //                 background:
+                        //                     'linear-gradient(180deg, transparent 62%, rgba(0,0,0,0.00345888) 63.94%, rgba(0,0,0,0.014204) 65.89%, rgba(0,0,0,0.0326639) 67.83%, rgba(0,0,0,0.0589645) 69.78%, rgba(0,0,0,0.0927099) 71.72%, rgba(0,0,0,0.132754) 73.67%, rgba(0,0,0,0.177076) 75.61%, rgba(0,0,0,0.222924) 77.56%, rgba(0,0,0,0.267246) 79.5%, rgba(0,0,0,0.30729) 81.44%, rgba(0,0,0,0.341035) 83.39%, rgba(0,0,0,0.367336) 85.33%, rgba(0,0,0,0.385796) 87.28%, rgba(0,0,0,0.396541) 89.22%, rgba(0,0,0,0.4) 91.17%)',
+                        //             }}
+                        //         >
+                        //             <Box>
+                        //                 <Box
+                        //                     sx={{
+                        //                         p: 2,
+                        //                         display: 'flex',
+                        //                         alignItems: 'center',
+                        //                         gap: 1.5,
+                        //                         flexGrow: 1,
+                        //                         alignSelf: 'flex-end',
+                        //                     }}
+                        //                 >
+                        //                     <Typography level="h2" noWrap sx={{ fontSize: 'lg' , color:"white"}}>
+                        //                         {i+1} 번째 사진
+                        //                     </Typography>
+                        //                     <div style={{color:"white", float:"right"}}>
+                        //                         <IconButton aria-label="delete">
+                        //                     <DeleteOutlineOutlinedIcon
+                        //                         onClick={()=>{
+                        //                             deletePhotoNoList(getPhotoNoList[i]); // 숫자 숨겨
+                        //                             deletePhotoPathList(getFilePathList[i]); // 위치 숨겨
+                        //                             deleteClick(getPhotoNoList[i]); // 숫자 지운
+                        //                         }}
+                        //                     />
+                        //                         </IconButton>
+                        //                     </div>
+                        //                 </Box>
+                        //             </Box>
+                        //         </CardCover>
+                        //     </Box>
+                        // </Card>
+
+
                 );
             }
         return result;
@@ -251,16 +326,15 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
     }
     return (
         <>
-        {/*<Buttonr*/}
+        {/*<Button*/}
         {/*    variant="outline-dark"*/}
         {/*    size="sm"*/}
-        {/*    onClick={handleShow}>업데이트</Buttonr>*/}
+        {/*    onClick={handleShow}>업데이트</Button>*/}
         <TreeItem nodeId="3" label="업데이트" onClick={handleShow} />
         <Modal
             show={show}
             onHide={handleClose}
-            fullscreen={fullscreen}
-        >
+            dialogClassName="modal-90w">>
             <Modal.Header closeButton>
                 <Modal.Title>
                     피드 업데이트
@@ -280,13 +354,11 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                 </div>
                 <div>
                     {Rendering()}
-
                     <div style={{clear:"both"}}></div>
                 </div>
 
                 <div style={{clear:"both"}}></div>
 
-                {/*<div style={{marginTop:"50px"}}>원래 피드 내용 : {feedContent}</div>*/}
                 <FloatingLabel controlId="floatingTextarea2" label="내용수정">
                     <Form.Control
                         as="textarea"
@@ -301,7 +373,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                 </FloatingLabel>
             </ModalBody>
             <ModalFooter>
-            <Button variant="contained"
+            <ButtonR variant="outline-primary"
                     onClick={ () => {
                     axios.post(
                         'api/feed/updateFeed',
@@ -318,7 +390,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                             window.location.reload("/main");
                         })}}
                     disabled={disable}
-            >수정하기</Button>
+            >수정하기</ButtonR>
             </ModalFooter>
         </Modal>
         </>

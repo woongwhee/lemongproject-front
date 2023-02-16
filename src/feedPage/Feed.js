@@ -4,14 +4,8 @@ import FeedReply from './FeedReply';
 import FeedUpdate from "./FeedUpdate";
 import FeedDelete from "./FeedDelete";
 import FeedPhoto from "./FeedPhoto";
-import FeedLoading from "./FeedLoading";
 import Avatar from "@mui/material/Avatar";
 import {red} from "@mui/material/colors";
-// import {DndProvider} from "react-dnd";
-// import {HTML5Backend} from "react-dnd-html5-backend";
-
-
-
 
 function Feed(props) {
 
@@ -30,7 +24,7 @@ function Feed(props) {
 
     return (
         <div className="feed-container">
-            <div className="feed">
+
                 <div className="feed-header">
                     <div className="feed-header-left">
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -66,7 +60,7 @@ function Feed(props) {
                 <div className="feed-content">
                     <span>{Feed.userNo}(닉네임) : {Feed.feedContent}</span>
                 </div>
-            </div>
+
         </div>
 
     );
