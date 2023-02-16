@@ -7,6 +7,7 @@ import TemplateTodoInput from "./TemplateTodoInput";
 import TemplateInput from "./TemplateInput";
 import "../style/TemplateWrite.css"
 import {useTemplateDispatch} from "../TemplateContext";
+import GoBackButton from "./GoBackButton";
 
 const TemplateWrite = ({result}) => {
     let {title, categoryNo, content, range, todoList} = result;
@@ -81,6 +82,7 @@ const TemplateWrite = ({result}) => {
             setDays(newDays);
         }
     }
+
     const reset = async (e) => {
         const result = await resetUnSave();
         let {title, categoryNo, content, range} = result;
@@ -92,10 +94,13 @@ const TemplateWrite = ({result}) => {
     return (
         <div className={"template-write"}>
             <div className="btnBox">
+                <GoBackButton/>
+                <div>
                 <Button onClick={reset}>
                     리셋
                 </Button>
                 <Button onClick={upload}>저장</Button>
+                </div>
             </div>
             <TemplateInput inputValue={inputValue} updateInputValue={updateInputValue}/>
             <TemplateTodoInput range={inputValue.range} insertTodo={insertTodo} deleteTodo={deleteTodo}

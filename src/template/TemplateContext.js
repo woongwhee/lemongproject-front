@@ -8,9 +8,11 @@ const TemplateNextIdContext = createContext(null);
 function templateReducer(state, action) {
     switch (action.type) {
         case 'DETAIL':
-            return {index:1,templateNo:action.templateNo,list: state.list};
+            return {...state,index:1,templateNo:action.templateNo};
         case 'LIST' :
             return initialParam;
+        case 'BACK_LIST' :
+            return {...state,index: 0};
         case 'CATEGORY' :
             return {...state,categoryNo: action.categoryNo}
         case 'ADD_CATEGORY' :
@@ -32,7 +34,6 @@ const initialParam = {
 export function TemplateProvider({ children }) {
     const [state, dispatch] = useReducer(templateReducer, initialParam);
     const nextId = useRef(6);
-
     return (
         <TemplateStateContext.Provider value={state}>
             <TemplateDispatchContext.Provider value={dispatch}>

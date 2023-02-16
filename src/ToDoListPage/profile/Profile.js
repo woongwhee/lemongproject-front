@@ -3,11 +3,12 @@ import './Profile.css'
 import {useLoginState} from "../../Member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 import MyFollowingCount from '../../mypage/MyFollowingCount';
+import {USER_PROFILE} from "../../ImagePath";
 
 function Profile() {
-    const profile=useLoginState().profile;
-    const photo=profile.photo;
-
+    const {profile}=useLoginState();
+    const {photo}=profile;
+    const filePath=photo!=null?photo.filePath+"/"+photo.changeName:USER_PROFILE;
     const dispatch = useDispatch();
 
     const selectUserNo = () => {

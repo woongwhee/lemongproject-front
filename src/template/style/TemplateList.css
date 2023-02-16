@@ -64,3 +64,10 @@
 .target{
     height: 200px;
 }
+
+ .Category-Button:hover,.Write-Button:hover{
+    -webkit-filter: drop-shadow(2px 1px 0 black)
+    drop-shadow(-1px -1px 0 black);
+    filter: drop-shadow(2px 1px 0 black)
+    drop-shadow(-1px -1px 0 black);
+}

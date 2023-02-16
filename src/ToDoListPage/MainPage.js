@@ -7,7 +7,6 @@ import Profile from "./profile/Profile";
 //캘린더 Api 컴포넌트
 import Calendar from './calendar/Calendar';
 //메뉴바 컴포넌트
-import Menubar2 from "./menubar/Menubar2";
 
 import axios from "axios";
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -22,6 +21,7 @@ import MyMenuBar from "./menubar/MyMenuBar";
 import MainMenuBar from "./menubar/MainMenuBar";
 
 import { useLoginState } from "../Member/LoginContext";
+import Menubar4 from "./menubar/Menubar4";
 
 //캘린더 라이브러리 추가 해주기
 //npm install react-calendar

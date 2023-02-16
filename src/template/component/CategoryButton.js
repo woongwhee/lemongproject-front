@@ -13,9 +13,9 @@ const CategoryButton = (props) => {
 
 
     return (<>
-            <button type="button" className="Category-Button" onClick={toggle} >
+            <div className="Category-Button" onClick={toggle} >
                 <img src="/LemongImg/template/search.png" />
-            </button>
+            </div>
             {
             <CategoryModal state={state} isOpen={modal} toggle={toggle}/>
             }

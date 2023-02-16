@@ -5,6 +5,7 @@ import StartSingleBtn from "./StartSingleBtn";
 import StartMultiBtn from "./StartMultiBtn";
 import {CLEAR_MARK} from "../../ImagePath";
 import ChallengeReadyCard from "../../challenge/component/ChallengeReadyCard";
+import GoBackButton from "./GoBackButton";
 
 const TemplateDetail = (state) => {
     const template=state.result;
@@ -13,6 +14,7 @@ const TemplateDetail = (state) => {
     console.log(template)
     return (
         <>
+            <GoBackButton/>
             <StartSingleBtn templateNo={templateNo}/>
             <StartMultiBtn templateNo={templateNo}/>
             {clear&&<img className={"clear-img"} src={CLEAR_MARK} alt="templateClear"/>}
