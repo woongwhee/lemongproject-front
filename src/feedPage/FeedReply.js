@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FeedReplyInsert from "./FeedReplyInsert";
@@ -6,21 +6,25 @@ import "./FeedReply.css"
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FeedDelete from "./FeedDelete";
-import FeedDetail from "./FeedDetail";
+import FeedDetailView from "./FeedDetailView";
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import axios from "axios";
 
-function FeedReply(props) {
-    let feedNo = props.feedNo;
-
+function FeedReply({Feed}) {
+    // let feedNo = props.feedNo;
     const [show, setShow] = useState(false);
+    const [replyCount, setReplyCount] = useState(false);
+
+
     return (
         <>
             <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
-                <FavoriteIcon />
+                <ChatBubbleOutlineIcon />
             </IconButton>
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
-                dialogClassName="modal-90w"
+                dialogClassName="modal-70w"
                 aria-labelledby="example-custom-modal-styling-title"
             >
                 <Modal.Header closeButton>
@@ -29,8 +33,7 @@ function FeedReply(props) {
                     </Modal.Title>
                 </Modal.Header>
                     <Modal.Body>
-                        {/*<FeedReplyInsert feedNo={feedNo}/>*/}
-                        <FeedDetail feedNo={feedNo}></FeedDetail>
+                        <FeedReplyInsert Feed={Feed} setReplyCount={setReplyCount}/>
                     </Modal.Body>
             </Modal>
         </>

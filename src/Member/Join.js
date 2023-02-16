@@ -11,7 +11,6 @@ function Join() {
     const [reUserPwd, setReUserPwd] = useState();
     const [email, setEmail] = useState();
     const [emailNum, setEmailNum] = useState();
-    const [socialType, setSocialType] = useState("NONE");
 
     // 알림 색깔
     const [errorColor, setErrorColor] = useState();
@@ -42,7 +41,7 @@ function Join() {
     
 
     // 이름 공백 체크
-    const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeName = useCallback((e) => {
         const nameCurrent = e.target.value
         setUserName(nameCurrent)
 
@@ -75,7 +74,7 @@ function Join() {
 
 
     // 비밀번호 체크
-    const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangePassword = useCallback((e) => {
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[@#$%^&*()_])(?=.*[0-9]).{8,15}$/
         const passwordCurrent = e.target.value
         setUserPwd(passwordCurrent)
@@ -94,7 +93,7 @@ function Join() {
 
     
     // 비밀번호 일치 체크
-    const onChangeRePwd = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeRePwd = useCallback((e) => {
         const passwordReCurrent = e.target.value
         setReUserPwd(passwordReCurrent)
 
@@ -112,7 +111,7 @@ function Join() {
 
     
     // 이메일 형식 체크
-    const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeEmail = useCallback((e) => {
         const emailRegex = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
         const emailCurrent = e.target.value
         setEmail(emailCurrent)
@@ -179,13 +178,12 @@ function Join() {
 
 
     // 회원가입 클릭시 데이터 전송
-    const joinClick = async(name, nick, pwd, email, socialType) => {
+    const joinClick = async(name, nick, pwd, email) => {
         let response = await axios.post('api/p/join',
             ({'userName':name,
               'nickName':nick,
               'userPwd':pwd,
               'email':email,
-              'socialType':socialType
             })
         )
         if(response.data.code === '2000') {
@@ -262,7 +260,7 @@ function Join() {
                 </div>
                 <br />
                 <div className="joinBtn">
-                    <button onClick={() => {joinClick(userName, nickName, userPwd, email, socialType);}} disabled={!isJoinBtn}>
+                    <button onClick={() => {joinClick(userName, nickName, userPwd, email);}} disabled={!isJoinBtn}>
                         회 원 가 입
                     </button>
                 </div>

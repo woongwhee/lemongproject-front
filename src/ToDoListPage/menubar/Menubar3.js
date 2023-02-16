@@ -13,6 +13,8 @@ import TemplateCard from "../../template/component/TemplateCard";
 import TemplateList from "../../template/component/TemplateList";
 import TemplateListView from "../../template/page/TemplateListView";
 import Test1 from "../../feedPage/Test1";
+import Test from "../../feedPage/test"
+import Test2 from "../../feedPage/test2";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -68,21 +70,25 @@ export default function BasicTabs() {
                     <Tab label="ChallengeList" {...a11yProps(1)} />
                     <Tab label="Feed" {...a11yProps(2)} />
                     <Tab label="Template" {...a11yProps(3)} />
+                    <Tab label="test" {...a11yProps(4)} />
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
                 <TodoView3 />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                {/*<ChallengeList />*/}
-                <Test1></Test1>
+                <Test></Test>
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <FeedList/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <TemplateView/>
+                <Test2></Test2>
             </TabPanel>
+            <TabPanel value={value} index={4}>
+                <Test1></Test1>
+            </TabPanel>
+
 
             {/*<div className="menubar-box">*/}
             {/*    <div className="menuBar">*/}

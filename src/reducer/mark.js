@@ -22,7 +22,6 @@ function mark(state=initialState, action) {
   }
 };
 
-
 const moveMarkFn = async() => {
   axios.get("/api/todo/calTodo" , {
     params : {userNo : 1},

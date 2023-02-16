@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import FeedLoading from "./FeedLoading";
 
 function FeedPhoto({filePathList}) {
+
+
 
     const rendering = () => {
         let i = 0;
@@ -19,6 +22,7 @@ function FeedPhoto({filePathList}) {
             );})
         return result;
     };
+
     return (
         <Carousel pause='hover'>
             {rendering()}
