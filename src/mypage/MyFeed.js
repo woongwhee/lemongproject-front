@@ -164,9 +164,8 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useLoginState} from "../member/LoginContext";
 import {useSelector} from "react-redux";
-import FeedDetail from "../feedPage/FeedDetail";
 import Modal from "react-bootstrap/Modal";
-import FeedDetailView from "../feedPage/FeedDetailView";
+import FeedDetailView from "../feed/FeedDetailView";
 
 function MyFeed(props) {
 
