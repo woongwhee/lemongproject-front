@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaLemon } from 'react-icons/fa';
 
 const TitleContent = ({chMark, Mark, hdMark, day}) => {
     let isMark= (Mark.lastIndexOf(day) != -1);
@@ -15,8 +16,8 @@ const TitleContent = ({chMark, Mark, hdMark, day}) => {
 
     return (
         <div className="flex justify-center items-center absoluteDiv">
-            {isMark&&<div className="dot"></div>}
-            {isChMark && <div className="dot2"></div>}
+            {isMark && <FaLemon className="dot"/>}
+            {isChMark && <FaLemon className="dot2"></FaLemon>}
             <div className="">{holiday?.holidayName}</div>
         </div>
     );

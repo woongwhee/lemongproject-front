@@ -8,9 +8,8 @@
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
     margin: auto;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    font-family: Arial, Helvetica, sans-serif;
   }
   .react-calendar--doubleView {
     width: 700px;
@@ -22,6 +21,7 @@
   .react-calendar--doubleView .react-calendar__viewContainer > * {
     width: 50%;
     margin: 0.5em;
+    /*border: #9a31d2;*/
   }
   .react-calendar,
   .react-calendar *,
@@ -34,10 +34,11 @@
   /*날짜 버튼*/
   .react-calendar button {
     margin: 0;
-    border: 0;
     height: 65px;
     outline: none;
     font-size: 15.5px;
+    border : 1px solid pink;
+    /*color : pink;*/
   }
   /*날짜 버튼 호버*/
   .react-calendar button:enabled:hover {
@@ -68,10 +69,13 @@
     text-align: center;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 0.9em;
+    font-size: 1em;
+    /*color: #9a31d2;*/
   }
+  /*요일*/
   .react-calendar__month-view__weekdays__weekday {
     padding: 1em;
+    color: #9a31d2;
   }
   .react-calendar__month-view__weekNumbers .react-calendar__tile {
     display: flex;
@@ -80,8 +84,10 @@
     font-size: 0.75em;
     font-weight: bold;
   }
+  /*공휴일 색*/
   .react-calendar__month-view__days__day--weekend {
     color: #d10000;
+    color: #9a31d2;
   }
   .react-calendar__month-view__days__day--neighboringMonth {
     color: #757575;
@@ -119,6 +125,7 @@
     background: #ffffa9;
     background-image: linear-gradient(60deg, #abecd6 0%, #fee74f 100%);
     background : linear-gradient(60deg, #b721ff 0%, #21d4fd 100%);
+    opacity: 0.5;
   }
   .react-calendar__tile--hasActive {
     background: #76baff;
@@ -131,6 +138,7 @@
   .react-calendar__tile--active {
     background: #63097f;
     background : linear-gradient(60deg, #b721ff 0%, #21d4fd 100%);
+
     color: rgb(255, 255, 255);
     font-weight: bold;
     border-radius: 30px;
@@ -147,20 +155,18 @@
     background-color: #e6e6e6;
   }
   .dot {
-    height: 8px;
-    width: 8px;
-    background-color: #f87171;
-    border-radius: 50%;
-    display: flex;
+    height: 10px;
+    width: 10px;
+    color: 	#FFEE4E;
+    /*background-color: #FDFD36;*/
+    /*border-radius: 50%;*/
+    /*display: flex;*/
     margin-left: 1px;
   }
   .dot2 {
-    height: 8px;
-    width: 8px;
-    background-color: #9d0da7;
-    box-shadow: 10px;
-    border-radius: 50%;
-    display: flex;
+    height: 10px;
+    width: 10px;
     margin-left: 1px;
+    color: #9a31d2;
   }
   
