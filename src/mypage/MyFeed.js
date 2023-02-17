@@ -203,11 +203,10 @@ function MyFeed(props) {
         )
     }
 
+    const [Feed, setFeedList] = useState(myFeedList.userNo,myFeedList.feedNo,myFeedList.feedContent,myFeedList.feedAt,filePathList,photoNoList,myFeedList.nickName,userNo)
 
 
-    let newFeedList = [...myFeedList, filePathList, photoNoList]
-
-    console.log(newFeedList)
+    console.log(Feed)
 
 
     Thumbnail = filePathList.map( (item) => item[0])
