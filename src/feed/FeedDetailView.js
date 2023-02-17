@@ -26,8 +26,8 @@ function FeedDetailView(props) {
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
-    const [profilePath, setProfilePath] = useState();
 
+    const [profilePath, setProfilePath] = useState();
     const proFile = (userNo) => {
         axios.post('api/feed/feedProfile',{
             userNo:userNo

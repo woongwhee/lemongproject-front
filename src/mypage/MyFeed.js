@@ -183,21 +183,32 @@ function MyFeed(props) {
                     userNo : userNos != null ? userNos : userNo,
                 }
             }).then(function(res){
-                console.log(res.data.result);
                 setMyFeedList(res.data.result);
             }).catch(function(){
                 console.log("데이터 전송 실패")
             })
         } , [userNos != null ? userNos : userNo]
     )
-    let eett = []
-    let eeff = []
+
+    let Thumbnail = []
+    let filePathList = []
+    let photoNoList = []
     for(let i = 0; i<myFeedList.length; i++){
-        eeff.push(
+        filePathList.push(
             myFeedList[i].filePath.split(",")
         )
+        photoNoList.push(
+            myFeedList[i].photoNo.split(",")
+        )
     }
-    eett = eeff.map( (item) => item[0])
+
+    const [Feed, setFeedList] = useState(myFeedList.userNo,myFeedList.feedNo,myFeedList.feedContent,myFeedList.feedAt,filePathList,photoNoList,myFeedList.nickName,userNo)
+
+
+    console.log(Feed)
+
+
+    Thumbnail = filePathList.map( (item) => item[0])
 
     const ofof = () =>{
         const result = []
@@ -205,7 +216,7 @@ function MyFeed(props) {
             result.push(
                 <>
                     <div style={{border:"3px solid black", float:"left"}}>
-                        <img src={eett[i]} style={{width:"240px", height:"240px"}} onClick={() => {setShow(true)}}/>
+                        <img src={Thumbnail[i]} style={{width:"240px", height:"240px"}} onClick={() => {setShow(true)}}/>
                     </div>
                 </>
             )
@@ -215,9 +226,9 @@ function MyFeed(props) {
 
     return (
         <>
-        <div style={{marginLeft:"0px", border:"1px solid blue"}}>
+        {/*<div style={{marginLeft:"0px", border:"1px solid blue"}}>*/}
             {ofof()}
-        </div>
+        {/*</div>*/}
         <Modal
             show={show}
             onHide={() => setShow(false)}
@@ -231,7 +242,7 @@ function MyFeed(props) {
             </Modal.Header>
             <Modal.Body>
                 {/*<FeedReplyInsert feedNo={feedNo}/>*/}
-                <FeedDetailView Feed={myFeedList}></FeedDetailView>
+                {/*<FeedDetailView Feed={myFeedList}></FeedDetailView>*/}
             </Modal.Body>
         </Modal>
     </>

@@ -12,6 +12,7 @@ function FeedDetail(props) {
 
     const [show, setShow] = useState(false);
 
+
     return (
         <>
             <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
