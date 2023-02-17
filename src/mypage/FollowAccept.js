@@ -3,7 +3,7 @@ import { Component } from "react";
 import axios from "axios";
 
 import { CiCircleCheck } from "react-icons/ci";
-import { useLoginState } from "../Member/LoginContext"
+import { useLoginState } from "../member/LoginContext"
 import './MyPage.css';
 import moment from 'moment';
 import 'moment/locale/ko';

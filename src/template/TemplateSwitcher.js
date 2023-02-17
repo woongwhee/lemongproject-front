@@ -7,11 +7,6 @@ import TemplateWriteView from "./page/TemplateWriteView";
 const TemplateSwitcher = () => {
 
     const state = useTemplateState();
-
-
-    // useEffect(()=>{
-    //     return <>{viewList[index]}</>
-    // },[index]);
     const switching = (state) => {
         switch (state.index) {
             case 0:

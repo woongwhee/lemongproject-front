@@ -1,0 +1,9 @@
+.profile-icon{
+    width: 400px;
+    hight: 30px;
+    box-sizing: border-box;
+}
+.profile-icon img{
+    width: 30px;
+    hight: 30px;
+}

@@ -9,7 +9,7 @@ import ProFileData from "./MyPageProfileInsert";
 
 import './MyPageUpdate.css';
 
-import { useLoginState } from "../Member/LoginContext"; 
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
 import { BsFillPersonFill , BsFillWalletFill , BsFillTelephoneFill} from "react-icons/bs";
@@ -47,12 +47,12 @@ function MyPageProfile(props){
                 userNo : userNo ,
             }
         }).then(function(res){
-            console.log("데이터 전송 성공");
+            // console.log("데이터 전송 성공");
             const data = res.data.result;
             callback(data);
 
         }).catch(function(){
-            console.log("데이터 전송 실패"); 
+            // console.log("데이터 전송 실패");
         });
         } , []
     )

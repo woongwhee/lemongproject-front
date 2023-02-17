@@ -1,8 +1,10 @@
-.template-list{
+#template-list{
     display: inline-block;
-    width: 50%;
+    width: 100%;
     /*margin: auto;*/
-    margin-left: 200px;
+    margin-left: 10px;
+    height: 100%;
+    overflow: scroll;
     /*border: 1px solid red;*/
     /*overflow: scroll;*/
     /*grid-template-columns: repeat(2, 1fr);*/
@@ -35,7 +37,7 @@
 
 .Template-Card{
     width: 45%;
-    height: 130px;
+    height: 200px;
     border:1px solid black;
     display: inline-block;
     margin-left:10px ;
@@ -58,4 +60,14 @@
 }
 .category-select{
     all:unset;
+}
+.target{
+    height: 200px;
+}
+
+ .Category-Button:hover,.Write-Button:hover{
+    -webkit-filter: drop-shadow(2px 1px 0 black)
+    drop-shadow(-1px -1px 0 black);
+    filter: drop-shadow(2px 1px 0 black)
+    drop-shadow(-1px -1px 0 black);
 }
