@@ -30,7 +30,6 @@ const TemplateDetail = (state) => {
             </div>
             <ReviewArea reviewlist={reviewList} templateNo={templateNo}/>
 
-
         </div>
     );
 };
