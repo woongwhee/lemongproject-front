@@ -1,20 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Montserrat&display=swap');
+abbr[title] {
+  text-decoration: none;
+}
 .react-calendar {
     width: 450px;
     max-width: 100%;
-    height: 510px;
+    height: 570px;
     max-height: 100%;
+    height: 100%;
     background: white;
     border: 1px solid #ffffff;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
     margin: auto;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
   }
-  .react-calendar--doubleView {
+  /* .react-calendar--doubleView {
     width: 700px;
-  }
+  } */
   .react-calendar--doubleView .react-calendar__viewContainer {
     display: flex;
     margin: -0.5em;
@@ -22,6 +28,7 @@
   .react-calendar--doubleView .react-calendar__viewContainer > * {
     width: 50%;
     margin: 0.5em;
+    /*border: #9a31d2;*/
   }
   .react-calendar,
   .react-calendar *,
@@ -33,56 +40,76 @@
   }
   /*날짜 버튼*/
   .react-calendar button {
-    margin: 0;
     border: 0;
-    height: 65px;
+    height: 80px;
     outline: none;
-    font-size: 15.5px;
+    font-size: 15.2px;
+    /* border : 1px solid pink; */
+    /*color : pink;*/
   }
   /*날짜 버튼 호버*/
   .react-calendar button:enabled:hover {
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 20px;
   }
+  /* 상단바 */
   .react-calendar__navigation {
     display: flex;
-    height: 44px;
+    height: 54px;
     margin-bottom: 1em;
+    font-family: 'Amatic SC', cursive;
+    /* background-color: #21d4fd; */
   }
   /*달력 년월 버튼*/
   .react-calendar__navigation button {
     min-width: 44px;
     background: none;
     font-weight: 600;
-    font-size: 22px;
+    font-size: 28px;
+    text-align: center;
+    margin-top: 2px;
   }
-  .react-calendar__navigation button:disabled {
+  /* .react-calendar__navigation button:disabled {
     background-color: #f0f0f0;
-  }
+  } */
   /* .react-calendar__navigation button:enabled:hover,
   .react-calendar__navigation button:enabled:focus {
      background-color: #e6e6e6; 
   } */
-  /* 요일 버튼*/
+  /* 요일 text*/
   .react-calendar__month-view__weekdays {
     text-align: center;
     text-transform: uppercase;
-    font-weight: 600;
-    font-size: 0.9em;
+    font-weight: bolder;
+    font-size: 23px;
+    /*color: #9a31d2;*/
+    text-decoration: none;
+    border: none;
+    font-family: 'Amatic SC', cursive;
   }
+  /*요일 div*/
   .react-calendar__month-view__weekdays__weekday {
-    padding: 1em;
+    text-decoration: none;
+    padding: 18px;
+    color: #9a31d2;
+    color: 	#ffe609;
+    background-color: #16048b;
   }
   .react-calendar__month-view__weekNumbers .react-calendar__tile {
-    display: flex;
-    align-items: center;
+    /* display: flex; */
+    align-items: center; 
     justify-content: center;
     font-size: 0.75em;
     font-weight: bold;
   }
+  /*주말 색*/
   .react-calendar__month-view__days__day--weekend {
     color: #d10000;
+    /* color: #9a31d2; */
   }
+  /* .react-calendar__tile react-calendar__month-view__days__day{
+    margin: auto;
+  } */
   .react-calendar__month-view__days__day--neighboringMonth {
     color: #757575;
   }
@@ -91,12 +118,15 @@
   .react-calendar__century-view .react-calendar__tile {
     padding: 2em 0.5em;
   }
+  /* 캘린더 날짜칸 */
   .react-calendar__tile {
     max-width: 100%;
-    padding: 10px 6.6667px;
+    padding: 10px 6.6667px 40px;
     background: none;
-    text-align: center;
-    line-height: 16px;
+    /* line-height: 16px; */
+    /* color: #21d4fd; */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
   }
   .react-calendar__tile:disabled {
     background-color: #f0f0f0;
@@ -104,14 +134,16 @@
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
     background-color: #e6e6e6;
+    background-image: linear-gradient(60deg, #abecd6 0%, #fee74f 100%);
   }
   /*오늘 날짜*/
   .react-calendar__tile--now {
     color: #ffffff;
     font-weight: bolder;
-    border-radius: 30px;
-    background-image: linear-gradient(60deg, #abecd6 0%, #fee74f 100%);
-    background : linear-gradient(60deg, #b721ff 0%, #21d4fd 100%);
+    border-radius: 20px;
+    border: 3px solid transparent;
+    /* background-image: linear-gradient(60deg, #abecd6 0%, #fee74f 100%);*/
+    background : linear-gradient(60deg, #b721ff 0%, #21d4fd 100%); 
   }
   /*오늘 날짜 hover*/
   .react-calendar__tile--now:enabled:hover,
@@ -119,6 +151,7 @@
     background: #ffffa9;
     background-image: linear-gradient(60deg, #abecd6 0%, #fee74f 100%);
     background : linear-gradient(60deg, #b721ff 0%, #21d4fd 100%);
+    opacity: 1;
   }
   .react-calendar__tile--hasActive {
     background: #76baff;
@@ -131,9 +164,10 @@
   .react-calendar__tile--active {
     background: #63097f;
     background : linear-gradient(60deg, #b721ff 0%, #21d4fd 100%);
+
     color: rgb(255, 255, 255);
     font-weight: bold;
-    border-radius: 30px;
+    border-radius: 20px;
     background-image: linear-gradient(60deg, #abecd6 0%, #fee74f 100%);
   }
   /*선택된 날짜 */
@@ -146,21 +180,36 @@
   .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;
   }
-  .dot {
-    height: 8px;
-    width: 8px;
-    background-color: #f87171;
-    border-radius: 50%;
+  .dots{
+    /* border: 1px solid #21d4fd; */
     display: flex;
-    margin-left: 1px;
+  }
+  .dot {
+    height: 12px;
+    width: 12px;
+    color: 	#FFEE4E;
+    margin-left: 13px;
+    margin-top: 8px;
+    position: absolute;
+    /* flex: 1; */
   }
   .dot2 {
-    height: 8px;
-    width: 8px;
-    background-color: #9d0da7;
-    box-shadow: 10px;
-    border-radius: 50%;
-    display: flex;
-    margin-left: 1px;
+    height: 12px;
+    width: 12px;
+    color: #0707beb8;
+    position: absolute;
+    margin-left: 3px;
+    margin-top: 8px;
+    /* flex: 1; */
   }
-  
+  .holy{
+    /* position: absolute; */
+    font-size: 10px;
+    /* border: 1px solid #21fd75; */
+    /* flex: 1; */
+    color: #d10000;
+    margin-top: 20px;
+  }
+  abbr[title] {
+    text-decoration: none;
+  }

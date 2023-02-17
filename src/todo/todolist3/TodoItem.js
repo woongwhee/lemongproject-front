@@ -99,8 +99,8 @@ const CheckCircle = styledr.div`
   //background-image: linear-gradient(#fff, #fff), linear-gradient(0deg, rgba(195, 255, 0, 0.45), rgba(0, 64, 255, 0.98));
   //background-image: linear-gradient(#fff, #fff), linear-gradient(45deg, rgb(255, 247, 0), rgba(47, 0, 255, 0.89));    
   background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, rgba(230, 255, 0, 0.85), rgba(0, 149, 255, 0.46));
-  background-origin: border-box; //배경위치 시작지점 : 
-  background-clip: content-box, border-box; //배경이미지를 잘라낼 위치
+  background-origin: border-box; 
+  background-clip: content-box, border-box; 
 
   font-size: 18px;
   display: flex;

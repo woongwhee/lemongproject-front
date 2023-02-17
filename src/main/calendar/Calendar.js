@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import Calendar from 'react-calendar';
-//import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import moment from 'moment/moment';
 import {useDispatch, useSelector} from 'react-redux';
@@ -88,7 +87,6 @@ function Calendar2() {
 
     const onViewChange = async ({activeStartDate}) => {
         let month = new moment(activeStartDate).format("YYMMDD");
-        console.log("먼쓰",activeStartDate.getMonth())
         setMonth(activeStartDate.getMonth()+1);
         const res = await axios.get(`/api/todo/getMonth/${month}`);
         let {challengeDayList, holidayList, todoDayList} = codeHandler(res);
@@ -98,22 +96,25 @@ function Calendar2() {
     }
     return (
         <div>
-            {/* onChange: 값이 변경 될 때마다 호출되는 함수로
-      날짜가 클릭될 때 onSelectDay 함수를 호출해주었다. 
-      선택한 값은 event 값에 배열로 들어가게 된다. */}
-            <Calendar
-                onChange={selectDay} //선택한 날짜 todolist에 보내기
-                formatDay={(locale, date) => moment(date).format("DD")} //달력날짜에 '일' 삭제
-                tileContent={(e) => {
-                    let date=e.date;
-                    if(date.getMonth()+1 != month || isEmpty(mark) && isEmpty(chMark) && isEmpty(holidayMark)){
-                        return (<></>)
-                    }
-                    return(<TitleContent chMark={chMark} Mark={mark} hdMark={holidayMark} day={date.getDate()}/>)
-                }}
-                onActiveStartDateChange={onViewChange}
-                onClickDay={selectDay}
-            />
+        {/* onChange: 값이 변경 될 때마다 호출되는 함수로
+        날짜가 클릭될 때 onSelectDay 함수를 호출해주었다.
+        선택한 값은 event 값에 배열로 들어가게 된다. */}
+        <Calendar
+            onChange={selectDay} //선택한 날짜 todolist에 보내기
+            locale={"en"}
+            calendarType={'US'}
+            formatMonthYear={(local, date) => moment(date).format("YYYY MM")}
+            formatDay={(local, date) => moment(date).format("DD")} //달력날짜에 '일' 삭제
+            tileContent={(e) => {
+                let date=e.date;
+                if(date.getMonth()+1 != month || isEmpty(mark) && isEmpty(chMark) && isEmpty(holidayMark)){
+                    return (<></>)
+                }
+                return(<TitleContent chMark={chMark} Mark={mark} hdMark={holidayMark} day={date.getDate()}/>)
+            }}
+            onActiveStartDateChange={onViewChange}
+            onClickDay={selectDay)}
+        />
         </div>
     );
 

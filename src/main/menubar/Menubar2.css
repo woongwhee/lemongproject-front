@@ -1,6 +1,7 @@
 .menubar-box{
     box-sizing: border-box;
     display: inline-block;
+    /*border: 1px solid pink;*/
     /*border: 10px solid pink;*/
     width: 63%;
     height: 100%;
@@ -32,3 +33,4 @@
     color: black;
     height: 100%;
 }
+
