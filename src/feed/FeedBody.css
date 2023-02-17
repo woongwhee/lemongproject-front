@@ -1,0 +1,8 @@
+.FeedBody{
+    /*display: none; !* Chrome, Safari, Opera*!*/
+    overflow: scroll;
+    height: 800px;
+}
+.FeedBody::-webkit-scrollbar{
+    display: none;
+}

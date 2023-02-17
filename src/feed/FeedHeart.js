@@ -7,6 +7,9 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { pink } from '@mui/material/colors';
 import axios from "axios";
 import {useEffect, useState} from "react";
+import {useLoginState} from "../member/LoginContext";
+import Badge, { BadgeProps } from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
 
 function FeedHeart(props) {
 
@@ -18,14 +21,18 @@ function FeedHeart(props) {
     const [checked, setChecked] = useState(false); // 좋아요 누르기
     const [heartCount, setHeartCount] = useState(0); // 좋아요 수
 
+    let {profile}=useLoginState();
+    // console.log(profile);
+    let loginUserNo = profile.userNo;
+
     const handleChange = (event) => {
         setChecked(event.target.checked);
         if(checked === false){
             axios.post('api/feed/heartClick',{
-                userNo:Feed.loginUserNo,
+                userNo:loginUserNo,
                 refNo:Feed.feedNo
             }).then(function (res) {
-                console.log("좋아요 추가" +res.data)
+                // console.log("좋아요 추가" +res.data)
                 setChecked(true);
                 // reHeart();
                 reCountHeart();
@@ -33,10 +40,10 @@ function FeedHeart(props) {
         }
         else{
             axios.post('api/feed/heartCancel',{
-                userNo:Feed.loginUserNo,
+                userNo:loginUserNo,
                 refNo:Feed.feedNo
             }).then(function (res){
-                console.log("좋아요 취소" +  res.data)
+                // console.log("좋아요 취소" +  res.data)
                 setChecked(false);
                 // reHeart();
                 reCountHeart();
@@ -47,10 +54,10 @@ function FeedHeart(props) {
 
     useEffect(()=>{
         axios.post("api/feed/heartState",{
-            userNo:Feed.loginUserNo,
+            userNo:loginUserNo,
             refNo:Feed.feedNo
         }).then(function (res){
-            // console.log(res.data);
+            console.log(res.data);
             setHeartState(res.data);
             if(heartState === 1){
                 setChecked(true);
@@ -89,18 +96,27 @@ function FeedHeart(props) {
             setHeartCount(res.data)
         }).catch(function (res){console.log("실패")})
     }
+    const StyledBadge = styled(Badge)(({ theme }) => ({
+        '& .MuiBadge-badge': {
+            right: -1,
+            top: 13,
+            border: `2px solid ${theme.palette.background.paper}`,
+            padding: '0 4px',
+        },
+    }));
 
     return (
         <div>
+            <StyledBadge badgeContent={heartCount} color="secondary">
             <Checkbox
                 {...label}
                 checked={checked}
                 onChange={handleChange}
                 icon={<FavoriteBorder />}
-                checkedIcon={<Favorite  sx={{ color: pink[500] }}/>} />
-            {heartCount}
-
-
+                checkedIcon={<Favorite  sx={{ color: pink[500] }}/>}
+            />
+            </StyledBadge>
+            
             {/*<Checkbox*/}
             {/*    {...label}*/}
             {/*    icon={<BookmarkBorderIcon />}*/}

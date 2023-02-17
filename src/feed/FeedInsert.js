@@ -2,18 +2,20 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import './FeedInsert.css'
 import FeedPictureInsert from "./FeedPictureInsert";
-
+import Alert from '@mui/material/Alert';
+import ButtonM from '@mui/material/Button';
 import '../mypage/font/font.css';
-
 import {Paper, Stack, TextField} from "@mui/material";
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import ButtonR from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import swal from 'sweetalert';
 
 import { useLoginState } from "../member/LoginContext";
 
 import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiSquarePlus} from "react-icons/ci";
+import {returnFocus} from "react-modal/lib/helpers/focusManager";
 
 function FeedInsert() {
 
@@ -39,14 +41,21 @@ function FeedInsert() {
     }
     // const [fullscreen, setFullscreen] = useState(true);
     const [show, setShow] = useState(false);
-    // function handleShow(breakpoint) {
-    //     setFullscreen(breakpoint);
-    //     setShow(true);
-    // }
 
     let {profile}=useLoginState();
     console.log(profile);
     const userNos = profile?.userNo; // 로그인한 사용자 userNo
+
+    const successAlert = () =>{
+        return(
+                swal({
+                    title: "Feed Insert",
+                    text: "피드가 올라갔습니다!",
+                    icon: "success",
+                    button: "확인",
+                }).then(()=>{window.location.replace("/");})
+        )
+    }
 
     return (
         <div className="feed-insert-body">
@@ -100,8 +109,9 @@ function FeedInsert() {
                                         feedContent: content,
                                         photoNo: insertPhotoNo
                                     }).then(function (res) {
-                                        console.log(res.data);
-                                        window.location.reload();
+                                        // console.log(res.data);
+                                        {successAlert()}
+
                                     }).catch(function (res) {
                                         checkContent(res.data.Java);
                                         console.log('실패함' + userNos, content, res.data.Java);

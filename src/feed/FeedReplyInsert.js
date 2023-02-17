@@ -12,6 +12,7 @@ import CloseButton from "react-bootstrap/CloseButton";
 import {TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import {useLoginState} from "../member/LoginContext";
+import "./FeedReply.css"
 function FeedReplyInsert(props) {
 
     const Feed = props.Feed;
@@ -166,7 +167,7 @@ function FeedReplyInsert(props) {
     return (
         <>
     <div>
-        <div style={{overflow:"scroll", height:"700px"}}>
+        <div className="FeedReplyInsert-body">
             <ListGroup variant="flush">
                 {replyList2()}
             </ListGroup>

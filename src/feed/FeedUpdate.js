@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import TreeItem from "@mui/lab/TreeItem";
+import TreeItem, {treeItemClasses} from "@mui/lab/TreeItem";
 
 import AspectRatio from '@mui/joy/AspectRatio';
 import Box from '@mui/joy/Box';
@@ -20,6 +20,11 @@ import CloseButton from "react-bootstrap/CloseButton";
 
 import ButtonR from "react-bootstrap/Button";
 import Button from "@mui/material/Button";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+import CreateIcon from '@mui/icons-material/Create';
+import swal from 'sweetalert';
 
 
 function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
@@ -324,13 +329,94 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
             return alert("내용입력은 필수 입니다.")
         }
     }
+
+    const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
+        color: theme.palette.text.secondary,
+        [`& .${treeItemClasses.content}`]: {
+            color: theme.palette.text.secondary,
+            borderTopRightRadius: theme.spacing(2),
+            borderBottomRightRadius: theme.spacing(2),
+            paddingRight: theme.spacing(1),
+            fontWeight: theme.typography.fontWeightMedium,
+            '&.Mui-expanded': {
+                fontWeight: theme.typography.fontWeightRegular,
+            },
+            '&:hover': {
+                backgroundColor: theme.palette.action.hover,
+            },
+            '&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused': {
+                backgroundColor: `var(--tree-view-bg-color, ${theme.palette.action.selected})`,
+                color: 'var(--tree-view-color)',
+            },
+            [`& .${treeItemClasses.label}`]: {
+                fontWeight: 'inherit',
+                color: 'inherit',
+            },
+        },
+        [`& .${treeItemClasses.group}`]: {
+            marginLeft: 0,
+            [`& .${treeItemClasses.content}`]: {
+                paddingLeft: theme.spacing(2),
+            },
+        },
+    }));
+
+    function StyledTreeItem(props) {
+        const {
+            bgColor,
+            color,
+            labelIcon: LabelIcon,
+            labelInfo,
+            labelText,
+            ...other
+        } = props;
+
+        return (
+            <StyledTreeItemRoot
+                label={
+                    <Box sx={{ display: 'flex', alignItems: 'center', p: 0.5, pr: 0 }}>
+                        <Box component={LabelIcon} color="inherit" sx={{ mr: 1 }} />
+                        <Typography variant="body2" sx={{ fontWeight: 'inherit', flexGrow: 1 }}>
+                            {labelText}
+                        </Typography>
+                        <Typography variant="caption" color="inherit">
+                            {labelInfo}
+                        </Typography>
+                    </Box>
+                }
+                style={{
+                    '--tree-view-color': color,
+                    '--tree-view-bg-color': bgColor,
+                }}
+                {...other}
+            />
+        );
+    }
+
+    StyledTreeItem.propTypes = {
+        bgColor: PropTypes.string,
+        color: PropTypes.string,
+        labelIcon: PropTypes.elementType.isRequired,
+        labelInfo: PropTypes.string,
+        labelText: PropTypes.string.isRequired,
+    };
+
+
     return (
         <>
         {/*<Button*/}
         {/*    variant="outline-dark"*/}
         {/*    size="sm"*/}
         {/*    onClick={handleShow}>업데이트</Button>*/}
-        <TreeItem nodeId="3" label="업데이트" onClick={handleShow} />
+            <StyledTreeItem
+                nodeId="6"
+                labelText=""
+                labelIcon={CreateIcon}
+                labelInfo=""
+                color="#1a73e8"
+                bgColor="#e8f0fe"
+                onClick={handleShow}
+            />
         <Modal
             show={show}
             onHide={handleClose}
@@ -385,9 +471,14 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                         checkContent(res.data.Java);
                         }).then(function (res) {
                             console.log(feedNo)
-                            alert('업테이트성공');
                             handleClose();
-                            window.location.reload("/main");
+                            swal({
+                                title: "업데이트 성공!",
+                                icon: "success",
+                                button: "확인",
+                            }).then(()=>{window.location.reload("/main")});
+
+
                         })}}
                     disabled={disable}
             >수정하기</ButtonR>

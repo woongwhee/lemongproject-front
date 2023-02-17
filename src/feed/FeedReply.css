@@ -4,3 +4,10 @@
     max-width: 90vw !important;
     max-height: 90vw !important;
 }
+.FeedReplyInsert-body{
+    overflow: scroll;
+    height: 700px;
+}
+.FeedReplyInsert-body::-webkit-scrollbar{
+    display: none;
+}
