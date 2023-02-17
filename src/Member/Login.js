@@ -105,9 +105,9 @@ function Login() {
                 <img className='logo' src='LemongImg/CommonImg/LemongLogo.png' alt='lemongLogo' />
             </div>
             <div className='inputArea'>
-                <input placeholder='사용자 이메일' onChange={(e) => {setEmail(e.target.value);}}/>
+                <input placeholder='이메일을 입력해주세요.' onChange={(e) => {setEmail(e.target.value);}}/>
                 <br />
-                <input placeholder='비밀번호' type="password" onChange={(e) => {setUserPwd(e.target.value);}}/>
+                <input placeholder='비밀번호를 입력해주세요.' type="password" onChange={(e) => {setUserPwd(e.target.value);}}/>
                 <p className={noLoginCol}>{noLoginMs}</p>
                 {/* <br /> */}
                 <button id='loginButton' onClick={()=>{loginClick(email,userPwd);}}>
