@@ -9,7 +9,7 @@ const StartSingleBtn = ({templateNo}) => {
 
     return (
         <>
-        <Button onClick={toggle}>
+        <Button onClick={toggle} color={"info"} size={"sm"}>
             혼자하기
         </Button>
         <StartSingleModal isOpen={modal} toggle={toggle} templateNo={templateNo}/>

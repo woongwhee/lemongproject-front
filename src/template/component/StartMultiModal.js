@@ -4,6 +4,8 @@ import {startMulti, startSingle} from "../../challenge/challengeApi";
 import moment from "moment";
 import {isEmpty} from "../../util/typeUtile";
 import {ModalBody, Modal, ModalFooter, ModalHeader} from "reactstrap";
+import {MENU_MY_PROFILE} from "../../reducer/menu";
+import {useDispatch} from "react-redux";
 
 const StartMultiModal = ({isOpen, toggle, templateNo}) => {
 
@@ -16,7 +18,8 @@ const StartMultiModal = ({isOpen, toggle, templateNo}) => {
         challengeTitle: "",
         challengeInfo: ""
     });
-    const [startDate, setStartDate] = useState()
+    const [startDate, setStartDate] = useState();
+    let dispatch = useDispatch();
     const timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
     const today = new Date(now_utc - timeOff).toISOString().split("T")[0];
     const optionToggle = (index) => {
@@ -31,7 +34,7 @@ const StartMultiModal = ({isOpen, toggle, templateNo}) => {
         return opstionString;
     }
     const start = async () => {
-        let submitInput = {...inputs, option, templateNo};
+        let submitInput = {...inputs, option:parseOption(), templateNo};
         if (isEmpty(submitInput.startDate) || isEmpty(submitInput.challengeInfo) || isEmpty(submitInput.challengeTitle)) {
             alert("다채워주세요")
             return;
@@ -41,6 +44,7 @@ const StartMultiModal = ({isOpen, toggle, templateNo}) => {
             console.log(result);
 
             toggle();
+            dispatch({type:MENU_MY_PROFILE});
         }
     }
 

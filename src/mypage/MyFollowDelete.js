@@ -4,14 +4,16 @@ import axios from "axios";
 
 import './MyPage.css';
 
+import { ImUserMinus } from "react-icons/im";
+
 function MyFollowDelete(){
 
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
+    // 팔로우 당하는사람(팔로워)
 
     const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
-    // 팔로우 당하는사람(팔로워)
     const follower = params.get("userNo");
 
     // 팔로우 하는사람(팔로잉)
@@ -33,7 +35,7 @@ function MyFollowDelete(){
 
     return(
         <div>
-            <button style={{marginLeft:'350px'}} onClick={followDelete}>팔로우 취소</button>
+            <button class="btn btn-primary" style={{marginLeft:'325px' , fontSize:'13px' , marginTop:'-373px' , borderRadius:'100px' , width:'100px' , height:'34px'}} onClick={followDelete}>팔로우 취소</button>
         </div>
     )
 }

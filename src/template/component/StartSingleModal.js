@@ -4,6 +4,8 @@ import {startMulti, startSingle} from "../../challenge/challengeApi";
 import moment from "moment";
 import {isEmpty} from "../../util/typeUtile";
 import {ModalBody, Modal, ModalFooter, ModalHeader} from "reactstrap";
+import {useDispatch} from "react-redux";
+import {MENU_TODOLIST} from "../../reducer/menu";
 
 const StartSingleModal = ({isOpen, toggle, templateNo}) => {
 
@@ -15,6 +17,7 @@ const StartSingleModal = ({isOpen, toggle, templateNo}) => {
         startDate: "",
         challengeTitle: ""
     });
+    let dispatch = useDispatch();
     const timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
     const today = new Date(now_utc - timeOff).toISOString().split("T")[0];
     const optionToggle = (index) => {
@@ -39,6 +42,7 @@ const StartSingleModal = ({isOpen, toggle, templateNo}) => {
         if (result != null) {
             console.log(result);
             toggle();
+            dispatch({type:MENU_TODOLIST}) ;
         }
     }
 
@@ -55,10 +59,9 @@ const StartSingleModal = ({isOpen, toggle, templateNo}) => {
             {/*<div className="modal-content">*/}
             <ModalHeader toggle={toggle}>혼자하기</ModalHeader>
             <ModalBody>
-
                 <div>
                     {option.map((item, i) => {
-                        return (<><Checkbox type="checkbox" key={"sc+i"} checked={item} onClick={() => {
+                        return (<><Checkbox type="checkbox" key={i} checked={item} onClick={() => {
                             optionToggle(i)
                         }} id={"sc" + i}/><label htmlFor={"sc" + i}>{optionInfo[i]}</label> </>)
                     })}
@@ -68,7 +71,7 @@ const StartSingleModal = ({isOpen, toggle, templateNo}) => {
                                                           onChange={changeValue}></input>
                 </div>
                 <div>
-                    <label htmlFor="stTitle">제목!</label><input id="stTitle" type="text" name="challengeTitle"
+                    <label htmlFor="stTitle">제목</label><input id="stTitle" type="text" name="challengeTitle"
                                                               onChange={changeValue}></input>
                 </div>
             </ModalBody>

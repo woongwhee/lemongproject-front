@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import Login from './Member/Login';
-import MainPage from "./ToDoListPage/MainPage";
-import {useLoginState} from "./Member/LoginContext";
-import FeedLoading from "./feedPage/FeedLoading";
+
+import MainPage from "./main/MainPage";
+import {useLoginState} from "./member/LoginContext";
+import Login from "./member/Login";
 
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
             {/*{loading ? setLoading(false) : isLogin ? <MainPage/> : <Login isLogin={isLogin}/>}*/}
             {/*{loading ? <FeedLoading/>*/}
         </>
-        // <MainPage/>
     )
 
 }

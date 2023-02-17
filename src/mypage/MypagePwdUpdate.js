@@ -1,13 +1,19 @@
 import React , {useState , useEffect , useCallback} from "react";
 import axios from "axios";
 
+import { confirmAlert } from "react-confirm-alert";
+import './react-confirm-alert.css';
+
+import {useDispatch, useSelector} from 'react-redux';
+
+
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
 rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"></link>
 
 function MyPagePwdCheck(){
 
      // 비밀번호 체크
-     const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+     const onChangePassword = useCallback((e) => {
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[@#$%^&*()_])(?=.*[0-9]).{8,15}$/
         const passwordCurrent = e.target.value
         setUserPwd(passwordCurrent)
@@ -24,7 +30,7 @@ function MyPagePwdCheck(){
     }, [])
 
     // 비밀번호 일치 체크
-    const onChangeRePwd = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeRePwd = useCallback((e) => {
         const passwordReCurrent = e.target.value
         setReUserPwd(passwordReCurrent)
 
@@ -54,6 +60,9 @@ function MyPagePwdCheck(){
     const [isPwd, setIsPwd] = useState(false);
     const [isRePwd, setIsRePwd] = useState(false);
 
+    // const userNo = sessionStorage.getItem("userNo");
+    const userNos = useSelector((state) => state.userNo.selectUserNo);
+
     const btnCheck = () => {
         if(userPwd === reUserPwd){
             axios.get("/api/member/myPwdUpdate" , {
@@ -63,14 +72,52 @@ function MyPagePwdCheck(){
             }).then(function(res){
                 console.log("데이터 전송 성공 + success");
                 console.log(userPwd);
-                alert("비밀번호가 변경되었습니다.");
+                // alert("비밀번호가 변경되었습니다.");
+                confirmAlert({
+                    title: "Success",
+                    message: "변경이 완료되었습니다.",
+                    buttons: [
+                      {
+                        label: "Yes" ,
+                        onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
+                      }
+                    ]
+                  })
             }).catch(function(){
                 console.log("데이터 전송 실패");
                 console.log(userPwd);
-                alert("비밀번호 변경에 실패하였습니다.");
+                // alert("비밀번호 변경에 실패하였습니다.");
+                confirmAlert({
+                    title: "Fail",
+                    message: "변경에 실패하였습니다.",
+                    buttons: [
+                      {
+                        label: "Yes" ,
+                        onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate"
+                      }
+                    ]
+                  })
             })
         }
     }
+
+     // 비밀번호 변경 알람
+     const submitUpPwd = () => {
+        confirmAlert({
+          title: "Password Update",
+          message: "비밀번호를 변경하시겠습니까?",
+          buttons: [
+            {
+              label: "Yes",
+              onClick: () => btnCheck()
+            },
+            {
+              label: "No"
+              // onClick: () => alert("Click No")
+            }
+          ]
+        });
+      }
 
     return(
         <div>
@@ -85,21 +132,21 @@ function MyPagePwdCheck(){
                             onChangePassword(e);
                             setUserPwd(e.target.value);
                         }} style={{borderRadius:'0'}}/>
-                    <p style={{fontSize:'20px'}} className={pwdColor}>{pwdError}</p>
+                    <b><p style={{fontSize:'18px' , fontFamily:'SourceSansPro-Light'}} className={pwdColor}>{pwdError}</p></b>
                 </div>
 
                 <br/><br/>
 
                 <h6 style={{marginLeft: "70px"}}><b>PassWord Check</b></h6>
-                <div className="outer_passCheck" style={{height: '40px'}}>
+                <div className="outer_passCheck" style={{height: '40px' , width:'75%'}}>
                     <input
                         type="password"
                         className="form-control"
                         name='passwordInput2'
                         onChange={(e) => {onChangeRePwd(e);}} style={{borderRadius:'0'}}/>
-                        <p style={{fontSize:'20px'}} className={rePwdColor}>{rePwdError}</p>
+                        <b><p style={{fontSize:'18px' , fontFamily:'SourceSansPro-Light'}} className={rePwdColor}>{rePwdError}</p></b>
                     </div>
-                <button type="submit" onClick={btnCheck}>확인</button>
+                <button type="button" class="btn btn-primary" style={{borderRadius:'100px' , marginTop:'-71px' , marginLeft:'644px'}} onClick={submitUpPwd}>변경</button>
             </form>
         </div>
     );

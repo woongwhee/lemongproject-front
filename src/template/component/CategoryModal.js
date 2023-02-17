@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useAsync} from "react-async-hook";
 import {useTemplateDispatch, useTemplateState} from "../TemplateContext";
 import {templateCategory} from "../templateApi";
@@ -14,7 +14,12 @@ const CategoryModal = ({isOpen, toggle, result}) => {
             dispatch({
                 type: "CATEGORY", categoryNo: categoryNo
             })
+            toggle();
         }
+        useEffect(() => {
+                dispatch({type: "ADD_CATEGORY", categories: result})
+            }
+            , [])
         return (
             <Modal ariaHideApp={false}
                    contentLabel="Selected Option" size="sm" fullscreen={false} isOpen={isOpen} toggle={toggle}>
@@ -22,11 +27,11 @@ const CategoryModal = ({isOpen, toggle, result}) => {
                 <button onClick={toggle}>닷기</button>
                 <ModalBody>
                     {
-                        result?.map(category => {
+                        result?.map((category,index) => {
                             return (
-                                <button className="category-select" key={category.categoryNo} onClick={() => {
+                                <button className="category-select"  onClick={() => {
                                     changeCategory(category.categoryNo)
-                                }}>
+                                }} key={index}>
                                     <img src={category.imagePath} alt={category.categoryNo}/>
                                     <p>{category.categoryName}</p>
                                 </button>
