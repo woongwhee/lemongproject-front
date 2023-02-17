@@ -21,6 +21,9 @@ function Login() {
     const [userPwd, setUserPwd] = useState();
     const [noLoginMs, setNoLoginMs] = useState();
     const [noLoginCol, setNoLoginCol] = useState();
+    const [loginHeight, setLoginHeight] = useState("loginArea loginAreaHeight");
+
+
     const loginDispatch=useLoginDispatch();
     const loginSuccess = (result) => {
         loginDispatch({
@@ -31,6 +34,8 @@ function Login() {
             }
         })
     }
+
+
     const checkLogin= async() => {
         const res = await axios.get(`/api/p/checkLogin`);
         if ( res.status != 200 ) throw new Error(res.statusText);
@@ -39,6 +44,8 @@ function Login() {
             return res;
         }
     }
+
+
     const loginClick = async (e, p) => {
         let response = await axios.post('/api/p/login',
             {
@@ -49,13 +56,13 @@ function Login() {
         if (response.data.code === '2000') {
             alert("로그인에 성공하였습니다.")
             console.log(response.data.result);
-
             loginSuccess(response.data.result);
         } else {
             console.log('실패!')
-            console.log(error)
+            // console.log(error)
             setNoLoginMs("잘못된 회원 정보입니다. 다시 입력해주세요.")
-            setNoLoginCol("chAlarm noAlarm")
+            setNoLoginCol("newChAlarm noAlarm")
+            setLoginHeight("loginArea newLoginAreaHeight")
         }
         
     }
@@ -80,17 +87,6 @@ function Login() {
             loginButton: { color: 'green', type: 1, height: '47' },
         });
         nLogin.init();
-
-        // 프론트에서 회원정보를 가지고 올 경우?
-        // 이 내부에서 작성하면 된다.
-        // nLogin.getLoginStatus(async function(status) {
-        //     if(status) {
-        //         const userId = nLogin.member.getEmail()
-        //         const userName = nLogin.member.getName()
-        //         console.log(userId)
-        //         console.log(userName)
-        //     }
-        // })
     }
 
 
@@ -104,7 +100,7 @@ function Login() {
     // 화면 설계
     return (
 
-        <div className='loginArea'>
+        <div className={loginHeight}>
             <div className='logo'>
                 <img className='logo' src='LemongImg/CommonImg/LemongLogo.png' alt='lemongLogo' />
             </div>
@@ -134,10 +130,10 @@ function Login() {
                 {/* id 값이 naverIdLogin인 div가 반드시 있어야 한다. */}
                 <br />
                 <div className='menu'>
-                    <Link to="/join" style={{ textDecoration: 'none' }}>
+                    <Link to="/join" className='toLink'>
                         회원가입
                     </Link> |{" "}
-                    <Link to="/findPwd" style={{ textDecoration: 'none' }}>
+                    <Link to="/findPwd" className='toLink'>
                         비밀번호 찾기
                     </Link>
                 </div>

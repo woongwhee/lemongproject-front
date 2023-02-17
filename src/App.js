@@ -1,3 +1,8 @@
+import React, {useEffect, useState} from 'react';
+import Login from './member/Login';
+import {useLoginState} from "./member/LoginContext";
+import TitleInfo from "./member/TitleInfo";
+import MainFront from './member/MainFront';
 
 import MainPage from "./main/MainPage";
 import {useLoginState} from "./member/LoginContext";
@@ -6,13 +11,10 @@ import Login from "./member/Login";
 
 function App() {
     let {isLogin} = useLoginState();
-    // const [loading, setLoading] = useState(true);
     return (
         <>
             {isLogin ? <MainPage/> : <Login isLogin={isLogin}/>}
-            {/*{isLogin ? setLoading(false) : <Login isLogin={isLogin}/>}*/}
-            {/*{loading ? setLoading(false) : isLogin ? <MainPage/> : <Login isLogin={isLogin}/>}*/}
-            {/*{loading ? <FeedLoading/>*/}
+            {/*{isLogin ? <MainPage/> : <MainFront isLogin={isLogin}/>}*/}
         </>
     )
 
