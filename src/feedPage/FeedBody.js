@@ -23,12 +23,13 @@ function FeedBody(){
         if (maxPage.current == -1) {
             maxPage.current =await axios.get(`/api/feed/feedCount`).then(res=>codeHandler(res));
         }
-        let result=await axios.get(`/api/feed/main/${page}`).then(res=>codeHandler(res));
+        let result = await axios.get(`/api/feed/main/${page}`).then(res=>codeHandler(res));
         let newList = [...feedList, ...result];
         setFeedList(newList);
         console.log(newList);
         isLanding.current = false;
     };
+
 
     const handleObserver = useCallback((entries) => {
         const target = entries[0];
@@ -74,6 +75,8 @@ function FeedBody(){
     //         setLoading(false);
     //     }, []
     // );
+
+
 
 
 
