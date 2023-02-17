@@ -10,11 +10,11 @@ const ChallengeReadyCard = (props) => {
         dispatch({type: MENU_CHALLENGE, challengeNo})
     }
     return (
-        <Card className="challengeCard" onClick={openDetail}>
+        <div className="challengeCard" onClick={openDetail}>
             <h3>{title}</h3>
             <div>{startDate.toString()}~{endDate.toString()}</div>
             <div>참여중 : {userCount}</div>
-        </Card>
+        </div>
     );
 };
 

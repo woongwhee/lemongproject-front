@@ -25,14 +25,14 @@ const initialParam = {
 };
 
 export const ChallengeProvider = ({children}) => {
-    const [state, dispatch] = useReducer(challengeReducer, initialParam);
     const menuParam = useSelector(state => state.menuParam);
+    const [state, dispatch] = useReducer(challengeReducer, initialParam);
+    if (!isEmpty(menuParam)) {
+        dispatch({type: 'DETAIL', challengeNo: menuParam})
+    }
 
     const nextId = useRef(7);
     useEffect(() => {
-        if (!isEmpty(menuParam)) {
-            dispatch({type: 'DETAIL', challengeNo: menuParam})
-        }
     })
     return (
         <ChallengeStateContext.Provider value={state}>

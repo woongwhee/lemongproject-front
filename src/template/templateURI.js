@@ -18,6 +18,7 @@ export const UNSAVE_UP_LOAD=`${TEMPLATE_URL}/unsave/upload`;
 export const UNSAVE_RESET=`${TEMPLATE_URL}/unsave/reset`;
 //delte
 export const REVIEW_DELETE=`${TEMPLATE_URL}/review/delete`;
+export const REVIEW_LIST=`${TEMPLATE_URL}/review/list`;
 export const TEMPLATE_DELETE=`${TEMPLATE_URL}/delete`;
 export const UNSAVE_TODO_DELETE=`${TEMPLATE_URL}/todo/deleteUnSave`;
 export const UNSAVE_UPDATE=`${TEMPLATE_URL}/unsave/update`
