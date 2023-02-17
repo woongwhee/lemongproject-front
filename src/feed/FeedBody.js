@@ -1,10 +1,11 @@
 import React, {useCallback, useEffect, useReducer, useRef, useState} from "react";
 import axios from "axios";
 import Feed from "./Feed1";
-import FeedLoading from "./FeedLoading";
 import {useLoginState} from "../member/LoginContext";
 import {codeHandler} from "../util/apiUtil";
 import "./FeedBody.css"
+import CircularProgress from '@mui/material/CircularProgress';
+import Ready from './FeedLoading';
 
 function FeedBody(){
     // 요청받은 정보를 담아줄 변수 선언
@@ -51,9 +52,11 @@ function FeedBody(){
         const observer = new IntersectionObserver(handleObserver, option);
         if (target.current) observer.observe(target.current);
     }, [handleObserver]);
+
     useEffect(() => {
         loadPage();
     }, [page])
+
     function callback(str) {
         setFeedList(str);
     }
