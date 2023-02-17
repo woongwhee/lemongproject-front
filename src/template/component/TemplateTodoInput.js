@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import TodoDay from "./TodoDay";
 import TodoWriter from "./TodoWriter";
-
 function TemplateTodoInput({range, days, insertTodo, deleteTodo, templateNo}) {
     const [modal, setModal] = useState(false);
     const [singleModal, setSingleModal] = useState(false);
