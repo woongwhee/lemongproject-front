@@ -138,23 +138,12 @@ function TemplateTodoInput({range, days, insertTodo, deleteTodo, templateNo}) {
             <div id="templatetodo-input">
                 {Days()}
             </div>
-            {/*<TodoWriter isOpen={modal} dayList={dayList} contentList={contentList} addContent={addContent}*/}
-            {/*            removeContent={removeContent} toggle={modalToggle} onClosed={onModalClose}></TodoWriter>*/}
             <TodoWriter isOpen={modal} templateNo={templateNo} dayList={dayList} contentList={contentList} addContent={addContent}
                          removeContent={removeContent} toggle={modalToggle} onClosed={onModalClose}></TodoWriter>
-            {/*<TodoWriter isOpen={singleModal} templateNo={templateNo} dayList={dayList} toggle={singleModalToggle} onClosed={onModalClose} deleteTodo={deleteTodo}></TodoWriter>*/}
         </>
     )
 }
 
-/**
- * 사각형의 범위안에
- * @param el httpElement
- * @param rec1 좌표를 담은 객체{x1,x2,y1,y2}
- *
- *
- *
- */
 const rangeSelect = (el, rec1,top) => {
     let rec2 = {
         y1: el.offsetTop-top,

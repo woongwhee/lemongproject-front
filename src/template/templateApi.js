@@ -6,14 +6,15 @@ import {
     TODO_DETAIL,
     UNSAVE_LOAD, UNSAVE_RESET, UNSAVE_TODO_DELETE,
     UNSAVE_TODO_INSERT,
-    UNSAVE_UP_LOAD, UNSAVE_UPDATE, TEMPLATE_DELETE, REVIEW_DELETE, TEMPLATE_CATEGORY, TEMPLATE_MAXPAGE
+    UNSAVE_UP_LOAD, UNSAVE_UPDATE, TEMPLATE_DELETE, REVIEW_DELETE, TEMPLATE_CATEGORY, TEMPLATE_MAXPAGE, REVIEW_LIST
 
 } from "./templateURI";
 import {codeHandler} from "../util/apiUtil";
 
 
 //get
-export const templateList = (page = 0, categoryNo = 0) => axios.get(`${TEMPLATE_LIST}/${page}/${categoryNo}`).then(res => codeHandler(res))
+export const templateList = (page = 0, categoryNo = 0) => axios.get(`${TEMPLATE_LIST}/${page}/${categoryNo}`).then(res =>codeHandler(res))
+export const reviewList = (templateNo) => axios.get(`${REVIEW_LIST}/${templateNo}`).then(res => codeHandler(res))
 export const templateMaxPage = (categoryNo) => axios.get(`${TEMPLATE_MAXPAGE}/${categoryNo}`).then(res => codeHandler(res))
 export const templateDetail = (templateNo,day) => axios.get(`${TEMPLATE_DETAIL}/${templateNo}`).then(res => codeHandler(res))
 export const templateCategory = () => axios.get(`${TEMPLATE_CATEGORY}`).then(res => codeHandler(res))
@@ -25,7 +26,7 @@ export const todoInsert = async (dayList, contentList, templateNo) => axios.post
     contentList,
     templateNo
 }).then(res => codeHandler(res))
-export const reviewInsert = (content, templateNo) => axios.post(REVIEW_INSERT, {
+export const reviewInsert = ( templateNo,content) => axios.post(REVIEW_INSERT, {
     content,
     templateNo
 }).then(res => codeHandler(res))

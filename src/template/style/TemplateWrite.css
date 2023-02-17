@@ -1,45 +1,44 @@
 .template-write{
-    border: 1px solid purple;
-    background-color: #9d0da7;
-    border-radius: 5px;
+    background-color: #c780e2;
+    border-radius: 30px;
     height: 100%;
+
 }
-.template-write .btnBox{
+.btnBox{
+    margin-top:10px;
+    margin-right: 5px;
+    display: inline-flex;
+}
+
+.template-input{
     display: flex;
-
-}
-#template-input{
-    display: grid;
     padding: 20px;
-    height: 23%;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 3px;
-    grid-row-gap: 3px;
-
+    width: 80%;
+    height: 15%;
 }
+/*.template-input input,#template-input select{*/
+/*    align-content: center;*/
+/*}*/
 .tpdiv1 { grid-area: 1 / 1 / 2 / 2; }
 .tpdiv2 { grid-area: 1 / 2 / 2 / 3; }
 .tpdiv3 { grid-area: 2 / 1 / 3 / 2; }
 .tpdiv4 { grid-area: 2 / 2 / 3 / 3; }
-#template-input input,#template-input select{
-    margin:5px;
-    align-content: center;
-}
 #templatetodo-input {
-    height: 70%;
-    width: 95%;
+    margin: auto;
+    height: 77%;
+    width: 80%;
     display: grid;
-    padding: 20px;
     grid-template-columns: repeat(7,1fr);
     row-gap: 1px;
     column-gap: 1px;
     overflow: scroll;
     /*grid-template-rows: repeat(7, 1fr);*/
 }
-.templatetodo-input>div{
+#templatetodo-input>div{
     border: 1px solid black;
     height: 100px;
+    width: 120px;
+
 }
 .days>.content{
     overflow: hidden;
