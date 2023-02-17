@@ -86,7 +86,6 @@ function Calendar2() {
 
     const onViewChange = async ({activeStartDate}) => {
         let month = new moment(activeStartDate).format("YYMMDD");
-        //console.log("먼쓰",activeStartDate.getMonth())
         setMonth(activeStartDate.getMonth()+1);
         const res = await axios.get(`/api/todo/getMonth/${month}`);
         let {challengeDayList, holidayList, todoDayList} = codeHandler(res);
@@ -103,7 +102,7 @@ function Calendar2() {
             onChange={selectDay} //선택한 날짜 todolist에 보내기
             locale={"en"}
             calendarType={'US'}
-            formatMonthYear={(local, date) => moment(date).format("YYYY MMMM")}
+            formatMonthYear={(local, date) => moment(date).format("YYYY MM")}
             formatDay={(local, date) => moment(date).format("DD")} //달력날짜에 '일' 삭제
             tileContent={(e) => {
                 let date=e.date;

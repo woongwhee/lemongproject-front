@@ -5,8 +5,10 @@ import 'moment/locale/ko';
 import Calendar2 from '../calendar/Calendar';
 import { useSelector } from 'react-redux';
 
+
 const TodoHeadBlock = styled.div`
-  h1 {
+
+  .nowDate {
     margin: 0;
     font-size: 36px;
     color: #343a40;
@@ -39,7 +41,7 @@ function TodoDate() {
 
   return (
     <TodoHeadBlock>
-      <h1>{moment(selectDay).format('MM월 DD일')}</h1>
+      <h1 className="nowDate">{moment(selectDay).format('MM월 DD일')}</h1>
       <div className="day">{moment(selectDay).format('ddd요일')}</div>
       {/* <div className="tasks-left">할 일 2개 남음</div> */}
     </TodoHeadBlock>
