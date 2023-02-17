@@ -238,17 +238,17 @@ function Join() {
                             onChange={(e) => {onChangeRePwd(e);}} />
                         <p className={rePwdColor}>{rePwdError}</p>
                     </div>
-                    {/* 이메일 */}
+                     이메일
                     <div className="emailInput">
-                        <input type="email" id="email" name="email" placeholder="이메일 주소" required 
+                        <input type="email" id="email" name="email" placeholder="이메일 주소" required
                             onChange={(e) => {
                                 onChangeEmail(e);
                                 setEmail(e.target.value);
                                 }}/>
-                        <button className="chBtn eBtn" onClick={() => {chEmail(email);}}>인증</button>
+                        {/*<button className="chBtn eBtn" onClick={() => {chEmail(email);}}>인증</button>*/}
                         <p className={emailColor}>{emailMs}</p>
                     </div>
-                    {/* 이메일 인증번호 */}
+                     {/*이메일 인증번호*/}
                     <div className="emailNumInput">
                         <input type="text" id="emailNum" name="emailNum" placeholder="이메일 인증번호 입력" required
                             onChange={(e) => {setEmailNum(e.target.value);}}/>

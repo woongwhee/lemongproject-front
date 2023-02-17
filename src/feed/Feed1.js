@@ -16,7 +16,7 @@ import FeedDelete from "./FeedDelete";
 import FeedUpdate from "./FeedUpdate";
 import FeedPhoto from "./FeedPhoto";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import TreeItem from "@mui/lab/TreeItem";
+import TreeItem, {treeItemClasses} from "@mui/lab/TreeItem";
 import TreeView from '@mui/lab/TreeView';
 import FeedReply from "./FeedReply";
 import "./Feed.css"
@@ -24,6 +24,10 @@ import FeedDetail from "./FeedDetail";
 import axios from "axios";
 import FeedHeart from "./FeedHeart";
 import FeedLoading from "./FeedLoading";
+import {useLoginState} from "../member/LoginContext";
+import SettingsIcon from "@mui/icons-material/Settings";
+import Box from "@mui/joy/Box";
+import PropTypes from "prop-types";
 
 
 
@@ -40,7 +44,9 @@ const ExpandMore = styled((props) => {
 
 
 export default function RecipeReviewCard(props) {
-    let{userNo,feedNo,feedContent,feedAt,filePath,photoNo,nickName,loginUserNo}=props;
+    let{userNo,feedNo,feedContent,feedAt,filePath,photoNo,nickName}=props;
+
+    let loginUserNo=useLoginState().profile.userNo;
 
     let filePathList=filePath.split(",");
     let photoNoList=photoNo.split(",");
@@ -56,6 +62,78 @@ export default function RecipeReviewCard(props) {
     const [focusDisabledItems, setFocusDisabledItems] = React.useState(false);
 
 
+    const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
+        color: theme.palette.text.secondary,
+        [`& .${treeItemClasses.content}`]: {
+            color: theme.palette.text.secondary,
+            borderTopRightRadius: theme.spacing(2),
+            borderBottomRightRadius: theme.spacing(2),
+            paddingRight: theme.spacing(1),
+            fontWeight: theme.typography.fontWeightMedium,
+            '&.Mui-expanded': {
+                fontWeight: theme.typography.fontWeightRegular,
+            },
+            '&:hover': {
+                backgroundColor: theme.palette.action.hover,
+            },
+            '&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused': {
+                backgroundColor: `var(--tree-view-bg-color, ${theme.palette.action.selected})`,
+                color: 'var(--tree-view-color)',
+            },
+            [`& .${treeItemClasses.label}`]: {
+                fontWeight: 'inherit',
+                color: 'inherit',
+            },
+        },
+        [`& .${treeItemClasses.group}`]: {
+            marginLeft: 0,
+            [`& .${treeItemClasses.content}`]: {
+                paddingLeft: theme.spacing(2),
+            },
+        },
+    }));
+
+    function StyledTreeItem(props) {
+        const {
+            bgColor,
+            color,
+            labelIcon: LabelIcon,
+            labelInfo,
+            labelText,
+            ...other
+        } = props;
+
+        return (
+            <StyledTreeItemRoot
+                label={
+                    <Box sx={{ display: 'flex', alignItems: 'center', p: 0.5, pr: 0 }}>
+                        <Box component={LabelIcon} color="inherit" sx={{ mr: 1 }} />
+                        <Typography variant="body2" sx={{ fontWeight: 'inherit', flexGrow: 1 }}>
+                            {labelText}
+                        </Typography>
+                        <Typography variant="caption" color="inherit">
+                            {labelInfo}
+                        </Typography>
+                    </Box>
+                }
+                style={{
+                    '--tree-view-color': color,
+                    '--tree-view-bg-color': bgColor,
+                }}
+                {...other}
+            />
+        );
+    }
+
+    StyledTreeItem.propTypes = {
+        bgColor: PropTypes.string,
+        color: PropTypes.string,
+        labelIcon: PropTypes.elementType.isRequired,
+        labelInfo: PropTypes.string,
+        labelText: PropTypes.string.isRequired,
+    };
+
+
     const updateDeleteButton = () => {
         if(userNo===loginUserNo){
             return(
@@ -66,10 +144,10 @@ export default function RecipeReviewCard(props) {
                 disabledItemsFocusable={focusDisabledItems}
                 multiSelect
             >
-                <TreeItem nodeId="1" label='설정'>
+                <StyledTreeItem nodeId="1" labelText="" labelIcon={SettingsIcon}>
                     <FeedDelete Feed={Feed}/>
                     <FeedUpdate Feed={Feed}/>
-                </TreeItem>
+                </StyledTreeItem>
             </TreeView>)
         }
     }

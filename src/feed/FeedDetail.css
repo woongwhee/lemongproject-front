@@ -5,3 +5,14 @@
     min-width: 40%;
     min-height: 40%;
 }
+
+.FeedDetailView-content{
+    text-align: left;
+    height: 600px;
+    overflow: scroll;
+    /*border:1px solid red;*/
+}
+
+.FeedDetailView-content::-webkit-scrollbar{
+    display: none;
+}

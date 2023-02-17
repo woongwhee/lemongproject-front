@@ -4,6 +4,7 @@ import Feed from "./Feed1";
 import FeedLoading from "./FeedLoading";
 import {useLoginState} from "../member/LoginContext";
 import {codeHandler} from "../util/apiUtil";
+import "./FeedBody.css"
 
 function FeedBody(){
     // 요청받은 정보를 담아줄 변수 선언
@@ -53,39 +54,20 @@ function FeedBody(){
     useEffect(() => {
         loadPage();
     }, [page])
-    //         ''        data
-    //         data
-    // const testStr = String data(hello world)
-    //                 JSON, 객체 상관이없다!
-    // 변수 초기화
     function callback(str) {
         setFeedList(str);
     }
     const [loading, setLoading] = useState(true);
-    const {userNo}=useLoginState().profile;
     // let {userNo} =useLoginState().profile;
     // console.log({userNo})
-    //
-    // 첫 번째 렌더링을 마친 후 실행
-    // useEffect(
-    //     async () => {
-    //        let res=await axios.get(`/api/feed/main/${page}`)
-    //         let feedList=codeHandler(res);
-    //        setFeedList(feedList);
-    //         setLoading(false);
-    //     }, []
-    // );
 
-
-
-
-
+    // style={{overflow:"scroll", height:"800px", scrollbarWidth:"none"}}
     let i=0;
     return(
         <div>
-            <div style={{overflow:"scroll", height:"800px"}}>
-                {feedList?.map((e)=><Feed key={i++} {...e} loginUserNo={userNo}/>)}
-                <div ref={target} style={{border:"1px solid red", height:"30px"}}></div>
+            <div className="FeedBody" >
+                {feedList?.map((e)=><Feed key={i++} {...e}/>)}
+                <div ref={target} style={{height:"30px"}}></div>
             </div>
         </div>
     );

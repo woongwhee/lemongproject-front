@@ -171,7 +171,10 @@ function MyFeed(props) {
 
     const [myFeedList , setMyFeedList] = useState([]);
     const [show, setShow] = useState(false);
+
     const userNos = useSelector((state) => state.userNo.selectUserNo);
+
+    const [currentFeed,setCurrentFeed]=useState({});
 
     let {profile}=useLoginState();
     const userNo = profile?.userNo; // 로그인한 사용자 userNo
@@ -183,51 +186,34 @@ function MyFeed(props) {
                     userNo : userNos != null ? userNos : userNo,
                 }
             }).then(function(res){
-                setMyFeedList(res.data.result);
+                setMyFeedList(parseFeedList(res.data.result));
             }).catch(function(){
                 console.log("데이터 전송 실패")
             })
         } , [userNos != null ? userNos : userNo]
     )
+    const parseFeedList=(result)=>{
+        return result.map(e=>{
+            e.filePathList=e.filePath.split(",");
+            e.photoNoList=e.photoNo.split(",")
+            return e;
+        })
 
-    let Thumbnail = []
-    let filePathList = []
-    let photoNoList = []
-    for(let i = 0; i<myFeedList.length; i++){
-        filePathList.push(
-            myFeedList[i].filePath.split(",")
-        )
-        photoNoList.push(
-            myFeedList[i].photoNo.split(",")
-        )
     }
+    console.log(currentFeed)
 
-    const [Feed, setFeedList] = useState(myFeedList.userNo,myFeedList.feedNo,myFeedList.feedContent,myFeedList.feedAt,filePathList,photoNoList,myFeedList.nickName,userNo)
-
-
-    console.log(Feed)
-
-
-    Thumbnail = filePathList.map( (item) => item[0])
-
-    const ofof = () =>{
-        const result = []
-        for(let i =0; i<myFeedList.length; i++){
-            result.push(
-                <>
-                    <div style={{border:"3px solid black", float:"left"}}>
-                        <img src={Thumbnail[i]} style={{width:"240px", height:"240px"}} onClick={() => {setShow(true)}}/>
-                    </div>
-                </>
-            )
-        }
-        return result
+    const openFeed=(feed)=>{
+        setCurrentFeed(feed);
+        setShow(true);
     }
-
     return (
         <>
         {/*<div style={{marginLeft:"0px", border:"1px solid blue"}}>*/}
-            {ofof()}
+            {myFeedList.map(Feed=>
+                <div style={{border:"3px solid black", float:"left"}}>
+                    <img src={Feed.filePathList[0]} style={{width:"240px", height:"240px"}} onClick={() => {openFeed(Feed)}}/>
+                </div>
+            )}
         {/*</div>*/}
         <Modal
             show={show}
@@ -242,7 +228,7 @@ function MyFeed(props) {
             </Modal.Header>
             <Modal.Body>
                 {/*<FeedReplyInsert feedNo={feedNo}/>*/}
-                {/*<FeedDetailView Feed={myFeedList}></FeedDetailView>*/}
+                <FeedDetailView Feed={currentFeed}></FeedDetailView>
             </Modal.Body>
         </Modal>
     </>
