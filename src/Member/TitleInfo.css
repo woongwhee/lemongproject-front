@@ -1,8 +1,48 @@
-.CarouselMain{
-    width: 800px;
+.monitorImg{
+    width: 35rem;
+    margin: auto;
 }
 
-.CarouselInnerImg{
-    width: 800px;
-    /* height: 300px; */
+.CarouselMain, .CarouselInnerImg {
+    width: 34rem;
+}
+
+.sdiv1 {
+    box-sizing: border-box;
+    text-align: center;
+    /* border: 1px solid blue; */
+    width: 36rem;
+    height: 29rem;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 29%;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+}
+
+.sdiv2 {
+    box-sizing: border-box;
+    text-align: center;
+    /* border: 1px solid red; */
+    width: 36rem;
+    height: 29rem;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 29.2%;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.sdiv2>img {
+    /* margin: auto; */
+    position: absolute;
+    top: 0;
+    right: 30%;
+    bottom: 0;
+    left: 0;
 }
