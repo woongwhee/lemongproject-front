@@ -1,0 +1,25 @@
+.Tempscroll::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+.Tempscroll::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: none; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.outer_dat::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+.outer_dat::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: none; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+.themBtn:hover{
+    letter-spacing: 1px;
+    transform: scale(1.1);
+    cursor: pointer;
+    transition: all 1.0s;
+  }

@@ -5,6 +5,10 @@ import {Button} from "reactstrap";
 import {useDispatch} from "react-redux";
 import {MENU_MY_PROFILE} from "../../reducer/menu";
 
+import { BsFillPeopleFill } from "react-icons/bs";
+
+import '../../template/style/TemplateJiho.css';
+
 const StartMultiBtn = ({templateNo}) => {
     const [modal, setModal] = useState(false);
 
@@ -16,10 +20,10 @@ const StartMultiBtn = ({templateNo}) => {
     }
     return (
         <>
-            <Button onClick={toggle} color={"info"} size={"sm"}>
-                같이하기
-            </Button>
-            <StartMultiModal isOpen={modal} toggle={toggle} templateNo={templateNo}/>
+            <div style={{marginLeft:'630px'}} onClick={toggle} color={"info"}>
+                <BsFillPeopleFill className='themBtn' style={{fontSize:'30px'}}></BsFillPeopleFill> <span style={{fontFamily:'SourceSansPro-Light' , fontSize:'20px'}}>Multi</span>
+                <StartMultiModal isOpen={modal} toggle={toggle} templateNo={templateNo}/>
+            </div>
         </>
     );
 };

@@ -7,6 +7,7 @@ import apiHoc from "../../util/apiHoc";
 import {useTemplateState} from "../TemplateContext";
 import {templateList, templateMaxPage} from "../templateApi";
 
+import '../../mypage/font/font.css';
 
 const TemplateList = ({result}) => {
 

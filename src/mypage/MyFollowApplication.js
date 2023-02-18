@@ -49,20 +49,46 @@ function MyFollowApplication(props){
         })
     }
 
-    function showBtn(){
+    const [myfollowingList , setMyFollowingList] = useState();
+
+    function ShowMyFollowing(){
+        axios.get("/api/follow/selectMyFollowingList" , {
+            params:{
+                follower : userNos == null ? userNo : userNos,
+            }
+        }).then(function(res){
+            console.log(res+"데이터 전송 성공");
+            const data = res.data.result;
+            console.log(data);
+            setMyFollowingList(data);
+        }).catch(function(){
+            console.log("데이터 전송 실패");
+        })
+    }
+
+    useEffect(() => {
+        ShowMyFollowing();
+        console.log(userNo + "===여기도 통과됨")
+      },[userNos == null ? userNo : userNos])
+    
+
+    function fBtnShow(){
         if(userNo !== myNo){
-            return (
-                <>
+            return (<div>
                 <button class="btn btn-primary" style={{marginLeft:'215px' , fontSize:'13px', marginTop:'-325px' , borderRadius:'100px' , width:'100px'}} onClick={followGo}>팔로우 신청</button>
-                <MyFollowDelete/>
-                </>
-            )
+                {/* <MyFollowDelete userNo={userNo}/> */}
+            </div>)
+        }else if(userNos !== myfollowingList?.userNo){
+            return(<div>
+                {/* <button class="btn btn-primary" style={{marginLeft:'215px' , fontSize:'13px', marginTop:'-325px' , borderRadius:'100px' , width:'100px'}} onClick={followGo}>팔로우 신청</button> */}
+            <MyFollowDelete userNo={userNo}/>
+            </div>)
         }
     }
 
     return(
         <div>
-            {showBtn()}
+            {fBtnShow()}
         </div>
     )
 }

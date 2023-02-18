@@ -14,7 +14,7 @@ import { BsFillBrushFill , BsCheckLg } from "react-icons/bs";
 
 import { confirmAlert } from "react-confirm-alert";
 // import "react-confirm-alert/src/react-confirm-alert.css";
-import './react-confirm-alert.css';
+import '../mypage/react-confirm-alert.css';
 
 import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
