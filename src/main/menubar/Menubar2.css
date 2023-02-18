@@ -1,33 +1,35 @@
 .menubar-box{
     box-sizing: border-box;
     display: inline-block;
-    /*border: 1px solid pink;*/
-    /*border: 10px solid pink;*/
-    width: 63%;
+    border: 0px dotted pink;
+    width: 67%;
     height: 100%;
-    float: left;
-    /*margin: auto;*/
+    margin: auto;
 }
 .menuBar{
     /*padding: 1rem; */
-    background: white;
+    background: rgb(225, 225, 225);
     width: 100%;
     height: 13%;
     margin-bottom: 1rem;
+    text-align: center;
 }
 .contentArea{
     width: 100%;
-    height: 83%;
+    height: 87%;
+    margin: auto;
+    border: 0px dotted skyblue;
 }
 .tabs {
     height: 13%;
 }
 .tabs li{
-    font-size: 27px;
+    font-size: 37px;
     font-weight: bold;
     display: inline-block;
     color: #c4c4c4;
-    padding: 1rem;
+    color: rgb(249, 249, 249);
+    padding: 23px 40px;
 }
 .tabs li.active{
     color: black;

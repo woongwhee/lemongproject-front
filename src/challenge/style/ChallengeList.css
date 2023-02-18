@@ -1,0 +1,17 @@
+.ChallengePage{
+    border: 1px solid pink;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    margin-left: 10px;
+    /* overflow: scroll; */
+}
+.challengeCard{
+    width: 45%;
+    height: 200px;
+    border:1px solid black;
+    display: inline-block;
+    margin-left:10px ;
+    padding: 5px;
+    position: relative;
+}

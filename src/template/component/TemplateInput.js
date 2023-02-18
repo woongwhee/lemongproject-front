@@ -9,31 +9,31 @@ const TemplateInput = ({inputValue, updateInputValue}) => {
     return (
         <div className="template-input">
             <div className="tpdiv1">
-            <label htmlFor="title">제목</label>
-            <input type="text" onBlur={updateInputValue} name="title" defaultValue={inputValue.title}/>
+                <label htmlFor="title">제목&nbsp;</label>
+                <input type="text" onBlur={updateInputValue} name="title" defaultValue={inputValue.title}/>
             </div>
             <div className="tpdiv2">
-            <label htmlFor="content">내용</label>
-            <input type="text" onBlur={updateInputValue} name="content" defaultValue={inputValue.content}/>
-            <br/>
+                <label htmlFor="content">내용&nbsp;</label>
+                <input type="text" onBlur={updateInputValue} name="content" defaultValue={inputValue.content}/>
+                <br/>
             </div>
             <div className="tpdiv3">
-            <label htmlFor="categoryNo">분류</label>
-            <select name="categoryNo" onChange={updateInputValue}>
-                {inputValue.categoryNo==null&&<option value={null} selected>선택해주세요</option>}
-                {categories.map(c => {
-                    if (c.categoryNo != inputValue.categoryNo) {
-                        return <option key={c.categoryNo} value={c.categoryNo}>{c.categoryName}</option>
-                    } else {
-                        return <option key={c.categoryNo} value={c.categoryNo} selected>{c.categoryName}</option>
+                <label htmlFor="categoryNo">분류&nbsp;</label>
+                <select name="categoryNo" onChange={updateInputValue}>
+                    {inputValue.categoryNo==null&&<option value={null} selected>선택해주세요</option>}
+                    {categories.map(c => {
+                        if (c.categoryNo != inputValue.categoryNo) {
+                            return <option key={c.categoryNo} value={c.categoryNo}>{c.categoryName}</option>
+                        } else {
+                            return <option key={c.categoryNo} value={c.categoryNo} selected>{c.categoryName}</option>
+                        }
+                    })
                     }
-                })
-                }
-            </select>
+                </select>
             </div>
             <div className="tpdiv4">
-            <label htmlFor="range">기간</label>
-            <input type="number" onBlur={updateInputValue} name="range" max="365" defaultValue={inputValue.range}></input>
+                <label htmlFor="range">기간&nbsp;</label>
+                <input type="number" onBlur={updateInputValue} name="range" max="365" defaultValue={inputValue.range}></input>
             </div>
         </div>
     );

@@ -34,8 +34,8 @@ function MainPage() {
 
     return(
         <>
-            <Header/>
-            {/*<MainMenuBar profile={profile}/>*/}
+        <Header/>
+        {/*<MainMenuBar profile={profile}/>*/}
 
         <main className="outer">
             {/* 캘린더 영역 */}
@@ -44,8 +44,8 @@ function MainPage() {
                 <br/><br/>
                 <Calendar/>
             </div>
-          {/*<Menubar2/>*/}
-          {/*<Menubar3/>*/}
+            {/*<Menubar2/>*/}
+            {/*<Menubar3/>*/}
             <Menubar4/>
         </main>
     </>

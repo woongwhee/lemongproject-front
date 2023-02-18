@@ -8,6 +8,7 @@ import TemplateInput from "./TemplateInput";
 import "../style/TemplateWrite.css"
 import {useTemplateDispatch} from "../TemplateContext";
 import GoBackButton from "./GoBackButton";
+import { BsArrowLeftCircle} from 'react-icons/bs'
 
 const TemplateWrite = ({result}) => {
     let {title, categoryNo, content, range, todoList} = result;
@@ -94,12 +95,13 @@ const TemplateWrite = ({result}) => {
     return (
         <div className={"template-write"}>
             <div className="btnBox">
-                <GoBackButton/>
-                <div>
-                <Button onClick={reset}>
-                    리셋
-                </Button>
-                <Button onClick={upload}>저장</Button>
+                <div className='btnBack'>
+                    <BsArrowLeftCircle />
+                </div>
+                
+                <div className='btns'>
+                    <Button className='btnReset' onClick={reset}>리셋</Button>
+                    <Button className='btnSave' onClick={upload}>저장</Button>
                 </div>
             </div>
             <TemplateInput inputValue={inputValue} updateInputValue={updateInputValue}/>
