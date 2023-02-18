@@ -56,20 +56,25 @@ function Join() {
 
     // 닉네임 중복체크
     const checkNick = async(nickName) => {
-        let response = await axios.post('api/p/join/chNick',
-            ({'nickName':nickName})
-        )
-        if(response.data.code === '2000') {
-            // alert("사용가능")
-            setNickError("사용 가능한 닉네임입니다.")
-            setErrorColor("chAlarm okAlarm")
-            setIsNickBtn(true);
-        } else {
-            // alert("사용불가능")
-            setNickError("중복된 닉네임입니다.")
+        if(nickName == null) {
+            setNickError("닉네임을 입력해주세요.")
             setErrorColor("chAlarm noAlarm")
             setIsNickBtn(false);
-        } 
+        } else {
+            let response = await axios.post('api/p/join/chNick',
+                ({'nickName':nickName})
+            )
+            if(response.data.code === '2000') {
+                setNickError("사용 가능한 닉네임입니다.")
+                setErrorColor("chAlarm okAlarm")
+                setIsNickBtn(true);
+            } else {
+                setNickError("중복된 닉네임입니다.")
+                setErrorColor("chAlarm noAlarm")
+                setIsNickBtn(false);
+            } 
+        }
+        
     }
 
 
@@ -193,39 +198,45 @@ function Join() {
             alert.log('회원가입 실패');
         }
 
-        /*
-            동일한 회원정보가 존재할 경우(모든 데이터 일치)
-            axios Request failed with status code 500
-            이라는 에러가 뜬다.
-            Bad Server 500 error가 뜨는데 조회는 되는데 한 개만 select가 안되다보니
-            server 에러라고 뜬다.
-        */ 
+    }
+
+
+    const toMain = () => {
+        window.location.href = "/"
     }
 
 
     return(
+        <>
+
+            <div className="JoinBackCol"></div>
+        
+
             <div className="JoinArea">
                 <div className="logo">
                     <img className="logo" src="LemongImg/CommonImg/LemongLogo.png" alt="lemongLogo" />
                 </div>
-                <h3 className="intro">당신의 꿈에 한 발짝 더 나아가보세요</h3>
-                
+                <h5 className="intro">당신의 꿈에 한 발짝 더 나아가보세요</h5>
+                <br></br>
                 <div className="profInput">
                     {/* 이름 */}
                     <div className="nameInput">    
-                        <input type="text" id="userName" name="userName" placeholder="이름" required 
+                        <input type="text" id="userName" name="userName" placeholder="이름" className="longInput" required 
                             onChange={(e) => {onChangeName(e);}} />
                     </div>
+
                     {/* 닉네임 */}
                     <div className="nickInput">
-                        <input type="text" id="nickName" name="nickName" placeholder="닉네임" required 
+                        <input type="text" id="nickName" name="nickName" placeholder="닉네임" className="shortInput" required 
                             onChange={(e) => {setNickName(e.target.value);}} />
-                        <button className="chBtn nickBtn" onClick={() => {checkNick(nickName);}}>중복확인</button>
+                        <button className="chBtn" onClick={() => {checkNick(nickName);}}>중복확인</button>
+                        
                         <p className={errorColor}>{nickError}</p>
                     </div>
+
                     {/* 비밀번호 */}
                     <div className="pwdInput">
-                        <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호" required 
+                        <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호" className="longInput" required 
                             onChange={(e) => {
                                 onChangePassword(e);
                                 setUserPwd(e.target.value);
@@ -234,13 +245,13 @@ function Join() {
                     </div>
                     {/* 비밀번호 확인 */}
                     <div className="rePwdInpt">
-                        <input type="password" placeholder="비밀번호 확인" 
+                        <input type="password" placeholder="비밀번호 확인" className="longInput" required
                             onChange={(e) => {onChangeRePwd(e);}} />
                         <p className={rePwdColor}>{rePwdError}</p>
                     </div>
                     {/* 이메일 */}
                     <div className="emailInput">
-                        <input type="email" id="email" name="email" placeholder="이메일 주소" required 
+                        <input type="email" id="email" name="email" placeholder="이메일 주소" className="shortInput" required 
                             onChange={(e) => {
                                 onChangeEmail(e);
                                 setEmail(e.target.value);
@@ -250,7 +261,7 @@ function Join() {
                     </div>
                     {/* 이메일 인증번호 */}
                     <div className="emailNumInput">
-                        <input type="text" id="emailNum" name="emailNum" placeholder="이메일 인증번호 입력" required
+                        <input type="text" id="emailNum" name="emailNum" placeholder="이메일 인증번호 입력" className="shortInput" required
                             onChange={(e) => {setEmailNum(e.target.value);}}/>
                         <button className="chBtn enBtn" onClick={() => {chEmailNum(email, emailNum);}}>확인</button>
                         <p className={emailNumColor}>{emailNumMs}</p>
@@ -259,12 +270,15 @@ function Join() {
 
                 </div>
                 <br />
-                <div className="joinBtn">
-                    <button onClick={() => {joinClick(userName, nickName, userPwd, email);}} disabled={!isJoinBtn}>
+                <div className="joinBtnArea">
+                    <button className="joinBtn" onClick={() => {joinClick(userName, nickName, userPwd, email);}} disabled={!isJoinBtn}>
                         회 원 가 입
                     </button>
+                    <button className="backHomeBtn" onClick={toMain}>뒤 로 가 기</button>
                 </div>
             </div>
+
+        </>
 
     )
 

@@ -1,0 +1,51 @@
+
+.newPwdInput {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.newPwdInputP {
+    margin: auto;
+    text-align: center;
+    padding: 0 30px;
+    padding-left: 30px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.inputNewPwd {
+    width: 21rem;
+    height: 2.5rem;
+    border: 2px solid #BA99C3;
+    padding-left: 15px;
+}
+
+.newPwdInput p, .reNewPwdInput p {
+    margin-left: 13rem;
+}
+
+
+.reNewPwdInput {
+    margin: auto;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.reNewPwdInputP {
+    margin: auto;
+    text-align: center;
+    padding: 0 50px;
+    padding-left: 30px;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+.inputReNewPwd {
+    width: 21rem;
+    height: 2.5rem;
+    border: 2px solid #BA99C3;
+    padding-left: 15px;
+}
