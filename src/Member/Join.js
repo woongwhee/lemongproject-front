@@ -65,12 +65,10 @@ function Join() {
                 ({'nickName':nickName})
             )
             if(response.data.code === '2000') {
-                // alert("사용가능")
                 setNickError("사용 가능한 닉네임입니다.")
                 setErrorColor("chAlarm okAlarm")
                 setIsNickBtn(true);
             } else {
-                // alert("사용불가능")
                 setNickError("중복된 닉네임입니다.")
                 setErrorColor("chAlarm noAlarm")
                 setIsNickBtn(false);

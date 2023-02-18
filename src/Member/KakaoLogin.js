@@ -25,7 +25,6 @@ function KakaoLogin() {
                 console.log('닉네임 설정하기');
                 console.log(res.data.result);
                 console.log(res.data.result.userNo);
-                // sessionStorage.setItem("userNo", res.data.result.userNo);
                 document.location.href="/setNick";
             }
         })
@@ -35,7 +34,6 @@ function KakaoLogin() {
     })
 
 
-    // const userNo = sessionStorage.getItem("userNo");
 
     return(
 

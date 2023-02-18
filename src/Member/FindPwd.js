@@ -138,7 +138,7 @@ function FindPwd() {
                <div className="findInfoWrap">
 
                     <div className="pwdTitleArea">
-                            <img className="pwdLogo" src="LemongImg/CommonImg/LemongLogo.png" alt="logo" onClick={toMain} />
+                        <img className="pwdLogo" src="LemongImg/CommonImg/LemongLogo.png" alt="logo" onClick={toMain} />
                         <p className="pwdTitle">비밀번호 찾기</p>
                     </div>
                     

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // 액시오스
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import './Join.css';
 import { KAKAO_AUTH_URL } from './KakaoLoginData';
 import { Client_Id, Naver_CallBack_URL } from './NaverData';
 import {useLoginDispatch} from "./LoginContext";
-// import profile from "../ToDoListPage/profile/Profile";
 import {useAsync} from "react-async-hook";
-import userNo from '../reducer/userNo';
 
 function Login() {
 
@@ -55,11 +53,9 @@ function Login() {
         )
         if (response.data.code === '2000') {
             alert("로그인에 성공하였습니다.")
-            console.log(response.data.result);
             loginSuccess(response.data.result);
         } else {
             console.log('실패!')
-            // console.log(error)
             setNoLoginMs("잘못된 회원 정보입니다. 다시 입력해주세요.")
             setNoLoginCol("newChAlarm noAlarm")
             setLoginHeight("loginArea newLoginAreaHeight")
@@ -70,7 +66,6 @@ function Login() {
     const { data, error, isPending } = useAsync(checkLogin);
     if ( isPending ) return "Loading...";
     if ( error ) return `Something went wrong: ${error.message}`;
-        // 로그인 클릭시 데이터 전송
 
 
     // 네이버 로그인

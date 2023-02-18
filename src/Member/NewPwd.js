@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useCallback, useState } from 'react';
 import './FindPwd.css'
 import './Join.css';
+import './NewPwd.css';
 
 function NewPwd() {
 
@@ -76,47 +77,59 @@ function NewPwd() {
         )
         if(res.data.code === '2000') {
             alert("비밀번호가 재설정되었습니다.")
-            // document.location.href = "/";
+            document.location.href = "/";
         } else {
             alert("비밀번호 변경에 실패하였습니다.")
         }
     }
 
 
-
+    const toMain = () => {
+        window.location.href = "/"
+    }
 
 
     return(
+        <>
 
-        <div className="findInfoWrap">
+            <div className="findInfoCol"></div>
+
             <div>
-                <h1>비밀번호 재설정 페이지</h1>
-            </div>
-            <div>
-                {/* 비밀번호 재설정 */}
-                <div>
-                    <p>비밀번호 재설정</p>
-                    <input type="password" id="newPwd" name="newPwd" placeholder='비밀번호 입력' required
-                        onChange={(e) => {onChangeNewPwd(e);}} />
-                    <p className={newPwdCol}>{newPwdError}</p>
-                </div>
-                {/* 비밀번호 재입력 */}
-                <div>
-                    <p>비밀번호 확인</p>
-                    <input type="password" id="newPwdCh" name="newPwdCh" placeholder="비밀번호 재입력" required 
-                        onChange={(e) => {onChangeNewPwdCh(e);}} />
-                    <p className={newPwdChCol}>{newPwdChError}</p> 
-                </div>
-                {/* 재설정 버튼 */}
-                <div>
-                    <button onClick={() => {newPwdClick(newPwd);}} disabled={!isNewPwdBtn}>
-                        비밀번호 재설정
-                    </button>
+                <div className="findInfoWrap">
+
+                    <div className="pwdTitleArea">
+                        <img className="pwdLogo" src="LemongImg/CommonImg/LemongLogo.png" alt="logo" onClick={toMain} />
+                        <p className="pwdTitle">비밀번호 재설정</p>
+                    </div>
+
+                    <div className="findInput">
+                        {/* 비밀번호 재설정 */}
+                        <div className='newPwdInput'>
+                            <span className='newPwdInputP'>비밀번호 재설정</span>
+                            <input className='inputNewPwd' type="password" id="newPwd" name="newPwd" placeholder='비밀번호 입력' required
+                                onChange={(e) => {onChangeNewPwd(e);}} />
+                            <p className={newPwdCol}>{newPwdError}</p>
+                        </div>
+                        {/* 비밀번호 재입력 */}
+                        <div className='reNewPwdInput'>
+                            <span className='reNewPwdInputP'>비밀번호 확인</span>
+                            <input className='inputReNewPwd' type="password" id="newPwdCh" name="newPwdCh" placeholder="비밀번호 재입력" required 
+                                onChange={(e) => {onChangeNewPwdCh(e);}} />
+                            <p className={newPwdChCol}>{newPwdChError}</p> 
+                        </div>
+
+                        {/* 재설정 버튼 */}
+                        <div className="findPwdBtnArea">
+                            <button className="findPwdBtn" onClick={() => {newPwdClick(newPwd);}} disabled={!isNewPwdBtn}>
+                                비밀번호 재설정
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-
-        </div>
+        </>
 
 
     )
