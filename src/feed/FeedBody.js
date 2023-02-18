@@ -6,6 +6,7 @@ import {codeHandler} from "../util/apiUtil";
 import "./FeedBody.css"
 import CircularProgress from '@mui/material/CircularProgress';
 import Ready from './FeedLoading';
+import FeedAlarm from "./FeedAlarm";
 
 function FeedBody(){
     // 요청받은 정보를 담아줄 변수 선언
@@ -68,6 +69,7 @@ function FeedBody(){
     let i=0;
     return(
         <div>
+            <FeedAlarm/>
             <div className="FeedBody" >
                 {feedList?.map((e)=><Feed key={i++} {...e}/>)}
                 <div ref={target} style={{height:"30px"}}></div>
