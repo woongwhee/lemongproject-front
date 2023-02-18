@@ -1,7 +1,7 @@
 #template-list{
     display: inline-block;
     width: 100%;
-    /*margin: auto;*/
+    margin: auto;
     margin-left: 10px;
     height: 100%;
     overflow: scroll;

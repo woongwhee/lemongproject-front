@@ -45,7 +45,7 @@ const Menubar4 = (props) => {
                         onClick={() => changeMenu(MENU_TEMPLATE)}>Template
                     </li>
                 </ul>
-                <button onClick={() => changeMenu(MENU_MY_PROFILE)}>응애</button>
+                {/* <button onClick={() => changeMenu(MENU_MY_PROFILE)}>응애</button> */}
             </div>
             <div className="contentArea">
                 {getContent(menu.index)}
