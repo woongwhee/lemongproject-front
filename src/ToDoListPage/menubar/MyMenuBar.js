@@ -7,9 +7,9 @@ import {IconButton} from "@mui/material";
 import FeedInsert from "../../feedPage/FeedInsert";
 import MySearch from "../../mypage/MySearch";
 
-import {useLoginState} from "../../Member/LoginContext";
+import {useLoginState} from "../../member/LoginContext";
 
-import { useLoginDispatch } from "../../Member/LoginContext";
+import { useLoginDispatch } from "../../member/LoginContext";
 
 import axios from "axios";
 import {useDispatch, useSelector} from 'react-redux';

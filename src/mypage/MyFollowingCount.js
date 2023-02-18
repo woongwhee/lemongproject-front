@@ -3,7 +3,7 @@ import axios from "axios";
 
 import './MyPage.css';
 
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
 

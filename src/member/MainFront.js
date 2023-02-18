@@ -10,12 +10,12 @@ function MainFront() {
         <>
             
             
-            {/* <TitleInfo /> */}
+             <TitleInfo />
 
             
             <Login />
             
-            {/* <div className='loginBackColor'></div> */}
+             <div className='loginBackColor'></div>
 
         </>
     )

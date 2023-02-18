@@ -3,7 +3,7 @@ import {createGlobalStyle} from 'styled-components';
 import axios from "axios";
 // import ChallengeRoomCreate from './challengeRoomCreate';
 import {useDispatch, useSelector} from 'react-redux';
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 const Chat = (props) => {
 
     let{chatData}=props;

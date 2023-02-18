@@ -10,7 +10,7 @@ import { width } from 'dom7';
 
 import { TiTick } from "react-icons/ti";
 
-import { useLoginState } from "../Member/LoginContext"; 
+import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
 const ProFileData = (props): JSX.Element => {

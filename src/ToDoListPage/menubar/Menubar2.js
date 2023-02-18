@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 // import Menubar3 from "./Menubar3";
 import { MyPage } from "../../mypage/MyPage";
 
-import { useLoginState } from "../../Member/LoginContext"; 
+import { useLoginState } from "../../member/LoginContext";
 
 let {profile}=useLoginState;
 console.log(profile);

@@ -18,7 +18,7 @@ import {IconButton} from "@mui/material";
 import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 import MyMenuBar from "./menubar/MyMenuBar";
 import MainMenuBar from "./menubar/MainMenuBar";
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 
 
 //캘린더 라이브러리 추가 해주기

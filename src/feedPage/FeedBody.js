@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useReducer, useState} from "react";
 import axios from "axios";
 import Feed from "./Feed1";
 import FeedLoading from "./FeedLoading";
-import {useLoginState} from "../Member/LoginContext";
+import {useLoginState} from "../member/LoginContext";
 
 function FeedBody(){
     // 요청받은 정보를 담아줄 변수 선언

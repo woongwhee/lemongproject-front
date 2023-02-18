@@ -6,7 +6,7 @@ import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiSquarePl
 import {Nav} from 'react-bootstrap';
 import MySearch from "../mypage/MySearch";
 import MyAlert from "../mypage/MyAlert";
-import { useLoginState } from "../Member/LoginContext";
+import { useLoginState } from "../member/LoginContext";
 
 import { Link } from "react-router-dom";
 
