@@ -85,6 +85,7 @@ function MyChallenge(props){
     return(
         <div className="outer_Chall">
             <div>
+                {/* {onModal&&<challengezzz></challengezzz>} */}
                {myChallList?.map(e => <div key={i++} {...e} className="outer_myChallList" class="btn btn-outline-dark" onClick={() => {ChallengeDetail(e?.challengeNo);}} style={{borderRadius:'0' , width:'100%'}} data-bs-toggle="modal" data-bs-target={"#exampleModalChallenge"}>
                     <h1 style={{float:'left' , fontFamily:'Lobster-Regular'}} key={i++} {...e}><b>{e?.challenge?.challengeTitle}</b></h1> <br/><br/><br/> 
                     <h4 style={{float:'left' , fontFamily:'NanumGothic-Regular' , fontSize:'23px'}} key={i++} {...e}><span>{e?.challenge?.challengeInfo}</span></h4> <br/><br/>

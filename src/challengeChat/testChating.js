@@ -32,12 +32,13 @@ const Chat = (props) => {
     const ws = useRef(null);    //webSocket을 담는 변수, 
                                 //컴포넌트가 변경될 때 객체가 유지되어야하므로 'ref'로 저장
 
-    const msgBox = chatt.map((item, idx) => (
-        <div key={idx} className={item.name === name ? 'me' : 'other'}>
-            <span><b>{item.name}</b></span> [ {item.date} ]<br/>
-            <span>{item.msg}</span>
-        </div>
-    ));
+    const msgBox =
+        chatt.map((item, idx) => (
+            <div key={idx} className={item.name === name ? 'me' : 'other'}>
+                <span><b>{item.name}</b></span> [ {item.date} ]<br/>
+                <span>{item.msg}</span>
+            </div>
+        ));
 
     useEffect(() => {
         if(socketData !== undefined) {
@@ -88,6 +89,7 @@ const Chat = (props) => {
 
         if(msg !== ''){
             const data = {
+                userNo,
                 chatRoomNo,
                 name,
                 msg,
@@ -126,6 +128,7 @@ const Chat = (props) => {
            }
     })();
 
+
     
     return (
         <>
@@ -137,6 +140,7 @@ const Chat = (props) => {
                     <div id='talk' className='talk' style={{overflow:'scroll'}}>
                         <div className='talk-shadow'></div>
                         {msgBox}
+
                     </div>
                     <input disabled={chkLog}
                         placeholder='이름을 입력하세요.' 
