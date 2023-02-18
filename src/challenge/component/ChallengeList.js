@@ -13,11 +13,8 @@ const ChallengeList = ({result}) => {
     }
 
     return (
-        <div>
-            <Button onClick={() => {
-                detailView(3000);
-            }}>3000만큼사랑해</Button>
-
+        <div className='challenge'>
+            <Button onClick={() => {detailView(3000);}}>3000만큼사랑해</Button>
         </div>
     );
 };

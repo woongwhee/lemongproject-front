@@ -1,5 +1,6 @@
 .profile-box div{
     box-sizing: border-box;
+    border: 3px dotted skyblue;
 }
 .pro-pic{
     border: 1px solid orange;

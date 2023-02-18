@@ -1,5 +1,8 @@
 import React from 'react';
 import { FaLemon } from 'react-icons/fa';
+import { GiOrange, GiCutLemon, GiRoundStar } from 'react-icons/gi';
+import { FiGithub } from 'react-icons/fi';
+import { BsTrophyFill } from 'react-icons/bs';
 
 const TitleContent = ({chMark, Mark, hdMark, day}) => {
     let isMark= (Mark.lastIndexOf(day) != -1);
@@ -18,7 +21,7 @@ const TitleContent = ({chMark, Mark, hdMark, day}) => {
         <>
         <div className="dots">
             {isMark && <FaLemon className="dot"/>}
-            {isChMark && <FaLemon className="dot2"/>}
+            {isChMark && <GiRoundStar className="dot2"/>}
         </div>
         <div className="holy">{holiday?.holidayName}</div>
         </>

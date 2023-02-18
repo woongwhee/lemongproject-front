@@ -16,6 +16,7 @@ const ChallengeDetail = ({result}) => {
         let res = await cancelMulti(challengeNo);
         alert(res);
     }
+    
     return (
         <div>
             {isReady?<Button onClick={join}>흐에</Button>:<Button onClick={cancel}>포기할래요</Button>}
