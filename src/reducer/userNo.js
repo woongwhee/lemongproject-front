@@ -30,7 +30,7 @@ function userNo (state, action) {
         case 'SELECTUSERNO-MY' :
             return action.payload;
         default :
-            return state;
+            return state
     }
 
 }

@@ -5,7 +5,7 @@ import { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-import ProFileData from "./MyPageProfileInsert";
+import ProFileData from "./ProFileData";
 
 import './MyPageUpdate.css';
 
@@ -19,9 +19,7 @@ function MyPageProfile(props){
     let {profile}=useLoginState();
     console.log(profile);
     // const userNo = profile?.userNo; // 로그인한 사용자 userNo
-
     let{myprofile}=props;
-
     // 현재 주소에 떠있는 userNo를 가져와서 그 userNo에 해당하는 값을 사용하겠다.
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
@@ -31,7 +29,7 @@ function MyPageProfile(props){
 
     let saveFilePath = "http://localhost:8081/api/images/";
 
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
+    const userNos = useSelector((state) => state.userNo);
 
     const [member , setMember] = useState();
 

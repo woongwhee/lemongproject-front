@@ -4,42 +4,29 @@ import axios from "axios";
 import {useDispatch, useSelector} from 'react-redux';
 
 import './MyPage.css';
+import {MENU_PROFILE} from "../reducer/menu";
 
 function AcceptFollowingCount(props){
 
     let{userNo}=props;
 
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
-
-    // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
-
-    // 팔로우 당하는사람(팔로워)
-    const follower = params.get("userNo");
-
-    // 팔로우 하는사람(팔로잉)
-    const followerIng = params.get("userNo");
-
     const dispatch = useDispatch();
 
     const selectUserNo = e => {
-        console.log(e + "[통과확인] === success"); // 값 뽑히는거 확인됨.
         dispatch(
-            {type : 'SELECTUSERNO' , payload : {selectUserNo : e}} ,
+            {type : MENU_PROFILE , userNo:e} ,
         )
     };
 
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
-
+    const userNos = useSelector((state) => state.menu.userNo);
     // 팔로우 신청을 받은 사용자 입장에서 
     // 나의 팔로우 수락여부에 상관없이 팔로잉이 플러스되어야함.
     const [AcceptFollowingCount , setAcceptFollowingCount] = useState();
-
     useEffect(
         () => {
             axios.get("/api/follow/AcceptFollowingCount" , {
                 params : {
-                    follower : userNos == null ? userNo : userNos , 
+                    follower : userNo,
                 }
             }).then(function(res){
                 console.log(res+"데이터 전송 성공");
@@ -48,7 +35,7 @@ function AcceptFollowingCount(props){
             }).catch(function(){
                 console.log("데이터 전송 실패");
             })
-        } , [userNos == null ? userNo : userNos]
+        } , []
     )
 
     // 상대방 팔로잉 리스트 띄우기.
@@ -97,7 +84,7 @@ function AcceptFollowingCount(props){
                         {AcceptfollowingList?.map(e => <div style={{marginTop:'10px'}}>
                             <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
                             <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
-                                <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
+                                <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} data-bs-dismiss="modal"
                                 onClick={() => {selectUserNo(e?.profile?.userNo);}}>방문하기</button>
                             </div>
                         </div>)}

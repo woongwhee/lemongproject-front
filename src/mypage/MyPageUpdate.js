@@ -1,21 +1,14 @@
 import React , {useState , useEffect} from "react";
-import { Component } from "react";
-
 import './MyPage.css';
 import './MyPageUpdate.css';
 
 // 모달
-import Modal from 'react-bootstrap/Modal';
-import {ModalBody, ModalFooter} from "react-bootstrap";
-
 // 부트스트랩
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import MyPageProfile from "./MyPageProfile";
 import MyPagePwdCheck from "./MypagePwdUpdate";
 import MyDelete from "./MyDelete";
-import MyMenuBar from "../todo/menubar/MyMenuBar";
-import ChallengeChatRoom from "../challengeChat/challengeChatRoom";
 
 import { BsFillBrushFill , BsCheckLg } from "react-icons/bs";
 
@@ -25,6 +18,7 @@ import './react-confirm-alert.css';
 
 import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
+import MyMenuBar from "../main/menubar/MyMenuBar";
 
 function MyPageUpdate(){
 

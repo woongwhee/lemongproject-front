@@ -8,6 +8,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
+import {MENU_PROFILE} from "../reducer/menu";
 
 
 function MyFollowingCount(props){
@@ -18,7 +19,7 @@ function MyFollowingCount(props){
     // const queryString = window.location.search;
     // const params = new URLSearchParams(queryString);
 
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
+    const userNos = useSelector((state) => state.userNo);
 
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
@@ -45,10 +46,9 @@ function MyFollowingCount(props){
     // 프로필 클릭 시 해당하는 userNo 뽑아오기.
     const dispatch = useDispatch();
 
-    const selectUserNo = e => {
-        console.log(e + "[통과확인] === success"); // 값 뽑히는거 확인됨.
+    const selectUserNo = userNo => {
         dispatch(
-            {type : 'SELECTUSERNO' , payload : {selectUserNo : e}} ,
+            {type : MENU_PROFILE , userNo} ,
         )
     };
 
@@ -115,7 +115,7 @@ function MyFollowingCount(props){
                         {myfollowingList?.map(e => <div style={{marginTop:'10px'}}>
                             <img key={i++} {...e} src={e?.profile?.photo?.filePath+e?.profile?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
                             <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
-                                <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
+                                <button type="button" key={i++} {...e} class="btn btn-primary" data-bs-dismiss="modal" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}}
                                 onClick={() => {selectUserNo(e?.profile?.userNo);}}>방문하기</button>
                                 </div>
                         </div>)}  

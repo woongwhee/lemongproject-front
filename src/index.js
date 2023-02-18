@@ -23,6 +23,8 @@ import reducer from "./reducer";
 // import ChallengeRoomCreate from './challengeChat/challengeRoomCreate';
 // import ChallengeChatRoom from './challengeChat/challengeChatRoom';
 import FeedInsert from './feed/FeedInsert';
+import MyPageUpdate from "./mypage/MyPageUpdate";
+import {MyPage} from "./mypage/MyPage";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -38,10 +40,9 @@ root.render(
         <Route path="kakao" element={<KakaoLogin />} />
         <Route path="setNick" element={<SetNick />} />
         <Route path='naver' element={<NaverLoginBtn />} />
-        <Route path="FeedInsert" element={<FeedInsert />}/>
+        {/*<Route path="FeedInsert" element={<FeedInsert />}/>*/}
         {/*<Route path="mypage" element={<MyPage />}/>*/}
-        {/*<Route path="MypageUpdate" element={<LoginProvider><MyPageUpdate /></LoginProvider>}/>*/}
-        {/*<Route path="ChallengeRoomCreate" element={<LoginProvider><ChallengeRoomCreate /></LoginProvider>}/>*/}
+        <Route path="MypageUpdate" element={<LoginProvider><MyPageUpdate /></LoginProvider>}/>
     </Routes>
     </Provider>
   </BrowserRouter>

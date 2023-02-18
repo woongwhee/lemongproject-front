@@ -14,15 +14,6 @@ function Login() {
     useEffect( () => {
         initializeNaverLogin()
     }, [])
-
-
-    const [email, setEmail] = useState();
-    const [userPwd, setUserPwd] = useState();
-    const [noLoginMs, setNoLoginMs] = useState();
-    const [noLoginCol, setNoLoginCol] = useState();
-    const [loginHeight, setLoginHeight] = useState("loginArea loginAreaHeight");
-
-
     const loginDispatch=useLoginDispatch();
     const loginSuccess = (result) => {
         loginDispatch({
@@ -33,9 +24,7 @@ function Login() {
             }
         })
     }
-
-
-    const checkLogin= async() => {
+    const checkLogin=async ()=>{
         const res = await axios.get(`/api/p/checkLogin`);
         if ( res.status != 200 ) throw new Error(res.statusText);
         if (res.data.code === '2000') {
@@ -43,7 +32,35 @@ function Login() {
             return res;
         }
     }
+        const { data, error, isPending } = useAsync(checkLogin);
 
+    const [email, setEmail] = useState();
+    const [userPwd, setUserPwd] = useState();
+    const [noLoginMs, setNoLoginMs] = useState();
+    const [noLoginCol, setNoLoginCol] = useState();
+    const [loginHeight, setLoginHeight] = useState("loginArea loginAreaHeight");
+
+    if ( isPending ) return "Loading...";
+    if ( error ) return `Something went wrong: ${error.message}`;
+
+
+
+
+
+    const initializeNaverLogin = () => {
+        const nLogin = new naver.LoginWithNaverId({
+            clientId: NAVER_CLIENT_ID,
+            callbackUrl: NAVER_CALLBACK_URL,
+            isPopup: false,
+            loginButton: { color: 'green', type: 1, height: '47' },
+        });
+        nLogin.init();
+    }
+
+    const handleNaverClick = () => {
+        const naverLoginButton = document.getElementById("naverIdLogin_loginButton");
+        if(naverLoginButton) naverLoginButton.click();
+    }
 
     const loginClick = async (e, p) => {
         let response = await axios.post('/api/p/login',
@@ -64,10 +81,6 @@ function Login() {
         
     }
 
-    const { data, error, isPending } = useAsync(checkLogin);
-    if ( isPending ) return "Loading...";
-    if ( error ) return `Something went wrong: ${error.message}`;
-
 
     // 네이버 로그인
     const { naver } = window;
@@ -75,27 +88,10 @@ function Login() {
     const NAVER_CALLBACK_URL = Naver_CallBack_URL;
 
 
-    const initializeNaverLogin = () => {
-        const nLogin = new naver.LoginWithNaverId({
-            clientId: NAVER_CLIENT_ID,
-            callbackUrl: NAVER_CALLBACK_URL,
-            isPopup: false,
-            loginButton: { color: 'green', type: 1, height: '47' },
-        });
-        nLogin.init();
-    }
-
-
-    const handleNaverClick = () => {
-        const naverLoginButton = document.getElementById("naverIdLogin_loginButton");
-        if(naverLoginButton) naverLoginButton.click();
-    }
-
 
 
     // 화면 설계
     return (
-
         <div className={loginHeight}>
             <div className='logo'>
                 <img className='logo' src='LemongImg/CommonImg/LemongLogo.png' alt='lemongLogo' />

@@ -5,39 +5,28 @@ import './MyPage.css';
 
 import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
+import {MENU_PROFILE} from "../reducer/menu";
 
 function AcceptFollowCount(props){
-
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
-
     let{userNo}=props;
-
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
     let {profile}=useLoginState();
     console.log(profile);
     // const userNo = profile?.userNo; // 로그인한 사용자 userNo
-
-    // 팔로우 당하는사람(팔로워)
-    const follower = params.get("userNo");
-
-    // 팔로우 하는사람(팔로잉)
-    const followerIng = params.get("userNo");
-
     const dispatch = useDispatch();
 
     const selectUserNo = e => {
-        console.log(e + "[통과확인] === success"); // 값 뽑히는거 확인됨.
+
         dispatch(
-            {type : 'SELECTUSERNO' , payload : {selectUserNo : e}} ,
+            {type : MENU_PROFILE , userNo:e} ,
         )
     };
 
     // 팔로우 신청 받은 유저 입장에서 팔로우 신청 수락 시 카운트 올라감.
     const [AcceptCount , setAcceptCount] = useState();
 
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
+    const userNos = useSelector((state) => state.menu.userNo);
 
     useEffect(
         () => {
@@ -59,8 +48,6 @@ function AcceptFollowCount(props){
     // 상대방 팔로잉 리스트 띄우기.
     const [AcceptfollowerList , setAcceptfollowerList] = useState();
 
-    // 스프링에있는 폴더에서 이미지 불러오기위한 경로
-    let saveFilePath = "http://localhost:8081/api/images/";
 
     function ShowAcceptFollower(){
         axios.get("/api/follow/selectAcceptFollowerList" , {
@@ -78,9 +65,10 @@ function AcceptFollowCount(props){
     }
 
     useEffect(() => {
+
         ShowAcceptFollower();
         console.log(userNos + "===여기도 통과됨")
-      },[userNos == null ? userNo : userNos])
+      },[userNo])
 
     let i = 0;
 
@@ -90,7 +78,6 @@ function AcceptFollowCount(props){
             <span data-bs-toggle="modal" data-bs-target="#exampleModal1" onClick={ShowAcceptFollower} style={{fontSize:'27px' , marginLeft:'415px' , fontFamily:'Quicksand-Regular'}}><b>{AcceptCount?.count}</b></span>
             <div className="App">
             <div class="container p-5">
-            
              <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" style={{margin:'auto' , marginTop:'50px'}}>
                 <div class="modal-content" style={{width:'400px' , height:'700px' , borderRadius:'0'}}>
@@ -102,7 +89,7 @@ function AcceptFollowCount(props){
                         {AcceptfollowerList?.map(e => <div style={{marginTop:'10px'}}>
                             <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'45px' , height:'45px', borderRadius:'50%' , backgroundColor:'gray' , marginLeft:'15px'}}></img> &nbsp; <span key={i++} {...e} style={{fontSize:'20px' , fontFamily:'NanumGothic-Regular'}}>{e?.profile?.nickName}</span>
                             <div style={{float:'right' , marginRight:'300px' , marginTop:'-45px'}}>
-                                <button type="button" key={i++} {...e} class="btn btn-primary" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}} 
+                                <button type="button" key={i++} {...e} class="btn btn-primary" data-bs-dismiss="modal" style={{width:'88px' , fontSize:'15px' , float:'right' , marginLeft:'200px' , borderRadius:'100px' , position:'fixed'}}
                                 onClick={() => {selectUserNo(e?.profile?.userNo);}}>방문하기</button>
                             </div>
                         </div>)}

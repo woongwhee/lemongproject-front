@@ -5,15 +5,13 @@ import axios from "axios";
 import {useDispatch, useSelector} from 'react-redux';
 
 import './MyPage.css';
+import {MENU_PROFILE} from "../reducer/menu";
 
 function SearchUserList(props){
 
     let{userList}=props;
-
     let userNo = userList?.photo?.userNo;
-
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
-  
+    const userNos = useSelector((state) => state.menu.userNo);
     let i = 0;
 
     let saveFilePath = "http://localhost:8081/api/images/";
@@ -29,7 +27,7 @@ function SearchUserList(props){
     const MoveUserPage = e => {
         console.log(e + "[통과확인] === success"); // 값 뽑히는거 확인됨.
         dispatch(
-            {type : 'SELECTUSERNO' , payload : {selectUserNo : e}} ,
+            {type : MENU_PROFILE ,userNo} ,
         )
     };
     

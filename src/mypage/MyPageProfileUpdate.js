@@ -1,11 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import axios from 'axios';
-import { jsx } from '@emotion/react';
 
 
-const ProfileUpdate = (props)=> {
+const ProfileUpdate = ({userNo})=> {
 
-    let{userNo}=props;
 
     // 업로드 한 후  변경된 파일들 저장하는 배열
     const fileList = []; 

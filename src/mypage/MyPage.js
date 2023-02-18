@@ -35,19 +35,12 @@ function MyPage() {
     
     let {profile}=useLoginState();
     // console.log(profile);
-    const userNo = profile?.userNo; // 로그인한 사용자 userNo
+    // const userNo = profile?.userNo; // 로그인한 사용자 userNo
     // console.log(userNo + 'dd?')
      // photo테이userNo블에서 userNo에 해당하는 프로필 사진 정보 가져오기.
      const [myprofile , setMyProfile] = useState();
-     
-     const queryString = window.location.search;
-     const params = new URLSearchParams(queryString);
-
-    //  const userNo = profile?.userNo;
-
-     const userNos = useSelector((state) => state.userNo.selectUserNo);
-
-
+    const userNo = useSelector((state) => state.menu.userNo);
+    // console.log("No",userNo,"Nos",userNos)
      // console.log(userNos + " 제발 통과됨")
     //  const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
  
@@ -56,11 +49,12 @@ function MyPage() {
      }
 
     const selectUser = () => {
-        axios.get("/api/member/selectMyProfile" , {
-            params:{
-                userNo : userNos != null ? userNos : userNo ,
-            }
-        }).then(function(res){
+        axios.get("/api/member/selectMyProfile" ,{params:{userNo:userNo}}
+            // {
+            // params:{
+            //     userNo : userNos != null ? userNos : userNo ,
+            // }
+        ).then(function(res){
             console.log("데이터 전송 성공");
             const data = res.data.result;
             console.log(data);
@@ -73,8 +67,8 @@ function MyPage() {
 
      useEffect(() => {
         selectUser();
-        console.log(userNos + "===여기도 통과됨")
-      },[userNos != null ? userNos : userNo])
+        console.log(userNo + "===여기도 통과됨")
+      },[userNo])
 
      let saveFilePath = "http://localhost:8081/api/images/";
 
@@ -145,7 +139,7 @@ function MyPage() {
                         <button className="myBtnf" onClick={() => changeTab("Template")}>Template</button>
                     </div>
                         {tab === "Feed" ? <MyFeed/> : null}
-                        {tab === "Challenge" ? <MyChallenge userNo={userNo}/> : null}
+                        {tab === "Challenge" ? <MyChallenge/> : null}
                         {tab === "Template" ? <MyTemplates/> : null}
                     </div>
                 {/* <div className="outer_menu">

@@ -7,3 +7,5 @@ export const MULTI_JOIN=`${CHALLENGE_URL}/join`;
 export const CHALLENGE_CANCEL=`${CHALLENGE_URL}/cancel`;
 export const READY_LIST=`${CHALLENGE_URL}/list/ready`;
 export const READY_DETAIL=`${CHALLENGE_URL}/detail/ready`;
+export const ROOM_DETAIL=`${CHALLENGE_URL}/detail/room`
+export const CHAT_SOCKET=`ws://localhost:8081/api/socket/chatt/`;

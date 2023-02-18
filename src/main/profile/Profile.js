@@ -4,20 +4,23 @@ import {useLoginState} from "../../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 import MyFollowingCount from '../../mypage/MyFollowingCount';
 import {USER_PROFILE} from "../../util/ImagePath";
+import {MENU_MY_PROFILE, MENU_PROFILE} from "../../reducer/menu";
 
 function Profile() {
     const {profile}=useLoginState();
-    const {photo}=profile;
+    const {userNo,photo}=profile;
     const filePath=photo!=null?photo.filePath+"/"+photo.changeName:USER_PROFILE;
     const dispatch = useDispatch();
-
     const selectUserNo = () => {
-      dispatch(
-          {type : 'SELECTUSERNO-MY' , payload : {selectUserNo : profile.userNo}} ,
-      )
+      // dispatch(
+      //     {type : 'SELECTUSERNO-MY' , payload : {selectUserNo : profile.userNo}} ,
+      // )
+        dispatch(
+            {type : MENU_PROFILE , userNo:userNo} ,
+        )
   };
 
-  const userNos = useSelector((state) => state.userNo.selectUserNo);
+  // const userNos = useSelector((state) => state.userNo.selectUserNo);
 
   return (
     <div className='profile-box'>

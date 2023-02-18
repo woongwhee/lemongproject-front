@@ -113,7 +113,7 @@ function Calendar2() {
                 return(<TitleContent chMark={chMark} Mark={mark} hdMark={holidayMark} day={date.getDate()}/>)
             }}
             onActiveStartDateChange={onViewChange}
-            onClickDay={selectDay)}
+            onClickDay={selectDay}
         />
         </div>
     );

@@ -9,7 +9,7 @@ import axios from "axios";
 //export const move = () => ({type : MOVE});
 
 const initialState = {
-  index : 3,
+  index : 0,
   menuParam : null
 };
 
@@ -23,7 +23,6 @@ export const MENU_PROFILE="PROFILE";
 
 
 function menu(state=initialState, action) {
-
   switch(action.type){
     case "TODOLIST":
       return {index: 0};
@@ -33,10 +32,8 @@ function menu(state=initialState, action) {
       return {index: 2,menuParam: action.challengeNo};
     case "TEMPLATE":
       return {index:3};
-    case "MY_PROFILE":
-      return {index:4,menuParam:0};
     case "PROFILE":
-      return {index:4,menuParam:action.userNo};
+      return {index:4,userNo:action.userNo};
     default :
       return state;
   }

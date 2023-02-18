@@ -1,6 +1,14 @@
 import axios from "axios";
 import {codeHandler} from "../util/apiUtil";
-import {CHALLENGE_CANCEL, MULTI_JOIN, MULTI_START, READY_DETAIL, READY_LIST, SINGLE_START} from "./challengeURI";
+import {
+    CHALLENGE_CANCEL,
+    MULTI_JOIN,
+    MULTI_START,
+    READY_DETAIL,
+    READY_LIST,
+    ROOM_DETAIL,
+    SINGLE_START
+} from "./challengeURI";
 
 
 
@@ -14,7 +22,10 @@ export const readyDetail= async (challengeNo)=>{
     const res=await axios.get(`${READY_DETAIL}/${challengeNo}`)
     return codeHandler(res);
 }
-
+export const RoomDetail= async (challengeNo)=>{
+    const res=await axios.get(`${ROOM_DETAIL}/${challengeNo}`)
+    return codeHandler(res);
+}
 export const joinMulti=async (challengeNo)=>{
     const res=await axios.put(`${MULTI_JOIN}/${challengeNo}`)
     return codeHandler(res);

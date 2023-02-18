@@ -172,7 +172,7 @@ function MyFeed(props) {
     const [myFeedList , setMyFeedList] = useState([]);
     const [show, setShow] = useState(false);
 
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
+    const userNos = useSelector((state) => state.menu.userNo);
 
     const [currentFeed,setCurrentFeed]=useState({});
 
@@ -208,7 +208,6 @@ function MyFeed(props) {
     }
     return (
         <>
-        {/*<div style={{marginLeft:"0px", border:"1px solid blue"}}>*/}
             {myFeedList.map(Feed=>
                 <div style={{border:"3px solid black", float:"left"}}>
                     <img src={Feed.filePathList[0]} style={{width:"240px", height:"240px"}} onClick={() => {openFeed(Feed)}}/>

@@ -3,6 +3,7 @@ import {REVIEW_INSERT} from "../templateURI";
 import {useLoginState} from "../../member/LoginContext";
 import {reviewInsert, reviewList} from "../templateApi";
 import {isEmpty} from "../../util/typeUtile";
+import ProfileIcon from "../../mypage/ProfileIcon";
 
 const ReviewArea = ({reviewlist,templateNo}) => {
     const [content, setContent] = useState("");
@@ -43,7 +44,7 @@ const ReviewArea = ({reviewlist,templateNo}) => {
                 <button onClick={submitReview}> </button>
             </div>
             {reviews.map(review=>{
-                return <h1>{review.reviewDetail}</h1>
+                return <div><ProfileIcon profile={review.userProfile}></ProfileIcon>{review.reviewDetail}</div>
             })}
         </div>
     );

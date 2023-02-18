@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from "react";
+    import React , {useState , useEffect} from "react";
 import { Component } from "react";
 import axios from "axios";
 
@@ -8,7 +8,6 @@ function MyDelete(){
 
     // 비밀번호 체크 하기 위해 USER비밀번호 가져오기.
     const [userPwd , setUserPwd] = useState();
-
     const selectUpwd = async() => {
         const response = await axios.get("api/member/selectUser");
         setUserPwd(response.data[0]);
@@ -48,8 +47,6 @@ function MyDelete(){
             alert("회원탈퇴에 실패하였습니다.")
         }
     }
-
-
 
     return (
         <div className="App">

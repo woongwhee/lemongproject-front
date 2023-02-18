@@ -14,7 +14,7 @@ function MyFollowApplication(props){
 
     let{userNo}=props;
 
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
+    const userNos = useSelector((state) => state.userNo);
 
     const myNo = userNos == null ? userNo : userNos
 
