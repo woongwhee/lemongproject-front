@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // 액시오스
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import './Join.css';
@@ -8,7 +8,6 @@ import { Client_Id, Naver_CallBack_URL } from './NaverData';
 import {useLoginDispatch} from "./LoginContext";
 // import profile from "../todo/profile/Profile";
 import {useAsync} from "react-async-hook";
-import userNo from '../reducer/userNo';
 
 function Login() {
 
@@ -55,11 +54,9 @@ function Login() {
         )
         if (response.data.code === '2000') {
             alert("로그인에 성공하였습니다.")
-            console.log(response.data.result);
             loginSuccess(response.data.result);
         } else {
             console.log('실패!')
-            // console.log(error)
             setNoLoginMs("잘못된 회원 정보입니다. 다시 입력해주세요.")
             setNoLoginCol("newChAlarm noAlarm")
             setLoginHeight("loginArea newLoginAreaHeight")
@@ -70,7 +67,6 @@ function Login() {
     const { data, error, isPending } = useAsync(checkLogin);
     if ( isPending ) return "Loading...";
     if ( error ) return `Something went wrong: ${error.message}`;
-        // 로그인 클릭시 데이터 전송
 
 
     // 네이버 로그인
@@ -105,9 +101,9 @@ function Login() {
                 <img className='logo' src='LemongImg/CommonImg/LemongLogo.png' alt='lemongLogo' />
             </div>
             <div className='inputArea'>
-                <input placeholder='사용자 이메일' onChange={(e) => {setEmail(e.target.value);}}/>
+                <input placeholder='이메일을 입력해주세요.' onChange={(e) => {setEmail(e.target.value);}}/>
                 <br />
-                <input placeholder='비밀번호' type="password" onChange={(e) => {setUserPwd(e.target.value);}}/>
+                <input placeholder='비밀번호를 입력해주세요.' type="password" onChange={(e) => {setUserPwd(e.target.value);}}/>
                 <p className={noLoginCol}>{noLoginMs}</p>
                 {/* <br /> */}
                 <button id='loginButton' onClick={()=>{loginClick(email,userPwd);}}>

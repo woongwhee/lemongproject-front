@@ -1,9 +1,16 @@
+.JoinBackCol {
+    background-color: #BA99C3;
+    width: auto;
+    height: 100vh;
+}
+
+
 .JoinArea {
-    /* border: 3px solid #ba99c396; */
+    /* border: 1px solid #ba99c396; */
     /* box-shadow: 0px 0px 5px 5px #ba99c396; */
     box-sizing: border-box;
-    width: 25rem;
-    height: 40rem;
+    width: 35rem;
+    height: 45rem;
     margin: auto;
     position: absolute;
     top: 0;
@@ -11,6 +18,8 @@
     bottom: 0;
     left: 0;
     background-color: white;
+    border-radius: 15px;
+    z-index: 3;
 }
 
 .logo {
@@ -27,18 +36,21 @@
     color: #BA99C3;
     /* border: 1px solid black; */
     margin-top: 0px;
+    font-weight: bolder;
 }
 
 .profInput {
+    margin-top: 10px;
     box-sizing: border-box;
     /* border: 1px solid black; */
     margin: auto;
-    text-align: center;
+    text-align: left;
+    margin-left: 4rem;
 }
 
 .chAlarm {
     text-align: left;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     box-sizing: border-box;
     margin-top: 2px;
     font-size: 11px;
@@ -63,89 +75,73 @@
 }
 
 .profInput input {
-    width: 20rem;
     height: 2.5rem;
     border: 1.8px solid #BA99C3;
     padding-left: 15px;
 }
 
-.nickInput>input {
-    position: relative;
+
+.longInput {
+    width: 25rem;
 }
 
-.emailInput>input {
-    position: relative;
+
+.shortInput {
+    width: 19.1rem;
 }
 
-.emailNumInput>input {
-    position: relative;
-}
 
-.joinBtn {
+
+.joinBtnArea {
     margin: auto;
     text-align: center;
 }
 
-.joinBtn>button {
-    /* background-color: #ba99c3a3; */
-    color: white;
-    font-weight: bold;
-    font-size: large;
-    width: 17.5rem;
+.joinBtnArea button {
+    width: 12rem;
     height: 2.5rem;
-    border: 1px solid #BA99C3;
+    margin: 0 1rem;
+    border: 1px solid lightgray;
+    color: white;
+    font-size: large;
+    font-weight: bold;
     border-radius: 5px;
 }
 
-.joinBtn>button:hover {
-    cursor: pointer;
-    /* background-color: #BA99C3; */
-}
-
-.joinBtn>button:disabled {
+.joinBtn:disabled {
     background-color: #ba99c383;
 }
 
-.joinBtn>button:enabled {
+.joinBtn:enabled {
     background-color: #BA99C3;
 }
 
+.joinBtn:enabled, hover {
+    cursor: pointer;
+}
 
 
-
-
-
-
+.backHomeBtn {
+    background-color: rgb(146, 146, 146);
+}
 
 
 
 /* 체크 버튼 */
-/* relative로 이미지 완전 확정되고 위치 고정시키기 */
 .chBtn {
-    background-color: #ffff00;
+    background-color: white;
     border: 0.5px solid gray;
+    color: gray;
+    font-weight: bold;
     width: 5.5rem;
-    height: 2rem;
+    height: 2.3rem;
     border-radius: 15px;
     position: absolute;
+    margin-left: 0.3rem;
 }
 
 .chBtn:hover {
     cursor: pointer;
+    background-color: #ffff00;
+    color: black;
 }
-
-.nickBtn {
-    top: 13.5rem;
-    right: 2.5rem;
-}
-
-.eBtn {
-    top: 26rem;
-    right: 2.5rem;
-}
-
-.enBtn {
-    top: 30.2rem;
-    right: 2.5rem;
-}
-

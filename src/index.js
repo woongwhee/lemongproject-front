@@ -10,6 +10,7 @@ import FindPwd from './member/FindPwd';
 import KakaoLogin from './member/KakaoLogin';
 import {LoginProvider} from "./member/LoginContext";
 import SetNick from './member/SetNick';
+import NewPwd from './member/NewPwd';
 
 import NaverLoginBtn from './member/NaverLoginBtn';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -33,6 +34,7 @@ root.render(
         <Route path="/" element={<LoginProvider><App/></LoginProvider>} />
         <Route path="join" element={<Join />} />
         <Route path="findPwd" element={<FindPwd />} />
+        <Route path="newPwd" element={<NewPwd />} />
         <Route path="kakao" element={<KakaoLogin />} />
         <Route path="setNick" element={<SetNick />} />
         <Route path='naver' element={<NaverLoginBtn />} />
