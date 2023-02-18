@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import Carousel from "react-bootstrap/Carousel";
+import FeedLoading from "./FeedLoading";
 
 function FeedDetailPhoto({filePathList}) {
+
+
 
     const rendering = () => {
         let i = 0;

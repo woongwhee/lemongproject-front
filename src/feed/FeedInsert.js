@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import './FeedInsert.css'
 import FeedPictureInsert from "./FeedPictureInsert";
-import Alert from '@mui/material/Alert';
-import ButtonM from '@mui/material/Button';
 import '../mypage/font/font.css';
 import {Paper, Stack, TextField} from "@mui/material";
 import Button from '@mui/material/Button';
@@ -14,8 +12,6 @@ import swal from 'sweetalert';
 
 import { useLoginState } from "../member/LoginContext";
 
-import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiSquarePlus} from "react-icons/ci";
-import {returnFocus} from "react-modal/lib/helpers/focusManager";
 
 function FeedInsert() {
 

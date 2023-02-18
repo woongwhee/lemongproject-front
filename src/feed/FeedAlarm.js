@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {useLoginState} from "../member/LoginContext";
+import axios from "axios";
 
 function FeedAlarm(props) {
     const [show, setShow] = useState(false);
@@ -11,16 +12,14 @@ function FeedAlarm(props) {
 
     let {profile}=useLoginState();
 
-    function dfdf () {
-        const message = "프론트에서 백"
-        const eventSource = new EventSource("/api/feed/alarm" + message);
+    useEffect(()=>{
+        axios.post('api/feed/replyAlarm',{
 
-        eventSource.addEventListener('sse', function (event){
-            console.log(event.data);
-            const data = JSON.parse(event.data);
         })
+    })
 
-    }
+    const message = () => {}
+
 
 
     return (
@@ -36,6 +35,7 @@ function FeedAlarm(props) {
 
                 <Modal.Body>
                     알람창
+
                 </Modal.Body>
 
                 <Modal.Footer>

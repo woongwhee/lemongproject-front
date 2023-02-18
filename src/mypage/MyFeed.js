@@ -166,6 +166,9 @@ import {useLoginState} from "../member/LoginContext";
 import {useSelector} from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import FeedDetailView from "../feed/FeedDetailView";
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 
 function MyFeed(props) {
 
@@ -206,15 +209,30 @@ function MyFeed(props) {
         setCurrentFeed(feed);
         setShow(true);
     }
+
+
+
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
+
     return (
         <>
-        {/*<div style={{marginLeft:"0px", border:"1px solid blue"}}>*/}
+        <div style={{margin:"auto", border:"1px solid blue", width:"85%"}}>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {myFeedList.map(Feed=>
-                <div style={{border:"3px solid black", float:"left"}}>
-                    <img src={Feed.filePathList[0]} style={{width:"240px", height:"240px"}} onClick={() => {openFeed(Feed)}}/>
-                </div>
+                // <div style={{border:"3px solid black", float:"left"}}
+                    <Grid item xs={6} md={4}>
+                        <Item><img src={Feed.filePathList[0]} style={{width:"240px", height:"240px"}} alt="없습니다" onClick={() => {openFeed(Feed)}}/></Item>
+                    </Grid>
+                // </div>
             )}
-        {/*</div>*/}
+            </Grid>
+        </div>
         <Modal
             show={show}
             onHide={() => setShow(false)}
@@ -227,7 +245,6 @@ function MyFeed(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {/*<FeedReplyInsert feedNo={feedNo}/>*/}
                 <FeedDetailView Feed={currentFeed}></FeedDetailView>
             </Modal.Body>
         </Modal>
