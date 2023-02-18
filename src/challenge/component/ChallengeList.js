@@ -6,7 +6,7 @@ import ChallengeCard from './ChallengeCard';
 import '../style/ChallengeList.css';
 
 const ChallengeList = ({result}) => {
-    //console.log(result);
+    console.log(result);
     let dispatch = useChallengeDispatch();
 
     const detailView = (challengeNo) => {

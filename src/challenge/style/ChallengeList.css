@@ -4,18 +4,10 @@
     height: 100%;
     margin: auto;
     overflow: scroll;
-    padding: 0 5% 0 5%;
+    padding: 1% 5% 0 5%;
 }
 .ChallengePage>div{
     box-sizing: border-box;
-}
-.challengeCard{
-    width: 500px;
-    height: 220px;
-    border:3px solid black;
-    display: inline-block;
-    padding: 10px;
-    margin: 0% 0% 1% 3%;
 }
 .ChallengePage::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
@@ -23,4 +15,57 @@
 .ChallengePage{
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+}
+.chCard-outer{
+    display: inline-block;
+    width: 500px;
+    height: 280px;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 0% 0% 3% 3%;
+    box-shadow: 5px 5px 5px rgb(214, 213, 213);
+}
+.challengeCard{
+    width: 100%;
+    height: 99%;
+    padding: 0px 0px;
+    border-radius: 10px;
+    border: 7px solid transparent;
+    background-origin: border-box; 
+    background-clip: content-box, border-box; 
+    background-image : linear-gradient(#fff, #fff), linear-gradient(195deg, #9714d4 24%, #005dd6 90%);
+}
+.chTitle{
+    font-size: 28px;
+    text-align: center;
+    padding-top: 10px;
+    border: 0px solid skyblue;
+}
+.chCategory{
+    border: 1px solid skyblue;
+}
+.chDate{
+    height: 30px;
+    font-size: 20px;
+    text-align: right;
+    padding-right: 10px;
+    border: 1px solid skyblue;
+}
+
+.chWriterPic{
+    border: 1px solid skyblue;
+    width: 70px;
+    height: 70px;
+    float: left;
+}
+.chWriter{
+    border: 1px solid skyblue;
+    width: 70px;
+    float: left;
+}
+.chCount{
+    text-align: right;
+    font-size: 18px;
+    padding-right: 10px;
+    border: 1px solid skyblue;
 }
