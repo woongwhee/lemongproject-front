@@ -2,8 +2,8 @@ import React, { useCallback, useState } from "react";
 import axios from "axios";
 
 
-import './FindPwd.css'
-import './Join.css'
+import './FindPwd.css';
+import './Join.css';
 
 
 function FindPwd() {
@@ -119,48 +119,62 @@ function FindPwd() {
     }
 
 
+    const toMain = () => {
+        window.location.href = "/"
+    }
+
+
 
 
 
     // 화면 설계
     return(
-        <div>
-            <div className="findInfoWrap">
-                <div>
-                    <p>비밀번호 찾기</p>
-                </div>
-                
-                <div className="findInput">
-                    {/* 이름 */}
-                    <div className="findName">    
-                        <p>이름</p>
-                        <input type="text" id="userName" name="userName" placeholder="이름을 입력하세요." required 
-                            onChange={(e) => {changeName(e);}}/>
+        <>
+
+            <div className="findInfoCol"></div>
+
+            <div>
+            
+               <div className="findInfoWrap">
+
+                    <div className="pwdTitleArea">
+                            <img className="pwdLogo" src="LemongImg/CommonImg/LemongLogo.png" alt="logo" onClick={toMain} />
+                        <p className="pwdTitle">비밀번호 찾기</p>
                     </div>
-                    {/* 이메일 */}
-                    <div className="findEmail">
-                        <p>이메일</p>
-                        <input type="text" id="email" name="email" placeholder="이메일을 입력하세요." required 
-                            onChange={(e) => {changeEmail(e);}}/>
-                        <button onClick={() => {chEmail(userName, email);}}>인증</button>
-                        <p className={emailColor}>{emailMs}</p>
-                    </div>
-                    {/* 인증번호 확인 */}
-                    <div className="findEmailNum">
-                        <p>인증번호</p>
-                        <input type="text" id="code" name="code" placeholder="인증번호를 입력하세요." required 
-                            onChange={(e) => {setEmailNum(e.target.value);}} />
-                        <button onClick={() => {chEmailNum(email, emailNum);}}>확인</button>
-                        <p className={emailNumColor}>{emailNumMs}</p>
+                    
+                    <div className="findInput">
+                        {/* 이름 */}
+                        <div className="findName">    
+                            <span className="findInputP">이름</span>
+                            <input className="inputNameInfo" type="text" id="userName" name="userName" placeholder="이름을 입력하세요." required 
+                                onChange={(e) => {changeName(e);}}/>
+                        </div>
+                        {/* 이메일 */}
+                        <div className="findEmail">
+                            <span className="findInputP">이메일</span>
+                            <input class="inputEmailInfo" type="text" id="email" name="email" placeholder="이메일을 입력하세요." required 
+                                onChange={(e) => {changeEmail(e);}}/>
+                            <button className="chBtn enBtn" onClick={() => {chEmail(userName, email);}}>인증</button>
+                            <p className={emailColor}>{emailMs}</p>
+                        </div>
+                        {/* 인증번호 확인 */}
+                        <div className="findEmailNum">
+                            <span className="findInputP">인증번호</span>
+                            <input class="inputEmailInfo" type="text" id="code" name="code" placeholder="인증번호를 입력하세요." required 
+                                onChange={(e) => {setEmailNum(e.target.value);}} />
+                            <button className="chBtn enBtn" onClick={() => {chEmailNum(email, emailNum);}}>확인</button>
+                            <p className={emailNumColor}>{emailNumMs}</p>
+                        </div>
+
+                        <div className="findPwdBtnArea">
+                            <button className="findPwdBtn" onClick={() => {findClick(email)}} disabled={!toNewPwd}>비밀번호 재설정</button>
+                        </div>
                     </div>
 
-                    <div>
-                        <button onClick={() => {findClick(email)}} disabled={!toNewPwd}>비밀번호 재설정</button>
-                    </div>
                 </div>
-
             </div>
-        </div>
+
+        </>
     )
 
 
