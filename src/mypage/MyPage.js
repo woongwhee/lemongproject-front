@@ -30,6 +30,7 @@ import MyFollowApplication from "./MyFollowApplication";
 import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 import UserNo from "../reducer/userNo";
+import { color } from "@mui/system";
 
 function MyPage() {
     
@@ -106,37 +107,37 @@ function MyPage() {
     return(
         <div>
             {/* <ChallengeChatRoom /> */}
-            <div style={{position:'absolute' , marginLeft:'-180px' , marginTop:'-7px'}}>
+            <div style={{position:'absolute' , marginLeft:'-180px' , marginTop:'0px'}}>
             <div className="outer_my" style={{position:'absolute'}}>
                 
                 <div className="outer_prof">
                     <div className="outer_MyProf">
                         <div className="outer_proimgf">
-                            <img src={myprofile?.photo?.filePath+myprofile?.photo?.changeName} style={{marginLeft:'7px' , marginTop:'0px'}} className="profileImg"></img>
+                            <img src={myprofile?.photo?.filePath+myprofile?.photo?.changeName} style={{marginLeft:'7px' , marginTop:'0px' , width:'150px' , height:'150px'}} className="profileImg"></img>
                         </div>
-                        <div className="outer_idf">
-                            <p className="nickFontf" style={{marginTop:'7px'}}><b>{myprofile?.nickName}</b><img src={mark} style={{width:'25px' , height:'25px' , marginLeft:'7px' , marginTop:'-5px'}}/></p>
-                        </div>
-                        <br/>
-                        <div className="outer_fallf">
-                            <div className="followsizef">
-                                <p style={{fontSize:'23px' , fontFamily:'NanumGothic-Regular'}}>게시글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    팔로잉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팔로워</p>
-                                    {followerComparison()}
-                                    {followingComparison()}
-                            </div>
-                        </div>
+                       <div>
+                                <br/>
+                                <div>
+                                    <p style={{marginTop:'-150px' , marginLeft:'223px'}}><b>{myprofile?.nickName}</b></p>
+                                    <div className="followsizef" style={{marginTop:'-15px' , marginLeft:'223px' , position:'absolute'}}>
+                                        <p style={{fontSize:'17px' , fontFamily:'NanumGothic-Regular'}}>게시글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            팔로잉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팔로워</p>
+                                            {followerComparison()}
+                                            {followingComparison()}
+                                    </div>
+                                </div>
+                         </div>
                         <div className="outer_contentf">
-                            <p style={{fontFamily:'NanumGothic-Regular' , fontSize:'17px'}}>{myprofile?.profileComment}</p>
+                            <p style={{fontFamily:'NanumGothic-Regular' , fontSize:'17px' , marginTop:'80px' , position:'absolute'}}>{myprofile?.profileComment}</p>
                             <MyFollowApplication userNo={userNo}/>
                             
                         </div>
                     </div>
                     <div className="outer_btnf">
-                        <button className="myBtnf" onClick={() => changeTab("Feed")}>Feed</button>
-                        <button className="myBtnf" onClick={() => changeTab("Challenge")}>Challenge</button>
-                        <button className="myBtnf" onClick={() => changeTab("Template")}>Template</button>
+                        <button className="myBtnf" onClick={() => changeTab("Feed")}><p style={{fontFamily:'NanumGothic-Regular'}}>Feed</p></button>
+                        <button className="myBtnf" onClick={() => changeTab("Challenge")}><p style={{fontFamily:'NanumGothic-Regular'}}>Challenge</p></button>
+                        <button className="myBtnf" onClick={() => changeTab("Template")}><p style={{fontFamily:'NanumGothic-Regular'}}>Template</p></button>
                     </div>
                         {tab === "Feed" ? <MyFeed/> : null}
                         {tab === "Challenge" ? <MyChallenge/> : null}

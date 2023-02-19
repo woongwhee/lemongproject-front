@@ -14,7 +14,7 @@ const StartSingleBtn = ({templateNo}) => {
     return (
         <>
             <div style={{marginLeft:'510px' , marginBottom:'-30px'}} onClick={toggle} color={"info"}>
-                <BsFillPersonFill className='themBtn'  style={{fontSize:'30px'}}></BsFillPersonFill> <span style={{fontFamily:'SourceSansPro-Light' , fontSize:'20px'}}>Single</span> 
+                <BsFillPersonFill className='themBtn' style={{fontSize:'30px'}}></BsFillPersonFill> <span style={{fontFamily:'SourceSansPro-Light' , fontSize:'20px'}}>Single</span> 
                 <StartSingleModal isOpen={modal} toggle={toggle} templateNo={templateNo}/>
             </div>
         </>

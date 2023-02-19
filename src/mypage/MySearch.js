@@ -61,13 +61,13 @@ function MySearch(props){
 
     let i = 0;
     return(
-        <div id="serchOuter" style={{width:'92%' , marginLeft:'0px' , height:'960px' , marginTop:'-16px' , position:'absolute'}}>
+        <div id="serchOuter" className="serchOuter" style={{width:'92%' , marginLeft:'0px' , height:'960px' , marginTop:'-16px' , position:'absolute' , overflow:'scroll'}}>
         {/* // <div className="outer_req1"> */}
             <form id="searchForm" name="searchForm" onSubmit={handleSubmit}> 
                 <div className="outer_searchBtn">
                     <input type="search" name="searcValue" className="searchbar" placeholder="아이디를 입력해주세요." onChange={SearchValHandle}
                     id="searchbbbar"></input>
-                        <CiLocationArrow1 type="submit" className="searchbtn" onClick={SerchUser} style={{width:'30px' , marginLeft:'30px' , marginTop:'10px'}}>검색</CiLocationArrow1>
+                        <button type="submit" className="searchbtn" class="btn btn-dark" onClick={SerchUser} style={{width:'75px' , fontSize:'17px' , marginLeft:'20px' , marginTop:'10px' , borderRadius:'0px'}}>검색</button>
                     <SearchUserList userList={userList}/>
                 </div>
             </form>

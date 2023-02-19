@@ -1,10 +1,10 @@
 .outer_my{
     /* border: 1px solid black; */
     width: 1500px;
-    height: 1200px;
+    height: 1130px;
     margin: auto;
     margin-top: -0px;
-    margin-left: 290px;
+    margin-left: 400px;
     position: absolute;
 }
 /* .outer_date{
@@ -26,35 +26,42 @@
     float: right;
 } */
 .outer_MyProf{
-    border: 1px solid sienna;
+    /* border: 1px solid sienna; */
     width: 85%;
-    height: 27%;
+    height: 17%;
     margin: auto;
-    margin-top: 10px;
+    margin-top: -10px;
 }
 .outer_Feed{
-    border: 1px solid springgreen;
+    /* border: 1px solid rgb(98, 0, 255); */
     width: 85%;
-    height: 67%;
+    height: 60%;
     margin: auto;
     margin-top: 0px;
 }
 .outer_Chall{
     border: 1px solid violet;
     width: 85%;
-    height: 67%;
+    height: 60%;
+    margin: auto;
+    margin-top: 0px;
+}
+.outer_Tem{
+    border: 1px solid rgb(17, 255, 0);
+    width: 85%;
+    height: 60%;
     margin: auto;
     margin-top: 0px;
 }
 
 .outer_btnf{
-    border: 1px solid salmon;
+    /* border: 1px solid salmon; */
     margin: auto;
     width: 85%;
 }
 .myBtnf{
     width: 33.3%;
-    height: 40px;
+    height: 33.5px;
     font-size: 17px;
     border-top: 0px;
     border-left: 0px;
@@ -108,12 +115,12 @@
     margin-top: 20px;
     background-color: yellow;
 }
-.outer_proimgf{
+/* .outer_proimgf{
     /* border: 1px solid cornflowerblue; */
-    width: 30%;
-    height: 100%;
+    /* width: 30%; */
+    /* height: 100%; */
     /* background-color: chartreuse; */
-}
+/* } */ 
 .outer_idf{
     /* border: 1px solid thistle; */
     width: 69%;
@@ -251,7 +258,7 @@
     font-weight: bold;
     text-align: center;
     background-color: #ffffff;
-    background-color: rgba(203, 203, 203, 0.14);
+    /* background-color: rgba(203, 203, 203, 0.14); */
 }
 #searchbbbar{
     border-top: 0;
@@ -263,6 +270,7 @@
     margin-top: 10px;
     background-color:transparent;
     outline: none;
+    margin-left: 3px;
 }
 #delete_outer{
     /* background-color:transparent; */
@@ -299,20 +307,11 @@
     cursor: pointer;
     transition: all 0.5s;
   }
-.outer_Feed::-webkit-scrollbar {
-    width: 7px;  /* 스크롤바의 너비 */
-    height: 0px;
-}
-.outer_Feed::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: white; /* 스크롤바의 색상 */
-    
-    border-radius: 10px;
-}
 .outer_myChallList{
     border: 1px solid blue;
     height: 200px;
 }
+
 .talk::-webkit-scrollbar {
     width: 7px;  /* 스크롤바의 너비 */
     height: 0px;
@@ -320,5 +319,30 @@
 .talk::-webkit-scrollbar-thumb {
     height: 30%; /* 스크롤바의 길이 */
     background: white; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+.outer_Feed::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+.outer_Feed::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: none; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+.clickFeed:hover{
+    letter-spacing: 1px;
+    transform: scale(1.03);
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+
+.serchOuter::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+.serchOuter::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: black; /* 스크롤바의 색상 */
     border-radius: 10px;
 }
