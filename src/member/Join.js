@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
+import swal from 'sweetalert';
 
 import './Join.css';
 
@@ -192,7 +193,8 @@ function Join() {
             })
         )
         if(response.data.code === '2000') {
-            alert("어서오세요. 여러분의 꿈을 응원합니다. :)")
+            // alert()
+            swal("어서오세요. 여러분의 꿈을 응원합니다. :)", "", "success");
             document.location.href = "/"; // 회원가입 성공 시 로그인 페이지로
         } else {
             alert.log('회원가입 실패');

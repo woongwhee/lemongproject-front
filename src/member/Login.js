@@ -8,6 +8,7 @@ import { Client_Id, Naver_CallBack_URL } from './NaverData';
 import {useLoginDispatch} from "./LoginContext";
 // import profile from "../todo/profile/Profile";
 import {useAsync} from "react-async-hook";
+import swal from 'sweetalert';
 
 function Login() {
 
@@ -70,7 +71,8 @@ function Login() {
             }
         )
         if (response.data.code === '2000') {
-            alert("로그인에 성공하였습니다.")
+            // alert("로그인에 성공하였습니다.")
+            swal("로그인에 성공하였습니다.", "", "success");
             loginSuccess(response.data.result);
         } else {
             console.log('실패!')
