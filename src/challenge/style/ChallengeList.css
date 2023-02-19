@@ -96,3 +96,55 @@
     font-weight: bold;
     font-size: 17px;
 }
+
+.chDetail>div{
+    box-sizing: border-box;
+}
+.chDetail{
+    border: 3px solid pink;
+    height: 100%;
+}
+.dtBtn{
+    border: 3px solid rgb(59, 21, 212);
+    /* width: 100%; */
+    height: 70px;
+} 
+.btnBack{
+    border: 3px solid rgb(44, 45, 46);
+    float: left;
+}
+.btnss{
+    border: 3px solid skyblue;
+    float: right;
+    margin-top: 16px;
+}
+.dtTitle{
+    border: 3px solid skyblue;
+    height: 60px;
+    text-align: center;
+    font-size: 35px;
+}
+.dtDate{
+    border: 3px solid skyblue;
+}
+.dtCountUser{
+    border: 3px solid skyblue;
+}
+.dtStart{
+    border: 3px solid skyblue;
+}
+.dtInfo{
+    border: 3px solid skyblue;
+}
+.dtDate{
+    border: 3px solid skyblue;
+}
+.dtTodo{
+    border: 3px solid skyblue;
+}
+.dtCountUser2{
+    border: 3px solid skyblue;
+}
+.dtUser{
+    border: 3px solid skyblue;
+}
