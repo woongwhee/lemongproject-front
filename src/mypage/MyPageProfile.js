@@ -33,6 +33,8 @@ function MyPageProfile(props){
 
     const [member , setMember] = useState();
 
+    console.log(member)
+
     function callback(str){
         setMember(str);
     }
@@ -48,7 +50,6 @@ function MyPageProfile(props){
             // console.log("데이터 전송 성공");
             const data = res.data.result;
             callback(data);
-
         }).catch(function(){
             // console.log("데이터 전송 실패");
         });
