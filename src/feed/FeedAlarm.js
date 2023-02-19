@@ -13,9 +13,9 @@ function FeedAlarm(props) {
     let {profile}=useLoginState();
 
     useEffect(()=>{
-        axios.post('api/feed/replyAlarm',{
-
-        })
+        axios.post('api/feed/replyAlarmList',{
+            userNo:profile.userNo
+        }).then((res)=>{console.log(res.data)})
     })
 
     const message = () => {}

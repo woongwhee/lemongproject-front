@@ -15,7 +15,7 @@ function FeedDetail(props) {
     return (
         <>
             <IconButton aria-label="add to favorites" onClick={() => setShow(true)}>
-                <InfoIcon />
+                <InfoIcon/>
             </IconButton>
             <Modal
                 show={show}
