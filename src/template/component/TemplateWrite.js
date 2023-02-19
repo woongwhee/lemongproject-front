@@ -36,10 +36,10 @@ const TemplateWrite = ({result}) => {
         }
         if (name == 'range') {
             if (range > value) {
-                const newDays = dayArr.slice(0, value);
+                const newDays = days.slice(0, value);
                 setDays(newDays);
             } else {
-                const newDays = [...dayArr];
+                const newDays = [...days];
                 newDays.length = value;
                 setDays(newDays);
             }
