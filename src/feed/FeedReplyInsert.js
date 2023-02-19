@@ -77,7 +77,7 @@ const [ testStr, setTestStr ] = useState([]);
             return(<p></p>)
         }
     }
-    console.log(loginUserNo === Feed.userNo);
+    // console.log(loginUserNo === Feed.userNo);
     const deleteReplyManagerButton = (replyNo, feedNo) =>{
         if(loginUserNo === Feed.userNo){
             return(
@@ -169,7 +169,7 @@ const [ testStr, setTestStr ] = useState([]);
                 feedNo:feedNo
             }
         }).then((res) => {
-            console.log(res.data) // [7개]
+            // console.log(res.data) // [7개]
             setReplyCount(res.data)
         })
     }
