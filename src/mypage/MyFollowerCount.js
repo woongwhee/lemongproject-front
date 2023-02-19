@@ -28,11 +28,6 @@ function MyFollowCount(props){
 
     const userNos = useSelector((state) => state.menu.userNo);
 
-    // 팔로우 당하는사람(팔로워)
-    const follower = userNos;
-
-    // 팔로우 하는사람(팔로잉)
-    const followerIng = userNos;
 
     // (로그인을 한 유저)입장에서 다른 유저에게 팔로우를 신청할 경우
     // 상대방이 수락을 하던말던 나의 팔로워에 카운트가 올라가야함.

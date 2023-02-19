@@ -30,7 +30,7 @@ function MyChallenge() {
                 console.log("데이터 수신실패");
             })
 
-        }, [])
+        }, [userNo])
 
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(e => !e);

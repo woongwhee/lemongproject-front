@@ -123,15 +123,13 @@ function MyPage() {
                                         <p style={{fontSize:'17px' , fontFamily:'NanumGothic-Regular'}}>게시글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             팔로잉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팔로워</p>
-                                            {followerComparison()}
-                                            {followingComparison()}
+                                            <MyFollowCount userNo={userNo}/><MyFollowingCount userNo={userNo}/>
                                     </div>
                                 </div>
                          </div>
                         <div className="outer_contentf">
                             <p style={{fontFamily:'NanumGothic-Regular' , fontSize:'17px' , marginTop:'80px' , position:'absolute'}}>{myprofile?.profileComment}</p>
                             <MyFollowApplication userNo={userNo}/>
-                            
                         </div>
                     </div>
                     <div className="outer_btnf">
