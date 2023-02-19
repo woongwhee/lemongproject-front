@@ -1,15 +1,16 @@
 .profile-box div{
     box-sizing: border-box;
-    border: 3px dotted skyblue;
+    /* border: 3px dotted skyblue; */
+    margin-left: 30px;
 }
 .pro-pic{
-    border: 1px solid orange;
-    height: 100px;
-    width: 20%;
+    /* border: 1px solid orange; */
+    height: 85px;
+    width: 85px;
     float: left;
 }
 .pro-nic{
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
     height: 100px;
     width: 20%;
     float: left;
@@ -22,7 +23,7 @@
     text-align: right;
 }
 .pro-following-count{
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
     height: 100px;
     width: 20%;
     float: left;
@@ -36,15 +37,15 @@
     text-align: right;
 }
 .pro-intro{
-    border: 1px solid rgb(16, 160, 52);
+    /* border: 1px solid rgb(16, 160, 52); */
     height: 100px;
-    width: 100%;
-    background-color: rgb(16, 160, 52);
+    width: 80%;
+    /* background-color: rgb(16, 160, 52); */
 }
 .pro-pic img{
-    height: 95%;
-    width: 95%;
-    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
 }
 hr{
     border: 1px solid black;

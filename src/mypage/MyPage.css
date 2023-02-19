@@ -1,10 +1,10 @@
 .outer_my{
     /* border: 1px solid black; */
     width: 1500px;
-    height: 1200px;
+    height: 1130px;
     margin: auto;
     margin-top: -0px;
-    margin-left: 290px;
+    margin-left: 400px;
     position: absolute;
 }
 /* .outer_date{
@@ -258,7 +258,7 @@
     font-weight: bold;
     text-align: center;
     background-color: #ffffff;
-    background-color: rgba(203, 203, 203, 0.14);
+    /* background-color: rgba(203, 203, 203, 0.14); */
 }
 #searchbbbar{
     border-top: 0;
@@ -270,6 +270,7 @@
     margin-top: 10px;
     background-color:transparent;
     outline: none;
+    margin-left: 3px;
 }
 #delete_outer{
     /* background-color:transparent; */
@@ -335,3 +336,13 @@
     cursor: pointer;
     transition: all 0.5s;
   }
+
+.serchOuter::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+.serchOuter::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: black; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}

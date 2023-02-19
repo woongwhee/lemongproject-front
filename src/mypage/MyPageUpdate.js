@@ -91,6 +91,7 @@ function MyPageUpdate(){
                 const data = res.data.result;
                 console.log(data);
                 setSaveCheckNick(data);
+                // showCheckNick();
             }).catch(function(){
                 console.log("데이터 전송 실패");
             })
@@ -109,7 +110,7 @@ function MyPageUpdate(){
         }
      }
 
-      // 닉네임 유효성 체크 알림
+    //   // 닉네임 유효성 체크 알림
       const submitCheckNick = () => {
         if(saveCheckNick?.nickName == "" || mynickCheck?.checkValue == ""){
             return (
@@ -123,35 +124,36 @@ function MyPageUpdate(){
                       },
                     ]
                 })
-            )
-        }else if(saveCheckNick?.nickNam === mynickCheck?.checkValue){
-            return (
-                confirmAlert({
-                    title: "✘ Fail",
-                    message: "이미 존재하는 닉네임입니다.",
-                    buttons: [
-                      {
-                        label: "Yes",
-                        // onClick: () => updateMyContent()
-                      },
-                    ]
-                })
-            )
-        }else if(saveCheckNick?.nickName !== mynickCheck?.checkValue){
-            return (
-                confirmAlert({
-                    title: "✔ Success",
-                    message: "사용 가능한 닉네임입니다.",
-                    buttons: [
-                      {
-                        label: "Yes",
-                        // onClick: () => updateMyContent()
-                      },
-                    ]
-                })
-            )
+            )}
         }
-      }
+    //     }else if(saveCheckNick?.nickNam === mynickCheck?.checkValue){
+    //         return (
+    //             confirmAlert({
+    //                 title: "✘ Fail",
+    //                 message: "이미 존재하는 닉네임입니다.",
+    //                 buttons: [
+    //                   {
+    //                     label: "Yes",
+    //                     // onClick: () => updateMyContent()
+    //                   },
+    //                 ]
+    //             })
+    //         )
+    //     }else if(saveCheckNick?.nickName !== mynickCheck?.checkValue){
+    //         return (
+    //             confirmAlert({
+    //                 title: "✔ Success",
+    //                 message: "사용 가능한 닉네임입니다.",
+    //                 buttons: [
+    //                   {
+    //                     label: "Yes",
+    //                     // onClick: () => updateMyContent()
+    //                   },
+    //                 ]
+    //             })
+    //         )
+    //     }
+    //   }
      
      // 중복 체크 후 닉네임 변경
      function updateMyNickName(){

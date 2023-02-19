@@ -71,3 +71,13 @@
     filter: drop-shadow(2px 1px 0 black)
     drop-shadow(-1px -1px 0 black);
 }
+
+#template-list::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+#template-list::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: none; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
