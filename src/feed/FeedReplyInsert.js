@@ -22,7 +22,7 @@ function FeedReplyInsert(props) {
 
     const [replyCount, setReplyCount] = useState(0) // REPLY CONTENT
 
-    const [ testStr, setTestStr ] = useState([]);
+const [ testStr, setTestStr ] = useState([]);
 
     props.setReplyCount(replyCount);
 
@@ -125,7 +125,7 @@ function FeedReplyInsert(props) {
                     feedNo:feedNo
                 }
             }).then((res) => {
-                console.log(res.data.result)
+                // console.log(res.data.result)
                 setTestStr(res.data.result) // [7개]
             })
         },[]
@@ -139,7 +139,7 @@ function FeedReplyInsert(props) {
             }
         }).then((res) => {
             // callback(res.data);
-            console.log(res.data.result) // [7개]
+            // console.log(res.data.result) // [7개]
             setTestStr(res.data.result) // [7개]
             // console.log(Json.userNo);
 
