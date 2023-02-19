@@ -73,7 +73,7 @@ function SetNick() {
                         
                     
                         <div className="setNickInputArea">
-                            <input className="setNickInput" type="text" id="nickName" name="nickName" placeholder="닉네임" required 
+                            <input className="setNickInput" type="text" id="nickName" name="nickName" placeholder="닉네임을 입력해주세요." required
                                 onChange={(e) => {setNickName(e.target.value);}} />
                             <button className="chBtn enBtn" onClick={() => {checkNick(nickName);}}>중복확인</button>
                             <p className={errorColor}>{nickError}</p>

@@ -106,14 +106,14 @@ function NewPwd() {
                         {/* 비밀번호 재설정 */}
                         <div className='newPwdInput'>
                             <span className='newPwdInputP'>비밀번호 재설정</span>
-                            <input className='inputNewPwd' type="password" id="newPwd" name="newPwd" placeholder='비밀번호 입력' required
+                            <input className='inputNewPwd' type="password" id="newPwd" name="newPwd" placeholder='새 비밀번호를 입력하세요.' required
                                 onChange={(e) => {onChangeNewPwd(e);}} />
                             <p className={newPwdCol}>{newPwdError}</p>
                         </div>
                         {/* 비밀번호 재입력 */}
                         <div className='reNewPwdInput'>
                             <span className='reNewPwdInputP'>비밀번호 확인</span>
-                            <input className='inputReNewPwd' type="password" id="newPwdCh" name="newPwdCh" placeholder="비밀번호 재입력" required 
+                            <input className='inputReNewPwd' type="password" id="newPwdCh" name="newPwdCh" placeholder="새 비밀번호 재입력하세요." required 
                                 onChange={(e) => {onChangeNewPwdCh(e);}} />
                             <p className={newPwdChCol}>{newPwdChError}</p> 
                         </div>

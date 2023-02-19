@@ -57,8 +57,7 @@
     border: 1px solid #BA99C3;
     border-radius: 5px;
     background-color: #BA99C3;
-    font-family: Cafe24Ssurround;
-    font-weight: 300;
+    font-family: Binggrae-Two;
 }
 
 #loginButton:hover {
@@ -78,7 +77,7 @@
     /* border: 1px solid black; */
     margin-bottom: 5px;
     margin-top: 0px;
-    font-family: Cafe24Ssurround;
+    font-family: Binggrae-Two;
 }
 
 .socialArea div {
