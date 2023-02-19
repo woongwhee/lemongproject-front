@@ -12,11 +12,33 @@
     position: relative;
     width: 50%;
     height: 100vh;
-    z-index: 7;
+    z-index: 6;
     float: right;
     /* box-shadow: 0px 0px 60px 0px red */
     /* top: 0;
     right: 0;
     bottom: 0;
     left: 30%; */
+}
+
+.copyRightArea {
+    box-sizing: border-box;
+    /*border: 1px solid red;*/
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    top: 93%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 7;
+}
+
+.copyRightArea p {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    color: #9a9a9a;
+    font-family: KoPubWorldDotum;
+    font-weight: lighter;
+    font-size: 12px;
 }
