@@ -5,6 +5,7 @@ import {cancelMulti, joinMulti} from "../challengeApi";
 import {useLoginState} from "../../member/LoginContext";
 import '../style/ChallengeList.css';
 import { BsArrowLeftCircle} from 'react-icons/bs'
+import { FaLemon } from 'react-icons/fa';
 
 const ChallengeDetail = ({result}) => {
     const {challengeNo, challengeTitle, challengeInfo, startDate, LocalDate, endDate,readyUsers,todoPreview} = result;
@@ -37,15 +38,26 @@ const ChallengeDetail = ({result}) => {
             </div>
             <div className='dtTitle'>{challengeTitle}</div>
             <div className='dtDate'>모집일 : {chStartDate}~{chEndDate}</div>
-            <div className='dtCountUser'>참여인원 : {countUser}</div>
+            <div className='dtCountUser'>참여인원 : {countUser}명</div>
             <div className='dtStart'>시작일 : {chStartDate2}</div>
             <div className='dtInfo'>챌린지 소개 </div>
             <div className='dtInfo2'>{challengeInfo}</div>
 
-            <div className='dtTodo'>{todoPreview.todoList.map(todo=><div className='chDtTodo' todo={todo}>{todo.todoContent}</div>)}</div>
+            <div className='dtTodo'>{todoPreview.todoList.map( todo =>
+                <div>
+                    <div className='CheckCircle'><FaLemon/></div>
+                    <div className='chDtTodo' todo={todo}>{todo.todoContent}</div>
+               </div>
+            )}</div>
             
             <div className='dtCountUser2'>참여 인원 ( {countUser} )</div>
-            <div className='dtUser'>{readyUsers.map(user=>user.nickName)}</div>
+            <div className='dtUser'> {readyUsers.map(user =>
+                <> 
+                    <div className='dtUserPic'><img src={user.photo.filePath}  alt={user.nickName}></img></div>
+                    <div className='dtUserNic' user={user}>{user.nickName}</div>
+                </>
+                )}
+            </div>
         </div>
     );
 };

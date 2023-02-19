@@ -26,7 +26,7 @@ const ChallengeReadyCard = (props) => {
                 <div className='chCategory'>카테고리</div>
                 <div className='chDate'>{startDate.toString()}~{endDate.toString()}</div>
                 <div className='chCount'><MdEmojiPeople/>{userCount}</div>
-                <div className='chWriterPic'><img className="profile" src={createUser.filePath} alt={createUser.photo?.originName}/></div>
+                <div className='chWriterPic'><img className="profile" src={createUser.filePath} alt={createUser.nickName}/></div>
                 <div className='chWriter'>{createUser.nickName}</div>
             </div>
         </div>

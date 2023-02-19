@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Barlow:wght@300;400&family=IBM+Plex+Sans+KR&family=Montserrat&display=swap');
+
 .ChallengePage{
     border: 3px solid pink;
     width: 100%;
@@ -99,11 +101,11 @@
 
 .chDetail>div{
     box-sizing: border-box;
-    padding-left: 10px;
+    /* padding-left: 10px; */
     margin-top: 3px;
 }
 .chDetail{
-    border: 3px solid pink;
+    border: 0px solid pink;
     height: 100%;
     overflow: scroll;
 }
@@ -138,18 +140,21 @@
     font-weight: bolder;
     margin-bottom: 10px;
     background-color: rgb(245, 245, 245);
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .dtDate{
     border: 0px solid skyblue;
     font-size: 20px;
     width: 70%;
     margin: auto;
+    padding-left: 10px;
 }
 .dtCountUser{
     border: 0px solid skyblue;
     font-size: 20px;
     width: 70%;
     margin: auto;
+    padding-left: 10px;
 }
 .dtStart{
     border: 0px solid skyblue;
@@ -157,29 +162,47 @@
     font-weight: bold;
     width: 70%;
     margin: auto;
+    padding-left: 10px;
 }
 .dtInfo{
     border: 0px solid skyblue;
-    font-size: 21px;
+    border-radius: 10px;
+    font-size: 26px;
+    font-weight: bold;
     width: 70%;
+    height: 50px;
     margin: auto;
+    padding-top: 7px;
     text-align: center;
     background-color: rgb(245, 245, 245);
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .dtInfo2{
     border: 0px solid skyblue;
+    border-radius: 10px;
     font-size: 20px;
     width: 70%;
     margin: auto;
+    margin-bottom: 20px;
+    padding: 10px;
     background-color: rgb(245, 245, 245);
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .dtTodo{
-    border: 1px solid skyblue;
-    width: 70%;
+    border: 0px solid skyblue;
+    width: 55%;
     height: 400px;
     margin: auto;
-    padding: 20px;
+    margin-bottom: 20px;
+    /* padding: 20px; */
+    padding-left: 0px;
     overflow: scroll;
+
+    border-radius: 20px;
+    border: 3px solid transparent;
+    background-image: linear-gradient(#fff, #fff), linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+    background-origin: border-box;  
+    background-clip: content-box, border-box; 
 }
 .dtTodo::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
@@ -188,20 +211,63 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
+.CheckCircle{   
+    width: 32px;
+    height: 32px;
+    color : #FFEE4E;
+    border-radius: 16px;
+    border: 3px solid transparent;
+    background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, rgba(230, 255, 0, 0.85), rgba(0, 149, 255, 0.46));
+    background-origin: border-box; 
+    background-clip: content-box, border-box; 
+    float: left;
+    margin-left: 20px;
+    margin-right: 10px;
+    text-align: center;
+}
 .chDtTodo{
-    font-size: 30px;
+    /* padding: 15px 0px 0px 20px; */
+    font-size: 20px;
+    border: #005dd6 0px solid;
+    margin: 18px;
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .dtCountUser2{
     border: 0px solid skyblue;
+    border-radius: 10px;
     font-size: 26px;
     font-weight: bold;
+    text-align: center;
     width: 70%;
+    height: 50px;
     margin: auto;
+    padding-top: 7px;
+    padding-left: 10px;
     background-color: rgb(245, 245, 245);
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .dtUser{
-    border: 1px solid skyblue;
-    font-size: 18px;
+    border: 0px solid skyblue;
+    border-radius: 10px;
+    font-size: 22px;
     width: 70%;
     margin: auto;
+    padding: 10px;
+    background-color: rgb(245, 245, 245);
+}
+.dtUserPic{
+    border: 1px dashed rgb(0, 0, 0);
+    border-radius: 30px;
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 10px;
+    font-size: 10px;
+}
+.dtUserNic{
+    border: 0px solid skyblue;
+    border-bottom: 0px solid black;
+    height: 50px;
+    padding-top: 10px;
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
