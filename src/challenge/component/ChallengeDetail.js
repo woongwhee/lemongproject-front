@@ -31,17 +31,18 @@ const ChallengeDetail = ({result}) => {
                 <div className='btnBack'>
                     <BsArrowLeftCircle />
                 </div>
-            </div>
-            <div className='btnss'>
-                {isReady?<Button onClick={join}>흐에</Button>:<Button onClick={cancel}>포기할래요</Button>}
+                <div className='btnss'>
+                    {isReady?<Button onClick={join}>흐에</Button>:<Button onClick={cancel}>포기할래요</Button>}
+                </div>
             </div>
             <div className='dtTitle'>{challengeTitle}</div>
             <div className='dtDate'>모집일 : {chStartDate}~{chEndDate}</div>
             <div className='dtCountUser'>참여인원 : {countUser}</div>
             <div className='dtStart'>시작일 : {chStartDate2}</div>
-            <div className='dtInfo'>챌린지 소개 : {challengeInfo}</div>
+            <div className='dtInfo'>챌린지 소개 </div>
+            <div className='dtInfo2'>{challengeInfo}</div>
 
-            <div className='dtTodo'>{todoPreview.todoList.map(todo=>todo.todoContent)}</div>
+            <div className='dtTodo'>{todoPreview.todoList.map(todo=><div className='chDtTodo' todo={todo}>{todo.todoContent}</div>)}</div>
             
             <div className='dtCountUser2'>참여 인원 ( {countUser} )</div>
             <div className='dtUser'>{readyUsers.map(user=>user.nickName)}</div>

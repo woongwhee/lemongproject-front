@@ -11,7 +11,7 @@
     width: 33%;
     height: 100%;
     float: left;
-    background: #e6e6e69e;
+    /* background: #e6e6e69e; */
 }
 .outer_Temp{
     border: 1px solid green;
