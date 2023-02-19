@@ -12,12 +12,9 @@ import '../../main/calendar/Calendar.css';
 function Profile() {
     const {profile}=useLoginState();
     const {userNo,photo}=profile;
-    const filePath=photo!=null?photo.filePath+"/"+photo.changeName:USER_PROFILE;
+    const filePath=photo!=null?photo?.filePath+"/"+photo?.changeName:USER_PROFILE;
     const dispatch = useDispatch();
     const selectUserNo = () => {
-      // dispatch(
-      //     {type : 'SELECTUSERNO-MY' , payload : {selectUserNo : profile.userNo}} ,
-      // )
         dispatch(
             {type : MENU_PROFILE , userNo:userNo} ,
         )
@@ -45,7 +42,7 @@ function Profile() {
           <div className='pro-following-count' style={{marginTop:'65px' , marginLeft:'-30px' , fontFamily:'NanumGothic-Regular'}}><p>팔로워  </p></div>
         </div>
         <div style={{marginTop:'-100px'}}>
-          <div className='pro-intro'><p style={{float:'left' , marginTop:'-70px' , marginLeft:'155px'}}>{profile.profileComment}</p></div>
+          <div className='pro-intro'><p style={{float:'left' , marginTop:'-70px' , marginLeft:'155px'}}>{profile?.profileComment}</p></div>
         </div>
     </div>
   )

@@ -27,7 +27,7 @@ function SearchUserList(props){
     const MoveUserPage = e => {
         console.log(e + "[통과확인] === success"); // 값 뽑히는거 확인됨.
         dispatch(
-            {type : MENU_PROFILE ,userNo} ,
+            {type : MENU_PROFILE ,userNo:e} ,
         )
     };
     
