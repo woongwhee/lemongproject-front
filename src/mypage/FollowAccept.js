@@ -7,6 +7,7 @@ import { useLoginState } from "../member/LoginContext"
 import './MyPage.css';
 import moment from 'moment';
 import 'moment/locale/ko';
+import FeedAlarm from "../feed/FeedAlarm";
 
 function FollowAccept(){
 
@@ -90,7 +91,7 @@ function FollowAccept(){
     let i = 0;
     return(
         <div className="followAcceptList" style={{position:'absolute'}}>
-            <br></br>
+            <br></br><FeedAlarm/>
             <form onSubmit={handleSubmit}>
                 {followerList?.map(e => <div className="sUserList">
                     <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'50px' , height:'50px', borderRadius:'50%' , backgroundColor:'gray' , float:'left' , marginTop:'10px'}}></img> <span name="followNick" key={i++} {...e} onChange={followNickHandle}><b>{e?.profile?.nickName}</b></span>
