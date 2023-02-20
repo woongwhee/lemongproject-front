@@ -154,17 +154,15 @@ export default function RecipeReviewCard(props) {
     const [profilePath, setProfilePath] = useState();
 
     const Profile = (userNo) => {
-
-            axios.post('api/feed/feedProfile',{
-                userNo:userNo
-            }).then(function (res){
-                // console.log(res.data.FILEPATH);
-                setProfilePath(res.data.FILEPATH)
-            })
-            return(
-                <Avatar alt="Remy Sharp" src={profilePath} />
-            )
-
+        axios.post('api/feed/feedProfile',{
+            userNo:userNo
+        }).then(function (res){
+            // console.log(res.data.FILEPATH);
+            setProfilePath(res.data.FILEPATH)
+        })
+        return(
+            <Avatar alt="Remy Sharp" src={profilePath} />
+        )
     }
 
     return (
@@ -175,30 +173,12 @@ export default function RecipeReviewCard(props) {
                     Profile(userNo)
                 }
                 action={
-                    // <TreeView
-                    //     aria-label="disabled items"
-                    //     defaultCollapseIcon={<ExpandMoreIcon />}
-                    //     defaultExpandIcon={<ChevronRightIcon />}
-                    //     disabledItemsFocusable={focusDisabledItems}
-                    //     multiSelect
-                    // >
-                    //     <TreeItem nodeId="1" label="변경하기">
-                    //         {Feed.userNo}
-                    //         <FeedDelete Feed={Feed}/>
-                    //         <FeedUpdate Feed={Feed}/>
-                    //     </TreeItem>
-                    // </TreeView>
                     updateDeleteButton()
                 }
                 title={Feed.nickName}
                 subheader={Feed.feedAt}
             />
-            <CardMedia
-                // component="img"
-                // height="194"
-                // image={Feed.filePathList}
-                // alt="Paella dish"
-            >
+            <CardMedia>
                 <FeedPhoto filePathList={Feed.filePathList}></FeedPhoto>
 
             </CardMedia>
