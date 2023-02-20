@@ -9,6 +9,7 @@ function FeedPictureInsert(props) {
         event.preventDefault(); // 페이지 이동 금지 시키기
         event.stopPropagation(); // 상위 엘리먼트들로의 이벤트 전파 중지
     }
+
     // 사진 번호 가져오기
     let arr = [];
     const startClickPhoto=(t)=>{
@@ -16,7 +17,6 @@ function FeedPictureInsert(props) {
     }
     const finishClickPhoto=(e,t)=>{
         arr.push(t);
-
     }
     //-----------------------------------------------------
     // 인덱스 바꾸기
@@ -28,8 +28,9 @@ function FeedPictureInsert(props) {
     const finishIndex = (e) => {
         const newNo = photoNoList.indexOf(e)
         arrCh.push(newNo)
-        console.log("바꿀인덱스 : "+arrCh);
     }
+    // console.log("바꿀인덱스 : "+arrCh);
+
     const changeArray = (e) =>{
         const photoNo = [...photoNoList]
         photoNo.splice(arrCh[0],1,arr[1]) // 0, 1, 477
@@ -45,12 +46,14 @@ function FeedPictureInsert(props) {
     const finalPath = (t) =>{
         arrFile.push(t)
     }
+
     const changePath = (e) =>{
         const filePath = [...photoFilePathList]
         filePath.splice(arrCh[0],1,arrFile[1])
         filePath.splice(arrCh[1],1,arrFile[0])
         setPhotoFilePathList(filePath);
     }
+
     //-----------------------------------------------------
     const Rendering=()=>{
         const result = [];
@@ -102,6 +105,7 @@ function FeedPictureInsert(props) {
         }
         return result;
     }
+
     const deletePhotoNoList=(i)=>{
         const newPlist=[...photoNoList];
         let index=newPlist.indexOf(i);
@@ -114,6 +118,7 @@ function FeedPictureInsert(props) {
         newPlist.splice(index,1)
         setPhotoFilePathList(newPlist);
     }
+
     const deleteClick=(photoNo)=>{
         axios({
                 url:'api/feed/deletePhoto',
@@ -131,21 +136,21 @@ function FeedPictureInsert(props) {
     const [photoNoList, setPhotoNoList] = useState([]);                 // 원래 사진 번호
 
     const putPhotoFilePath = (newPhoto) => { //사진 미리보기
-        console.log(newPhoto)
         setPhotoFilePathList([...photoFilePathList,newPhoto]);
     }
     const putPhotoNo = (PhotoNo) => {
         const newList=[...photoNoList,PhotoNo];
         setPhotoNoList(newList);
     }
+
     props.setInsertPhotoNo(photoNoList);
 
     const onChange = async (e) => {
         e.preventDefault();
         if(e.target.files){
             const uploadFile = e.target.files[0]
-            const formData = new FormData() // html 의 form 을 비동기로 할려면 => key : value 로 보낼려면 =>
-            formData.append('files',uploadFile) // 비동기로 할려면 json 형태인데 => form 으로만들어주면 첨부파일을 올릴수있다.
+            const formData = new FormData()                 // html 의 form 을 비동기로 할려면 => key : value 로 보낼려면 =>
+            formData.append('files',uploadFile)     // 비동기로 할려면 json 형태인데 => form 으로만들어주면 첨부파일을 올릴수있다.
 
             const response = await axios({
                 method: 'post',
@@ -167,6 +172,7 @@ function FeedPictureInsert(props) {
             }
         }
     }
+
     return (
         <div>
             <Button
