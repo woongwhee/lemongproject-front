@@ -35,8 +35,9 @@
     text-align: center;
     color: #BA99C3;
     /* border: 1px solid black; */
-    margin-top: 0px;
+    margin-top: 5px;
     font-weight: bolder;
+    font-family: Binggrae-Two;
 }
 
 .profInput {
@@ -78,6 +79,7 @@
     height: 2.5rem;
     border: 1.8px solid #BA99C3;
     padding-left: 15px;
+    font-family: KoPubWorldDotum;
 }
 
 
@@ -106,6 +108,7 @@
     font-size: large;
     font-weight: bold;
     border-radius: 5px;
+    font-family: Binggrae-Two;
 }
 
 .joinBtn:disabled {
@@ -138,6 +141,8 @@
     border-radius: 15px;
     position: absolute;
     margin-left: 0.3rem;
+    font-family: KoPubWorldDotum;
+    text-align: center;
 }
 
 .chBtn:hover {

@@ -66,8 +66,8 @@ function FindPwd() {
     // 이메일 인증 버튼
     const chEmail = async(name, email) => {
         let response = await axios.post('api/p/findPwd/chEmail',
-            ({ 'userName':name, 
-               'email':email})
+            ({ 'userName':name,
+                'email':email})
         )
         if(response.data.code === '2000') {
             console.log("테스팅 중~")
@@ -86,7 +86,7 @@ function FindPwd() {
     const chEmailNum = async(email, emailNum) => {
         let response = await axios.post('api/p/join/chEmailNum',
             ({'email':email,
-              'emailNum':emailNum
+                'emailNum':emailNum
             })
         )
         if(response.data.code === '2000') {
@@ -107,9 +107,9 @@ function FindPwd() {
 
     const findClick = async(email) => {
         let res = await axios.post('api/p/toNewPwd',
-        {
-            'email':email
-        })
+            {
+                'email':email
+            })
         if(res.data.code === '2000') {
             console.log('비밀번호 재설정 페이지로 이동')
             document.location.href = '/newPwd'
@@ -134,34 +134,34 @@ function FindPwd() {
             <div className="findInfoCol"></div>
 
             <div>
-            
-               <div className="findInfoWrap">
+
+                <div className="findInfoWrap">
 
                     <div className="pwdTitleArea">
                         <img className="pwdLogo" src="LemongImg/CommonImg/LemongLogo.png" alt="logo" onClick={toMain} />
                         <p className="pwdTitle">비밀번호 찾기</p>
                     </div>
-                    
+
                     <div className="findInput">
                         {/* 이름 */}
-                        <div className="findName">    
+                        <div className="findName">
                             <span className="findInputP">이름</span>
-                            <input className="inputNameInfo" type="text" id="userName" name="userName" placeholder="이름을 입력하세요." required 
-                                onChange={(e) => {changeName(e);}}/>
+                            <input className="inputNameInfo" type="text" id="userName" name="userName" placeholder="이름을 입력하세요." required
+                                   onChange={(e) => {changeName(e);}}/>
                         </div>
                         {/* 이메일 */}
                         <div className="findEmail">
                             <span className="findInputP">이메일</span>
-                            <input class="inputEmailInfo" type="text" id="email" name="email" placeholder="이메일을 입력하세요." required 
-                                onChange={(e) => {changeEmail(e);}}/>
+                            <input class="inputEmailInfo" type="text" id="email" name="email" placeholder="이메일을 입력하세요." required
+                                   onChange={(e) => {changeEmail(e);}}/>
                             <button className="chBtn enBtn" onClick={() => {chEmail(userName, email);}}>인증</button>
                             <p className={emailColor}>{emailMs}</p>
                         </div>
                         {/* 인증번호 확인 */}
                         <div className="findEmailNum">
                             <span className="findInputP">인증번호</span>
-                            <input class="inputEmailInfo" type="text" id="code" name="code" placeholder="인증번호를 입력하세요." required 
-                                onChange={(e) => {setEmailNum(e.target.value);}} />
+                            <input class="inputEmailInfo" type="text" id="code" name="code" placeholder="인증번호를 입력하세요." required
+                                   onChange={(e) => {setEmailNum(e.target.value);}} />
                             <button className="chBtn enBtn" onClick={() => {chEmailNum(email, emailNum);}}>확인</button>
                             <p className={emailNumColor}>{emailNumMs}</p>
                         </div>

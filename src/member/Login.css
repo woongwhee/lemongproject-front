@@ -48,6 +48,7 @@
     margin-bottom: 10px;
     padding-left: 15px;
     font-size: small;
+    font-family: KoPubWorldDotum;
 }
 
 #loginButton {
@@ -56,6 +57,7 @@
     border: 1px solid #BA99C3;
     border-radius: 5px;
     background-color: #BA99C3;
+    font-family: Binggrae-Two;
 }
 
 #loginButton:hover {
@@ -71,10 +73,11 @@
 
 .socialArea p {
     color: gray;
-    font-weight: bold;
+    font-weight: normal;
     /* border: 1px solid black; */
     margin-bottom: 5px;
     margin-top: 0px;
+    font-family: Binggrae-Two;
 }
 
 .socialArea div {
@@ -106,11 +109,13 @@
 
 .toLink {
     text-decoration: none;
-    color: black;
+    color: gray;
+    font-family: KoPubWorldDotum;
 }
 
 .toLink:hover {
-    color: #BA99C3;
+    color: #bd7ace;
+    text-decoration: underline;
 }
 
 .newChAlarm {
