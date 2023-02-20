@@ -3,6 +3,8 @@ import {USER_PROFILE} from "../util/ImagePath";
 import "./ProfileIcon.css"
 import '../mypage/font/font.css';
 import {PopoverBody, PopoverHeader, UncontrolledPopover} from "reactstrap";
+import {ProgressBar} from "react-progressbar-fancy";
+
 const ProfileIcon = ({profile}) => {
     const {userNo,photo,nickName,profileContent}=profile
     const photoPath=photo==undefined?USER_PROFILE:photo.filePath+photo.changeName
