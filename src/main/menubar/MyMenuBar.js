@@ -19,6 +19,7 @@ import '../../mypage/MyPage.css';
 import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiSquarePlus} from "react-icons/ci";
 import {Nav} from 'react-bootstrap';
 import MyAlert from "../../mypage/MyAlert";
+import {KAKAO_LOGOUT_URL} from "../../api/KakaoLoginData";
 
 function MyMenuBar(props){
     
@@ -30,13 +31,21 @@ function MyMenuBar(props){
     const userNo = params.get("userNo"); // 로그인한 사용자 userNo;
 
     const dispatch= useLoginDispatch();
-    
-    function logout(){
-        axios.get("/api/member/logout");
-    
+    const logout = async () => {
+        let res = await axios.get("/api/member/logout");
+        if(res.data.code === '3008') {
+            console.log(res.data)
+            logoutKakao()
+            console.log("로그아웃 완료")
+        }
         dispatch({
             type:"logout"
         });
+    }
+
+    const logoutKakao = () => {
+        const kakaoLogout = KAKAO_LOGOUT_URL;
+        document.location.href = kakaoLogout;
     }
     
     
@@ -65,7 +74,7 @@ function MyMenuBar(props){
         }else if(props.tab === 1) {
           return <div><MyAlert/></div>
         }else if(props.tab === 2) {
-            return <div><FeedInsert></FeedInsert></div>
+            return <div><FeedInsert/></div>
         }else if(props.tab === 3) {
             return <div></div>
         }else if(props.tab === 4) {

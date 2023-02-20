@@ -38,8 +38,6 @@ function FeedAlarm(props) {
         })
     }
 //====================================================================
-
-
     // 댓글 알림 가져오기
     const [replyAlarm, setReplyAlarm] = useState([])
     useEffect(()=>{

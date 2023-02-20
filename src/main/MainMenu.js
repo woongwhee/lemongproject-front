@@ -24,10 +24,9 @@ function MainMenu(){
                     <Offcanvas.Title>메뉴바</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <LogoutButton></LogoutButton>
+                        <LogoutButton/>
                     <br/>
-                    <FeedInsert></FeedInsert>
-
+                        <FeedInsert/>
                     <br/>
                     <div style={{marginTop:'-500px'}}>
                         <ChallengeChatRoom/>
