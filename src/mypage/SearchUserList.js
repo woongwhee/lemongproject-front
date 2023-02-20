@@ -37,9 +37,9 @@ function SearchUserList(props){
         <div className="sListOuter">
             <br/>
            {userList?.map(e =><div className="sUserList" onClick={() => {MoveUserPage((e?.userNo))}}>
-                <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'50px' , height:'50px', borderRadius:'50%' , backgroundColor:'gray' , float:'left' , marginTop:'10px'}}
-                ></img> <span key={i++} {...e} style={{float:'left' , marginTop:'13px' , marginLeft:'10px'}}>{e?.nickName}</span>
-                <p key={i++} {...e} style={{fontSize:'13px' , marginTop:'37px' , marginRight:'65px' , float:'left' , position:'fixed' , marginLeft:'61px'}}>{e?.profileComment}</p>
+                <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'40px' , height:'40px', borderRadius:'50%' , backgroundColor:'gray' , float:'left' , marginTop:'15px' , marginLeft:'7px'}}
+                ></img> <span key={i++} {...e} style={{float:'left' , marginTop:'13px' , marginLeft:'10px' , fontSize:'14px'}}>[{e?.nickName}]</span>
+                <p key={i++} {...e} style={{fontSize:'13px' , marginTop:'37px' , marginRight:'67px' , float:'left' , position:'fixed' , marginLeft:'57px'}}>{e?.profileComment}</p>
            </div>)}
         </div>
     );

@@ -7,7 +7,7 @@ import {USER_PROFILE} from "../../util/ImagePath";
 import {MENU_MY_PROFILE, MENU_PROFILE} from "../../reducer/menu";
 
 import '../../mypage/font/font.css';
-import '../../main/calendar/Calendar.css';
+// import '../../main/calendar/Calendar.css';
 
 function Profile() {
     const {profile}=useLoginState();
@@ -23,7 +23,7 @@ function Profile() {
   // const userNos = useSelector((state) => state.userNo.selectUserNo);
 
   return (
-    <div className='profile-box' style={{marginTop:'0px'}}>
+    <div className='profile-box' >
         {/* <div className='pro-pic' onClick={selectUserNo}><img className={"profile"} src={filePath} alt={photo?.originName}/></div>
         <div className='pro-nic'>{profile.nickName}</div>
         <div className='pro-following-count'><p>팔로잉 : </p></div>
@@ -32,7 +32,7 @@ function Profile() {
         <hr/>
         <div className='pro-intro'>{profile.profileComment}</div> */}
 
-        <div onClick={selectUserNo} className='react-calendar2' style={{border:'0px' ,margin: 'auto', height:'160px' , marginLeft:'80px' , marginTop:'70px', border: '0px solid orange', overFlow: 'hidden'}}>
+        <div onClick={selectUserNo} className='react-calendar2' style={{margin: 'auto', height:'160px' , marginLeft:'90px' , marginTop:'20px', border: '0px solid orange'}}>
             {/* 메인페이지 프로필 이미지(클릭 시 마이 홈으로 이동) */}
           <div className='pro-pic' onClick={selectUserNo} style={{marginTop:'33px' , marginLeft:'20px'}}>
               <img className={"profile"} src={filePath} alt={photo?.originName}/>
@@ -41,7 +41,7 @@ function Profile() {
           <div className='pro-following-count' style={{marginTop:'65px' , marginLeft:'-135px' , height:'30px', fontFamily:'NanumGothic-Regular' , border: '0px solid pink'}}><p>팔로잉  </p></div>
           <div className='pro-following-count' style={{marginTop:'65px' , marginLeft:'-30px' ,  height:'30px', fontFamily:'NanumGothic-Regular' , border: '0px solid pink'}}><p>팔로워  </p></div>
           
-          <div className='pro-intro'><p style={{float:'left', width:'70%', marginTop:'0px' , marginLeft:'28px', border: '0px solid pink', margin: 'auto'}}>{profile?.profileComment}</p></div>
+          <div className='pro-intro'><p style={{float:'left', width:'70%', marginTop:'0px' ,paddingLeft:'28px', border: '0px solid pink', margin: 'auto', overflow: 'hidden'}}>{profile?.profileComment}</p></div>
           
         </div>
     </div>

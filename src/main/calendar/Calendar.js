@@ -89,10 +89,13 @@ function Calendar2() {
         let month = new moment(activeStartDate).format("YYMMDD");
         setMonth(activeStartDate.getMonth()+1);
         const res = await axios.get(`/api/todo/getMonth/${month}`);
-        let {challengeDayList, holidayList, todoDayList} = codeHandler(res);
-        setChMark(challengeDayList);
-        setMark(todoDayList);
-        setHdMark(holidayList);
+        if (res.data.code == '2000') {
+            let {challengeDayList, todoDayList, holidayList} = res.data.result;
+            setChMark(challengeDayList);
+            setMark(todoDayList);
+            setHdMark(holidayList);
+        }
+
     }
     return (
         <div>
@@ -116,7 +119,7 @@ function Calendar2() {
             onClickDay={selectDay}
         />
         </div>
-    );
+    )
 
 }
 
