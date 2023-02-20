@@ -179,7 +179,6 @@ export default function RecipeReviewCard(props) {
                     updateDeleteButton()
                 }
                 title={Feed.nickName}
-                // subheader={Feed.feedAt}
                 subheader={new moment(Feed.feedAt).format('YY.MM.DD')}
             />
             <CardMedia>

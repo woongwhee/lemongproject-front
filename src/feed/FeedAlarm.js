@@ -128,8 +128,9 @@ function FeedAlarm(props) {
                         </Paper>
                     </div>
                     <div style={{float:"right", marginTop:"10px"}}>
-                        <IconButton aria-label="delete" onClick={ () => {
-                            readHeartAlarm(heartAlarm[i].refNo);}}>
+                        <IconButton aria-label="delete"
+                                    onClick={() => { readHeartAlarm(heartAlarm[i].refNo); }}
+                        >
                             <HighlightOffIcon fontSize="medium"/>
                         </IconButton>
                     </div>
