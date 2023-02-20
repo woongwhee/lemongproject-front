@@ -56,7 +56,7 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
     })
   }
 
-  const [checkTodo] = chList.filter(chTodos => chTodos.challengeName !== null);
+  const [checkTodo] = chList?.filter(chTodos => chTodos.challengeName !== null);
   
 
   return ( 
@@ -66,7 +66,7 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
         {provided => (
           <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}>
             {/* dailyTodo */}
-            {todoList && todoList.map((todo, index) =>(
+            {!isEmpty(todoList) && todoList.map((todo, index) =>(
               <Draggable draggableId={String(todo.todoNo)} index={index} key={todo.todoNo} >
                 {provided => (
                   <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
@@ -87,7 +87,7 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
 
             {/* challengeTodo */}
             
-            {chList && chList.map((chTodos, index) => ( 
+            {!isEmpty(chList) && chList.map((chTodos, index) => (
               <Challenge chTodos={chTodos} key={index}>
                 {!isEmpty(chTodos.todoList) && <p>{chTodos.challengeName}</p>}
 

@@ -9,7 +9,6 @@ import {CHAT_SOCKET} from "../challengeURI";
 const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
         const msg = useRef(null);
         const myNo = useLoginState().profile.userNo;
-        const [players, setPlayers] = useState(playerList);
         const [socketConnect, setSocketConnect] = useState(false);
         const ws = useRef(null);
         useEffect(() => {
@@ -58,18 +57,22 @@ const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
             console.log(message);
             addChat(JSON.parse(message.data));
 
-            setTimeout(()=> {
+            setTimeout(() => {
                     let talk = document.querySelector("#talk");
                     talk.scrollTop = talk.scrollHeight;
-                },10
+                }, 10
             )
 
         }
 
-        // useEffect(() => {
-        //     let talk =document.querySelector("#talk");
-        //     talk.scrollHeight=talk.scrollTop;
-        // }, [chatList]);
+        useEffect(() => {
+            setTimeout(() => {
+
+                let talk = document.querySelector("#talk");
+
+                talk.scrollHeight = talk.scrollTop;
+            }, 100)
+        }, [chatList]);
 
         const send = async () => {
             if (!ws.current) {
@@ -86,6 +89,7 @@ const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
             }
             msg.current.value = "";
         }
+
         return (
             <>
                 {/* <GlobalStyle/> */}
@@ -97,14 +101,20 @@ const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
                             <div className='talk-shadow'></div>
                             {chatList.map((chat, idx) => (
                                 <div key={idx} className={chat.userNo === myNo ? 'me' : 'other'}>
-                                    <div style={{marginLeft:'-10px'}}><ProfileIcon profile={players.find(e=>e.userNo=chat.userNo)}></ProfileIcon></div>
-                                    <div style={{width:'100%'}}>{chat.chatMessage}</div><br/>
-                                    <span style={{marginTop:'-100px'}}>{chat.sendAt}</span>
+                                    <div style={{marginLeft: '-10px'}}>
+                                        <ProfileIcon profile={playerList?.find(e => e.userNo = chat.userNo)}></ProfileIcon></div>
+                                    <div style={{width: '100%'}}>{chat.chatMessage}</div>
+                                    <br/>
+                                    <span style={{marginTop: '-100px'}}>{chat.sendAt}</span>
                                 </div>
                             ))}
                         </div>
                         <div id='sendZone'>
-                        <textarea id='msg' ref={msg} onKeyDown={(ev) => {if (ev.keyCode === 13) {send();}}}></textarea>
+                            <textarea id='msg' ref={msg} onKeyDown={(ev) => {
+                                if (ev.keyCode === 13) {
+                                    send();
+                                }
+                            }}></textarea>
                             <input type='button' value='전송' id='btnSend' onClick={send}/>
                         </div>
                     </div>

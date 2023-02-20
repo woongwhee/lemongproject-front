@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import moment from "moment/moment";
-import ProfileIcon from "../../mypage/ProfileIcon";
 import {useLoginState} from "../../member/LoginContext";
 import Chat from "./Chating";
 import ChallengeRank from "./ChallengeRank";

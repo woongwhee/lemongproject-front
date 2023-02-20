@@ -38,8 +38,7 @@ function MyChallenge() {
     const toggle = () => setIsOpen(e => !e);
     const openRoom = async (roomNo) => {
         if (myNo == userNo) {
-            setChallengeNo(roomNo);
-            console.log(roomNo, "룸");
+            await setChallengeNo(roomNo);
             setIsOpen(true);
         }
     }
