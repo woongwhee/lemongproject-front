@@ -30,6 +30,7 @@ input[type='number']::-webkit-outer-spin-button {
 	margin: 0 auto;
   #title{
     font-size: 30pt;
+    font-family: 'SourceSansPro-Light';
     text-align: center;
     margin-bottom: 20px;
   }
@@ -57,12 +58,17 @@ input[type='number']::-webkit-outer-spin-button {
       box-sizing: border-box;
 
       &.me{
-        background-color : #ffc;
+        background-color : rgba(180, 135, 203, 0.27);
         margin : 0px 0px 20px 40%;	
+        border-radius: 0px;
+        height: 20%;
       }
 
       &.other{
         margin : 20px 0px 2px 0;	
+        background-color : rgba(244, 241, 38, 0.27);
+        border-radius: 0px;
+        height: 20%;
       }
     }
   }

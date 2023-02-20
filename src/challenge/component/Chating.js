@@ -86,9 +86,9 @@ const Chat = ({chatList,challengeNo,playerList}) => {
                         <div className='talk-shadow'></div>
                         {chatt.map((chat, idx) => (
                             <div key={idx} className={chat.userNo === myNo ? 'me' : 'other'}>
-                                <ProfileIcon profile={players.find(e=>e.userNo=chat.userNo)}></ProfileIcon>
-                                [ {chat.chatMessage} ]<br/>
-                                <span>{chat.sendAt}</span>
+                               <div style={{marginLeft:'-10px'}}><ProfileIcon profile={players.find(e=>e.userNo=chat.userNo)}></ProfileIcon></div>
+                               <div style={{width:'100%'}}>{chat.chatMessage}</div><br/>
+                                <span style={{marginTop:'-100px'}}>{chat.sendAt}</span>
                             </div>
                         ))}
 

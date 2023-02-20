@@ -81,3 +81,13 @@
     cursor: pointer;
     transition: all 0.5s;
   }
+
+.outer_rank::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+.outer_rank::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: none; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
