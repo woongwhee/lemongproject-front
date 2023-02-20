@@ -21,6 +21,12 @@
     height: 36rem;
 }
 
+@media only screen and (max-width: 1300px) {
+    .loginArea {
+        left: 0;
+    }
+}
+
 .logo {
     width: 80%;
     box-sizing: border-box;
