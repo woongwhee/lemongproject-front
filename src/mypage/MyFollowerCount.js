@@ -12,55 +12,37 @@ function MyFollowCount(props){
 
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
-    let {userNo}=props;
-    // console.log(profile);
-    // console.log(userNo)
-    // const userNo = profile?.userNo; // 로그인한 사용자 userNo
-
+    let userNo=useSelector((state) => state.menu.userNo);
     const dispatch = useDispatch();
-
+    console.log(userNo);
     const selectUserNo = e => {
         dispatch(
             {type : MENU_PROFILE , userNo : e} ,
         )
     };
 
-    const userNos = useSelector((state) => state.menu.userNo);
-
-
     // (로그인을 한 유저)입장에서 다른 유저에게 팔로우를 신청할 경우
     // 상대방이 수락을 하던말던 나의 팔로워에 카운트가 올라가야함.
-    const [myfollow , setMyFollow] = useState();
-    
-    console.log(userNos + "통과 제발 되라 제발요.")
-
+    const [myfollow , setMyFollow] = useState(0);
     useEffect(
         () => {
-            axios.get("/api/follow/MyFollowCount" , {
-                params:{
-                    followerIng : userNos == null ? userNo : userNos  ,
-                }
-            }).then(function(res){
+            axios.get(`/api/follow/MyFollowCount/${userNo}`).then(function(res){
                 console.log(res + "데이터 전송 성공");
                 const data = res.data.result;
                 console.log(data);
-                console.log(userNos + "통 과 됨")
                 setMyFollow(data);
             }).catch(function(){
                 console.log("데이터 전송 실패");
             });
-        },[userNos == null ? userNo : userNos]
+        },[userNo]
     )
 
     // 나의 팔로워 리스트 띄우기.
     const [myfollowerList , setMyFollowerList] = useState();
 
     function ShowMyFollower(){
-        axios.get("/api/follow/selectMyFollowerList" , {
-            params:{
-                followerIng : userNos == null ? userNo : userNos,
-            }
-        }).then(function(res){
+        axios.get(`/api/follow/selectMyFollowerList/${userNo}`
+            ).then(function(res){
             console.log(res+"데이터 전송 성공");
             const data = res.data.result;
             console.log(data);
@@ -73,13 +55,13 @@ function MyFollowCount(props){
     useEffect(() => {;
         ShowMyFollower();
         console.log(userNo + "===여기도 통과됨")
-      },[userNos == null ? userNo : userNos])
+      },[userNo])
    
     let i = 0;
 
     return(
         <div className="followCount" style={{marginTop:'-42px'}}>
-            <span data-bs-toggle="modal" data-bs-target="#exampleModal1" onClick={ShowMyFollower} style={{fontSize:'17px' , marginLeft:'307px' , fontFamily:'Quicksand-Regular'}}><b>{myfollow?.count}</b></span>
+            <span data-bs-toggle="modal" data-bs-target="#exampleModal1" onClick={ShowMyFollower} style={{fontSize:'17px' , marginLeft:'307px' , fontFamily:'Quicksand-Regular'}}><b>{myfollow}</b></span>
             <div className="App">
             <div class="container p-5">
             

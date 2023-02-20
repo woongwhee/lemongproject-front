@@ -4,7 +4,7 @@ import FeedList from "./FeedList";
 import ChallengeList from "./ChallengeList";
 import TemplateView from "./TemplateView";
 import {useDispatch, useSelector} from "react-redux";
-import {MENU_CHALLENGE, MENU_FEED, MENU_MY_PROFILE, MENU_TEMPLATE} from "../../reducer/menu";
+import {MENU_CHALLENGE, MENU_FEED,  MENU_TEMPLATE} from "../../reducer/menu";
 import {MyPage} from "../../mypage/MyPage";
 import TodoView3 from "../../todo/todolist3/TodoView";
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import './Profile.css'
 import {useLoginState} from "../../member/LoginContext";
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import MyFollowingCount from '../../mypage/MyFollowingCount';
 import {USER_PROFILE} from "../../util/ImagePath";
-import {MENU_MY_PROFILE, MENU_PROFILE} from "../../reducer/menu";
+import {MENU_PROFILE} from "../../reducer/menu";
 
 import '../../mypage/font/font.css';
 // import '../../main/calendar/Calendar.css';
@@ -12,9 +12,11 @@ import '../../mypage/font/font.css';
 function Profile() {
     const {profile}=useLoginState();
     const {userNo,photo}=profile;
+
     const filePath=photo!=null?photo?.filePath+"/"+photo?.changeName:USER_PROFILE;
     const dispatch = useDispatch();
     const selectUserNo = () => {
+        console.log(userNo);
         dispatch(
             {type : MENU_PROFILE , userNo:userNo} ,
         )

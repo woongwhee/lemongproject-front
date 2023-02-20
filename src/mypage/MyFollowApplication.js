@@ -13,7 +13,7 @@ import {useLoginState} from "../member/LoginContext";
 
 function MyFollowApplication(){
     const [myfollowingList , setMyFollowingList] = useState();
-    const userNo = useSelector((state) => state.userNo);
+    const userNo = useSelector((state) => state.menu.userNo);
     const myNo =useLoginState().profile.userNo;
 
     console.log(userNo + " 값 확인중 ")
@@ -32,13 +32,8 @@ function MyFollowApplication(){
         })
     }
 
-
     function ShowMyFollowing(){
-        axios.get("/api/follow/selectMyFollowingList" , {
-            params:{
-                follower : userNo
-            }
-        }).then(function(res){
+        axios.get(`/api/follow/selectMyFollowingList/${userNo}`).then(function(res){
             console.log(res+"데이터 전송 성공");
             const data = res.data.result;
             console.log(data);

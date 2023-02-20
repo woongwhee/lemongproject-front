@@ -18,7 +18,7 @@ function MyFollowingCount(props){
     // const queryString = window.location.search;
     // const params = new URLSearchParams(queryString);
 
-    const userNo = useSelector((state) => state.userNo);
+    const userNo = useSelector((state) => state.menu.userNo);
 
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
 
@@ -39,7 +39,7 @@ function MyFollowingCount(props){
 
     // 팔로우 신청을 받은 사용자 입장에서 
     // 나의 팔로우 수락여부에 상관없이 팔로잉이 플러스되어야함.
-    const [MyFollowingCount , setMyFollowingCount] = useState();
+    const [MyFollowingCount , setMyFollowingCount] = useState(0);
 
     // 프로필 클릭 시 해당하는 userNo 뽑아오기.
     const dispatch = useDispatch();
@@ -73,11 +73,7 @@ function MyFollowingCount(props){
     console.log(myfollowingList)
 
     function ShowMyFollowing(){
-        axios.get("/api/follow/selectMyFollowingList" , {
-            params:{
-                follower : userNo
-            }
-        }).then(function(res){
+        axios.get(`/api/follow/selectMyFollowingList/${userNo}`).then(function(res){
             console.log(res+"데이터 전송 성공");
             const data = res.data.result;
             console.log(data);
@@ -96,7 +92,7 @@ function MyFollowingCount(props){
 
     return(
         <div className="followCount" style={{marginTop:'-54px'}}>
-            <span data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={ShowMyFollowing}><p style={{fontSize:'17px' , marginLeft : '188px' , marginTop:'-122px' , fontFamily:'Quicksand-Regular'}}><b>{MyFollowingCount?.count}</b></p></span>
+            <span data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={ShowMyFollowing}><p style={{fontSize:'17px' , marginLeft : '188px' , marginTop:'-122px' , fontFamily:'Quicksand-Regular'}}><b>{MyFollowingCount}</b></p></span>
             <div className="App">
             <div class="containers p-5">
             
