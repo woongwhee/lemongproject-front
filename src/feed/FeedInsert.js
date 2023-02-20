@@ -105,7 +105,6 @@ function FeedInsert() {
                                         photoNo: insertPhotoNo
                                     }).then(function (res) {
                                         {successAlert()}
-
                                     }).catch(function (res) {
                                         checkContent(res.data.Java);
                                     })

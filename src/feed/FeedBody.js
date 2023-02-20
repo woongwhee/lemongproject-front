@@ -29,10 +29,8 @@ function FeedBody(){
         let result = await axios.get(`/api/feed/main/${page}`).then(res=>codeHandler(res));
         let newList = [...feedList, ...result];
         setFeedList(newList);
-        console.log(newList);
         isLanding.current = false;
     };
-
 
     const handleObserver = useCallback((entries) => {
         const target = entries[0];
@@ -53,17 +51,17 @@ function FeedBody(){
         const observer = new IntersectionObserver(handleObserver, option);
         if (target.current) observer.observe(target.current);
     }, [handleObserver]);
+
     useEffect(() => {
         loadPage();
     }, [page])
+
     function callback(str) {
         setFeedList(str);
     }
-    const [loading, setLoading] = useState(true);
-    // let {userNo} =useLoginState().profile;
-    // console.log({userNo})
 
-    // style={{overflow:"scroll", height:"800px", scrollbarWidth:"none"}}
+    const [loading, setLoading] = useState(true);
+
     let i=0;
     return(
         <div>
