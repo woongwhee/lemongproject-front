@@ -11,10 +11,10 @@ import GoBackButton from "./GoBackButton";
 import { BsArrowLeftCircle} from 'react-icons/bs'
 
 const TemplateWrite = ({result}) => {
+    let dispatch = useTemplateDispatch();
     let {title, categoryNo, content, range, todoList} = result;
     let templateNo = result.templateNo;
     let todoCount = todoList == null ? 0 : todoList.length;
-    let dispatch = useTemplateDispatch();
     let dayArr = new Array(range);
     if (todoList != null && todoList.length > 0) {
         for (let i = 0; i < todoList.length; i++) {
@@ -83,7 +83,9 @@ const TemplateWrite = ({result}) => {
             setDays(newDays);
         }
     }
-
+    const backToList=()=>{
+        dispatch({type:"BACK_LIST"})
+    }
     const reset = async (e) => {
         const result = await resetUnSave();
         let {title, categoryNo, content, range} = result;
@@ -95,7 +97,7 @@ const TemplateWrite = ({result}) => {
     return (
         <div className={"template-write"}>
             <div className="btnBox">
-                <div className='btnBack'>
+                <div className='btnBack' onClick={backToList}>
                     <BsArrowLeftCircle />
                 </div>
                 

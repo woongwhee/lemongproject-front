@@ -1,106 +1,122 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
-
+import React, {useCallback, useRef, useState, useEffect} from 'react';
+import SockJs from "sockjs-client";
 import '../style/chat.scss';
 import ProfileIcon from "../../mypage/ProfileIcon";
 import {useLoginState} from "../../member/LoginContext";
-import challenge from "../../challengeChat/challenge";
 import {CHAT_SOCKET} from "../challengeURI";
 
-const Chat = ({chatList,challengeNo,playerList}) => {
-    const [msg, setMsg] = useState("");
-    const myNo=useLoginState().profile.userNo;
-    const [chatt, setChatt] = useState(chatList);
-    const [chkLog, setChkLog] = useState(false);
-    const [socketData, setSocketData] = useState();
-    const [players,setPlayers]=useState(playerList);
-    const ws = useRef(null);    //
-    useEffect(() => {
-        if(socketData !== undefined) {
-            const tempData = chatt.concat(socketData);
-            console.log(tempData);
-            setChatt(tempData);
-        }
-    }, [challengeNo])
 
-    const onText = event => {
-        setMsg(event.target.value);
-    }
+const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
+        const msg = useRef(null);
+        const myNo = useLoginState().profile.userNo;
+        const [players, setPlayers] = useState(playerList);
+        const [socketConnect, setSocketConnect] = useState(false);
+        const ws = useRef(null);
+        useEffect(() => {
+            console.log("응애");
+            if (isOpen) {
+                console.log("ws", "열기시작")
+                webSocketLogin()
+                console.log("ws", "열기종료")
+                let talk = document.querySelector("#talk");
+                talk.scrollTop = talk.scrollHeight;
 
-    const webSocketLogin = useCallback(() => {
-        ws.current = new WebSocket(`${CHAT_SOCKET}/${challengeNo}`);
-        ws.current.onmessage = (message) => {
-            const dataSet = JSON.parse(message.data);
-            const newChat=[...chatt,dataSet];
-            setChatt(newChat);
-            setSocketData(dataSet);
-        }
-    });
-    const send = useCallback(() => {
-        if(!chkLog) {
-            webSocketLogin();
-            setChkLog(true);
-        }
-        if(msg !== ''){
-            const data = {
-                userNo:myNo,
-                challengeNo,
-                chatMessage:msg,
-                msg,
-                date: new Date().toLocaleString(),
-            };  //전송 데이터(JSON)
-            const temp = JSON.stringify(data);
-            
-            if(ws.current.readyState === 0) {   //readyState는 웹 소켓 연결 상태를 나타냄
-                ws.current.onopen = () => { //webSocket이 맺어지고 난 후, 실행
-                    console.log(ws.current.readyState);
-                    ws.current.send(temp);
-                }
-            }else {
-                ws.current.send(temp);
+            } else {
+                ws.current.close()
+                ws.current = null;
             }
-        }else {
-            alert("메세지를 입력하세요.");
-            document.getElementById("msg").focus();
-            return;
+            return () => {
+            }
+        }, [isOpen])
+
+        const webSocketLogin = useCallback(
+            async () => {
+                ws.current = await new SockJs(CHAT_SOCKET);
+                console.log("여기옴", ws.current)
+                ws.current.onmessage = onMessage;
+                ws.current.onopen = onOpen;
+                ws.current.onclose = onClose;
+            }, [])
+
+        const onOpen = useCallback(() => {
+            console.log("열렸으")
+        }, [ws])
+        const onClose = useCallback(
+            () => {
+                if (isOpen) {
+                    console.log("재연결중")
+                    setTimeout(() => {
+                        webSocketLogin();
+                    }, 2000)
+                }
+
+            },
+            []
+        );
+
+        const onMessage = (message) => {
+            console.log(message);
+            addChat(JSON.parse(message.data));
+
+            setTimeout(()=> {
+                    let talk = document.querySelector("#talk");
+                    talk.scrollTop = talk.scrollHeight;
+                },10
+            )
+
         }
-        setMsg("");
-    });
 
-    (function(){
-        const displayChatting = document.getElementsByClassName("talk")[0];
-        if(displayChatting != null){
-            displayChatting.scrollTop = displayChatting.scrollHeight;
-           }
-    })();
+        // useEffect(() => {
+        //     let talk =document.querySelector("#talk");
+        //     talk.scrollHeight=talk.scrollTop;
+        // }, [chatList]);
 
-
-    
-    return (
-        <>
-            {/* <GlobalStyle/> */}
-            <div id="chat-wrap">
-                <div id='chatt'>
-                    <h1 id="title">WebSocket Chatting</h1>
-                    <br/>
-                    <div id='talk' className='talk' style={{overflow:'scroll'}}>
-                        <div className='talk-shadow'></div>
-                        {chatt.map((chat, idx) => (
-                            <div key={idx} className={chat.userNo === myNo ? 'me' : 'other'}>
-                                <ProfileIcon profile={players.find(e=>e.userNo=chat.userNo)}></ProfileIcon>
-                                [ {chat.chatMessage} ]<br/>
-                                <span>{chat.sendAt}</span>
-                            </div>
-                        ))}
-
-                    </div>
-                    <div id='sendZone'>
-                        <textarea id='msg' value={msg} onChange={onText} onKeyDown={(ev) => {if(ev.keyCode === 13){send();}}}></textarea>
-                        <input type='button' value='전송' id='btnSend' onClick={send}/>
+        const send = async () => {
+            if (!ws.current) {
+                await webSocketLogin();
+            }
+            if (msg.current.value !== '') {
+                if (ws.current.readyState != 0) {   //readyState는 웹 소켓 연결 상태를 나타냄
+                    ws.current.send(msg.current.value);
+                }
+            } else {
+                alert("메세지를 입력하세요.");
+                document.getElementById("msg").focus();
+                return;
+            }
+            msg.current.value = "";
+        }
+        return (
+            <>
+                {/* <GlobalStyle/> */}
+                <div id="chat-wrap">
+                    <div id='chatt'>
+                        <h1 id="title">WebSocket Chatting</h1>
+                        {/*<button onClick={webSocketLogin}> 눌러봐</button>*/}
+                        <br/>
+                        <div id='talk' className='talk' style={{overflow: 'scroll'}}>
+                            <div className='talk-shadow'></div>
+                            {chatList.map((chat, idx) => (
+                                <div key={idx} className={chat.userNo === myNo ? 'me' : 'other'}>
+                                    {/*<ProfileIcon profile={players.find(e => e.userNo == chat.userNo)}></ProfileIcon>*/}
+                                    [ {chat.chatMessage} ]<br/>
+                                    <span>{chat.sendAt}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <div id='sendZone'>
+                        <textarea id='msg' ref={msg} onKeyDown={(ev) => {
+                            if (ev.keyCode === 13) {
+                                send();
+                            }
+                        }}></textarea>
+                            <input type='button' value='전송' id='btnSend' onClick={send}/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </>
-    );
-};
+            </>
+        );
+    }
+;
 
 export default Chat;

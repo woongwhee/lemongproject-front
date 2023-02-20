@@ -13,7 +13,7 @@ function challengeReducer(state, action) {
         case 'DETAIL':
             return {index: 1, challengeNo: action.challengeNo};
         case 'LIST':
-            return initialParam;
+            return {index: 0};
         default:
             return state;
     }

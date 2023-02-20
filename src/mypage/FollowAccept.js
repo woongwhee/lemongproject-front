@@ -17,8 +17,7 @@ function FollowAccept(){
 
     let {profile}=useLoginState();
     console.log(profile);
-    const userNo = profile?.userNo; // 로그인한 사용자 userNo
-
+    const userNo = profile?.userNo; // 로그인한 사용자 userNoㄷ
     // 나한테 온 팔로우신청 목록들.
     const [followerList , setFollowerList] = useState();
 
@@ -48,7 +47,6 @@ function FollowAccept(){
             }).then(function(res){
                 console.log("데이터 전송 성공");
                 console.log(res.data.result);
-
                 const data = res.data.result;
                 callback(data);
             }).catch(function(){

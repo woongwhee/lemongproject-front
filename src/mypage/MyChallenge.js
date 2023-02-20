@@ -17,7 +17,8 @@ function MyChallenge() {
     const myNo = useLoginState().profile.userNo;
     // 현재 내가 참여하고 있는 챌린지 리스트
     const [challList, setChallList] = useState([]);
-    const challengeNo = useRef(0);
+    // const challengeNo = useRef(0);
+    const [challengeNo,setChallengeNo] = useState();
     // 챌린지 상세보기
     useEffect(
         () => {
@@ -29,14 +30,13 @@ function MyChallenge() {
             }).catch(function () {
                 console.log("데이터 수신실패");
             })
-
         }, [userNo])
 
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(e => !e);
     const openRoom = async (roomNo) => {
         if (myNo == userNo) {
-            challengeNo.current = roomNo;
+            setChallengeNo(roomNo);
             console.log(roomNo, "룸");
             setIsOpen(true);
         }
@@ -59,7 +59,7 @@ function MyChallenge() {
                     </div>
                 )}
             </div>
-            <ChallengeRoomModal isOpen={isOpen} toggle={toggle} challengeNo={challengeNo.current}/>
+            <ChallengeRoomModal isOpen={isOpen} toggle={toggle} challengeNo={challengeNo}/>
         </div>
     )
 };

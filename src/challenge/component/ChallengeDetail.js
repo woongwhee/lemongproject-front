@@ -5,11 +5,13 @@ import {cancelMulti, joinMulti} from "../challengeApi";
 import {useLoginState} from "../../member/LoginContext";
 import '../style/ChallengeList.css';
 import { BsArrowLeftCircle} from 'react-icons/bs'
+import {useChallengeDispatch} from "../ChallengeContext";
 
 const ChallengeDetail = ({result}) => {
     const {challengeNo, challengeTitle, challengeInfo, startDate, LocalDate, endDate,readyUsers,todoPreview} = result;
     const {userNo}=useLoginState().profile;
     const isReady=readyUsers.find(e=>e.userNo==userNo)==undefined?true:false
+    let dispatch = useChallengeDispatch();
     const join = async () => {
         let res = await joinMulti(challengeNo);
         alert(res);
@@ -18,7 +20,9 @@ const ChallengeDetail = ({result}) => {
         let res = await cancelMulti(challengeNo);
         alert(res);
     }
-    
+    const backtoList=()=>{
+        dispatch({type:'LIST'})
+    }
     const countUser = readyUsers.length;
     
     const chStartDate = (startDate[0]).toString()+"년 "+(startDate[1].toString())+"월 "+(startDate[2]).toString()+"일"; 
@@ -28,7 +32,7 @@ const ChallengeDetail = ({result}) => {
     return (
         <div className='chDetail'>
             <div className='dtBtn'>
-                <div className='btnBack'>
+                <div className='btnBack' onClick={backtoList} >
                     <BsArrowLeftCircle />
                 </div>
             </div>
@@ -40,9 +44,7 @@ const ChallengeDetail = ({result}) => {
             <div className='dtCountUser'>참여인원 : {countUser}</div>
             <div className='dtStart'>시작일 : {chStartDate2}</div>
             <div className='dtInfo'>챌린지 소개 : {challengeInfo}</div>
-
             <div className='dtTodo'>{todoPreview.todoList.map(todo=>todo.todoContent)}</div>
-            
             <div className='dtCountUser2'>참여 인원 ( {countUser} )</div>
             <div className='dtUser'>{readyUsers.map(user=>user.nickName)}</div>
         </div>
