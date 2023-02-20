@@ -92,24 +92,19 @@ const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
                 <div id="chat-wrap">
                     <div id='chatt'>
                         <h1 id="title">WebSocket Chatting</h1>
-                        {/*<button onClick={webSocketLogin}> 눌러봐</button>*/}
                         <br/>
                         <div id='talk' className='talk' style={{overflow: 'scroll'}}>
                             <div className='talk-shadow'></div>
                             {chatList.map((chat, idx) => (
                                 <div key={idx} className={chat.userNo === myNo ? 'me' : 'other'}>
-                                    {/*<ProfileIcon profile={players.find(e => e.userNo == chat.userNo)}></ProfileIcon>*/}
-                                    [ {chat.chatMessage} ]<br/>
-                                    <span>{chat.sendAt}</span>
+                                    <div style={{marginLeft:'-10px'}}><ProfileIcon profile={players.find(e=>e.userNo=chat.userNo)}></ProfileIcon></div>
+                                    <div style={{width:'100%'}}>{chat.chatMessage}</div><br/>
+                                    <span style={{marginTop:'-100px'}}>{chat.sendAt}</span>
                                 </div>
                             ))}
                         </div>
                         <div id='sendZone'>
-                        <textarea id='msg' ref={msg} onKeyDown={(ev) => {
-                            if (ev.keyCode === 13) {
-                                send();
-                            }
-                        }}></textarea>
+                        <textarea id='msg' ref={msg} onKeyDown={(ev) => {if (ev.keyCode === 13) {send();}}}></textarea>
                             <input type='button' value='전송' id='btnSend' onClick={send}/>
                         </div>
                     </div>
