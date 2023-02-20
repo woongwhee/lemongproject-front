@@ -3,11 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {useLoginState} from "../member/LoginContext";
 import axios from "axios";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import {IconButton} from "@mui/material";
 import Badge from "@mui/material/Badge";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import TabContext from '@mui/lab/TabContext';
@@ -191,7 +190,7 @@ function FeedAlarm(props) {
         <>
             <IconButton aria-label="delete" onClick={handleShow}>
                 <Badge badgeContent={alCount} color="primary">
-                    <NotificationsIcon fontSize="large"/>
+                    <NotificationsNoneOutlinedIcon fontSize="large" />
                 </Badge>
             </IconButton>
 
@@ -222,11 +221,11 @@ function FeedAlarm(props) {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={()=>{clearAlarm()}}>
-                        Close
+                    <Button variant="outline-success" onClick={()=>{clearAlarm()}}>
+                        CLEAR
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
+                    <Button variant="dark" onClick={handleClose}>
+                        CLOSE
                     </Button>
                 </Modal.Footer>
             </Modal>
