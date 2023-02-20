@@ -6,6 +6,7 @@ import {useLoginState} from "../member/LoginContext";
 import {codeHandler} from "../util/apiUtil";
 import "./FeedBody.css"
 import FeedAlarm from "./FeedAlarm";
+import FeedInsert from "./FeedInsert";
 
 function FeedBody(){
     // 요청받은 정보를 담아줄 변수 선언
@@ -67,7 +68,10 @@ function FeedBody(){
     return(
         <div>
             <div className="FeedBody" >
-                <FeedAlarm/>
+                <div style={{border:"5px, solid red",marginTop:"20px", position:"fixed"}}>
+                    <div style={{float:"left"}}><FeedAlarm/></div>
+                    <div style={{float:"left"}}><FeedInsert/></div>
+                </div>
                 {feedList?.map((e)=><Feed key={i++} {...e}/>)}
                 <div ref={target} style={{height:"30px"}}></div>
             </div>

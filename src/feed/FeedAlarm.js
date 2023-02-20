@@ -15,6 +15,8 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import Paper from '@mui/material/Paper';
+import "./FeedAlarm.css"
 
 function FeedAlarm(props) {
     const [show, setShow] = useState(false);
@@ -49,6 +51,7 @@ function FeedAlarm(props) {
             setReplyAlarm(res.data.result)
         })
     },[])
+
     const replyRendering=()=>{
         axios.post('api/feed/replyAlarmList',{
             userNo:loginUserNo
@@ -64,10 +67,12 @@ function FeedAlarm(props) {
             proFile(replyAlarm[i].sendUser)
             result.push(
                 <div key={i} style={{width:"100%"}}>
-                    <div style={{border:"1px solid gray", width:"350px", float:"left",marginTop:"5px"}}>
+                    <div style={{border:"1px solid #dcdcdc", width:"350px", float:"left",marginTop:"5px"}}>
+                        <Paper elevation={16}>
                         <div>보낸사람 : {get} </div>
                         <div style={{textOverflow:"ellipsis", overflow:"hidden",whiteSpace:"nowrap"}}>댓글내용 : {replyAlarm[i].message}</div>
-                        <div>쓴시간 : {replyAlarm[i].alrAt}</div>
+                        <div>{replyAlarm[i].alrAt}</div>
+                        </Paper>
                     </div>
                     <div style={{float:"right", marginTop:"20px"}}>
                         <IconButton aria-label="delete" onClick={ () => {
@@ -119,9 +124,11 @@ function FeedAlarm(props) {
             proFile(heartAlarm[i].sendUser)
             result.push(
                 <div key={i} style={{width:"100%"}}>
-                    <div style={{border:"1px solid gray", width:"350px", float:"left",marginTop:"5px"}}>
+                    <div style={{border:"1px solid #dcdcdc", width:"350px", float:"left",marginTop:"5px"}}>
+                        <Paper elevation={16}>
                         <div>{get} 님이 {heartAlarm[i].message} </div>
                         <div>{heartAlarm[i].alrAt}</div>
+                        </Paper>
                     </div>
                     <div style={{float:"right", marginTop:"10px"}}>
                         <IconButton aria-label="delete" onClick={ () => {
@@ -190,7 +197,7 @@ function FeedAlarm(props) {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Feed Alarm</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -202,12 +209,12 @@ function FeedAlarm(props) {
                             </TabList>
                         </Box>
                         <TabPanel value="1">
-                            <div style={{height:"500px", overflow:"scroll"}}>
+                            <div className="replyMessage" >
                                 {replyMessage()}
                             </div>
                         </TabPanel>
                         <TabPanel value="2">
-                            <div style={{height:"500px", overflow:"scroll"}}>
+                            <div className="replyMessage">
                                 {HrMessage()}
                             </div>
                         </TabPanel>

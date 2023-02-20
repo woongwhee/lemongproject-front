@@ -28,6 +28,7 @@ import {useLoginState} from "../member/LoginContext";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Box from "@mui/joy/Box";
 import PropTypes from "prop-types";
+import moment from "moment";
 
 
 
@@ -175,32 +176,14 @@ export default function RecipeReviewCard(props) {
                     Profile(userNo)
                 }
                 action={
-                    // <TreeView
-                    //     aria-label="disabled items"
-                    //     defaultCollapseIcon={<ExpandMoreIcon />}
-                    //     defaultExpandIcon={<ChevronRightIcon />}
-                    //     disabledItemsFocusable={focusDisabledItems}
-                    //     multiSelect
-                    // >
-                    //     <TreeItem nodeId="1" label="변경하기">
-                    //         {Feed.userNo}
-                    //         <FeedDelete Feed={Feed}/>
-                    //         <FeedUpdate Feed={Feed}/>
-                    //     </TreeItem>
-                    // </TreeView>
                     updateDeleteButton()
                 }
                 title={Feed.nickName}
-                subheader={Feed.feedAt}
+                // subheader={Feed.feedAt}
+                subheader={new moment(Feed.feedAt).format('YY.MM.DD')}
             />
-            <CardMedia
-                // component="img"
-                // height="194"
-                // image={Feed.filePathList}
-                // alt="Paella dish"
-            >
+            <CardMedia>
                 <FeedPhoto filePathList={Feed.filePathList}></FeedPhoto>
-
             </CardMedia>
 
             <CardContent>
@@ -209,8 +192,6 @@ export default function RecipeReviewCard(props) {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                {/*{Feed.feedNo}*/}
-                {/*<FeedDetail Feed={Feed}></FeedDetail>*/}
                 <FeedReply Feed={Feed}></FeedReply>
                 <FeedDetail Feed={Feed}></FeedDetail>
                 <FeedHeart Feed={Feed}></FeedHeart>

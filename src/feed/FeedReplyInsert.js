@@ -10,6 +10,7 @@ import "./FeedReply.css"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 import swal from 'sweetalert';
+import moment from "moment";
 
 function FeedReplyInsert(props) {
 
@@ -81,11 +82,9 @@ const [ testStr, setTestStr ] = useState([]);
     const deleteReplyManagerButton = (replyNo, feedNo) =>{
         if(loginUserNo === Feed.userNo){
             return(
-                // <CloseButton onClick={()=>{deleteReply(replyNo,feedNo)}}/>
                 <IconButton aria-label="delete" size="small">
                     <DeleteForeverIcon fontSize="small" onClick={()=>{deleteReply(replyNo,feedNo)}}/>
                 </IconButton>
-                // <p>dfd</p>
             )
         }else{
             return(" ");
@@ -104,7 +103,8 @@ const [ testStr, setTestStr ] = useState([]);
                                 {deleteReplyButton(testStr[i].replyNo, feedNo, testStr[i].userNo)}
                             </div>
                             <div>
-                                <div style={{float:"left"}}>{testStr[i].replyAt}</div>
+                                {/*<div style={{float:"left"}}>{testStr[i].replyAt}</div>*/}
+                                <div style={{float:"left"}}>{new moment(testStr[i].replyAt).format('YY.MM.DD HH:mm')}</div>
                                 <div>{deleteReplyManagerButton(testStr[i].replyNo, feedNo)}</div>
                             </div>
                         </div>

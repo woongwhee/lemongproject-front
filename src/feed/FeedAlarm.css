@@ -1,0 +1,8 @@
+.replyMessage{
+    /*display: none; !* Chrome, Safari, Opera*!*/
+    overflow: scroll;
+    height: 500px;
+}
+.replyMessage::-webkit-scrollbar{
+    display: none;
+}
