@@ -225,19 +225,18 @@
     height: 40px;
 }
 #serchOuter:hover {
-    letter-spacing: 0.3px;
+    /* letter-spacing: 0.3px;
     transform: scale(0.99);
-    box-shadow: -5px 0px 25px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-    transition: all 1.5s;
+    box-shadow: -5px 0px 25px rgba(0, 0, 0, 0.05); */
+    
 }
 
 #alerthOuter:hover {
-    letter-spacing: 0.3px;
+    /* letter-spacing: 0.3px;
     transform: scale(0.99);
     box-shadow: -5px 0px 25px rgba(0, 0, 0, 0.05);
     cursor: pointer;
-    transition: all 1.5s;
+    transition: all 1.5s; */
 }
 
 #mbtn:hover{
@@ -251,7 +250,7 @@
     font-weight: bold;
     text-align: center;
     background-color: #ffffff;
-    background-color: rgba(203, 203, 203, 0.14);
+    /* background-color: rgba(203, 203, 203, 0.14); */
 }
 
 #serchOuter{
