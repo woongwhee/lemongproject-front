@@ -9,6 +9,7 @@
 .menuBar{
     /*padding: 1rem; */
     background: rgb(225, 225, 225);
+    /* background: #dadee1; */
     width: 100%;
     height: 7%;
     margin-bottom: 1rem;
@@ -20,6 +21,7 @@
     height: 87%;
     margin: auto;
     border: 0px dotted skyblue;
+    /* background: #e9ecef; */
 }
 .tabs {
     height: 13%;

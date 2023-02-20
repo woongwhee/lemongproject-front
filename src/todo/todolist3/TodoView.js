@@ -15,11 +15,11 @@ import { useLoginState } from '../../member/LoginContext';
 // npx create-react-app react-todo
 // npm i react-icons styled-components
  
-const GlobalStyle = createGlobalStyle`
-  body {
-    background: #e9ecef;
-  }
-`;
+// const GlobalStyle = createGlobalStyle`
+//   body {
+//     background: #e9ecef;
+//   }
+// `;
 
 function TodoView3(){
   //선택한 투두리스트 날짜 
@@ -210,7 +210,7 @@ function TodoView3(){
     <>
       <TodoTemplate>
         {/* <p onClick={click}>dd</p> */}
-        <GlobalStyle />
+        {/* <GlobalStyle /> */}
         <TodoDate /> {/*todo날짜 컴포넌트*/}
         <TodoList 
          todoList={todoList}

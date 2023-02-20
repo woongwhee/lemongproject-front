@@ -11,6 +11,8 @@ const TodoTemplateBlock = styled.div `
     background: white;
     border-radius: 16px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 0 38px #e9ecef;
+    box-shadow: 0 0 38px #dadee1;
  
     margin: 0 auto;
  
