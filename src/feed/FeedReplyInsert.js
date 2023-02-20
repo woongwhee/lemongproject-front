@@ -27,8 +27,37 @@ const [ testStr, setTestStr ] = useState([]);
 
     props.setReplyCount(replyCount);
 
+    let {profile} = useLoginState();
+    let loginUserNo = profile.userNo
 
 
+
+
+    // const deleteReplyAlert = (e, replyNo, feedNo) =>{
+    //     if(res === "success"){
+    //         return(
+    //             swal({
+    //             title: "댓글을 삭제 하시겠습니까?",
+    //             text: "",
+    //             icon: "warning",
+    //             buttons: true,
+    //             dangerMode: true,
+    //         })
+    //             .then((willDelete) => {
+    //                 if (willDelete) {
+    //                     swal("댓글이 삭제 되었습니다!", {
+    //                         icon: "success",
+    //
+    //                     });
+    //                 } else {
+    //                     swal("댓글 삭제를 취소하셨습니다!");
+    //                 }
+    //             })
+    //             )
+    //     }else{
+    //         return(swal("댓글 삭제를 취소하셨습니다!"))
+    //     }
+    // }
 
     const deleteReply = async (replyNo, feedNo) => {
         await axios.post('api/feed/deleteReply',
@@ -36,38 +65,11 @@ const [ testStr, setTestStr ] = useState([]);
                 replyNo:replyNo,
                 feedNo:feedNo
             }).then(function (res){
-                // console.log(res.data.Java);
-                deleteReplyAlert(res.data.Java);
-                getReplyList();
-            })
+            // deleteReplyAlert(res.data.Java);
+            getReplyList();
+        })
     }
 
-    const deleteReplyAlert = (res) =>{
-        if(res === "success"){
-            return(
-                swal({
-                title: "댓글을 삭제 하시겠습니까?",
-                text: "",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal("댓글이 삭제 되었습니다!", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("댓글 삭제를 취소하셨습니다!");
-                    }
-                })
-                )
-        }else{
-            return(swal("댓글 삭제를 취소하셨습니다!"))
-        }
-    }
-    let {profile} = useLoginState();
-    let loginUserNo = profile.userNo
     //                                             댓글쓴사람
     const deleteReplyButton = (replyNo, feedNo, replyUserNo) =>{
         if(loginUserNo === replyUserNo){
@@ -78,7 +80,8 @@ const [ testStr, setTestStr ] = useState([]);
             return(<p></p>)
         }
     }
-    // console.log(loginUserNo === Feed.userNo);
+
+
     const deleteReplyManagerButton = (replyNo, feedNo) =>{
         if(loginUserNo === Feed.userNo){
             return(
@@ -103,7 +106,6 @@ const [ testStr, setTestStr ] = useState([]);
                                 {deleteReplyButton(testStr[i].replyNo, feedNo, testStr[i].userNo)}
                             </div>
                             <div>
-                                {/*<div style={{float:"left"}}>{testStr[i].replyAt}</div>*/}
                                 <div style={{float:"left"}}>{new moment(testStr[i].replyAt).format('YY.MM.DD HH:mm')}</div>
                                 <div>{deleteReplyManagerButton(testStr[i].replyNo, feedNo)}</div>
                             </div>
@@ -130,6 +132,7 @@ const [ testStr, setTestStr ] = useState([]);
             })
         },[]
     );
+
     const getReplyList=()=>{
         axios({
             url: '/api/feed/listReply',
@@ -186,16 +189,6 @@ const [ testStr, setTestStr ] = useState([]);
             console.log('실패함');
         })
     }
-
-    // const replyAlarm = () =>{
-    //     axios.post('api/feed/alarmReply',{
-    //         feedNo:feedNo,
-    //         replyContent:replyContent,
-    //
-    //     })
-    // }
-
-
 
     let i = 0;
     return (

@@ -15,6 +15,8 @@ function Login() {
     useEffect( () => {
         initializeNaverLogin()
     }, [])
+
+
     const loginDispatch=useLoginDispatch();
     const loginSuccess = (result) => {
         loginDispatch({
@@ -33,7 +35,8 @@ function Login() {
             return res;
         }
     }
-        const { data, error, isPending } = useAsync(checkLogin);
+
+    const { data, error, isPending } = useAsync(checkLogin);
 
     const [email, setEmail] = useState();
     const [userPwd, setUserPwd] = useState();
