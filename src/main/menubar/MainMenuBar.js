@@ -7,7 +7,7 @@ import {IconButton} from "@mui/material";
 import FeedInsert from "../../feed/FeedInsert";
 import MySearch from "../../mypage/MySearch";
 import Challenge from "../../challengeChat/challenge";
-import { KAKAO_LOGOUT_URL } from '../../member/KakaoLoginData';
+import { KAKAO_LOGOUT_URL } from '../../api/KakaoLoginData';
 import {useLoginState} from "../../member/LoginContext";
 import { useLoginDispatch } from "../../member/LoginContext";
 import axios from "axios";

@@ -40,7 +40,7 @@
     margin-top: 0px;
 }
 .outer_Chall{
-    border: 1px solid violet;
+    /* border: 1px solid violet; */
     width: 85%;
     height: 60%;
     margin: auto;
@@ -343,6 +343,30 @@
 }
 .serchOuter::-webkit-scrollbar-thumb {
     height: 30%; /* 스크롤바의 길이 */
-    background: black; /* 스크롤바의 색상 */
+    background: none; /* 스크롤바의 색상 */
     border-radius: 10px;
 }
+
+.outer_Chall::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 0px;
+}
+.outer_Chall::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: none; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+#myChalldiv{
+    background-color: #ffffff;
+    background-color: rgba(240, 235, 235, 0.097);
+    color: black;
+}
+#myChalldiv:hover{
+    transition: all 0.3s linear;
+    transform: scale(1.01);
+    width: 100px;
+    margin: 0px auto;
+    overflow: hidden;
+}
+

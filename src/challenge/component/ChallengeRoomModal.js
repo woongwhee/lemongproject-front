@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import moment from "moment/moment";
-import ProfileIcon from "../../mypage/ProfileIcon";
 import {useLoginState} from "../../member/LoginContext";
 import Chat from "./Chating";
 import ChallengeRank from "./ChallengeRank";
@@ -29,17 +28,15 @@ const ChallengeRoomModal = ({challengeNo, isOpen, toggle}) => {
     }
     useEffect(
         () => {
-            if (isOpen) {
                 console.log("???")
                 loadRoom(challengeNo);
-            }
         }, [challengeNo])
 
     return (
-        <Modal isOpen={isOpen} toggle={toggle} size="xl">
+        <Modal isOpen={isOpen} toggle={toggle} size="xl" style={{width:'1003px'}}>
 
             <ModalHeader toggle={toggle}></ModalHeader>
-            <ModalBody>
+            <ModalBody >
                 <div className="detail-header">
                     <h1 style={{fontSize: '25px'}}><b>{detail.challengeTitle}</b></h1>
                     <h3 style={{fontSize: '20px'}}>{moment(detail.startDate).format('YYYY년 MM월 DD일')} ㅡ {moment(detail.endDate).format('YYYY년 MM월 DD일')}</h3>

@@ -17,7 +17,6 @@ function TitleInfo() {
     return(
 
         <div className='TitleInfoWrap'>
-
                 <div className='sdiv1'>
                     <Carousel className="CarouselMain" indicators={false} controls={false} interval={5000} fade={true}>
                         <Carousel.Item>
@@ -37,7 +36,6 @@ function TitleInfo() {
                         </Carousel.Item>
                     </Carousel>
                 </div>
-
                 <div className='sdiv2'>
                     <img className='monitorImg' src={monitor} alt="mointor Img loading fail" />
                 </div>    

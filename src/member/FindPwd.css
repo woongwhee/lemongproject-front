@@ -53,18 +53,20 @@
     background-color: #BA99C3;
     margin: auto;
     height: 6rem;
-    padding-top: 28px;
+    padding-top: 30px;
     border-top-right-radius: 11px;
     border-top-left-radius: 11px;
     font-size: 33px;
     color: white;
     font-weight: bold;
+    font-family: Binggrae-Two;
 }
 
 .findInput {
     /* border: 1px solid red; */
     margin: 50px 70px;
     padding-top: 20px;
+    font-family: KoPubWorldDotum;
 }
 
 .findInputP {
@@ -75,6 +77,7 @@
     font-weight: bold;
     font-size: 20px;
     margin-right: 30px;
+    font-family: Binggrae-Two;
 }
 
 .findName {
@@ -144,6 +147,7 @@
     font-size: large;
     font-weight: bold;
     border-radius: 5px;
+    font-family: Binggrae-Two;
 }
 
 

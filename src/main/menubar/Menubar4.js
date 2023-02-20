@@ -29,7 +29,7 @@ const Menubar4 = (props) => {
     }
     return (
         <div className="menubar-box">
-            <div className="menuBar" style={{marginTop:'-32px' , height:'10%'}}>
+            <div className="menuBar" >
                 <ul className="tabs">
                     <li className={`${menu.index === 1 ? 'active' : ''}`} onClick={() => changeMenu(MENU_FEED)}><p style={{fontFamily:'Lobster-Regular' , fontSize:'33px'}}>Feed</p>
                     </li>

@@ -55,10 +55,8 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
       console.log("dnd 실패")
     })
   }
-
-  const [checkTodo] = chList.filter(chTodos => chTodos.challengeName !== null);
-  
-
+  console.log("여기까지옴")
+  // const checkTodo = chList?.filter(chTodos => chTodos.challengeName !== null);
   return ( 
     <>
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
@@ -66,7 +64,7 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
         {provided => (
           <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}>
             {/* dailyTodo */}
-            {todoList && todoList.map((todo, index) =>(
+            {todoList?.map((todo, index) =>(
               <Draggable draggableId={String(todo.todoNo)} index={index} key={todo.todoNo} >
                 {provided => (
                   <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
@@ -83,16 +81,14 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
                 )}
               </Draggable>
               ))}
-              {provided.placeholder} 
-
+              {provided.placeholder}
             {/* challengeTodo */}
-            
-            {chList && chList.map((chTodos, index) => ( 
+            {chList?.map((chTodos, index) => (
               <Challenge chTodos={chTodos} key={index}>
                 {!isEmpty(chTodos.todoList) && <p>{chTodos.challengeName}</p>}
 
                 
-                {chTodos.todoList.map(chTodo => 
+                {chTodos?.todoList.map(chTodo =>
                   <ChallTodoItem key={chTodo.todoNo} chTodo={chTodo} onToggleCh={onToggleCh}/>
                 )}
               </Challenge>

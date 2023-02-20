@@ -12,6 +12,8 @@ import {useLoginState} from "../member/LoginContext";
 import {codeHandler} from "../util/apiUtil";
 import ChallengeRoomModal from "../challenge/component/ChallengeRoomModal";
 
+import { FcOk } from "react-icons/fc";
+
 function MyChallenge() {
     const userNo = useSelector((state) => state.menu.userNo);
     const myNo = useLoginState().profile.userNo;
@@ -36,25 +38,25 @@ function MyChallenge() {
     const toggle = () => setIsOpen(e => !e);
     const openRoom = async (roomNo) => {
         if (myNo == userNo) {
-            setChallengeNo(roomNo);
-            console.log(roomNo, "룸");
+            await setChallengeNo(roomNo);
             setIsOpen(true);
         }
     }
     return (
-        <div className="outer_Chall">
+        <div className="outer_Chall" style={{overflow:'scroll'}}>
             <div>
                 {challList.map((e, index) =>
-                    <div key={index} className="outer_myChallList" class="btn btn-outline-dark" style={{borderRadius: '0', width: '100%'}} data-bs-toggle="modal"
+                    <div id="myChalldiv" key={index} className="outer_myChallList" class="btn btn-outline-dark" style={{borderRadius: '0', width: '49.3%' , marginTop:'3px' , marginLeft:'3px' , boxShadow:'1px 1px 3px #000' , border:'0px'}} data-bs-toggle="modal"
                         onClick={() => {
                             if (e.status == 'PLAY') {openRoom(e.challengeNo)}else{console.log(e.challengeNo,"아닌데??")}
                         }}
                         >
-                        <h1 style={{float: 'left', fontFamily: 'Lobster-Regular'}}>
-                            <b>{e?.title}</b></h1>
+                        <h1 style={{float: 'left', fontFamily: 'SourceSansPro-Black' , fontSize:'27px'}}>
+                            <b>{e?.title}</b></h1> 
                         <br/><br/><br/>
-                        <h4 style={{float: 'left', fontFamily: 'NanumGothic-Regular'}}>
-                            <b>{moment(e.startDate).format('YYYY년 MM월 DD일')} ㅡ {moment(e.endDate).format('YYYY년 MM월 DD일')}</b>
+                        <h4 style={{float: 'left', fontFamily: 'SourceSansPro-Light' , fontSize:'20px'}}>
+                            <b>{moment(e.startDate).format('YYYY년 MM월 DD일')} ㅡ {moment(e.endDate).format('YYYY년 MM월 DD일')}</b><br></br>
+                            <FcOk style={{float:'left' , marginTop:'7px'}}/> <span style={{fontFamily:'NanumGothic-Regular' , fontSize:'17px' , marginTop:'7px' , float:'left' , marginLeft:'5px'}}>참여 중</span>
                         </h4>
                     </div>
                 )}

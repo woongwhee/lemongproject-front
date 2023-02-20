@@ -10,7 +10,7 @@ function App() {
 
     return (
         <>
-            {isLogin ? <MainPage/> : <MainFront/>}
+            {isLogin ? <MainPage/> : <MainFront isLogin={isLogin}/>}
         </>
     )
 
