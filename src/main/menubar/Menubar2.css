@@ -6,6 +6,7 @@
     height: 100%;
     margin: auto;
     margin-top: -10px;
+    cursor: default;
 }
 .menuBar{
     /*padding: 1rem; */
