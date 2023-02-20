@@ -53,20 +53,14 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
 
     }
     const finishClickPhoto=(e,t)=>{
-        // e.preventDefault();
-        // e.stopPropagation();
-        console.log('끝' + t);
         arr.push(t);
-        console.log("끝 번호 추가 arr"+arr)
     }
     const changeValue = () =>{
         axios.post('api/feed/changeValue',{
             startPhoNo:arr[0],
             finishPhoNo:arr[1]
         }).then(function (res){
-            console.log('여긴피드업데이트')
             arr = [];
-            console.log("피드업데이트후 arr : " + arr);
         })
     }
 //----------------------------------------------------------------------+
@@ -74,21 +68,17 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
     // 인덱스 바꾸기
     let arrCh = []
     const startIndex = (e) =>{
-        console.log("시작인덱스번호 : " + getPhotoNoList.indexOf(e) + "리스트 : " + getPhotoNoList);
         const newNo = getPhotoNoList.indexOf(e)
         arrCh.push(newNo);
     }
     const finishIndex = (e) => {
-        console.log("끝인덱스번호 : " + getPhotoNoList.indexOf(e))
         const newNo = getPhotoNoList.indexOf(e)
         arrCh.push(newNo)
-        console.log("바꿀인덱스 : "+arrCh);
     }
     const changeArray = (e) =>{
         const photoNo = [...getPhotoNoList]
         photoNo.splice(arrCh[0],1,arr[1]) // 0, 1, 477
         photoNo.splice(arrCh[1],1,arr[0]) // 1, 1, 476
-        console.log("복사본바꾼리스트 : "+photoNo);
         setPhotoNoList(photoNo);
     }
 //----------------------------------------------------------------------+
@@ -140,13 +130,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                              changeArray(event);
                              changePath(event);
                          }}
-                         // * onDrop : 대상이 드랍되면 이벤트가 발생 합니다.
-
                          onDragOver={(event) => { return dragFunction(event); }}
-                         // * onDragOver : 드래그 대상이 드랍영역에 오버(over)하는 경우 발생 합니다.
-                        // onDragStart={(event)=>{onDragStart(event,getPhotoNoList[i],'시작')}}
-                        //  onDragEnd={(event)=>{onDragEnd(event,getPhotoNoList[i],'끝')}}
-                        //  onDragOver={(e)=>{onDragOver(e)}}
                     >
 
 
@@ -170,68 +154,6 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
                         />
                         <span>{getPhotoNoList[i]}  :::  {[i]}</span>
                     </div>
-                        // <Card
-                        //     sx={{
-                        //         width: 300,
-                        //         bgcolor: 'initial',
-                        //         boxShadow: 'none',
-                        //         '--Card-padding': '0px',
-                        //     }}
-                        // >
-                        //     <Box sx={{ position: 'relative' }}>
-                        //         <AspectRatio ratio="4/5">
-                        //             <figure>
-                        //                 <img
-                        //                     src={getFilePathList[i]}
-                        //                     loading="lazy"
-                        //                     alt="Yosemite by Casey Horner"
-                        //                 />
-                        //             </figure>
-                        //         </AspectRatio>
-                        //         <CardCover
-                        //             className="gradient-cover"
-                        //             sx={{
-                        //                 '&:hover, &:focus-within': {
-                        //                     opacity: 1,
-                        //                 },
-                        //                 opacity: 0,
-                        //                 transition: '0.1s ease-in',
-                        //                 background:
-                        //                     'linear-gradient(180deg, transparent 62%, rgba(0,0,0,0.00345888) 63.94%, rgba(0,0,0,0.014204) 65.89%, rgba(0,0,0,0.0326639) 67.83%, rgba(0,0,0,0.0589645) 69.78%, rgba(0,0,0,0.0927099) 71.72%, rgba(0,0,0,0.132754) 73.67%, rgba(0,0,0,0.177076) 75.61%, rgba(0,0,0,0.222924) 77.56%, rgba(0,0,0,0.267246) 79.5%, rgba(0,0,0,0.30729) 81.44%, rgba(0,0,0,0.341035) 83.39%, rgba(0,0,0,0.367336) 85.33%, rgba(0,0,0,0.385796) 87.28%, rgba(0,0,0,0.396541) 89.22%, rgba(0,0,0,0.4) 91.17%)',
-                        //             }}
-                        //         >
-                        //             <Box>
-                        //                 <Box
-                        //                     sx={{
-                        //                         p: 2,
-                        //                         display: 'flex',
-                        //                         alignItems: 'center',
-                        //                         gap: 1.5,
-                        //                         flexGrow: 1,
-                        //                         alignSelf: 'flex-end',
-                        //                     }}
-                        //                 >
-                        //                     <Typography level="h2" noWrap sx={{ fontSize: 'lg' , color:"white"}}>
-                        //                         {i+1} 번째 사진
-                        //                     </Typography>
-                        //                     <div style={{color:"white", float:"right"}}>
-                        //                         <IconButton aria-label="delete">
-                        //                     <DeleteOutlineOutlinedIcon
-                        //                         onClick={()=>{
-                        //                             deletePhotoNoList(getPhotoNoList[i]); // 숫자 숨겨
-                        //                             deletePhotoPathList(getFilePathList[i]); // 위치 숨겨
-                        //                             deleteClick(getPhotoNoList[i]); // 숫자 지운
-                        //                         }}
-                        //                     />
-                        //                         </IconButton>
-                        //                     </div>
-                        //                 </Box>
-                        //             </Box>
-                        //         </CardCover>
-                        //     </Box>
-                        // </Card>
-
-
                 );
             }
         return result;

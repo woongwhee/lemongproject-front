@@ -79,9 +79,6 @@ function FeedInsert() {
                         <FeedPictureInsert setInsertPhotoNo={setInsertPhotoNo}></FeedPictureInsert>
                     </div>
 
-                    {/*<div>*/}
-                    {/*    {insertPhotoNo}*/}
-                    {/*</div>*/}
                     <Paper elevation={24} style={{marginTop:"30px"}}>
                         <TextField
                             id="outlined-multiline-static"
@@ -107,12 +104,10 @@ function FeedInsert() {
                                         feedContent: content,
                                         photoNo: insertPhotoNo
                                     }).then(function (res) {
-                                        // console.log(res.data);
                                         {successAlert()}
 
                                     }).catch(function (res) {
                                         checkContent(res.data.Java);
-                                        console.log('실패함' + userNos, content, res.data.Java);
                                     })
                                 }}
                     >전송</Button>
