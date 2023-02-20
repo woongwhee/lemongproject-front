@@ -23,7 +23,7 @@ function Profile() {
   // const userNos = useSelector((state) => state.userNo.selectUserNo);
 
   return (
-    <div className='profile-box' >
+    <div className='profile-box' style={{textAlign: 'center', border:'0px solid pink'}}>
         {/* <div className='pro-pic' onClick={selectUserNo}><img className={"profile"} src={filePath} alt={photo?.originName}/></div>
         <div className='pro-nic'>{profile.nickName}</div>
         <div className='pro-following-count'><p>팔로잉 : </p></div>
@@ -32,7 +32,7 @@ function Profile() {
         <hr/>
         <div className='pro-intro'>{profile.profileComment}</div> */}
 
-        <div onClick={selectUserNo} className='react-calendar2' style={{margin: 'auto', height:'160px' , marginLeft:'90px' , marginTop:'20px', border: '0px solid orange'}}>
+        <div onClick={selectUserNo} className='react-calendar2' style={{display: 'inline-block', height:'160px' , marginLeft:'0px' , marginTop:'20px', border: '0px solid orange'}}>
             {/* 메인페이지 프로필 이미지(클릭 시 마이 홈으로 이동) */}
           <div className='pro-pic' onClick={selectUserNo} style={{marginTop:'33px' , marginLeft:'20px'}}>
               <img className={"profile"} src={filePath} alt={photo?.originName}/>

@@ -1,5 +1,6 @@
 .profile-box {
     margin: auto;
+    flex: auto;
 }
 .react-calendar2{
     width: 450px;
@@ -14,6 +15,7 @@
     border-radius: 12px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
     text-decoration: none;
+    margin: auto;
 }
 .profile-box div{
     box-sizing: border-box;
