@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
-import swal from 'sweetalert';
 
 import './Join.css';
 
@@ -39,7 +38,7 @@ function Join() {
     const [isNickBtn, setIsNickBtn] = useState(false);
     const [isEmailBtn, setIsEmailBtn] = useState(false);
     const [isEmailNumBtn, setIsEmailNumBtn] = useState(false);
-    
+
 
     // 이름 공백 체크
     const onChangeName = useCallback((e) => {
@@ -73,9 +72,9 @@ function Join() {
                 setNickError("중복된 닉네임입니다.")
                 setErrorColor("chAlarm noAlarm")
                 setIsNickBtn(false);
-            } 
+            }
         }
-        
+
     }
 
 
@@ -97,7 +96,7 @@ function Join() {
     }, [])
 
 
-    
+
     // 비밀번호 일치 체크
     const onChangeRePwd = useCallback((e) => {
         const passwordReCurrent = e.target.value
@@ -115,7 +114,7 @@ function Join() {
     })
 
 
-    
+
     // 이메일 형식 체크
     const onChangeEmail = useCallback((e) => {
         const emailRegex = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
@@ -163,7 +162,7 @@ function Join() {
     const chEmailNum = async(email, emailNum) => {
         let response = await axios.post('api/p/join/chEmailNum',
             ({'email':email,
-              'emailNum':emailNum
+                'emailNum':emailNum
             })
         )
         if(response.data.code === '2000') {
@@ -187,14 +186,13 @@ function Join() {
     const joinClick = async(name, nick, pwd, email) => {
         let response = await axios.post('api/p/join',
             ({'userName':name,
-              'nickName':nick,
-              'userPwd':pwd,
-              'email':email,
+                'nickName':nick,
+                'userPwd':pwd,
+                'email':email,
             })
         )
         if(response.data.code === '2000') {
-            // alert()
-            swal("어서오세요. 여러분의 꿈을 응원합니다. :)", "", "success");
+            alert("어서오세요. 여러분의 꿈을 응원합니다. :)")
             document.location.href = "/"; // 회원가입 성공 시 로그인 페이지로
         } else {
             alert.log('회원가입 실패');
@@ -212,7 +210,7 @@ function Join() {
         <>
 
             <div className="JoinBackCol"></div>
-        
+
 
             <div className="JoinArea">
                 <div className="logo">
@@ -222,49 +220,49 @@ function Join() {
                 <br></br>
                 <div className="profInput">
                     {/* 이름 */}
-                    <div className="nameInput">    
-                        <input type="text" id="userName" name="userName" placeholder="이름" className="longInput" required 
-                            onChange={(e) => {onChangeName(e);}} />
+                    <div className="nameInput">
+                        <input type="text" id="userName" name="userName" placeholder="이름" className="longInput" required
+                               onChange={(e) => {onChangeName(e);}} />
                     </div>
 
                     {/* 닉네임 */}
                     <div className="nickInput">
-                        <input type="text" id="nickName" name="nickName" placeholder="닉네임" className="shortInput" required 
-                            onChange={(e) => {setNickName(e.target.value);}} />
+                        <input type="text" id="nickName" name="nickName" placeholder="닉네임" className="shortInput" required
+                               onChange={(e) => {setNickName(e.target.value);}} />
                         <button className="chBtn" onClick={() => {checkNick(nickName);}}>중복확인</button>
-                        
+
                         <p className={errorColor}>{nickError}</p>
                     </div>
 
                     {/* 비밀번호 */}
                     <div className="pwdInput">
-                        <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호" className="longInput" required 
-                            onChange={(e) => {
-                                onChangePassword(e);
-                                setUserPwd(e.target.value);
-                            }} />
+                        <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호 입력" className="longInput" required
+                               onChange={(e) => {
+                                   onChangePassword(e);
+                                   setUserPwd(e.target.value);
+                               }} />
                         <p className={pwdColor}>{pwdError}</p>
                     </div>
                     {/* 비밀번호 확인 */}
                     <div className="rePwdInpt">
-                        <input type="password" placeholder="비밀번호 확인" className="longInput" required
-                            onChange={(e) => {onChangeRePwd(e);}} />
+                        <input type="password" placeholder="비밀번호 재입력" className="longInput" required
+                               onChange={(e) => {onChangeRePwd(e);}} />
                         <p className={rePwdColor}>{rePwdError}</p>
                     </div>
                     {/* 이메일 */}
                     <div className="emailInput">
-                        <input type="email" id="email" name="email" placeholder="이메일 주소" className="shortInput" required 
-                            onChange={(e) => {
-                                onChangeEmail(e);
-                                setEmail(e.target.value);
-                                }}/>
+                        <input type="email" id="email" name="email" placeholder="이메일 주소" className="shortInput" required
+                               onChange={(e) => {
+                                   onChangeEmail(e);
+                                   setEmail(e.target.value);
+                               }}/>
                         <button className="chBtn eBtn" onClick={() => {chEmail(email);}}>인증</button>
                         <p className={emailColor}>{emailMs}</p>
                     </div>
                     {/* 이메일 인증번호 */}
                     <div className="emailNumInput">
-                        <input type="text" id="emailNum" name="emailNum" placeholder="이메일 인증번호 입력" className="shortInput" required
-                            onChange={(e) => {setEmailNum(e.target.value);}}/>
+                        <input type="text" id="emailNum" name="emailNum" placeholder="인증번호" className="shortInput" required
+                               onChange={(e) => {setEmailNum(e.target.value);}}/>
                         <button className="chBtn enBtn" onClick={() => {chEmailNum(email, emailNum);}}>확인</button>
                         <p className={emailNumColor}>{emailNumMs}</p>
                     </div>
