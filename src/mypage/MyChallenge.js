@@ -65,7 +65,7 @@ function MyChallenge() {
                     </div>
                 )}
             </div>
-            {hasChat && <ChallengeRoomModal isOpen={isOpen} toggle={toggle} challengeNo={challengeNo}/>}
+            <ChallengeRoomModal isOpen={isOpen} toggle={toggle} challengeNo={challengeNo}/>
         </div>
     )
 };

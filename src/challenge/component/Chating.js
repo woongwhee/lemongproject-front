@@ -50,7 +50,7 @@ const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
                 }
 
             },
-            []
+            [ws]
         );
 
         const onMessage = (message) => {

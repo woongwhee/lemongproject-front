@@ -27,6 +27,7 @@ function MyFollowApplication() {
         axios.get(`/api/follow/followGo/${myNo}/${userNo}`).then(function (res) {
             console.log(res + "데이터 전송 성공");
             alert("팔로우 신청이 완료되었습니다.");
+            ShowMyFollowing();
         }).catch(function () {
             console.log("데이터 전송 실패");
         })
@@ -49,25 +50,16 @@ function MyFollowApplication() {
     }, [userNo])
 
 
-    function fBtnShow() {
-        if (myfollowingList?.find(e => e?.profile?.userNo == userNo) != null) {
-            return (<div>
-                {/* <button class="btn btn-primary" style={{marginLeft:'215px' , fontSize:'13px', marginTop:'-325px' , borderRadius:'100px' , width:'100px'}} onClick={followGo}>팔로우 신청</button> */}
-                <MyFollowDelete userNo={userNo}/>
-            </div>)
-        } else {
-            return (<div>
-                <button class="btn btn-primary"
-                        style={{marginLeft: '215px', fontSize: '13px', borderRadius: '100px', width: '100px'}}
-                        onClick={followGo}>팔로우 신청
-                </button>
-            </div>)
-        }
-    }
+
 
     return (
         <div>
-            {fBtnShow()}
+            {(myNo==userNo)?<></>:(myfollowingList?.find(e => e?.profile?.userNo == userNo) == null)?<MyFollowDelete showMyFollowing={ShowMyFollowing}></MyFollowDelete>:(<div>
+                <button className="btn btn-primary"
+                        style={{marginLeft: '215px', fontSize: '13px', borderRadius: '100px', width: '100px'}}
+                        onClick={followGo}>팔로우 신청
+                </button>
+            </div>)}
         </div>
     )
 }
