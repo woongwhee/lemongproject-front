@@ -12,7 +12,7 @@ const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
         const [socketConnect, setSocketConnect] = useState(false);
         const ws = useRef(null);
         useEffect(() => {
-            console.log("응애");
+            //console.log("응애");
             if (isOpen) {
                 console.log("ws", "열기시작")
                 webSocketLogin()
@@ -54,7 +54,7 @@ const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
         );
 
         const onMessage = (message) => {
-            console.log(message);
+            //console.log(message);
             addChat(JSON.parse(message.data));
 
             setTimeout(() => {
@@ -95,23 +95,27 @@ const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
                 {/* <GlobalStyle/> */}
                 <div id="chat-wrap">
                     <div id='chatt'>
-                        <h1 id="title">WebSocket Chatting</h1>
-                        <br/>
+                        <h1 id="title">Chatting</h1>
+                        {/* <br/> */}
                         <div id='talk' className='talk' style={{overflow: 'scroll'}}>
                             {chatList.map((chat, idx) => (
                                 <>
-                                <div key={idx} className={chat.userNo === myNo ? 'me2' : 'other2'}>
-                                    <div className='userPic'><ProfileIcon profile={playerList?.find(e => e.userNo = chat.userNo)}></ProfileIcon></div>
-                                </div>
-                                <div key={idx} className={chat.userNo === myNo ? 'me' : 'other'}>
-                                    {/*<div className='userPic'><ProfileIcon profile={playerList?.find(e => e.userNo = chat.userNo)}></ProfileIcon></div>*/}
-                                    <div className='chatMsg'>{chat.chatMessage}</div>
-                                    <br/>
-                                    <span className='chatDate'>{chat.sendAt}</span>
+                                <div className='uu'>
+                                    <div key={idx} className={chat.userNo === myNo ? 'me2' : 'other2'}>
+                                        <div className='userPic'><ProfileIcon profile={playerList?.find(e => e.userNo = chat.userNo)}></ProfileIcon></div>
+                                    </div>
+                                    <div key={idx} className={chat.userNo === myNo ? 'me' : 'other'}>
+                                        <div className='chatMsg'>{chat.chatMessage}</div>
+                                    </div>
+                                    <div key={idx} className={chat.userNo === myNo ? 'me3' : 'other3'}>
+                                        <div className='chatDate'>{chat.sendAt}</div>
+                                    </div>
                                 </div>
                                 </>
                             ))}
                         </div>
+                        <br/>
+                        <br/>
                         <div id='sendZone'>
                             <textarea id='msg' ref={msg} onKeyDown={(ev) => {
                                 if (ev.keyCode === 13) {

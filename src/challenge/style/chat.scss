@@ -29,54 +29,90 @@ input[type='number']::-webkit-outer-spin-button {
 	width: 100%;
 	//margin: 0 auto;
   #title{
-    font-size: 30pt;
+    font-size: 30px;
     font-family: 'SourceSansPro-Light';
+    font-weight: bold;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    padding-top: 10px;
+    background-color: black;
+    color: #fff;
+    height: 60px;
+    font-family:'Lobster-Regular'
   }
 
   #talk{
     width: 100%;
-    height: 500px;
+    height: 536px;
     // overflow: scroll;
-    border-radius: 18px;
-    position: relative;
-    border: 3px solid pink;
+    border-radius: 0px;
+    //position: relative;
+    border: 0px solid pink;
+    background: #f4f4f4;
+    background: #ffffff;
+    padding: 10px;
+    //margin-bottom: 20px;
+  }
+  .uu{
+    border: 1px solid #ffffff;
+    height: 100px;
+    margin-bottom: 20px;
   }
   .me2{
     float: right;
     border: 0px solid #091c9a;
     //position: relative;
-    margin-top: 10px;
+    margin-top: 0px;
+    padding-right: 6px;
+    height: 20%;
+    font-weight: bold;
   }
   .me{
     background-color : rgba(180, 135, 203, 0.27);
-    margin : 50px 0px 10px 40%;
-    border-radius: 0px;
+    margin : 30px 0px 0px 40%;
+    border-radius: 10px;
     //height: 20%;
-    border: 2px solid #091c9a;
+    border: 0px solid #091c9a;
     width: 60%;
     //float: right;
+    text-align: right;
+    padding: 6px;
+    padding-right: 10px;
+  }
+  .me3{
+    float: right;
+    color: #c2c2c2;
+    margin-top: 2px;
   }
   .other2{
     float: left;
     border: 0px solid #da0329;
     margin-top: 20px;
+    height: 20%;
+    font-weight: bold;
   }
   .other{
-    margin: 60px 0px 2px 0px;
+    margin: 50px 0px 2px 0px;
     background-color: rgba(244, 241, 38, 0.27);
     border-radius: 10px;
-    //height: 20%;
     width: 60%;
-    //float: left;
+    padding: 6px;
+    padding-left: 10px;
+  }
+  .other3{
+    color: #c2c2c2;
+    margin-top: 2px;
   }
 
   .chatMsg{
-    border: 1px solid #219d08;
+    border: 0px solid #219d08;
   }
   .chatDate{
-    border: 1px solid skyblue;
+    border: 0px solid skyblue;
+    //float: right;
+    margin-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 4px;
   }
 
   #name{
@@ -89,10 +125,9 @@ input[type='number']::-webkit-outer-spin-button {
 
   #sendZone{
     > * {vertical-align: top;}
-    margin-top: 10px;
+    margin-top: 0px;
     $sendZone-H : 70px;
     display: flex;
-    margin-top: 0px;
 
     #msg{
       width: 90%;
@@ -104,7 +139,7 @@ input[type='number']::-webkit-outer-spin-button {
       box-sizing: border-box;
     }
     #btnSend{
-      width: 10%;
+      width: 15%;
       height: $sendZone-H;
       border: 1px solid #dcdcdc;
     }
