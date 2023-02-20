@@ -6,6 +6,7 @@ import {useLoginState} from "../../member/LoginContext";
 import '../style/ChallengeList.css';
 import { BsArrowLeftCircle} from 'react-icons/bs'
 import { FaLemon } from 'react-icons/fa';
+import {useChallengeDispatch} from "../ChallengeContext";
 
 const ChallengeDetail = ({result}) => {
     const {challengeNo, challengeTitle, challengeInfo, startDate, LocalDate, endDate,readyUsers,todoPreview} = result;
