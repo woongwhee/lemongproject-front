@@ -45,7 +45,7 @@ const ExpandMore = styled((props) => {
 
 
 export default function RecipeReviewCard(props) {
-    let{userNo,feedNo,feedContent,feedAt,filePath,photoNo,nickName}=props;
+    let{userNo,feedNo,feedContent,feedAt,filePath,photoNo,nickName,updatePage}=props;
 
     let loginUserNo=useLoginState().profile.userNo;
 
@@ -146,8 +146,8 @@ export default function RecipeReviewCard(props) {
                 multiSelect
             >
                 <StyledTreeItem nodeId="1" labelText="" labelIcon={SettingsIcon}>
-                    <FeedDelete Feed={Feed}/>
-                    <FeedUpdate Feed={Feed}/>
+                    <FeedDelete Feed={Feed} />
+                    <FeedUpdate Feed={Feed} />
                 </StyledTreeItem>
             </TreeView>)
         }

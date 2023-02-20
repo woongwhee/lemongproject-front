@@ -1,8 +1,8 @@
-import image1 from './MainImg/mountain_+wallpaper.jpg';
-import image2 from './MainImg/배경화면+노트북11.jpg';
-import image3 from './MainImg/빨래+배경화면.jpg';
-import image4 from './MainImg/편지_+pc+wallpaper.jpg';
-import monitor from './MainImg/pngwing.com.png';
+import image1 from './MainImg/feed.png';
+import image2 from './MainImg/rank.png';
+import image3 from './MainImg/templatelistimg.png';
+import image4 from './MainImg/todoimg.png';
+import monitor from './MainImg/monitor.png';
 
 import './TitleInfo.css';
 

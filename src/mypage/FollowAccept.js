@@ -13,8 +13,8 @@ function FollowAccept() {
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");
     let {profile} = useLoginState();
     console.log(profile);
-    const userNo = useSelector(state => state.menu.userNo); // 로그인한 사용자 userNoㄷ
-    const myNo = profile?.userNo
+    // const userNo = useSelector(state => state.menu.userNo); // 로그인한 사용자 userNoㄷ
+    const myNo = profile.userNo
     // 나한테 온 팔로우신청 목록들.
     const [followerList, setFollowerList] = useState([]);
     // 팔로우 당하는사람(팔로워)
@@ -74,7 +74,8 @@ function FollowAccept() {
         }).then(function (res) {
             console.log(res + "데이터 전송 성공");
             alert("팔로우 신청을 수락하였습니다.")
-            setFollowerList(e=>e.filter(e.userNo!=follower))
+            let newList = followerList.filter(e=>e.following!=follower);
+            setFollowerList(newList);
 
         }).catch(function () {
             console.log("데이터 전송 실패");
@@ -107,7 +108,7 @@ function FollowAccept() {
                         fontSize: '13px'
                     }}><b>{moment(e?.followAt).format('YYYY-MM-DD')}</b></p>
                     <CiCircleCheck type="submit" onClick={() => {
-                        followOkHandle(e.userNo)
+                        followOkHandle(e.following)
                     }} style={{fontSize: '35px', marginLeft: '10px', marginTop: '17px'}}>o</CiCircleCheck>
                 </div>)}
             </form>

@@ -28,15 +28,15 @@ function FeedAlarm(props) {
     let loginUserNo = profile.userNo;
 
 //====================================================================
-    const [get, sett] = useState();
-    const proFile = (userNo) => {
-        axios.post('api/feed/feedProfile',{
-            userNo:userNo
-        }).then(function (res){
-            // console.log(res.data);
-            sett(res.data.NICK_NAME);
-        })
-    }
+//     const [get, sett] = useState();
+//     const proFile = (userNo) => {
+//         axios.post('api/feed/feedProfile',{
+//             userNo:userNo
+//         }).then(function (res){
+//             // console.log(res.data);
+//             sett(res.data.NICK_NAME);
+//         })
+//     }
 //====================================================================
     // 댓글 알림 가져오기
     const [replyAlarm, setReplyAlarm] = useState([])
@@ -61,12 +61,12 @@ function FeedAlarm(props) {
     const replyMessage = () => {
         const result = [];
         for(let i = 0; i<replyAlarm.length; i++){
-            proFile(replyAlarm[i].sendUser)
+            // proFile(replyAlarm[i].sendUser)
             result.push(
                 <div key={i} style={{width:"100%"}}>
                     <div style={{border:"1px solid #dcdcdc", width:"350px", float:"left",marginTop:"5px"}}>
                         <Paper elevation={16}>
-                        <div>보낸사람 : {get} </div>
+                        <div>보낸사람 : </div>
                         <div style={{textOverflow:"ellipsis", overflow:"hidden",whiteSpace:"nowrap"}}>댓글내용 : {replyAlarm[i].message}</div>
                         <div>{replyAlarm[i].alrAt}</div>
                         </Paper>
@@ -118,12 +118,12 @@ function FeedAlarm(props) {
     const HrMessage=()=>{
         const result = []
         for(let i = 0; i<heartAlarm.length; i++){
-            proFile(heartAlarm[i].sendUser)
+            // proFile(heartAlarm[i].sendUser)
             result.push(
                 <div key={i} style={{width:"100%"}}>
                     <div style={{border:"1px solid #dcdcdc", width:"350px", float:"left",marginTop:"5px"}}>
                         <Paper elevation={16}>
-                        <div>{get} 님이 {heartAlarm[i].message} </div>
+                        <div> 님이 {heartAlarm[i].message} </div>
                         <div>{heartAlarm[i].alrAt}</div>
                         </Paper>
                     </div>

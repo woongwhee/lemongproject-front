@@ -16,11 +16,9 @@ function FeedBody(){
     const [page, setPage] = useState(0);
     const maxPage = useRef(-1);
     const target = useRef(null);
-
     const options = {
         threshold: 1.0,
     };
-
     const loadPage = async () => {
         if (isLanding.current == true) return;
         isLanding.current = true;
@@ -57,6 +55,7 @@ function FeedBody(){
         loadPage();
     }, [page])
 
+
     function callback(str) {
         setFeedList(str);
     }
@@ -69,7 +68,7 @@ function FeedBody(){
             <div className="FeedBody" >
                 <div style={{border:"5px, solid red",marginTop:"20px", position:"fixed"}}>
                     <div style={{float:"left"}}><FeedAlarm/></div>
-                    <div style={{float:"left"}}><FeedInsert/></div>
+                    <div style={{float:"left"}}><FeedInsert /></div>
                 </div>
                 {feedList?.map((e)=><Feed key={i++} {...e}/>)}
                 <div ref={target} style={{height:"30px"}}></div>

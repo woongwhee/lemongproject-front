@@ -4,15 +4,24 @@ import {
     TEMPLATE_DETAIL,
     TEMPLATE_LIST,
     TODO_DETAIL,
-    UNSAVE_LOAD, UNSAVE_RESET, UNSAVE_TODO_DELETE,
+    UNSAVE_LOAD,
+    UNSAVE_RESET,
+    UNSAVE_TODO_DELETE,
     UNSAVE_TODO_INSERT,
-    UNSAVE_UP_LOAD, UNSAVE_UPDATE, TEMPLATE_DELETE, REVIEW_DELETE, TEMPLATE_CATEGORY, TEMPLATE_MAXPAGE, REVIEW_LIST
+    UNSAVE_UP_LOAD,
+    UNSAVE_UPDATE,
+    TEMPLATE_DELETE,
+    REVIEW_DELETE,
+    TEMPLATE_CATEGORY,
+    TEMPLATE_MAXPAGE,
+    REVIEW_LIST,
+    PROFILE_TEMPLATE_LIST
 
 } from "./templateURI";
 import {codeHandler} from "../util/apiUtil";
 
 
-//get
+export const profileTemplateList = (userNo) => axios.get(`${PROFILE_TEMPLATE_LIST}/${userNo}`).then(res =>codeHandler(res))
 export const templateList = (page = 0, categoryNo = 0) => axios.get(`${TEMPLATE_LIST}/${page}/${categoryNo}`).then(res =>codeHandler(res))
 export const reviewList = (templateNo) => axios.get(`${REVIEW_LIST}/${templateNo}`).then(res => codeHandler(res))
 export const templateMaxPage = (categoryNo) => axios.get(`${TEMPLATE_MAXPAGE}/${categoryNo}`).then(res => codeHandler(res))
