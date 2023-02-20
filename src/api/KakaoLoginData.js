@@ -6,8 +6,8 @@ export const CLIENT_ID = '6c1bbd8efca92b427aff16845e3336d1';
 
 
 // 배포 redirect
-export const REDIRECT_URI = 'http://52.194.242.239/kakao';
-export const LOGOUT_REDIRECT_URI = 'http://52.194.242.239';
+export const REDIRECT_URI = 'http://lemongproject.site/kakao';
+export const LOGOUT_REDIRECT_URI = 'http://lemongproject.site';
 
 // 인가 코드 + 토큰을 받아오는 uri -> 프론트로 받아오기
 
