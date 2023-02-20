@@ -98,15 +98,18 @@ const Chat = ({chatList, challengeNo, playerList, isOpen, addChat}) => {
                         <h1 id="title">WebSocket Chatting</h1>
                         <br/>
                         <div id='talk' className='talk' style={{overflow: 'scroll'}}>
-                            <div className='talk-shadow'></div>
                             {chatList.map((chat, idx) => (
-                                <div key={idx} className={chat.userNo === myNo ? 'me' : 'other'}>
-                                    <div style={{marginLeft: '-10px'}}>
-                                        <ProfileIcon profile={playerList?.find(e => e.userNo = chat.userNo)}></ProfileIcon></div>
-                                    <div style={{width: '100%'}}>{chat.chatMessage}</div>
-                                    <br/>
-                                    <span style={{marginTop: '-100px'}}>{chat.sendAt}</span>
+                                <>
+                                <div key={idx} className={chat.userNo === myNo ? 'me2' : 'other2'}>
+                                    <div className='userPic'><ProfileIcon profile={playerList?.find(e => e.userNo = chat.userNo)}></ProfileIcon></div>
                                 </div>
+                                <div key={idx} className={chat.userNo === myNo ? 'me' : 'other'}>
+                                    {/*<div className='userPic'><ProfileIcon profile={playerList?.find(e => e.userNo = chat.userNo)}></ProfileIcon></div>*/}
+                                    <div className='chatMsg'>{chat.chatMessage}</div>
+                                    <br/>
+                                    <span className='chatDate'>{chat.sendAt}</span>
+                                </div>
+                                </>
                             ))}
                         </div>
                         <div id='sendZone'>
