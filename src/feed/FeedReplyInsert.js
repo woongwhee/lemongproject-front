@@ -1,21 +1,20 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import FeedReplyList from "./FeedReplyList";
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Table from "react-bootstrap/Table";
 import ListGroup from 'react-bootstrap/ListGroup';
-import Avatar from '@mui/material/Avatar';
-import { deepOrange } from '@mui/material/colors';
 import CloseButton from "react-bootstrap/CloseButton";
 import {TextField} from "@mui/material";
 import Box from "@mui/material/Box";
 import {useLoginState} from "../member/LoginContext";
 import "./FeedReply.css"
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import IconButton from '@mui/material/IconButton';
+import swal from 'sweetalert';
+
 function FeedReplyInsert(props) {
 
     const Feed = props.Feed;
+    // console.log(Feed);
 
     const feedNo = props.Feed.feedNo;
 
@@ -23,7 +22,7 @@ function FeedReplyInsert(props) {
 
     const [replyCount, setReplyCount] = useState(0) // REPLY CONTENT
 
-    const [ testStr, setTestStr ] = useState([]);
+const [ testStr, setTestStr ] = useState([]);
 
     props.setReplyCount(replyCount);
 
@@ -36,13 +35,41 @@ function FeedReplyInsert(props) {
                 replyNo:replyNo,
                 feedNo:feedNo
             }).then(function (res){
-            console.log("삭제 성공")
-            getReplyList();
-        })
+                // console.log(res.data.Java);
+                deleteReplyAlert(res.data.Java);
+                getReplyList();
+            })
     }
-    let {userNo} =useLoginState().profile;
+
+    const deleteReplyAlert = (res) =>{
+        if(res === "success"){
+            return(
+                swal({
+                title: "댓글을 삭제 하시겠습니까?",
+                text: "",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("댓글이 삭제 되었습니다!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("댓글 삭제를 취소하셨습니다!");
+                    }
+                })
+                )
+        }else{
+            return(swal("댓글 삭제를 취소하셨습니다!"))
+        }
+    }
+    let {profile} = useLoginState();
+    let loginUserNo = profile.userNo
+    //                                             댓글쓴사람
     const deleteReplyButton = (replyNo, feedNo, replyUserNo) =>{
-        if(userNo === replyUserNo){
+        if(loginUserNo === replyUserNo){
             return(
                 <CloseButton onClick={()=>{deleteReply(replyNo,feedNo)}}/>
             )
@@ -50,20 +77,20 @@ function FeedReplyInsert(props) {
             return(<p></p>)
         }
     }
-
-    // const [profilePath, setProfilePath] = useState();
-    // const proFile = (userNo) => {
-    //     axios.post('api/feed/feedProfile',{
-    //         userNo:replyUserNo
-    //     }).then(function (res){
-    //         // console.log(res.data.FILEPATH);
-    //         setProfilePath(res.data.FILEPATH)
-    //     })
-    //     return(
-    //         <Avatar alt="Remy Sharp" src={profilePath} />
-    //     )
-    // }
-    const replyUserNo = [];
+    // console.log(loginUserNo === Feed.userNo);
+    const deleteReplyManagerButton = (replyNo, feedNo) =>{
+        if(loginUserNo === Feed.userNo){
+            return(
+                // <CloseButton onClick={()=>{deleteReply(replyNo,feedNo)}}/>
+                <IconButton aria-label="delete" size="small">
+                    <DeleteForeverIcon fontSize="small" onClick={()=>{deleteReply(replyNo,feedNo)}}/>
+                </IconButton>
+                // <p>dfd</p>
+            )
+        }else{
+            return(" ");
+        }
+    }
 
     const replyList2 = () =>{
         const result = [];
@@ -71,18 +98,15 @@ function FeedReplyInsert(props) {
             result.push((
                 <div key={i}>
                     <ListGroup.Item>
-                        {/*<div style={{float:"left"}}>*/}
-                        {/*    /!*{proFile(testStr[i].userNo)}*!/*/}
-                        {/*    /!*{replyUserNo.push(testStr[i].userNo)} <br/>*!/*/}
-                        {/*    /!*{proFile(testStr[i].userNo)}*!/*/}
-                        {/*</div>*/}
-                        <div style={{marginLeft:"10px"}}>
+                        <div style={{marginLeft:"10px", height:"60px"}}>
                             {testStr[i].nickName} : {testStr[i].replyContent}
                             <div style={{float:"right"}}>
                                 {deleteReplyButton(testStr[i].replyNo, feedNo, testStr[i].userNo)}
                             </div>
-                            <br/>
-                            {testStr[i].replyAt}
+                            <div>
+                                <div style={{float:"left"}}>{testStr[i].replyAt}</div>
+                                <div>{deleteReplyManagerButton(testStr[i].replyNo, feedNo)}</div>
+                            </div>
                         </div>
                     </ListGroup.Item>
                 </div>
@@ -101,7 +125,7 @@ function FeedReplyInsert(props) {
                     feedNo:feedNo
                 }
             }).then((res) => {
-                console.log(res.data.result)
+                // console.log(res.data.result)
                 setTestStr(res.data.result) // [7개]
             })
         },[]
@@ -115,7 +139,7 @@ function FeedReplyInsert(props) {
             }
         }).then((res) => {
             // callback(res.data);
-            console.log(res.data.result) // [7개]
+            // console.log(res.data.result) // [7개]
             setTestStr(res.data.result) // [7개]
             // console.log(Json.userNo);
 
@@ -145,7 +169,7 @@ function FeedReplyInsert(props) {
                 feedNo:feedNo
             }
         }).then((res) => {
-            console.log(res.data) // [7개]
+            // console.log(res.data) // [7개]
             setReplyCount(res.data)
         })
     }
@@ -157,11 +181,21 @@ function FeedReplyInsert(props) {
             replyContent:replyContent
         }).then(function (res){
             SetReplyContent('');
-            // window.location.reload("/main");
+            getReplyList();
         }).catch(function (){
             console.log('실패함');
         })
     }
+
+    // const replyAlarm = () =>{
+    //     axios.post('api/feed/alarmReply',{
+    //         feedNo:feedNo,
+    //         replyContent:replyContent,
+    //
+    //     })
+    // }
+
+
 
     let i = 0;
     return (
@@ -173,28 +207,6 @@ function FeedReplyInsert(props) {
             </ListGroup>
         </div>
         <div>
-            {/*<InputGroup className="mb-2" style={{marginTop:"30px"}}>*/}
-            {/*    <InputGroup.Text id="inputGroup-sizing-default" placeholder="숫자만입력">*/}
-            {/*        아이디*/}
-            {/*    </InputGroup.Text>*/}
-            {/*    <Form.Control*/}
-            {/*        aria-label="Default"*/}
-            {/*        aria-describedby="inputGroup-sizing-default"*/}
-            {/*        onChange={(e)=> {SetId(e.target.value);}}*/}
-            {/*        value={id}*/}
-            {/*    />*/}
-            {/*</InputGroup>*/}
-            {/*<InputGroup className="mb-2" style={{marginTop:"30px"}}>*/}
-            {/*    <InputGroup.Text id="inputGroup-sizing-default">*/}
-            {/*        {props.Feed.loginUserNo}*/}
-            {/*    </InputGroup.Text>*/}
-            {/*    <Form.Control*/}
-            {/*        aria-label="Default"*/}
-            {/*        aria-describedby="inputGroup-sizing-default"*/}
-            {/*        onChange={(e)=> {SetReplyContent(e.target.value);}}*/}
-            {/*        value={replyContent}*/}
-            {/*    />*/}
-            {/*</InputGroup>*/}
             <Box
                 sx={{
                     height: 30
