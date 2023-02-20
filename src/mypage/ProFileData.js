@@ -13,7 +13,7 @@ import { TiTick } from "react-icons/ti";
 import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 
-const ProFileData = (props)=> {
+const ProFileData = ({myProfile})=> {
 
     // let{userNo}=props;
 
@@ -44,7 +44,6 @@ const ProFileData = (props)=> {
         fileList.forEach((file) => {
             // 파일 데이터 저장
             formData.append('file', file);
-            formData.append('userNo' , userNo);
             console.log(file); // 데이터 잘 들어감.
             console.log(formData);
         });
@@ -60,7 +59,7 @@ const ProFileData = (props)=> {
                 buttons: [
                   {
                     label: "Yes" ,
-                    onClick: () =>  window.location.href = "http://localhost:3000/MyPageUpdate?userNo="+userNo
+                    onClick: () =>  window.location.href = "/MyPageUpdate?userNo="+userNo
                   }
                 ]
               })
@@ -105,7 +104,6 @@ const ProFileData = (props)=> {
             <input name="proFile" id="proFile" type="file" multiple /* 파일 여러개 선택 가능하게 하기 */ onChange={onSaveFiles} />
             <div id="my_ProfileImg" type="button" style={{marginTop:'-230px' , marginLeft:'100px'}}>
                 <label for="proFile" id="proHover" style={{border:'none' , width:'200px' , height:'200px' , borderRadius:'50%'}}>
-                    
                 </label>
             </div>
             <TiTick id="pbtn" type='button'onClick={submitUpProfile} style={{marginLeft:'275px' , marginTop:'-80px' , fontSize:'35px'}}>프로필 업로드</TiTick>
