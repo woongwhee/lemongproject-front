@@ -28,7 +28,7 @@ function FollowAccept(){
     const followerIng = sessionStorage.getItem("userNo");
 
     function callback(data){
-        setFollowerList(data);
+        setFollowerList(data.filter(data => data.following == userNo));
     }
 
     let saveFilePath = "http://localhost:8081/api/images/";
@@ -91,9 +91,9 @@ function FollowAccept(){
             <br></br>
             <form onSubmit={handleSubmit}>
                 {followerList?.map(e => <div className="sUserList">
-                    <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'50px' , height:'50px', borderRadius:'50%' , backgroundColor:'gray' , float:'left' , marginTop:'10px'}}></img> <span name="followNick" key={i++} {...e} onChange={followNickHandle}><b>{e?.profile?.nickName}</b></span>
-                    님이 팔로우를 신청하였습니다.
-                    <p key={i++} {...e} style={{float:'left' , marginTop:'-17px' , marginLeft:'150px' , position:'fixed'}}><b>{moment(e?.followAt).format('YYYY-MM-DD')}</b></p>
+                    <img key={i++} {...e} src={e?.photo?.filePath+e?.photo?.changeName} style={{width:'40px' , height:'40px', borderRadius:'50%' , backgroundColor:'gray' , float:'left' , marginTop:'15px' , marginLeft:'7px'}}></img> <span name="followNick" style={{float:'left' , marginTop:'10px' , marginLeft:'10px' , fontSize:'14px'}} key={i++} {...e} onChange={followNickHandle}><b>[{e?.profile?.nickName}]</b></span>
+                        <p style={{float:'left' , fontSize:'13px' , marginTop:'30px' , marginLeft:'-80px'}}>님이 팔로우를 신청하였습니다.</p>
+                    <p key={i++} {...e} style={{float:'left' , marginTop:'45px' , marginLeft:'58px' , position:'fixed' , fontSize:'13px'}}><b>{moment(e?.followAt).format('YYYY-MM-DD')}</b></p>
                     <CiCircleCheck type="submit" onClick={followOkHandle} style={{fontSize:'35px' , marginLeft:'10px' , marginTop:'17px'}}>o</CiCircleCheck>
                 </div>)}
             </form>
