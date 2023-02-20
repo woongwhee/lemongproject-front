@@ -37,9 +37,9 @@ function Profile() {
           <div className='pro-pic' onClick={selectUserNo} style={{marginTop:'33px' , marginLeft:'20px'}}>
               <img className={"profile"} src={filePath} alt={photo?.originName}/>
           </div>
-          <div className='pro-nic'><b><p style={{marginTop:'35px', fontSize:'18px'}}>{profile.nickName}</p></b></div>
-          <div className='pro-following-count' style={{marginTop:'65px' , marginLeft:'-135px' , height:'30px', fontFamily:'NanumGothic-Regular' , border: '0px solid pink'}}><p>팔로잉  </p></div>
-          <div className='pro-following-count' style={{marginTop:'65px' , marginLeft:'-30px' ,  height:'30px', fontFamily:'NanumGothic-Regular' , border: '0px solid pink'}}><p>팔로워  </p></div>
+            <div className='pro-nic'><b><p style={{marginTop:'35px', fontSize:'18px'}}>{profile.nickName}</p></b></div>
+            <div className='pro-following-count' style={{marginTop:'65px' , marginLeft:'-135px' , height:'30px', fontFamily:'NanumGothic-Regular' , border: '0px solid pink'}}><p>팔로잉  </p></div>
+            <div className='pro-following-count' style={{marginTop:'65px' , marginLeft:'-30px' ,  height:'30px', fontFamily:'NanumGothic-Regular' , border: '0px solid pink'}}><p>팔로워  </p></div>
           
           <div className='pro-intro'><p style={{float:'left', width:'70%', marginTop:'0px' ,paddingLeft:'28px', border: '0px solid pink', margin: 'auto', overflow: 'hidden'}}>{profile?.profileComment}</p></div>
           
