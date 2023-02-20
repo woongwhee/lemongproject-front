@@ -7,6 +7,7 @@ import {codeHandler} from "../util/apiUtil";
 import "./FeedBody.css"
 import FeedAlarm from "./FeedAlarm";
 import FeedInsert from "./FeedInsert";
+import { motion } from "framer-motion";
 
 function FeedBody(){
     // 요청받은 정보를 담아줄 변수 선언

@@ -7,12 +7,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {MENU_CHALLENGE, MENU_FEED,  MENU_TEMPLATE} from "../../reducer/menu";
 import {MyPage} from "../../mypage/MyPage";
 import TodoView3 from "../../todo/todolist3/TodoView";
+import { motion } from "framer-motion";
 
 import '../../mypage/font/font.css';
 
 const Menubar4 = (props) => {
     const menu = useSelector(state => state.menu);
     const dispatch = useDispatch();
+
     const changeMenu = (type) => {
         dispatch({
             type: type
@@ -32,15 +34,27 @@ const Menubar4 = (props) => {
             <div className="menuBar" >
                 <ul className="tabs">
                     <li className={`${menu.index === 1 ? 'active' : ''}`}
-                        onClick={() => changeMenu(MENU_FEED)}>
+                        onClick={() => changeMenu(MENU_FEED)}
+                    >
+                        {menu.index === 1 ? (
+                            <motion.div className="underline" layoutId="underline" />
+                        ) : null}
                         <p style={{fontFamily:'Lobster-Regular' , fontSize:'33px'}}>Feed</p>
                     </li>
                     <li className={`${menu.index === 2 ? 'active' : ''}`}
-                        onClick={() => changeMenu(MENU_CHALLENGE)}>
+                        onClick={() => changeMenu(MENU_CHALLENGE)}
+                    >
+                        {menu.index === 2 ? (
+                            <motion.div className="underline" layoutId="underline" />
+                        ) : null}
                         <p style={{fontFamily:'Lobster-Regular' , fontSize:'33px'}}>Challenge</p>
                     </li>
                     <li className={`${menu.index === 3 ? 'active' : ''}`}
-                        onClick={() => changeMenu(MENU_TEMPLATE)}>
+                        onClick={() => changeMenu(MENU_TEMPLATE)}
+                    >
+                        {menu.index === 3 ? (
+                            <motion.div className="underline" layoutId="underline" />
+                        ) : null}
                         <p style={{fontFamily:'Lobster-Regular' , fontSize:'33px'}}>Template</p>
                     </li>
                 </ul>

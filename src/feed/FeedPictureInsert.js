@@ -3,18 +3,6 @@ import axios from "axios";
 import {Button} from "@mui/material";
 import CloseButton from "react-bootstrap/CloseButton";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-
-import AspectRatio from '@mui/joy/AspectRatio';
-import Box from '@mui/joy/Box';
-import Card from '@mui/joy/Card';
-import CardCover from '@mui/joy/CardCover';
-import IconButton from '@mui/joy/IconButton';
-import Typography from '@mui/joy/Typography';
-import Favorite from '@mui/icons-material/Favorite';
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-
-
-
 function FeedPictureInsert(props) {
 
     const dragFunction = (event) => {
@@ -24,26 +12,20 @@ function FeedPictureInsert(props) {
     // 사진 번호 가져오기
     let arr = [];
     const startClickPhoto=(t)=>{
-        console.log('시작' + t);
         arr.push(t);
     }
     const finishClickPhoto=(e,t)=>{
-        // e.preventDefault();
-        // e.stopPropagation();
-        console.log('끝' + t);
         arr.push(t);
-        console.log(arr)
+
     }
     //-----------------------------------------------------
     // 인덱스 바꾸기
     let arrCh = []
     const startIndex = (e) =>{
-        console.log("시작인덱스번호 : " + photoNoList.indexOf(e) + "리스트 : " + photoNoList);
         const newNo = photoNoList.indexOf(e)
         arrCh.push(newNo);
     }
     const finishIndex = (e) => {
-        console.log("끝인덱스번호 : " + photoNoList.indexOf(e))
         const newNo = photoNoList.indexOf(e)
         arrCh.push(newNo)
         console.log("바꿀인덱스 : "+arrCh);
@@ -52,7 +34,6 @@ function FeedPictureInsert(props) {
         const photoNo = [...photoNoList]
         photoNo.splice(arrCh[0],1,arr[1]) // 0, 1, 477
         photoNo.splice(arrCh[1],1,arr[0]) // 1, 1, 476
-        console.log("복사본바꾼리스트 : "+photoNo);
         setPhotoNoList(photoNo);
     }
     //-----------------------------------------------------
@@ -60,21 +41,17 @@ function FeedPictureInsert(props) {
     let arrFile = []
     const startPath = (t) =>{
         arrFile.push(t)
-
     }
     const finalPath = (t) =>{
         arrFile.push(t)
-        console.log(arrFile);
     }
     const changePath = (e) =>{
         const filePath = [...photoFilePathList]
         filePath.splice(arrCh[0],1,arrFile[1])
         filePath.splice(arrCh[1],1,arrFile[0])
-        console.log(filePath);
         setPhotoFilePathList(filePath);
     }
     //-----------------------------------------------------
-
     const Rendering=()=>{
         const result = [];
         for(let i = 0; i<photoFilePathList.length; i++){
@@ -121,8 +98,6 @@ function FeedPictureInsert(props) {
                     </div>
                             {i+1} 번째 사진
                 </div>
-
-
             )
         }
         return result;
@@ -147,11 +122,9 @@ function FeedPictureInsert(props) {
             },
         ).then(function (res){
             console.log("성공");
-
         }).catch(function (res) {
             console.log(photoNo);
         })
-
     }
 
     const [photoFilePathList,setPhotoFilePathList]=useState([]);        // 원래 사진 경로
@@ -171,22 +144,18 @@ function FeedPictureInsert(props) {
         e.preventDefault();
         if(e.target.files){
             const uploadFile = e.target.files[0]
-            const formData = new FormData()
-            formData.append('files',uploadFile)
+            const formData = new FormData() // html 의 form 을 비동기로 할려면 => key : value 로 보낼려면 =>
+            formData.append('files',uploadFile) // 비동기로 할려면 json 형태인데 => form 으로만들어주면 첨부파일을 올릴수있다.
 
             const response = await axios({
                 method: 'post',
                 url: '/api/feed/insertPhoto',
                 data: formData,
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    'Content-Type': 'multipart/form-data',  // 파일은 엄청긴 데이터인데 파일보낸다고 미리 선언해서 그냥 보내는느낌 // request요청을 어떻게할거냐
                 },
             });
-            if(response.data.code==='2000'){
-                // console.log(response.data.result)
-                // callback(response.data.result.photoNo); // photoNo만
-                console.log(response.data.result.photoNo);
-
+            if(response.data.code==='2000'){ // 성공했다면
                 const newFilePath = (response.data.result.filePath);
                 const newChangeName = (response.data.result.changeName);
 
@@ -212,7 +181,6 @@ function FeedPictureInsert(props) {
             <div>
                 <Rendering/>
                 <div style={{clear:"both"}}></div>
-                {/*{photoNoList}*/}
             </div>
             <hr/>
         </div>
