@@ -13,7 +13,7 @@ function FeedDetailPhoto({filePathList}) {
                         className="d-block w-100"
                         src={path}
                         alt='사진이없습니다'
-                        style={{height:"500px", marginTop:"100px", marginBottom:"100px"}}
+                        style={{height:"500px", marginTop:"100px", marginBottom:"170px", width:"400px", border:"1px solid red"}}
                     />
                 </Carousel.Item>
             );})

@@ -404,10 +404,6 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
 
     return (
         <>
-        {/*<Button*/}
-        {/*    variant="outline-dark"*/}
-        {/*    size="sm"*/}
-        {/*    onClick={handleShow}>업데이트</Button>*/}
             <StyledTreeItem
                 nodeId="6"
                 labelText=""

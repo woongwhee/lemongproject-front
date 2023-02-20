@@ -11,6 +11,8 @@ import SendIcon from '@mui/icons-material/Send';
 import ButtonR from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import swal from 'sweetalert';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import IconButton from '@mui/material/IconButton';
 
 import { useLoginState } from "../member/LoginContext";
 
@@ -53,22 +55,18 @@ function FeedInsert() {
                     text: "피드가 올라갔습니다!",
                     icon: "success",
                     button: "확인",
-                }).then(()=>{window.location.replace("/");})
+                }).then(
+                    ()=>{setShow(false)}
+                )
         )
     }
 
     return (
         <div className="feed-insert-body">
-            <br/><br/>
-            {/* 피드 게시물 작성 */}
-            <br></br>
-            <button class="btn btn-dark" style={{fontSize:'23px' , marginTop:'-95px' , border:'0' , borderRadius:'0'
-                            , marginLeft:'15px' , fontFamily:'NanumGothic-Regular'}} onClick={() => setShow(true)}>
-                {/* <ButtonR className="me-2 mb-2" onClick={() => setShow(true)}>
-                    피드 게시물 작성
-                </ButtonR> */}
-                피드 작성
-            </button>
+            <IconButton aria-label="delete" onClick={() => setShow(true)}>
+                <AddBoxIcon fontSize="large"/>
+            </IconButton>
+
             <Modal
                 show={show}
                 onHide={() => setShow(false)}
