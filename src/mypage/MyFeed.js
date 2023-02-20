@@ -51,7 +51,7 @@ function MyFeed(props) {
     return (
         <>
             <div className='outer_Feed' style={{overflow:'scroll'}}>
-                {myFeedList.map(Feed=> (<div style={{border:'1px solid black' , width:'32.5%' , height:'32.5%' , marginLeft:'5.8px' , marginTop:'5.8px' , float:'left'}}>
+                {myFeedList.map(Feed=> (<div style={{  width:'32.5%' , height:'32.5%' , marginLeft:'5.8px' , marginTop:'5.8px' , float:'left'}}>
                     <img className='clickFeed' src={Feed.filePathList[0]} style={{width:"100%", height:"100%"}} onClick={() => {openFeed(Feed)}}/>
                 </div>))}
             </div>
