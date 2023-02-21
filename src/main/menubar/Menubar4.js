@@ -8,8 +8,8 @@ import {MENU_CHALLENGE, MENU_FEED,  MENU_TEMPLATE} from "../../reducer/menu";
 import {MyPage} from "../../mypage/MyPage";
 import TodoView3 from "../../todo/todolist3/TodoView";
 import { motion } from "framer-motion";
-
 import '../../mypage/font/font.css';
+import MainMenuBar from "./MainMenuBar";
 
 const Menubar4 = (props) => {
     const menu = useSelector(state => state.menu);
@@ -58,6 +58,7 @@ const Menubar4 = (props) => {
                         <p style={{fontFamily:'Lobster-Regular' , fontSize:'33px'}}>Template</p>
                     </li>
                 </ul>
+
             </div>
             <div className="contentArea">
                 {getContent(menu.index)}

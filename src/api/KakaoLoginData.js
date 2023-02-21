@@ -1,8 +1,8 @@
 export const CLIENT_ID = '6c1bbd8efca92b427aff16845e3336d1';
-
+export const SERVER_URL='http://lemongproject.site';
 // 로컬 redirect
-export const REDIRECT_URI = 'http://localhost:3000/kakao';
-export const LOGOUT_REDIRECT_URI = 'http://localhost:3000';
+export const REDIRECT_URI = `${SERVER_URL}/kakao`
+export const LOGOUT_REDIRECT_URI = SERVER_URL;
 
 
 // 배포 redirect

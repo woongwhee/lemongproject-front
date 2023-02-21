@@ -20,12 +20,13 @@
     border: 0px dotted pink;
     background: linear-gradient( to right, rgba(219, 190, 227, 0) 5%, rgb(218, 218, 218) 20%, rgb(218, 218, 218) 50%, rgb(218, 218, 218) 75%, rgba(219, 190, 227, 0) 100%  );
     position: relative;
+    top:-70px;
 
 }
 .contentArea{
     width: 100%;
-    height: 87%;
-    margin: auto;
+    height: 95%;
+    margin-top: -50px;
     border: 0px dotted skyblue;
     /* background: #e9ecef; */
 }

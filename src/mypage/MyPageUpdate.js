@@ -48,9 +48,9 @@ function MyPageUpdate() {
 
     useEffect(
         () => {
-            axios.get("/api/member/UpdateProfile", {
+            axios.get("/api/member/selectMyProfile", {
                 params: {
-                    userNo: userNo,
+                    userNo: userNo
                 }
             }).then(function (res) {
                 console.log("데이터 전송 성공");

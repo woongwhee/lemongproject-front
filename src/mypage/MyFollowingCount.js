@@ -17,7 +17,6 @@ function MyFollowingCount(props){
 
     // const queryString = window.location.search;
     // const params = new URLSearchParams(queryString);
-
     const userNo = useSelector((state) => state.menu.userNo);
 
     // const userNo = params.get("userNo") != null ? params.get("userNo")  : sessionStorage.getItem("userNo");

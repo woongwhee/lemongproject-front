@@ -1,6 +1,6 @@
 import image1 from './MainImg/feed.png';
 import image2 from './MainImg/rank.png';
-import image3 from './MainImg/templatelistimg.png';
+import image3 from './MainImg/templateimg.png';
 import image4 from './MainImg/todoimg.png';
 import monitor from './MainImg/monitor.png';
 

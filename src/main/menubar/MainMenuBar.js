@@ -21,9 +21,6 @@ import MyAlert from "../../mypage/MyAlert";
 
 
 function MainMenuBar(props){
-    
-    let{myprofile}=props;
-    // let{profile}=props;
 
     let {profile}=useLoginState();
     console.log(profile);
@@ -68,12 +65,12 @@ function MainMenuBar(props){
 
     // 홈으로 이동하는 함수
     function goHome(){
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "http://lemongproject.site:3000/";
     }
 
     // 회원정보 수정 페이지로 이동하는 함수
     function goUser(){
-        window.location.href = "http://localhost:3000/MypageUpdate?userNo="+profile?.userNo;
+        window.location.href = "http://lemongproject.site/MypageUpdate?userNo="+profile?.userNo;
     }
 
     let [tab, setTab] = useState(0);

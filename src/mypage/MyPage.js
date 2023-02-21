@@ -31,6 +31,7 @@ import { useLoginState } from "../member/LoginContext";
 import {useDispatch, useSelector} from 'react-redux';
 import UserNo from "../reducer/userNo";
 import { color } from "@mui/system";
+import Photo from "../main/profile/ProfilePhoto";
 
 function MyPage() {
     
@@ -64,7 +65,7 @@ function MyPage() {
             console.log("데이터 전송 실패");
         });
     }
- 
+
 
      useEffect(() => {
         selectUser();
@@ -103,7 +104,7 @@ function MyPage() {
             return <AcceptFollowingCount userNo={userNo}/>
         }
     }
- 
+
     return(
         <div>
             {/* <ChallengeChatRoom /> */}
@@ -113,7 +114,7 @@ function MyPage() {
                 <div className="outer_prof">
                     <div className="outer_MyProf">
                         <div className="outer_proimgf">
-                            <img src={myprofile?.photo?.filePath+myprofile?.photo?.changeName} style={{marginLeft:'7px' , marginTop:'0px' , width:'150px' , height:'150px'}} className="profileImg"></img>
+                            <Photo photo={myprofile?.photo} style={{marginLeft:'7px' , marginTop:'0px' , width:'150px' , height:'150px'}} classname={"profileImg"}/>
                         </div>
                        <div>
                                 <br/>

@@ -6,20 +6,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {IconButton} from "@mui/material";
 import FeedInsert from "../../feed/FeedInsert";
 import MySearch from "../../mypage/MySearch";
-
-import {useLoginState} from "../../member/LoginContext";
-
 import { useLoginDispatch } from "../../member/LoginContext";
-
 import axios from "axios";
-import {useDispatch, useSelector} from 'react-redux';
 import '../../mypage/MyPage.css';
 
 // 버튼 아이콘
 import { CiBellOn , CiSearch , CiUser , CiHome , CiLogout , CiMedal , CiSquarePlus} from "react-icons/ci";
 import {Nav} from 'react-bootstrap';
 import MyAlert from "../../mypage/MyAlert";
-import {KAKAO_LOGOUT_URL} from "../../api/KakaoLoginData";
+import {KAKAO_LOGOUT_URL, SERVER_URL} from "../../api/KakaoLoginData";
 
 function MyMenuBar(props){
     
@@ -37,6 +32,8 @@ function MyMenuBar(props){
             console.log(res.data)
             logoutKakao()
             console.log("로그아웃 완료")
+        }else if(res.data.code=='2000'){
+            window.location.href="/";
         }
         dispatch({
             type:"logout"
@@ -58,12 +55,12 @@ function MyMenuBar(props){
 
     // 홈으로 이동하는 함수
     function goHome(){
-        window.location.href = "http://localhost:3000/";
+        window.location.href = SERVER_URL;
     }
 
     // 회원정보 수정 페이지로 이동하는 함수
     function goUser(){
-        window.location.href = "http://localhost:3000/MypageUpdate?userNo="+userNo;
+        window.location.reload();
     }
 
     let [tab, setTab] = useState(0);
@@ -85,9 +82,10 @@ function MyMenuBar(props){
       }
 
     return(
-        <div style={{}}>
+        <div >
              <IconButton aria-label="delete" size="large" onClick={handleShow} style={{float:"right"}}>
                 <MenuIcon fontSize="inherit" />
+                 <h1>눌러봐</h1>
             </IconButton>
             <Offcanvas show={show} onHide={handleClose} placement="end">
                 <Offcanvas.Header closeButton>
@@ -139,7 +137,6 @@ function MyMenuBar(props){
                     <TabContent tab={tab}/>
                 </div>
             </Offcanvas.Body>
-
             </Offcanvas>
         </div>
     )
