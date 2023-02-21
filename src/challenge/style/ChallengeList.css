@@ -36,7 +36,7 @@
     background-origin: border-box; 
     background-clip: content-box, border-box; 
     background-image : linear-gradient(#fff, #fff), linear-gradient(195deg, #9714d4 24%, #005dd6 90%);
-    background-image : linear-gradient(#fff, #fff), linear-gradient(195deg, #050505 24%, #000000 90%);
+    /*background-image : linear-gradient(#fff, #fff), linear-gradient(195deg, #050505 24%, #000000 90%);*/
     position: relative;
 }
 .chCard-outer:hover{
@@ -50,9 +50,9 @@
     padding-top: 10px;
     border: 0px solid rgb(225, 225, 225);
     font-weight: bolder;
-    /* background: rgb(225, 225, 225); */
-    /* background-image : linear-gradient(195deg,#9714d4 24%, #005dd6 90%); */
-    background-color: #000000;
+    background: rgb(225, 225, 225);
+    background-image : linear-gradient(195deg,#9714d4 24%, #005dd6 90%);
+    /*background-color: #000000;*/
     color: white;
 }
 .chCategory{

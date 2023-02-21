@@ -34,7 +34,7 @@ const Challenge = styled.div`
 
 function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, onUpdate, onDelay}) {
   const onDragStart = () => {
-    console.log(todoList);
+    //console.log(todoList);
   }
   
   const onDragEnd = (res) => {
@@ -44,8 +44,6 @@ function TodoList({todoList, setTodoList, chList, onDel, onToggle, onToggleCh, o
     const [reorderedItem] = dndTodoList.splice(res.source.index, 1);
     dndTodoList.splice(res.destination.index, 0, reorderedItem);
     setTodoList(dndTodoList);
-    console.log(dndTodoList);
-
 
     axios.post('api/todo/dndTodo', ({
        dndTodoList : dndTodoList 
