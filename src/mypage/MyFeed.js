@@ -41,12 +41,10 @@ function MyFeed(props) {
 
     }
     console.log(currentFeed)
-
     const openFeed=(feed)=>{
         setCurrentFeed(feed);
         setShow(true);
     }
-
     let i = 0;
     return (
         <>

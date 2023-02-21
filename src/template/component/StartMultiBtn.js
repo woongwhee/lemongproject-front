@@ -22,7 +22,7 @@ const StartMultiBtn = ({templateNo}) => {
         <>
             <div style={{marginLeft:'630px'}} onClick={toggle} color={"info"}>
                 <BsFillPeopleFill className='themBtn' style={{fontSize:'30px'}}></BsFillPeopleFill> <span style={{fontFamily:'SourceSansPro-Light' , fontSize:'20px'}}>Multi</span>
-                <StartMultiModal isOpen={modal} toggle={toggle} templateNo={templateNo}/>
+                <StartMultiModal isOpen={modal} size="xl" toggle={toggle} templateNo={templateNo}/>
             </div>
         </>
     );

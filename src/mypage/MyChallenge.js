@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useRef} from "react";
-import {Component} from "react";
 import axios from "axios";
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
@@ -21,6 +20,7 @@ function MyChallenge() {
     const [challList, setChallList] = useState([]);
     // const challengeNo = useRef(0);
     const [challengeNo,setChallengeNo] = useState();
+    const [hasChat,setHasChat]=useState(false);
     // 챌린지 상세보기
     useEffect(
         () => {
@@ -28,6 +28,10 @@ function MyChallenge() {
                 return codeHandler(res)
             }).then(data => {
                 setChallList(data);
+                const has=data.findLastIndex(e=>e.status == 'PLAY');
+                if(has>-1){
+                    setHasChat(true);
+                }
                 console.log(data);
             }).catch(function () {
                 console.log("데이터 수신실패");

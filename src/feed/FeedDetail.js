@@ -29,7 +29,6 @@ function FeedDetail(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/*<FeedReplyInsert feedNo={feedNo}/>*/}
                     <FeedDetailView Feed={Feed}></FeedDetailView>
                 </Modal.Body>
             </Modal>

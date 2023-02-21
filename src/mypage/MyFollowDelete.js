@@ -6,20 +6,14 @@ import './MyPage.css';
 
 import { ImUserMinus } from "react-icons/im";
 import {useDispatch, useSelector} from 'react-redux';
+import {useLoginState} from "../member/LoginContext";
 
-function MyFollowDelete(props){
+function MyFollowDelete({showMyFollowing}){
 
-    // const queryString = window.location.search;
-    // const params = new URLSearchParams(queryString);
+    const userNo = useSelector((state) => state.menu.userNo);
 
-    let{userNo}=props;
+    const myNo = useLoginState().profile.userNo
 
-    const userNos = useSelector((state) => state.userNo.selectUserNo);
-
-    const myNo = userNos == null ? userNo : userNos
-
-    console.log(userNo + " 값 확인중 ")
-    console.log(userNos + " 값 확인중 ")
 
     // 팔로우 당하는사람(팔로워)
 
@@ -33,13 +27,13 @@ function MyFollowDelete(props){
     function followDelete(){
         axios.get("/api/follow/followDelete" , {
             params:{
-                follower : userNo ,
-                followerIng : myNo ,
+                follower :  myNo,
+                followerIng : userNo ,
             }
         }).then(function(){
             console.log("데이터 전송 성공");
             alert("팔로우를 취소하였습니다.");
-            window.location.href = "http://localhost:3000"
+            showMyFollowing();
         }).catch(function(){
             console.log("데이터 전송 실패");
         })
@@ -47,7 +41,7 @@ function MyFollowDelete(props){
 
     return(
         <div>
-            <button class="btn btn-primary" style={{marginLeft:'325px' , fontSize:'13px' , marginTop:'-373px' , borderRadius:'100px' , width:'100px' , height:'34px'}} onClick={followDelete}>팔로우 취소</button>
+            <button class="btn btn-primary" style={{marginLeft: '215px', fontSize: '13px', borderRadius: '100px', width: '100px'}} onClick={followDelete}>팔로우 취소</button>
         </div>
     )
 }

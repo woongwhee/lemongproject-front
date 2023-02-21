@@ -10,8 +10,6 @@ import {useDispatch} from "react-redux";
 const StartMultiModal = ({isOpen, toggle, templateNo}) => {
 
     const now_utc = Date.now() // 지금 날짜를 밀리초로
-    const initOption = [1, 1, 1, 1, 1, 1, 1, 0];
-    const optionInfo = ["월", "화", "수", "목", "금", "토", "일", "공휴일제외"];
     const [option, setOption] = useState(initOption)
     const [inputs, setInputs] = useState({
         startDate: "",
@@ -19,6 +17,13 @@ const StartMultiModal = ({isOpen, toggle, templateNo}) => {
         challengeInfo: ""
     });
     const [startDate, setStartDate] = useState();
+    const optionInfo = ["월", "화", "수", "목", "금", "토", "일", "공휴일제외"];
+    const initOption = [1, 1, 1, 1, 1, 1, 1, 0];
+    const parseOption = () => {
+        let opstionString = "";
+        option.forEach(e => opstionString += e)
+        return opstionString;
+    }
     let dispatch = useDispatch();
     const timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
     const today = new Date(now_utc - timeOff).toISOString().split("T")[0];
@@ -28,11 +33,7 @@ const StartMultiModal = ({isOpen, toggle, templateNo}) => {
         setOption(o);
         console.log(parseOption());
     }
-    const parseOption = () => {
-        let opstionString = "";
-        option.forEach(e => opstionString += e)
-        return opstionString;
-    }
+
     const start = async () => {
         let submitInput = {...inputs, option:parseOption(), templateNo};
         if (isEmpty(submitInput.startDate) || isEmpty(submitInput.challengeInfo) || isEmpty(submitInput.challengeTitle)) {
@@ -57,16 +58,16 @@ const StartMultiModal = ({isOpen, toggle, templateNo}) => {
         setInputs(newInputs);
     }
     return (
-        <Modal isOpen={isOpen} toggle={toggle}>
+        <Modal isOpen={isOpen} toggle={toggle} size={"xl"}>
             {/*<div className="modal-content">*/}
             <ModalHeader toggle={toggle}>같이하기</ModalHeader>
             <ModalBody>
 
                 <div>
                     {option.map((item, i) => {
-                        return (<><Checkbox type="checkbox" key={"sc+i"} checked={item} onClick={() => {
+                        return (<><label htmlFor={"sc" + i} style={{margin:"20px"}}>{optionInfo[i]}</label><Checkbox type="checkbox" key={i}  checked={item} onClick={() => {
                             optionToggle(i)
-                        }} id={"sc" + i}/><label htmlFor={"sc" + i}>{optionInfo[i]}</label> </>)
+                        }}style={{margin:"20px"}} id={"sc" + i}/> </>)
                     })}
                 </div>
                 <div>

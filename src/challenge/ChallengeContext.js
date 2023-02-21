@@ -1,5 +1,4 @@
 import React, {createContext, useReducer, useContext, useRef, useEffect} from 'react';
-import challenge from "../challengeChat/challenge";
 import {useSelector} from "react-redux";
 import {isEmpty} from "../util/typeUtile";
 

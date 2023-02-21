@@ -31,20 +31,19 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
     // 모달창
     const [show, setShow] = useState(false);
     const [fullscreen, setFullscreen] = useState(true);
+
     const handleClose = () => setShow(false);
     const handleShow = (breakpoint) => {
         setShow(true);
         setFullscreen(breakpoint);
     }
     const [newContent, setContent] = useState('');
-
-
-
 //----------------------------------------------------------------------+
     const dragFunction = (event, type) => {
         event.preventDefault(); // 페이지 이동 금지 시키기
         event.stopPropagation(); // 상위 엘리먼트들로의 이벤트 전파 중지
     }
+
     // 사진 번호 가져오기
     let arr = [];
     const startClickPhoto=(t)=>{
@@ -55,6 +54,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
     const finishClickPhoto=(e,t)=>{
         arr.push(t);
     }
+
     const changeValue = () =>{
         axios.post('api/feed/changeValue',{
             startPhoNo:arr[0],
@@ -63,6 +63,7 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
             arr = [];
         })
     }
+
 //----------------------------------------------------------------------+
 
     // 인덱스 바꾸기
@@ -166,12 +167,14 @@ function FeedUpdate({Feed:{feedContent,feedNo,filePathList,photoNoList}}) {
         newPlist.splice(index,1)
         setPhotoNoList(newPlist);
     }
+
     const deletePhotoPathList=(i)=>{
         const newPlist=[...getFilePathList];
         let index=newPlist.indexOf(i); // 숫자
         newPlist.splice(index,1)
         setFilePathList(newPlist);
     }
+
     const deleteClick=(photoNo)=>{
         axios.post(
             'api/feed/modifyFeedPhoto',{

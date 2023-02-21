@@ -24,6 +24,7 @@
     "cdbreact": "^1.5.5",
     "components": "^0.1.0",
     "form-data": "^4.0.0",
+    "framer-motion": "^9.0.4",
     "immer": "^9.0.19",
     "jquery": "^3.6.3",
     "js-circle-progress": "^0.2.4",

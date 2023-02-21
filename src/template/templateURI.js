@@ -1,7 +1,6 @@
 export const API_URL="/api";
 export const TEMPLATE_URL=`${API_URL}/template`;
-
-//get
+export const PROFILE_TEMPLATE_LIST=`${TEMPLATE_URL}/profile/list`
 export const TEMPLATE_LIST=`${TEMPLATE_URL}/list`;
 export const TEMPLATE_DETAIL=`${TEMPLATE_URL}/one`;
 export const TEMPLATE_MAXPAGE=`${TEMPLATE_URL}/count`;

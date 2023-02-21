@@ -57,8 +57,8 @@ const ChallengeDetail = ({result}) => {
             <div className='dtCountUser2'>참여 인원 ( {countUser} )</div>
             <div className='dtUser'> {readyUsers.map(user =>
                 <>
-                    <div className='dtUserPic'><img src={user.photo.filePath}  alt={user.nickName}></img></div>
-                    <div className='dtUserNic' user={user}>{user.nickName}</div>
+                    <div className='dtUserPic'><img src={user?.photo?.filePath}  alt={user.nickName}></img></div>
+                    <div className='dtUserNic' user={user}>{user?.nickName}</div>
                 </>
                 )}
             </div>

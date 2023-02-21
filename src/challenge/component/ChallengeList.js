@@ -6,14 +6,7 @@ import ChallengeCard from './ChallengeCard';
 import '../style/ChallengeList.css';
 
 const ChallengeList = ({result}) => {
-    console.log(result);
-    let dispatch = useChallengeDispatch();
 
-    const detailView = (challengeNo) => {
-        dispatch({
-            type:"DETAIL",challengeNo
-        })
-    }
 
     return (
         <div className='ChallengePage'>
