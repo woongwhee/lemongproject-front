@@ -16,6 +16,8 @@ import Box from '@mui/material/Box';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import Paper from '@mui/material/Paper';
 import "./FeedAlarm.css"
+import {codeHandler} from "../util/apiUtil";
+import ProfileIcon from "../mypage/ProfileIcon";
 
 function FeedAlarm(props) {
     const [show, setShow] = useState(false);
@@ -28,49 +30,52 @@ function FeedAlarm(props) {
     let loginUserNo = profile.userNo;
 
 //====================================================================
-    const [get, sett] = useState();
-    const proFile = (userNo) => {
-        axios.post('api/feed/feedProfile',{
-            userNo:userNo
-        }).then(function (res){
-            // console.log(res.data);
-            sett(res.data.NICK_NAME);
-        })
-    }
+//     const [get, sett] = useState();
+//     const proFile = (userNo) => {
+//         axios.post('api/feed/feedProfile',{
+//             userNo:userNo
+//         }).then(function (res){
+//             // console.log(res.data);
+//             sett(res.data.NICK_NAME);
+//         })
+//     }
 //====================================================================
-
 
     // 댓글 알림 가져오기
     const [replyAlarm, setReplyAlarm] = useState([])
     useEffect(()=>{
-        axios.post('api/feed/replyAlarmList',{
-            userNo:loginUserNo
-        }).then(function (res){
-            // console.log(res.data.result)
-            setReplyAlarm(res.data.result)
+        axios.get('api/feed/alarm/list').then(function (res){
+            let alarmlist=codeHandler(res);
+            setReplyAlarm(alarmlist);
+        }).catch(err=>{
+            console.log(err);
         })
     },[])
 
     const replyRendering=()=>{
-        axios.post('api/feed/replyAlarmList',{
-            userNo:loginUserNo
-        }).then(function (res){
-            // console.log(res.data.result)
-            setReplyAlarm(res.data.result)
+        axios.get('api/feed/alarm/list').then(function (res){
+            let alarmlist=codeHandler(res);
+            setReplyAlarm(alarmlist);
+        }).catch(err=>{
+            console.log(err);
         })
     }
     // --------------------------------------------------------
     const replyMessage = () => {
         const result = [];
         for(let i = 0; i<replyAlarm.length; i++){
-            proFile(replyAlarm[i].sendUser)
+
             result.push(
                 <div key={i} style={{width:"100%"}}>
                     <div style={{border:"1px solid #dcdcdc", width:"350px", float:"left",marginTop:"5px"}}>
                         <Paper elevation={16}>
-                        <div>보낸사람 : {get} </div>
-                        <div style={{textOverflow:"ellipsis", overflow:"hidden",whiteSpace:"nowrap"}}>댓글내용 : {replyAlarm[i].message}</div>
-                        <div>{replyAlarm[i].alrAt}</div>
+                        <div style={{border:"1px solid gray", height:"30px"}}>
+                            <ProfileIcon profile={replyAlarm[i].sender}/>
+                        </div>
+                        <div>
+                            <div style={{textOverflow:"ellipsis", overflow:"hidden",whiteSpace:"nowrap"}}>{replyAlarm[i].message}</div>
+                            <div>{replyAlarm[i].alrAt}</div>
+                        </div>
                         </Paper>
                     </div>
                     <div style={{float:"right", marginTop:"20px"}}>
@@ -104,28 +109,30 @@ function FeedAlarm(props) {
         axios.post('api/feed/heartAlarmList',{
             userNo:loginUserNo
         }).then(function (res){
-            // console.log(res.data.result)
-            setHeartAlarm(res.data.result)
+            let alarmlist=codeHandler(res);
+            setHeartAlarm(alarmlist)
         })
     },[])
+
     const heartRendering=()=>{
         axios.post('api/feed/heartAlarmList',{
             userNo:loginUserNo
         }).then(function (res){
-            // console.log(res.data.result)
-            setHeartAlarm(res.data.result)
+            let alarmlist=codeHandler(res);
+            setHeartAlarm(alarmlist)
         })
     }
     //-------------------------------------------------------
     const HrMessage=()=>{
         const result = []
         for(let i = 0; i<heartAlarm.length; i++){
-            proFile(heartAlarm[i].sendUser)
+
             result.push(
                 <div key={i} style={{width:"100%"}}>
                     <div style={{border:"1px solid #dcdcdc", width:"350px", float:"left",marginTop:"5px"}}>
                         <Paper elevation={16}>
-                        <div>{get} 님이 {heartAlarm[i].message} </div>
+                            <div> <ProfileIcon profile={heartAlarm[i].sender}/> </div>
+                        <div> 님이 {heartAlarm[i].message} </div>
                         <div>{heartAlarm[i].alrAt}</div>
                         </Paper>
                     </div>

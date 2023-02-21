@@ -13,8 +13,11 @@ const ProfileIcon = ({profile}) => {
     return (
 
         <span className="profile-icon">
-            <img src={photoPath} id={userNo+"profile"} ref={img} alt="profile" style={{width:'27px' , height:'27px' , borderRadius:'50%' , float:'left' , marginTop:'-3px' , marginLeft:'5px'}}/>
-            <p style={{fontFamily:'NanumGothic-Regular' , fontSize:'15px' , marginTop:'-2px' , float:'left' , marginLeft:'5px'}}>{nickName}</p>
+            <img src={photoPath}
+                 id={userNo+"profile"}
+                 ref={img} alt="profile"
+                 style={{width:'27px' , height:'27px' , borderRadius:'50%' , float:'left' , marginTop:'0px' , marginLeft:'5px'}}/>
+            <p style={{fontFamily:'NanumGothic-Regular' , fontSize:'15px' , marginTop:'0px' , float:'left' , marginLeft:'5px'}}>{nickName}</p>
               <UncontrolledPopover
                   placement="bottom"
                   target={img}
@@ -25,7 +28,6 @@ const ProfileIcon = ({profile}) => {
             <PopoverBody>
             </PopoverBody>
             </UncontrolledPopover>
-
         </span>
 
     );
