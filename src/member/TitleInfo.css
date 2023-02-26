@@ -10,15 +10,16 @@
 }
 
 .CarouselMain, .CarouselInnerImg {
-    width: 34rem;
+    width: 33rem;
+    height: 18.5rem;
 }
 
 .sdiv1 {
     box-sizing: border-box;
     text-align: center;
     /* border: 1px solid blue; */
-    width: 36rem;
-    height: 29rem;
+    width: 35rem;
+    height: 28rem;
     text-align: center;
     margin: auto;
     position: absolute;
