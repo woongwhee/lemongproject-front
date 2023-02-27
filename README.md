@@ -2,7 +2,7 @@
 # LemongProject Front-End
 LemongProject는 일정관리 및 커뮤니티 서비스 입니다. 
 ### 접속주소
-  [레몽프로젝트](lemongproject.site)
+  [레몽프로젝트](http://www.lemongproject.site)
 ### 기술 스택
   React
   Redux
